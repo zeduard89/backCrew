@@ -15,16 +15,14 @@ router.get('/:id', (req: Request, res: Response) => {
     : res.sendStatus(404)
 })
 
-router.post('/', (req, res) => {
+router.post('/', (req: Request, res: Response): void => {
   try {
-    const newDiaryEntry = toNewDiaryEntry(req.body);
-
-    const addedDiaryEntry = diaryServices.addDiary(newDiaryEntry);
-
-    res.json(addedDiaryEntry);
+    const newDiaryEntry = toNewDiaryEntry(req.body)
+    const addedDiaryEntry = diaryServices.addDiary(newDiaryEntry)
+    res.json(addedDiaryEntry)
   } catch (error) {
-   res.status(400).send(error.message || 'Error Desconocido');  
+    res.status(400).send(error.message || 'Error Desconocido')
   }
-});
+})
 
 export { router }
