@@ -1,7 +1,7 @@
-const { DataTypes } = require('sequelize')
+import { Sequelize, DataTypes } from 'sequelize'
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
-module.exports = (sequelize) => {
+export default (sequelize: Sequelize): void => {
   // defino el modelo
   sequelize.define('dog', {
     id: {
