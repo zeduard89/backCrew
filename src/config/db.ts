@@ -1,6 +1,4 @@
 import { Sequelize } from 'sequelize-typescript'
-// import fs from 'fs'
-// import path from 'path'
 import dotenv from 'dotenv'
 import DogModel from '../models/Dog'
 import TemperamentsModel from '../models/Temperaments'
