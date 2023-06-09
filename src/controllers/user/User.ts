@@ -4,7 +4,6 @@ import { IUser } from "../../types/types"
 import { compare, encrypt } from "../../utils/handleBcrypt"
 
 export const loginUser = async (req: Request, res: Response): Promise<void> => {
-  console.log(1)
   try {
     const { email, password } = req.body
     const user: IUser | null = await UserModel.findOne({ where: { email } })
@@ -44,10 +43,7 @@ export const registerUser = async (
       email,
       password: passwordHash
     })
-    console.log(123)
-    console.log(registerUser)
     res.status(200).send({ registerUser })
-    console.log(3)
   } catch (error: any) {
     res.send(error.error)
   }
