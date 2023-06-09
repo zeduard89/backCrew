@@ -1,4 +1,3 @@
-// import { Request, Response, Router } from 'express'
 import { Router } from 'express'
 import { loginUser } from '../controllers/user/User'
 

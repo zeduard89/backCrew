@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 import { Model, Column, Table, DataType } from 'sequelize-typescript'
-=======
-import { Column, DataType, Model, Table } from 'sequelize-typescript'
 import { IUser } from '../types/types'
->>>>>>> baabe852756649a344b2b4a17df5a0027af7b9ba
 
 @Table({ tableName: 'users' })
 export default class User extends Model<IUser> {
