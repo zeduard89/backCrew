@@ -1,17 +1,17 @@
 import { Router, Request, Response } from 'express'
-import toNewProyects from '../utils/utilsProjects' // Validador del Body
-import proyectos from '../controllers/projects/projectos'
+import toNewProjects from '../utils/utilsProjects' // Validador del Body
+import projectController from '../controllers/projects/postHandler'
 
 const router = Router()
 
 router.post('/', (req: Request, res: Response) => {
   try {
-    const projectInfo = toNewProyects(req.body)
+    const projectInfo = toNewProjects(req.body)
 
-    const newProject = proyectController(projectInfo)
-
-    res.json(newProject)
-  } catch (error) {
+    const newProject = projectController(projectInfo)
+    // console.log(projectInfo)
+    res.status(200).json(newProject)
+  } catch (error: any) {
     res.status(400).send(error.message || 'Error Desconocido')
   }
 })
