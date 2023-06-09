@@ -1,0 +1,29 @@
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+
+git commit -m '...'
+    'fix: Corregir error de validación en el formulario de registro'
+    'feat: Agregar función de autenticación de usuarios'
+    'build: Actualizar la configuración de Webpack'
+    'chore: Actualizar dependencias de terceros'
+    'ci: Configurar pruebas de integración continua con Travis CI'
+    'docs: Actualizar la documentación del proyecto'
+    'style: Aplicar formato de código consistente en el proyecto'
+    'refactor: Refactorizar la función de manejo de errores'
+    'perf: Optimizar el algoritmo de búsqueda'
+    'test: Agregar pruebas unitarias para el componente de navegación'
+
+Fix (corrección de errores):
+Feat (nueva característica):
+Build (cambios relacionados con la compilación o herramientas de construcción):
+Chore (tareas de mantenimiento y otras tareas que no modifican el código en sí):
+Ci (cambios en la configuración de integración continua):
+Docs (actualización de la documentación):
+Style (cambios relacionados con el estilo de código, como espacios en blanco, formato, etc.):
+Refactor (cambios en el código que no corrigen errores ni agregan nuevas características):
+Perf (mejoras de rendimiento):
+Test (agregar o modificar pruebas unitarias):
+
