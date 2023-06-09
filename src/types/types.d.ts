@@ -8,7 +8,7 @@ export interface User {
   password: string
 }
 
-export interface Proyects {
+export interface Projects {
   id: DataTypeUUID
   title: string
   description: string
@@ -19,7 +19,7 @@ export interface Proyects {
   categories: Categories
 }
 
-export type newProyects = Omit<Proyects, 'id'>
+export type newProjects = Omit<Proyects, 'id'>
 
 // Por defecto TS utiliza este nombre en el fichero 'types.d.ts'
 // Puedo tener varios esparcidos, pero ahora solo los coloco en este luegar

@@ -1,15 +1,14 @@
 import { Router, Request, Response } from 'express'
-import toNewProyects from '../utils/utilsProyects'
+import toNewProyects from '../utils/utilsProjects' // Validador del Body
+import proyectos from '../controllers/projects/projectos'
 
 const router = Router()
 
 router.post('/', (req: Request, res: Response) => {
   try {
-    const newProject = toNewProyects(req.body)
+    const projectInfo = toNewProyects(req.body)
 
-    // Aquí puedes realizar las operaciones necesarias para agregar el nuevo proyecto
-    // Por ahora, solo se asigna un valor de ejemplo
-    console.log(newProject)
+    const newProject = proyectController(projectInfo)
 
     res.json(newProject)
   } catch (error) {

@@ -1,4 +1,4 @@
-import { newProyects } from '../types/types'
+import { newProjects } from '../types/types'
 import { Categories } from '../types/enums'
 
 //! Parseo las variables(REQ BODY)
@@ -63,8 +63,8 @@ const isCategories = (value: any): boolean => {
 }
 
 //! Construccion final del entry validado
-const toNewProyects = (object: any): newProyects => {
-  const newEntry: newProyects = {
+const toNewProjects = (object: any): newProjects => {
+  const newEntry: newProjects = {
     title: parseTitle(object.title),
     description: parseDescription(object.description),
     funding: parseFounding(object.funding),
@@ -76,4 +76,4 @@ const toNewProyects = (object: any): newProyects => {
   return newEntry
 }
 
-export default toNewProyects
+export default toNewProjects
