@@ -9,7 +9,6 @@ else PORT = '3002'
 // Syncing all the models at once.
 sequelize.sync({ force: false })
   .then(() => {
-    console.log('DB conectada, master')
     server.listen(PORT, () => {
       console.log('Master, servidor levantado en el puerto', PORT)
     })

@@ -13,13 +13,20 @@ export interface DiaryEntry {
   comment: string
 }
 
+export interface User {
+  name: string
+  lastName: string
+  email: string
+  password: string
+}
+
 //  OPCION1)
 //  export type NonSensitiveInfoDiaryEntry = Pick<DiaryEntry, 'id'|'date'|'weather'|'visibility'>
 
 // OPCION2 otro tipo de utilidad
-export type NonSensitiveInfoDiaryEntry = Omit <DiaryEntry, 'comment'>
+export type NonSensitiveInfoDiaryEntry = Omit<DiaryEntry, 'comment'>
 
-export type NewDiaryEntry = Omit <DiaryEntry, 'id'>
+export type NewDiaryEntry = Omit<DiaryEntry, 'id'>
 
 //
 //  TEORIA

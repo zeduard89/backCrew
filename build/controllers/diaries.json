@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "date": "2017-01-01",
+        "weather": "rainy",
+        "visibility": "poor",
+        "comment": "Pretty scary flight, I'm glad I'm alive"
+    },
+    {
+        "id": 2,
+        "date": "2018-03-15",
+        "weather": "cloudy",
+        "visibility": "ok",
+        "comment": "Smooth flight with a few minor turbulence"
+    },
+    {
+        "id": 3,
+        "date": "2019-06-28",
+        "weather": "sunny",
+        "visibility": "poor",
+        "comment": "Beautiful flight, stunning views from the window"
+    },
+    {
+        "id": 4,
+        "date": "2020-09-05",
+        "weather": "stormy",
+        "visibility": "poor",
+        "comment": "One of the scariest flights I've ever experienced"
+    },
+    {
+        "id": 5,
+        "date": "2021-02-14",
+        "weather": "windy",
+        "visibility": "poor",
+        "comment": "Flight delayed due to heavy snowfall"
+    },
+    {
+        "id": 6,
+        "date": "2022-05-20",
+        "weather": "sunny",
+        "visibility": "good",
+        "comment": "Smooth and comfortable flight"
+    },
+    {
+        "id": 7,
+        "date": "2022-12-10",
+        "weather": "rainy",
+        "visibility": "ok",
+        "comment": "Delayed departure due to thick fog"
+    },
+    {
+        "id": 8,
+        "date": "2023-04-01",
+        "weather": "cloudy",
+        "visibility": "great",
+        "comment": "Perfect flight, no issues whatsoever"
+    },
+    {
+        "id": 9,
+        "date": "2023-07-17",
+        "weather": "windy",
+        "visibility": "great",
+        "comment": "Slight turbulence, but overall a good flight"
+    },
+    {
+        "id": 10,
+        "date": "2024-10-08",
+        "weather": "rainy",
+        "visibility": "poor",
+        "comment": "Challenging landing due to heavy rain"
+    }
+]

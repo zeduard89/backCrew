@@ -1,7 +1,6 @@
 import { Sequelize } from 'sequelize-typescript'
 import dotenv from 'dotenv'
-import DogModel from '../models/Dog'
-import TemperamentsModel from '../models/Temperaments'
+import UserModel from '../models/User';
 
 dotenv.config()
 
@@ -12,7 +11,6 @@ const sequelize = new Sequelize(`postgres://${DB_USER ?? ''}:${DB_PASSWORD ?? ''
   native: false
 })
 
-const Dog = DogModel(sequelize)
-const Temperaments = TemperamentsModel(sequelize)
+sequelize.addModels([UserModel]);
 
-export { sequelize, Dog, Temperaments }
+export { sequelize, UserModel }
