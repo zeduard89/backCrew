@@ -1,7 +1,7 @@
 import { DataTypeUUID } from 'sequelize'
 import { Categories } from './enums'
 
-export interface User {
+export interface IUser {
   name: string
   lastName: string
   email: string
