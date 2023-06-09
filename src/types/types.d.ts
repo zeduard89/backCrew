@@ -1,17 +1,3 @@
-// Por defecto TS utiliza este nombre en el fichero 'types.d.ts'
-// Puedo tener varios esparcidos, pero ahora solo los coloco en este luegar
-// traduce elementos para que TC los entienda como lo de color ROJO, eso lo cree en ENUM
-//! export type Visibility = 'great' | 'good' | 'ok' | 'poor'
-
-import { Weather, Visibility } from '../enums/enums'
-
-export interface DiaryEntry {
-  id: number
-  date: string
-  weather: Weather
-  visibility: Visibility
-  comment: string
-}
 
 export interface User {
   name: string
@@ -20,6 +6,27 @@ export interface User {
   password: string
 }
 
+export interface Proyects {
+  name: string
+  lastName: string
+  email: string
+  password: string
+}
+
+// Por defecto TS utiliza este nombre en el fichero 'types.d.ts'
+// Puedo tener varios esparcidos, pero ahora solo los coloco en este luegar
+// traduce elementos para que TC los entienda como lo de color ROJO, eso lo cree en ENUM
+//! export type Visibility = 'great' | 'good' | 'ok' | 'poor'
+
+// import { Weather, Visibility } from '../enums/enums'
+
+export interface DiaryEntry {
+  id: number
+  date: string
+  weather: Weather
+  visibility: Visibility
+  comment: string
+}
 //  OPCION1)
 //  export type NonSensitiveInfoDiaryEntry = Pick<DiaryEntry, 'id'|'date'|'weather'|'visibility'>
 
