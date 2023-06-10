@@ -1,25 +1,54 @@
-import { DataTypeUUID } from 'sequelize'
-import { Categories } from './enums'
+// import { DataTypeUUID } from "sequelize"
 
 export interface IUser {
   name: string
   lastName: string
-  email: string
+  email: strin
   password: string
 }
 
-export interface Projects {
-  id: DataTypeUUID
-  title: string
-  description: string
-  funding: string
-  update: string
-  story: string
-  problem: boolean
-  categories: Categories
+export interface popo {
+  name: string
+  lastName: string
 }
 
-export type newProjects = Omit<Proyects, 'id'>
+// export interface IUpdateComment {
+//   id: string
+//   firstName: string
+//   comments: string
+//   likes: number
+//   dislikes: number
+//   date: string
+// }
+
+// export interface IUpdate {
+//   id: string
+//   title: string
+//   description: string
+//   data: string
+//   comments: IUpdateComment[]
+// }
+
+// export interface ICreator {
+//   id: DataTypeUUID
+//   firstName: string
+//   lastName: string
+//   avatar: string
+// }
+
+export interface IProject {
+  title: string
+  description: string
+  fundingCurrent: number
+  fundingGoal: number
+  fundingGoalReached: boolean
+  fundingPercentage: number //! Relacionar con goal y reach guillermo
+  fundingDayLeft: number //! relacionar con createdA guillermo
+  // update: IUpdate[]
+  categories: string[]
+  // creator: ICreator  CADA PROYECTO TIENE ASOCIADO UN USER
+  image: string
+}
 
 // Por defecto TS utiliza este nombre en el fichero 'types.d.ts'
 // Puedo tener varios esparcidos, pero ahora solo los coloco en este luegar
