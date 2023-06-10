@@ -22,7 +22,8 @@ router.post("/", async (req: Request, res: Response) => {
   }
 })
 
-router.get("/serach/:id", async (req: Request, res: Response) => {
+// Ruta busca por id,
+router.get("/search/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params
     validatorUUID.parse(id)
@@ -35,6 +36,7 @@ router.get("/serach/:id", async (req: Request, res: Response) => {
   }
 })
 
+// Rutra que busca todos los projectos de la DB
 router.get("/allProjects", async (_req: Request, res: Response) => {
   try {
     const allProjects = await getAllProjects()
@@ -45,6 +47,11 @@ router.get("/allProjects", async (_req: Request, res: Response) => {
       "Error desconocido al buscar todos los Projectos"
     res.status(400).send(errorMessage)
   }
+})
+
+// Controlador de rutas no especificadas
+router.get("*", (_req: Request, res: Response) => {
+  res.status(404).send("Ruta no encontrada")
 })
 
 export { router }

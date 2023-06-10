@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize-typescript"
 import dotenv from "dotenv"
-import UserModel from "../models/User"
-import ProjectModel from "../models/Project"
+import userModel from "../models/User"
+import projectModel from "../models/Project"
 
 dotenv.config()
 
@@ -17,6 +17,9 @@ const sequelize = new Sequelize(
   }
 )
 
-sequelize.addModels([UserModel, ProjectModel])
+//Utilizo el modelo y lo presento a Sequelize, para que lo pueda usar donde lo necesita
+//! Creamos las tablas
+userModel(sequelize)
+projectModel(sequelize)
 
-export { sequelize, UserModel, ProjectModel }
+export { sequelize, userModel, projectModel }

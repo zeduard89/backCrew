@@ -30,9 +30,7 @@ export const registerUser = async (
 ): Promise<void> => {
   try {
     const { name, lastName, email, password }: IUser = req.body
-    console.log(1)
     const user: IUser | null = await UserModel.findOne({ where: { email } })
-    console.log(2)
     if (user != null) {
       res.status(400).send({ error: "Email already used" })
     }

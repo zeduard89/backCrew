@@ -1,35 +1,40 @@
-import { DataTypeUUID } from "sequelize"
+// import { DataTypeUUID } from "sequelize"
 
 export interface IUser {
   name: string
   lastName: string
-  email: string
+  email: strin
   password: string
 }
 
-export interface IUpdateComment {
-  id: string
-  firstName: string
-  comments: string
-  likes: number
-  dislikes: number
-  date: string
-}
-
-export interface IUpdate {
-  id: string
-  title: string
-  description: string
-  data: string
-  comments: IUpdateComment[]
-}
-
-export interface ICreator {
-  id: DataTypeUUID
-  firstName: string
+export interface popo {
+  name: string
   lastName: string
-  avatar: string
 }
+
+// export interface IUpdateComment {
+//   id: string
+//   firstName: string
+//   comments: string
+//   likes: number
+//   dislikes: number
+//   date: string
+// }
+
+// export interface IUpdate {
+//   id: string
+//   title: string
+//   description: string
+//   data: string
+//   comments: IUpdateComment[]
+// }
+
+// export interface ICreator {
+//   id: DataTypeUUID
+//   firstName: string
+//   lastName: string
+//   avatar: string
+// }
 
 export interface IProject {
   title: string
@@ -37,8 +42,8 @@ export interface IProject {
   fundingCurrent: number
   fundingGoal: number
   fundingGoalReached: boolean
-  fundingPercentage: number
-  fundingDayLeft: number
+  fundingPercentage: number //! Relacionar con goal y reach guillermo
+  fundingDayLeft: number //! relacionar con createdA guillermo
   // update: IUpdate[]
   categories: string[]
   // creator: ICreator  CADA PROYECTO TIENE ASOCIADO UN USER

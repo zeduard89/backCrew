@@ -13,6 +13,7 @@ export default class User extends Model<IProject> {
 
   @Column({
     type: DataType.STRING,
+    unique: true,
     allowNull: false
   })
   title!: string
