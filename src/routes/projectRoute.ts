@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express"
-import { projectValidator, validatorUUID } from "../schemas/projectSchemas"
+import { projectValidator, validatorString } from "../schemas/projectSchemas"
 import createProjectController from "../controllers/projects/postProyectHandler"
-import getProjectByIdController from "../controllers/projects/getProyectByIdHander"
+import getProjectByNameController from "../controllers/projects/getProyectByNameHandler"
 import getAllProjects from "../controllers/projects/getAllProjects"
 
 const router = Router()
@@ -22,13 +22,15 @@ router.post("/", async (req: Request, res: Response) => {
   }
 })
 
-// Ruta busca por id,
-router.get("/search/:id", async (req: Request, res: Response) => {
+// Ruta busca por name
+router.get("/search/", async (req: Request, res: Response) => {
   try {
-    const { id } = req.params
-    validatorUUID.parse(id)
-    const getProjectById = await getProjectByIdController(id)
-    res.status(200).json(getProjectById)
+    const { name } = req.query
+    const validatedName = validatorString.parse(name)
+    if (name !== undefined) {
+      const getProjectByName = await getProjectByNameController(validatedName)
+      res.status(200).json(getProjectByName)
+    }
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Error desconocido al buscar Project by ID"

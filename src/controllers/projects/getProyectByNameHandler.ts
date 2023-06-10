@@ -1,8 +1,14 @@
 import { ProjectModel } from "../../config/db"
 
-const getProyectByIdController = async (id: string): Promise<object> => {
+const getProyectByNameController = async (
+  validatedName: string
+): Promise<object> => {
   try {
-    const existingProject = await ProjectModel.findByPk(id)
+    const existingProject = await ProjectModel.findOne({
+      where: {
+        title: validatedName
+      }
+    })
     if (!existingProject) {
       return { message: "Project no existe" }
     }
@@ -13,4 +19,4 @@ const getProyectByIdController = async (id: string): Promise<object> => {
   }
 }
 
-export default getProyectByIdController
+export default getProyectByNameController

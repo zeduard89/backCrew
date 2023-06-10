@@ -4,12 +4,12 @@ import { IProject } from "../types/types"
 @Table({ tableName: "projects" })
 export default class User extends Model<IProject> {
   @Column({
-    type: DataType.UUID,
+    type: DataType.INTEGER,
     primaryKey: true,
     allowNull: false,
-    defaultValue: DataType.UUIDV4
+    autoIncrement: true
   })
-  id!: string
+  id!: number
 
   @Column({
     type: DataType.STRING,
