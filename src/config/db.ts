@@ -19,4 +19,4 @@ const sequelize = new Sequelize(
 
 sequelize.addModels([UserModel, ProjectModel])
 
-export { sequelize, UserModel }
+export { sequelize, UserModel, ProjectModel }

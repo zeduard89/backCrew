@@ -1,3 +1,5 @@
+import { DataTypeUUID } from "sequelize"
+
 export interface IUser {
   name: string
   lastName: string
@@ -23,14 +25,10 @@ export interface IUpdate {
 }
 
 export interface ICreator {
-  id: string
+  id: DataTypeUUID
   firstName: string
   lastName: string
   avatar: string
-}
-
-export interface ICategories {
-  name: string
 }
 
 export interface IProject {
@@ -42,8 +40,9 @@ export interface IProject {
   fundingPercentage: number
   fundingDayLeft: number
   // update: IUpdate[]
-  categories: ICategories[]
-  creator: ICreator
+  categories: string[]
+  // creator: ICreator  CADA PROYECTO TIENE ASOCIADO UN USER
+  image: string
 }
 
 // Por defecto TS utiliza este nombre en el fichero 'types.d.ts'

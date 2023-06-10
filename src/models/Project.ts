@@ -1,5 +1,5 @@
 import { Model, Column, Table, DataType } from "sequelize-typescript"
-import { IProject, ICategories } from "../types/types"
+import { IProject } from "../types/types"
 
 @Table({ tableName: "proyects" })
 export default class User extends Model<IProject> {
@@ -30,11 +30,11 @@ export default class User extends Model<IProject> {
   fundingCurrent!: number
 
   @Column({
-    type: DataType.BOOLEAN,
+    type: DataType.FLOAT,
     allowNull: false,
-    defaultValue: false
+    defaultValue: 0
   })
-  fundingGoal!: boolean
+  fundingGoal!: number
 
   @Column({
     type: DataType.BOOLEAN,
@@ -49,7 +49,7 @@ export default class User extends Model<IProject> {
   fundingPercentage!: number
 
   @Column({
-    type: DataType.FLOAT,
+    type: DataType.INTEGER,
     allowNull: false
   })
   fundingDayLeft!: number
@@ -58,12 +58,12 @@ export default class User extends Model<IProject> {
     type: DataType.ARRAY(DataType.STRING),
     allowNull: false
   })
-  categories!: ICategories[]
+  categories!: string[]
 
   @Column({
     type: DataType.STRING,
     allowNull: true,
-    defaultValue: false
+    defaultValue: null
   })
   image!: string
 }
