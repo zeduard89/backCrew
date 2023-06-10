@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize-typescript"
 import dotenv from "dotenv"
 import UserModel from "../models/User"
+import ProjectModel from "../models/Project"
 
 dotenv.config()
 
@@ -16,6 +17,6 @@ const sequelize = new Sequelize(
   }
 )
 
-sequelize.addModels([UserModel])
+sequelize.addModels([UserModel, ProjectModel])
 
 export { sequelize, UserModel }

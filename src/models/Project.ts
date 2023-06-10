@@ -1,7 +1,8 @@
-import { Model, Column, Table, DataType } from 'sequelize-typescript'
+import { Model, Column, Table, DataType } from "sequelize-typescript"
+import { IProject, ICategories } from "../types/types"
 
-@Table({ tableName: 'proyect' })
-export default class User extends Model<User> {
+@Table({ tableName: "proyects" })
+export default class User extends Model<IProject> {
   @Column({
     type: DataType.UUID,
     primaryKey: true,
@@ -14,33 +15,50 @@ export default class User extends Model<User> {
     type: DataType.STRING,
     allowNull: false
   })
-  name!: string
+  title!: string
 
   @Column({
     type: DataType.STRING,
     allowNull: false
   })
-  lastName!: string
+  description!: string
 
   @Column({
-    type: DataType.STRING,
-    unique: true,
+    type: DataType.FLOAT,
     allowNull: false
   })
-  email!: string
+  fundingCurrent!: number
 
   @Column({
     type: DataType.BOOLEAN,
     allowNull: false,
     defaultValue: false
   })
-  verified!: boolean
+  fundingGoal!: boolean
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.BOOLEAN,
     allowNull: false
   })
-  password!: string
+  fundingGoalReached!: boolean
+
+  @Column({
+    type: DataType.FLOAT,
+    allowNull: false
+  })
+  fundingPercentage!: number
+
+  @Column({
+    type: DataType.FLOAT,
+    allowNull: false
+  })
+  fundingDayLeft!: number
+
+  @Column({
+    type: DataType.ARRAY(DataType.STRING),
+    allowNull: false
+  })
+  categories!: ICategories[]
 
   @Column({
     type: DataType.STRING,

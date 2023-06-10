@@ -1,12 +1,11 @@
 import { Router, Request, Response } from "express"
-import toNewProjects from "../utils/utilsProjects" // Validador del Body
 import projectController from "../controllers/projects/postHandler"
 
 const router = Router()
 
 router.post("/", (req: Request, res: Response) => {
   try {
-    const projectInfo = toNewProjects(req.body)
+    const projectInfo = req.body
 
     const newProject = projectController(projectInfo)
     // console.log(projectInfo)

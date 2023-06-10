@@ -1,6 +1,3 @@
-import { DataTypeUUID } from 'sequelize'
-import { Categories } from './enums'
-
 export interface IUser {
   name: string
   lastName: string
@@ -8,18 +5,46 @@ export interface IUser {
   password: string
 }
 
-export interface Projects {
-  id: DataTypeUUID
-  title: string
-  description: string
-  funding: string
-  update: string
-  story: string
-  problem: boolean
-  categories: Categories
+export interface IUpdateComment {
+  id: string
+  firstName: string
+  comments: string
+  likes: number
+  dislikes: number
+  date: string
 }
 
-export type newProjects = Omit<Proyects, 'id'>
+export interface IUpdate {
+  id: string
+  title: string
+  description: string
+  data: string
+  comments: IUpdateComment[]
+}
+
+export interface ICreator {
+  id: string
+  firstName: string
+  lastName: string
+  avatar: string
+}
+
+export interface ICategories {
+  name: string
+}
+
+export interface IProject {
+  title: string
+  description: string
+  fundingCurrent: number
+  fundingGoal: number
+  fundingGoalReached: boolean
+  fundingPercentage: number
+  fundingDayLeft: number
+  // update: IUpdate[]
+  categories: ICategories[]
+  creator: ICreator
+}
 
 // Por defecto TS utiliza este nombre en el fichero 'types.d.ts'
 // Puedo tener varios esparcidos, pero ahora solo los coloco en este luegar
