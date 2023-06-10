@@ -20,6 +20,6 @@ const sequelize = new Sequelize(
 // sequelize.addModels([ProjectModel])
 // sequelize.addModels([UserModel])
 
-sequelize.addModels([UserModel, ProjectModel])
+sequelize.addModels([ProjectModel, UserModel])
 
 export { sequelize, UserModel, ProjectModel }
