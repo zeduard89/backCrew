@@ -17,3 +17,5 @@ export const creatorValidator = z.object({
   lastName: z.string().min(3),
   avatar: z.string().min(3)
 })
+
+export const validatorUUID = z.string().uuid()
