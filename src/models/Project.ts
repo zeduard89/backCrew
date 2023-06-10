@@ -1,7 +1,8 @@
-import { Model, Column, Table, DataType } from 'sequelize-typescript'
+import { Model, Column, Table, DataType } from "sequelize-typescript"
+import { IProject } from "../types/types"
 
-@Table({ tableName: 'proyect' })
-export default class User extends Model<User> {
+@Table({ tableName: "projects" })
+export default class User extends Model<IProject> {
   @Column({
     type: DataType.UUID,
     primaryKey: true,
@@ -12,40 +13,58 @@ export default class User extends Model<User> {
 
   @Column({
     type: DataType.STRING,
-    allowNull: false
-  })
-  name!: string
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false
-  })
-  lastName!: string
-
-  @Column({
-    type: DataType.STRING,
     unique: true,
     allowNull: false
   })
-  email!: string
-
-  @Column({
-    type: DataType.BOOLEAN,
-    allowNull: false,
-    defaultValue: false
-  })
-  verified!: boolean
+  title!: string
 
   @Column({
     type: DataType.STRING,
     allowNull: false
   })
-  password!: string
+  description!: string
+
+  @Column({
+    type: DataType.FLOAT,
+    allowNull: false
+  })
+  fundingCurrent!: number
+
+  @Column({
+    type: DataType.FLOAT,
+    allowNull: false,
+    defaultValue: 0
+  })
+  fundingGoal!: number
+
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: false
+  })
+  fundingGoalReached!: boolean
+
+  @Column({
+    type: DataType.FLOAT,
+    allowNull: false
+  })
+  fundingPercentage!: number
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false
+  })
+  fundingDayLeft!: number
+
+  @Column({
+    type: DataType.ARRAY(DataType.STRING),
+    allowNull: false
+  })
+  categories!: string[]
 
   @Column({
     type: DataType.STRING,
     allowNull: true,
-    defaultValue: false
+    defaultValue: null
   })
   image!: string
 }
