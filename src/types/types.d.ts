@@ -7,11 +7,6 @@ export interface IUser {
   password: string
 }
 
-export interface popo {
-  name: string
-  lastName: string
-}
-
 // export interface IUpdateComment {
 //   id: string
 //   firstName: string
@@ -48,7 +43,18 @@ export interface IProject {
   categories: string[]
   // creator: ICreator  CADA PROYECTO TIENE ASOCIADO UN USER
   image: string
+  displayProject: boolean
 }
+export type deleteIProyect = Omit<
+  IProject,
+  "description",
+  "fundingCurrent",
+  "fundingGoal",
+  "fundingGoalReached",
+  "fundingPercentage",
+  "fundingDayLeft",
+  "categoriesimage"
+>
 
 // Por defecto TS utiliza este nombre en el fichero 'types.d.ts'
 // Puedo tener varios esparcidos, pero ahora solo los coloco en este luegar

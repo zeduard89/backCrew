@@ -67,4 +67,10 @@ export default class User extends Model<IProject> {
     defaultValue: null
   })
   image!: string
+
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: false
+  })
+  displayProject!: boolean
 }

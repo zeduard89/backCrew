@@ -9,7 +9,13 @@ export const projectValidator = z.object({
   fundingPercentage: z.number().min(0).max(100),
   fundingDayLeft: z.number().positive(),
   categories: z.array(z.string()).min(1),
-  image: z.string().url()
+  image: z.string().url(),
+  displayProject: z.boolean()
+})
+
+export const deleteProjectValidator = z.object({
+  title: z.string().min(3),
+  displayProject: z.boolean()
 })
 
 export const creatorValidator = z.object({

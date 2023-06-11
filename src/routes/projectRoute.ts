@@ -1,7 +1,12 @@
 import { Router, Request, Response } from "express"
-import { projectValidator, validatorString } from "../schemas/projectSchemas"
+import {
+  projectValidator,
+  validatorString,
+  deleteProjectValidator
+} from "../schemas/projectSchemas"
 import createProjectController from "../controllers/projects/postProyectHandler"
 import getProjectByNameController from "../controllers/projects/getProyectByNameHandler"
+import deleteProjectByNameController from "../controllers/projects/deleteProjectByName"
 import getAllProjects from "../controllers/projects/getAllProjects"
 
 const router = Router()
@@ -47,6 +52,22 @@ router.get("/allProjects", async (_req: Request, res: Response) => {
     const errorMessage =
       (error as Error).message ||
       "Error desconocido al buscar todos los Projectos"
+    res.status(400).send(errorMessage)
+  }
+})
+
+// Ruta delete por name (actualiza booleano de displayProject)
+router.delete("/deleteProject", async (req: Request, res: Response) => {
+  try {
+    const validatedProject = deleteProjectValidator.parse(req.body)
+
+    const deleteProjectByName = await deleteProjectByNameController(
+      validatedProject
+    )
+    res.status(200).json(deleteProjectByName)
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message || "Error desconocido al buscar Project by ID"
     res.status(400).send(errorMessage)
   }
 })
