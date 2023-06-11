@@ -3,13 +3,15 @@ import {
   projectValidator,
   validatorString,
   deleteProjectValidator,
-  updateProjectValidator
+  updateProjectValidator,
+  updateFundingGoalValidator
 } from "../schemas/projectSchemas"
 import createProjectController from "../controllers/projects/postProyectHandler"
 import getProjectByNameController from "../controllers/projects/getProyectByNameHandler"
 import deleteProjectByNameController from "../controllers/projects/deleteProjectByName"
 import getAllProjects from "../controllers/projects/getAllProjects"
 import updateProjectController from "../controllers/projects/updateProjectController"
+import updateFundingGoalController from "../controllers/projects/updateFundingGoalController"
 
 const router = Router()
 //* Datos IMPORTANTES
@@ -29,7 +31,7 @@ router.post("/", async (req: Request, res: Response) => {
   }
 })
 
-// Ruta UPDATE de un project.
+// Ruta UPDATE DATOS de un project.
 router.put("/update", async (req: Request, res: Response) => {
   try {
     const validatedProject = updateProjectValidator.parse(req.body)
@@ -42,6 +44,24 @@ router.put("/update", async (req: Request, res: Response) => {
     res.status(400).send(errorMessage)
   }
 })
+
+// Ruta UPDATE fundingGOAL
+router.put(
+  "/update/addToFundingCurrent",
+  async (req: Request, res: Response) => {
+    try {
+      const validatedProject = updateFundingGoalValidator.parse(req.body)
+
+      const updatedProject = await updateFundingGoalController(validatedProject)
+      res.status(200).json(updatedProject)
+    } catch (error) {
+      const errorMessage =
+        (error as Error).message ||
+        "Error desconocido al buscar proyecto por Id"
+      res.status(400).send(errorMessage)
+    }
+  }
+)
 
 // Ruta busca por name
 router.get("/search/", async (req: Request, res: Response) => {

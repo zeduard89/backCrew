@@ -5,12 +5,19 @@ const updatedProjectController = async (
   validatedProject: updateProject
 ): Promise<object> => {
   try {
-    // Busco el projecto y compruebo y edito
+    // Compruebo que no exista un nombre igual
+    const projectDBname = await ProjectModel.findOne({
+      where: { title: validatedProject.title }
+    })
+    if (projectDBname) return { message: "El titulo ya existe" }
+
+    // Busco el projecto y lo edito
     const projectDB = await ProjectModel.findOne({
       where: { id: validatedProject.id }
     })
+    // Si no existe retorno mensaje
     if (!projectDB) return { message: "Project no existe" }
-
+    // caso contrario Lo edito
     const existingProject = await ProjectModel.update(
       {
         // Aquí se proporcionan los valores a actualizar
@@ -30,9 +37,11 @@ const updatedProjectController = async (
       }
     )
 
-    return existingProject
+    return {
+      message: `Cambio exitoso del projecto ${projectDB.id}${existingProject}`
+    }
   } catch (error) {
-    return { message: "Error Buscando el Projecto por name" }
+    return { message: "Error Buscando el Projecto por id" }
   }
 }
 

@@ -1,5 +1,3 @@
-// import { DataTypeUUID } from "sequelize"
-
 export interface IUser {
   name: string
   lastName: string
@@ -16,14 +14,6 @@ export interface IUser {
 //   date: string
 // }
 
-// export interface IUpdate {
-//   id: string
-//   title: string
-//   description: string
-//   data: string
-//   comments: IUpdateComment[]
-// }
-
 // export interface ICreator {
 //   id: DataTypeUUID
 //   firstName: string
@@ -31,20 +21,22 @@ export interface IUser {
 //   avatar: string
 // }
 
+// El signo de pregunta permite que sea opcional
 export interface IProject {
   id?: number
   title: string
   description: string
-  fundingCurrent: number
+  fundingCurrent?: number
   fundingGoal: number
   fundingGoalReached: boolean
-  fundingPercentage: number //! Relacionar con goal y reach guillermo
+  fundingPercentage?: number //! Relacionar con goal y reach guillermo
   fundingDayLeft: number //! relacionar con createdA guillermo
   categories: string[]
   // creator: ICreator  CADA PROYECTO TIENE ASOCIADO UN USER
   image: string
   displayProject: boolean
 }
+// Uso title displayProject
 export type deleteIProyect = Omit<
   IProject,
   "description",
@@ -56,7 +48,19 @@ export type deleteIProyect = Omit<
   "categories",
   "image"
 >
-
+// Uso title y currentFunding
+export type updateFundingGoalIProyect = Omit<
+  IProject,
+  "description",
+  "fundingGoal",
+  "fundingGoalReached",
+  "fundingPercentage",
+  "fundingDayLeft",
+  "categories",
+  "image",
+  "displayProject"
+>
+// Uso una interface nueva
 export interface updateProject {
   id: number
   title: string
