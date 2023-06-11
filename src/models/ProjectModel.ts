@@ -25,6 +25,12 @@ export default class Project extends Model<IProject> {
   description!: string
 
   @Column({
+    type: DataType.STRING,
+    allowNull: true
+  })
+  shortDescription!: string
+
+  @Column({
     type: DataType.FLOAT,
     allowNull: true,
     defaultValue: 0

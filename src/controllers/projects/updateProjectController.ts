@@ -23,6 +23,8 @@ const updatedProjectController = async (
         // Aquí se proporcionan los valores a actualizar
         title: validatedProject.title || projectDB.title,
         description: validatedProject.description || projectDB.description,
+        shortDescription:
+          validatedProject.shortDescription || projectDB.shortDescription,
         fundingGoal: validatedProject.fundingGoal || projectDB.fundingGoal,
         fundingDayLeft:
           validatedProject.fundingDayLeft || projectDB.fundingDayLeft,

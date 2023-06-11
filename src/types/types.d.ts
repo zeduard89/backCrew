@@ -26,6 +26,7 @@ export interface IProject {
   id?: number
   title: string
   description: string
+  shortDescription?: string
   fundingCurrent?: number
   fundingGoal: number
   fundingGoalReached: boolean
@@ -41,6 +42,7 @@ export interface IProject {
 export type deleteIProyect = Omit<
   IProject,
   "description",
+  "shortDescription",
   "fundingCurrent",
   "fundingGoal",
   "fundingGoalReached",
@@ -53,6 +55,7 @@ export type deleteIProyect = Omit<
 export type updateFundingCurrentIProyect = Omit<
   IProject,
   "description",
+  "shortDescription",
   "fundingGoal",
   "fundingGoalReached",
   "fundingDayLeft",
@@ -80,6 +83,7 @@ export interface updateProject {
   id: number
   title: string
   description: string
+  shortDescription: string
   fundingGoal: number
   fundingDayLeft: number
   categories: string[]

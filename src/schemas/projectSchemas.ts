@@ -3,6 +3,7 @@ import { z } from "zod"
 export const projectValidator = z.object({
   title: z.string().min(3),
   description: z.string().min(10),
+  shortDescription: z.string().min(5),
   // fundingCurrent: z.number().positive(),
   fundingGoal: z.number().positive(),
   fundingGoalReached: z.boolean(),
@@ -22,6 +23,7 @@ export const updateProjectValidator = z.object({
   id: z.number(),
   title: z.string().min(3),
   description: z.string().min(10),
+  shortDescription: z.string().min(5),
   fundingGoal: z.number().positive(),
   fundingDayLeft: z.number().positive(),
   categories: z.array(z.string()).min(1)
