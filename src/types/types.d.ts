@@ -49,12 +49,11 @@ export type deleteIProyect = Omit<
   "image"
 >
 // Uso title y currentFunding
-export type updateFundingGoalIProyect = Omit<
+export type updateFundingCurrentIProyect = Omit<
   IProject,
   "description",
   "fundingGoal",
   "fundingGoalReached",
-  "fundingPercentage",
   "fundingDayLeft",
   "categories",
   "image",

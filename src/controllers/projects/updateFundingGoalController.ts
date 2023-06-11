@@ -1,8 +1,8 @@
 import { ProjectModel } from "../../config/db"
-import { updateFundingGoalIProyect } from "../../types/types"
+import { updateFundingCurrentIProyect } from "../../types/types"
 
 const updatedProjectController = async (
-  validatedProject: updateFundingGoalIProyect
+  validatedProject: updateFundingCurrentIProyect
 ): Promise<object> => {
   try {
     // Busco el projecto y compruebo y edito
@@ -11,13 +11,18 @@ const updatedProjectController = async (
     })
     if (!projectDB) return { message: "Project no existe" }
 
-    // Busco current de DB y de front , sumos y aplico
+    // Actualizo fundingCurrent
     const newFundingCurrent =
       validatedProject.addToFundingCurrent + projectDB.fundingCurrent
+    // Actualizo fundingPercentage
+    const newFundingPercentage =
+      (100 * newFundingCurrent) / projectDB.fundingGoal
+
     const existingProject = await ProjectModel.update(
       {
         // Aquí se proporcionan los valores a actualizar
-        fundingCurrent: newFundingCurrent
+        fundingCurrent: newFundingCurrent,
+        fundingPercentage: newFundingPercentage
       },
       {
         // Aquí se especifica la condición de búsqueda

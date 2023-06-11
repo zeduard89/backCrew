@@ -1,10 +1,4 @@
-import {
-  Model,
-  Column,
-  Table,
-  DataType,
-  BeforeSave
-} from "sequelize-typescript"
+import { Model, Column, Table, DataType } from "sequelize-typescript"
 import { IProject } from "../types/types"
 
 @Table({ tableName: "projects" })
@@ -80,15 +74,4 @@ export default class Project extends Model<IProject> {
     allowNull: false
   })
   displayProject!: boolean
-
-  // Decorador proporcionado por sequelize, genera una logica antes de guardar
-  @BeforeSave
-  static calculateFundingPercentage(project: Project): void {
-    const { fundingCurrent, fundingGoal } = project
-    if (fundingGoal > 0) {
-      project.fundingPercentage = (fundingCurrent / fundingGoal) * 100
-    } else {
-      project.fundingPercentage = 0
-    }
-  }
 }

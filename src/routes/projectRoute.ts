@@ -4,7 +4,7 @@ import {
   validatorString,
   deleteProjectValidator,
   updateProjectValidator,
-  updateFundingGoalValidator
+  updateFundingCurrentValidator
 } from "../schemas/projectSchemas"
 import createProjectController from "../controllers/projects/postProyectHandler"
 import getProjectByNameController from "../controllers/projects/getProyectByNameHandler"
@@ -50,7 +50,7 @@ router.put(
   "/update/addToFundingCurrent",
   async (req: Request, res: Response) => {
     try {
-      const validatedProject = updateFundingGoalValidator.parse(req.body)
+      const validatedProject = updateFundingCurrentValidator.parse(req.body)
 
       const updatedProject = await updateFundingGoalController(validatedProject)
       res.status(200).json(updatedProject)

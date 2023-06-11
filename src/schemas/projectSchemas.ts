@@ -27,7 +27,7 @@ export const updateProjectValidator = z.object({
   categories: z.array(z.string()).min(1)
 })
 
-export const updateFundingGoalValidator = z.object({
+export const updateFundingCurrentValidator = z.object({
   title: z.string().min(3),
   addToFundingCurrent: z.number().positive()
 })
