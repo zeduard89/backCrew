@@ -12,6 +12,7 @@ import deleteProjectByNameController from "../controllers/projects/deleteProject
 import getAllProjects from "../controllers/projects/getAllProjects"
 import updateProjectController from "../controllers/projects/updateProjectController"
 import updateFundingGoalController from "../controllers/projects/updateFundingGoalController"
+import getDayLeftByNameController from "../controllers/projects/getDayLeftByNameHandler"
 
 const router = Router()
 //* Datos IMPORTANTES
@@ -70,6 +71,22 @@ router.get("/search/", async (req: Request, res: Response) => {
     const validatedName = validatorString.parse(name)
     if (name !== undefined) {
       const getProjectByName = await getProjectByNameController(validatedName)
+      res.status(200).json(getProjectByName)
+    }
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message || "Error desconocido al buscar Project by ID"
+    res.status(400).send(errorMessage)
+  }
+})
+
+// Ruta busca por name los Dias restantes
+router.get("/search/daysleft", async (req: Request, res: Response) => {
+  try {
+    const { name } = req.query
+    const validatedName = validatorString.parse(name)
+    if (name !== undefined) {
+      const getProjectByName = await getDayLeftByNameController(validatedName)
       res.status(200).json(getProjectByName)
     }
   } catch (error) {
