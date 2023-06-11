@@ -29,10 +29,11 @@ export interface IProject {
   fundingCurrent?: number
   fundingGoal: number
   fundingGoalReached: boolean
-  fundingPercentage?: number //! Relacionar con goal y reach guillermo
-  fundingDayLeft: number //! relacionar con createdA guillermo
+  fundingPercentage?: number
+  fundingDayLeft: number
+  likes?: number
+  disLikes?: number
   categories: string[]
-  // creator: ICreator  CADA PROYECTO TIENE ASOCIADO UN USER
   image: string
   displayProject: boolean
 }
@@ -59,7 +60,22 @@ export type updateFundingCurrentIProyect = Omit<
   "image",
   "displayProject"
 >
-// Uso una interface nueva
+
+// Uso title y likes/disLikes
+export type updateLikes = Omit<
+  IProject,
+  "description",
+  "fundingCurrent",
+  "fundingGoal",
+  "fundingGoalReached",
+  "fundingPercentage",
+  "fundingDayLeft",
+  "categories",
+  "image",
+  "displayProject"
+>
+
+// Uso una interface nueva Proyect x 2
 export interface updateProject {
   id: number
   title: string

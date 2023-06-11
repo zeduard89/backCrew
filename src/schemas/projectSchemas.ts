@@ -32,4 +32,10 @@ export const updateFundingCurrentValidator = z.object({
   addToFundingCurrent: z.number().positive()
 })
 
+export const updateLikes = z.object({
+  title: z.string().min(3),
+  likes: z.number().nonnegative(),
+  disLikes: z.number().nonnegative()
+})
+
 export const validatorString = z.string()

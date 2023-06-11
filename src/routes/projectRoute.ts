@@ -4,15 +4,17 @@ import {
   validatorString,
   deleteProjectValidator,
   updateProjectValidator,
-  updateFundingCurrentValidator
+  updateFundingCurrentValidator,
+  updateLikes
 } from "../schemas/projectSchemas"
 import createProjectController from "../controllers/projects/postProyectHandler"
 import getProjectByNameController from "../controllers/projects/getProyectByNameHandler"
 import deleteProjectByNameController from "../controllers/projects/deleteProjectByName"
 import getAllProjects from "../controllers/projects/getAllProjects"
 import updateProjectController from "../controllers/projects/updateProjectController"
-import updateFundingGoalController from "../controllers/projects/updateFundingGoalController"
+import updateFundingCurrentController from "../controllers/projects/updateFundingCurrentController"
 import getDayLeftByNameController from "../controllers/projects/getDayLeftByNameHandler"
+import updateLikesController from "../controllers/projects/updateLikesControllers"
 
 const router = Router()
 //* Datos IMPORTANTES
@@ -46,14 +48,16 @@ router.put("/update", async (req: Request, res: Response) => {
   }
 })
 
-// Ruta UPDATE fundingGOAL
+// Ruta UPDATE fundingCurrent
 router.put(
   "/update/addToFundingCurrent",
   async (req: Request, res: Response) => {
     try {
       const validatedProject = updateFundingCurrentValidator.parse(req.body)
 
-      const updatedProject = await updateFundingGoalController(validatedProject)
+      const updatedProject = await updateFundingCurrentController(
+        validatedProject
+      )
       res.status(200).json(updatedProject)
     } catch (error) {
       const errorMessage =
@@ -63,6 +67,20 @@ router.put(
     }
   }
 )
+
+// Ruta UPDATE likes
+router.put("/update/likes", async (req: Request, res: Response) => {
+  try {
+    const validatedProject = updateLikes.parse(req.body)
+
+    const updatedProject = await updateLikesController(validatedProject)
+    res.status(200).json(updatedProject)
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message || "Error desconocido al buscar proyecto por Id"
+    res.status(400).send(errorMessage)
+  }
+})
 
 // Ruta busca por name
 router.get("/search/", async (req: Request, res: Response) => {

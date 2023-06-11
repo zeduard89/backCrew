@@ -57,6 +57,20 @@ export default class Project extends Model<IProject> {
   fundingDayLeft!: number
 
   @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+    defaultValue: 0
+  })
+  likes!: number
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+    defaultValue: 0
+  })
+  disLikes!: number
+
+  @Column({
     type: DataType.ARRAY(DataType.STRING),
     allowNull: false
   })

@@ -5,6 +5,10 @@ const deleteProyectByNameController = async (
   validatedProject: deleteIProyect
 ): Promise<object> => {
   try {
+    const projectDB = await ProjectModel.findOne({
+      where: { title: validatedProject.title }
+    })
+    if (!projectDB) return { message: "Projecto no encontrado" }
     //* Si la condicion es FALSE la retorno a TRUE
     if (!validatedProject.displayProject) {
       const existingProject = await ProjectModel.update(
@@ -24,7 +28,7 @@ const deleteProyectByNameController = async (
       }
 
       return {
-        message: `Cambio exitoso displayProject:${validatedProject.displayProject}`
+        message: `Cambio exitoso displayProject: ${validatedProject.displayProject}`
       }
     }
     //* Si la condicion es TRUE la retorno a FALSE
@@ -45,7 +49,7 @@ const deleteProyectByNameController = async (
     }
 
     return {
-      message: `Cambio exitoso displayProject:${validatedProject.displayProject}`
+      message: `Cambio exitoso displayProject: ${validatedProject.displayProject}`
     }
   } catch (error) {
     return { message: "Error Buscando el Projecto por ID" }

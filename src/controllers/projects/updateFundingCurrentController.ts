@@ -31,8 +31,10 @@ const updatedProjectController = async (
         }
       }
     )
-
-    return existingProject
+    console.log(existingProject)
+    return {
+      message: `Se modifico Correctamente el valor de fundingCurrent y fundingPercentage`
+    }
   } catch (error) {
     return { message: "Error Buscando el Projecto por name" }
   }

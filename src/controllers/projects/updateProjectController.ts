@@ -36,9 +36,9 @@ const updatedProjectController = async (
         }
       }
     )
-
+    console.log(existingProject)
     return {
-      message: `Cambio exitoso del projecto ${projectDB.id}${existingProject}`
+      message: `Cambio exitoso del projecto con ID: ${projectDB.id}`
     }
   } catch (error) {
     return { message: "Error Buscando el Projecto por id" }
