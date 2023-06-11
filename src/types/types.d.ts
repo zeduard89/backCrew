@@ -32,6 +32,7 @@ export interface IUser {
 // }
 
 export interface IProject {
+  id?: number
   title: string
   description: string
   fundingCurrent: number
@@ -39,7 +40,6 @@ export interface IProject {
   fundingGoalReached: boolean
   fundingPercentage: number //! Relacionar con goal y reach guillermo
   fundingDayLeft: number //! relacionar con createdA guillermo
-  // update: IUpdate[]
   categories: string[]
   // creator: ICreator  CADA PROYECTO TIENE ASOCIADO UN USER
   image: string
@@ -53,8 +53,18 @@ export type deleteIProyect = Omit<
   "fundingGoalReached",
   "fundingPercentage",
   "fundingDayLeft",
-  "categoriesimage"
+  "categories",
+  "image"
 >
+
+export interface updateProject {
+  id: number
+  title: string
+  description: string
+  fundingGoal: number
+  fundingDayLeft: number
+  categories: string[]
+}
 
 // Por defecto TS utiliza este nombre en el fichero 'types.d.ts'
 // Puedo tener varios esparcidos, pero ahora solo los coloco en este luegar

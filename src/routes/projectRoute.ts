@@ -2,16 +2,18 @@ import { Router, Request, Response } from "express"
 import {
   projectValidator,
   validatorString,
-  deleteProjectValidator
+  deleteProjectValidator,
+  updateProjectValidator
 } from "../schemas/projectSchemas"
 import createProjectController from "../controllers/projects/postProyectHandler"
 import getProjectByNameController from "../controllers/projects/getProyectByNameHandler"
 import deleteProjectByNameController from "../controllers/projects/deleteProjectByName"
 import getAllProjects from "../controllers/projects/getAllProjects"
+import updateProjectController from "../controllers/projects/updateProjectController"
 
 const router = Router()
-// Datos
-// Title es unico - id es UUID
+//* Datos IMPORTANTES
+//* Title es unico - displaysProject'habilita/deshabilita el projecto'
 
 // Ruta crea un project.
 router.post("/", async (req: Request, res: Response) => {
@@ -20,6 +22,20 @@ router.post("/", async (req: Request, res: Response) => {
 
     const newProject = await createProjectController(validatedProject)
     res.status(200).json(newProject)
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message || "Error desconocido al buscar proyecto por Id"
+    res.status(400).send(errorMessage)
+  }
+})
+
+// Ruta UPDATE de un project.
+router.put("/update", async (req: Request, res: Response) => {
+  try {
+    const validatedProject = updateProjectValidator.parse(req.body)
+
+    const updatedProject = await updateProjectController(validatedProject)
+    res.status(200).json(updatedProject)
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Error desconocido al buscar proyecto por Id"
@@ -60,7 +76,6 @@ router.get("/allProjects", async (_req: Request, res: Response) => {
 router.delete("/deleteProject", async (req: Request, res: Response) => {
   try {
     const validatedProject = deleteProjectValidator.parse(req.body)
-
     const deleteProjectByName = await deleteProjectByNameController(
       validatedProject
     )

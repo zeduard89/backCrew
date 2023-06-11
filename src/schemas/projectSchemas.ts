@@ -18,10 +18,13 @@ export const deleteProjectValidator = z.object({
   displayProject: z.boolean()
 })
 
-export const creatorValidator = z.object({
-  firstName: z.string().min(3),
-  lastName: z.string().min(3),
-  avatar: z.string().min(3)
+export const updateProjectValidator = z.object({
+  id: z.number(),
+  title: z.string().min(3),
+  description: z.string().min(10),
+  fundingGoal: z.number().positive(),
+  fundingDayLeft: z.number().positive(),
+  categories: z.array(z.string()).min(1)
 })
 
 export const validatorString = z.string()

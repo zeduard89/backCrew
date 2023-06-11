@@ -10,7 +10,7 @@ const deleteProyectByNameController = async (
       const existingProject = await ProjectModel.update(
         {
           // Aquí se proporcionan los valores a actualizar
-          displayProject: true
+          displayProject: false
         },
         {
           // Aquí se especifica la condición de búsqueda
@@ -23,7 +23,9 @@ const deleteProyectByNameController = async (
         return { message: "Project no existe" }
       }
 
-      return existingProject
+      return {
+        message: `Cambio exitoso displayProject:${validatedProject.displayProject}`
+      }
     }
     //* Si la condicion es TRUE la retorno a FALSE
     const existingProject = await ProjectModel.update(
@@ -42,7 +44,9 @@ const deleteProyectByNameController = async (
       return { message: "Project no existe" }
     }
 
-    return existingProject
+    return {
+      message: `Cambio exitoso displayProject:${validatedProject.displayProject}`
+    }
   } catch (error) {
     return { message: "Error Buscando el Projecto por ID" }
   }
