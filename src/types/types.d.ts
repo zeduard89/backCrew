@@ -1,15 +1,8 @@
-// import { DataTypeUUID } from "sequelize"
-
 export interface IUser {
   name: string
   lastName: string
   email: strin
   password: string
-}
-
-export interface popo {
-  name: string
-  lastName: string
 }
 
 // export interface IUpdateComment {
@@ -21,14 +14,6 @@ export interface popo {
 //   date: string
 // }
 
-// export interface IUpdate {
-//   id: string
-//   title: string
-//   description: string
-//   data: string
-//   comments: IUpdateComment[]
-// }
-
 // export interface ICreator {
 //   id: DataTypeUUID
 //   firstName: string
@@ -36,18 +21,82 @@ export interface popo {
 //   avatar: string
 // }
 
+// El signo de pregunta permite que sea opcional
 export interface IProject {
+  id?: number
   title: string
   description: string
-  fundingCurrent: number
+  shortDescription?: string
+  fundingCurrent?: number
   fundingGoal: number
   fundingGoalReached: boolean
-  fundingPercentage: number //! Relacionar con goal y reach guillermo
-  fundingDayLeft: number //! relacionar con createdA guillermo
-  // update: IUpdate[]
+  fundingPercentage?: number
+  fundingDayLeft: number
+  likes?: number
+  disLikes?: number
   categories: string[]
-  // creator: ICreator  CADA PROYECTO TIENE ASOCIADO UN USER
   image: string
+  displayProject: boolean
+}
+// Uso title displayProject
+export type deleteIProyect = Omit<
+  IProject,
+  "description",
+  "shortDescription",
+  "fundingCurrent",
+  "fundingGoal",
+  "fundingGoalReached",
+  "fundingPercentage",
+  "fundingDayLeft",
+  "categories",
+  "image"
+>
+// Uso title y currentFunding
+export type updateFundingCurrentIProyect = Omit<
+  IProject,
+  "description",
+  "shortDescription",
+  "fundingGoal",
+  "fundingGoalReached",
+  "fundingDayLeft",
+  "categories",
+  "image",
+  "displayProject"
+>
+
+// Uso title y likes/disLikes
+export type updateLikes = Omit<
+  IProject,
+  "description",
+  "fundingCurrent",
+  "fundingGoal",
+  "fundingGoalReached",
+  "fundingPercentage",
+  "fundingDayLeft",
+  "categories",
+  "image",
+  "displayProject"
+>
+
+// Uso una interface nueva Proyect x 2
+export interface updateProject {
+  id: number
+  title: string
+  description: string
+  shortDescription: string
+  fundingGoal: number
+  fundingDayLeft: number
+  categories: string[]
+}
+
+export interface limitDate {
+  year: number
+  month: number
+  day: number
+  hours: number
+  minutes: number
+  seconds: number
+  daysLeft: number
 }
 
 // Por defecto TS utiliza este nombre en el fichero 'types.d.ts'
