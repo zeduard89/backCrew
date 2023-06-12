@@ -8,7 +8,7 @@ const createProjectController = async (
     const { title, ...rest } = validatedProject
     const existingProject = await ProjectModel.findOne({ where: { title } })
     if (existingProject) {
-      return { message: "El Proyecto ya existe " }
+      throw new Error("El Proyecto ya existe ")
     }
 
     const createdProject = await ProjectModel.create({
@@ -18,7 +18,9 @@ const createProjectController = async (
 
     return createdProject
   } catch (error) {
-    return { message: "Error creando el Projecto" }
+    const errorMessage =
+      (error as Error).message || "Error desconocido al guardar ImagenAzure"
+    return { errorMessage }
   }
 }
 

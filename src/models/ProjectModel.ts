@@ -2,14 +2,14 @@ import { Model, Column, Table, DataType } from "sequelize-typescript"
 import { IProject } from "../types/types"
 
 @Table({ tableName: "projects" })
-export default class User extends Model<IProject> {
+export default class Project extends Model<IProject> {
   @Column({
-    type: DataType.UUID,
+    type: DataType.INTEGER,
     primaryKey: true,
     allowNull: false,
-    defaultValue: DataType.UUIDV4
+    autoIncrement: true
   })
-  id!: string
+  id!: number
 
   @Column({
     type: DataType.STRING,
@@ -25,15 +25,21 @@ export default class User extends Model<IProject> {
   description!: string
 
   @Column({
+    type: DataType.STRING,
+    allowNull: true
+  })
+  shortDescription!: string
+
+  @Column({
     type: DataType.FLOAT,
-    allowNull: false
+    allowNull: true,
+    defaultValue: 0
   })
   fundingCurrent!: number
 
   @Column({
     type: DataType.FLOAT,
-    allowNull: false,
-    defaultValue: 0
+    allowNull: false
   })
   fundingGoal!: number
 
@@ -45,7 +51,8 @@ export default class User extends Model<IProject> {
 
   @Column({
     type: DataType.FLOAT,
-    allowNull: false
+    allowNull: true,
+    defaultValue: 0
   })
   fundingPercentage!: number
 
@@ -54,6 +61,20 @@ export default class User extends Model<IProject> {
     allowNull: false
   })
   fundingDayLeft!: number
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+    defaultValue: 0
+  })
+  likes!: number
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+    defaultValue: 0
+  })
+  disLikes!: number
 
   @Column({
     type: DataType.ARRAY(DataType.STRING),
@@ -67,4 +88,10 @@ export default class User extends Model<IProject> {
     defaultValue: null
   })
   image!: string
+
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: false
+  })
+  displayProject!: boolean
 }
