@@ -9,7 +9,7 @@ const updatedProjectController = async (
     const projectDB = await ProjectModel.findOne({
       where: { title: validatedProject.title }
     })
-    if (!projectDB) return { message: "Project no existe" }
+    if (!projectDB) throw new Error("Project no existe")
 
     // Actualizo fundingCurrent
     const newFundingCurrent =
@@ -18,7 +18,7 @@ const updatedProjectController = async (
     const newFundingPercentage =
       (100 * newFundingCurrent) / projectDB.fundingGoal
 
-    const existingProject = await ProjectModel.update(
+    await ProjectModel.update(
       {
         // Aquí se proporcionan los valores a actualizar
         fundingCurrent: newFundingCurrent,
@@ -31,12 +31,14 @@ const updatedProjectController = async (
         }
       }
     )
-    console.log(existingProject)
+
     return {
       message: `Se modifico Correctamente el valor de fundingCurrent y fundingPercentage`
     }
   } catch (error) {
-    return { message: "Error Buscando el Projecto por name" }
+    const errorMessage =
+      (error as Error).message || "Error desconocido al guardar ImagenAzure"
+    return { errorMessage }
   }
 }
 

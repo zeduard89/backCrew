@@ -5,11 +5,13 @@ const getAllProjects = async (): Promise<object> => {
     const existingProject = await ProjectModel.findAll()
 
     if (Object.keys(existingProject).length === 0) {
-      return { message: "No hay proyectos en la DB" }
+      throw new Error("No hay proyectos en la DB")
     }
     return existingProject
   } catch (error) {
-    return { message: "Error Buscando todos los Projectos" }
+    const errorMessage =
+      (error as Error).message || "Error desconocido al guardar ImagenAzure"
+    return { errorMessage }
   }
 }
 

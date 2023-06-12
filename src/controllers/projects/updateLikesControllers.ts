@@ -9,13 +9,13 @@ const updateLikesController = async (
     const projectDB = await ProjectModel.findOne({
       where: { title: validatedProject.title }
     })
-    if (!projectDB) return { message: "Project no existe" }
+    if (!projectDB) throw new Error("El Project no existe")
 
     // Actualizo fundingCurrent
     const newLikes = validatedProject.likes + projectDB.likes
     const newDisLikes = validatedProject.disLikes + projectDB.disLikes
 
-    const existingProject = await ProjectModel.update(
+    await ProjectModel.update(
       {
         // Aquí se proporcionan los valores a actualizar
         likes: newLikes,
@@ -28,12 +28,13 @@ const updateLikesController = async (
         }
       }
     )
-    console.log(existingProject)
     return {
       message: `Se modifico Correctamente el valor de likes: ${newLikes} y disLikes: ${newDisLikes}`
     }
   } catch (error) {
-    return { message: "Error actualizando likes" }
+    const errorMessage =
+      (error as Error).message || "Error desconocido al guardar ImagenAzure"
+    return { errorMessage }
   }
 }
 

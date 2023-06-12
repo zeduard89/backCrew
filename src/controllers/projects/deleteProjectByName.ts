@@ -8,7 +8,7 @@ const deleteProyectByNameController = async (
     const projectDB = await ProjectModel.findOne({
       where: { title: validatedProject.title }
     })
-    if (!projectDB) return { message: "Projecto no encontrado" }
+    if (!projectDB) throw new Error("Projecto no encontrado")
     //* Si la condicion es FALSE la retorno a TRUE
     if (!validatedProject.displayProject) {
       const existingProject = await ProjectModel.update(
@@ -24,7 +24,7 @@ const deleteProyectByNameController = async (
         }
       )
       if (!existingProject) {
-        return { message: "Project no existe" }
+        throw new Error("Project no existe")
       }
 
       return {
@@ -45,14 +45,16 @@ const deleteProyectByNameController = async (
       }
     )
     if (!existingProject) {
-      return { message: "Project no existe" }
+      throw new Error("Project no existe")
     }
 
     return {
       message: `Cambio exitoso displayProject: ${validatedProject.displayProject}`
     }
   } catch (error) {
-    return { message: "Error Buscando el Projecto por ID" }
+    const errorMessage =
+      (error as Error).message || "Error desconocido al guardar ImagenAzure"
+    return { errorMessage }
   }
 }
 

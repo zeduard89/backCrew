@@ -53,7 +53,7 @@ export const uploadBlob = async (req: Request, res: Response) => {
   }
 }
 
-// Funcion para ver el Blob (Buffer de imagen que renderizar en web con url)
+// Funcion para ver Listado URL
 export const getBlobList = async (req: Request, res: Response) => {
   try {
     const { container } = req.params
@@ -105,7 +105,8 @@ export const getBlobList = async (req: Request, res: Response) => {
     res.status(200).json(blobUrls)
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al buscar ImagenesAzure"
+      (error as Error).message ||
+      "Error desconocido al buscar listado URL Azure"
     res.status(500).send(errorMessage)
   }
 }

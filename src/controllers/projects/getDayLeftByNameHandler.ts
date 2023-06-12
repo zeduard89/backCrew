@@ -11,7 +11,7 @@ const getLeftDayByNameController = async (
       }
     })
     if (!existingProject) {
-      return { message: "Project no existe" }
+      throw new Error("Project no existe")
     }
     //! Logica para fecha limite
     // Obtengo la cantidad de milisegundos desde 1/1/1970 hasta la creacion
@@ -39,7 +39,9 @@ const getLeftDayByNameController = async (
 
     return limitDate
   } catch (error) {
-    return { message: "Error Buscando el Projecto por ID" }
+    const errorMessage =
+      (error as Error).message || "Error desconocido al guardar ImagenAzure"
+    return { errorMessage }
   }
 }
 

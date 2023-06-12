@@ -9,16 +9,16 @@ const updatedProjectController = async (
     const projectDBname = await ProjectModel.findOne({
       where: { title: validatedProject.title }
     })
-    if (projectDBname) return { message: "El titulo ya existe" }
+    if (projectDBname) throw new Error("El titulo ya existe")
 
     // Busco el projecto y lo edito
     const projectDB = await ProjectModel.findOne({
       where: { id: validatedProject.id }
     })
     // Si no existe retorno mensaje
-    if (!projectDB) return { message: "Project no existe" }
+    if (!projectDB) throw new Error("Project no existe")
     // caso contrario Lo edito
-    const existingProject = await ProjectModel.update(
+    await ProjectModel.update(
       {
         // Aquí se proporcionan los valores a actualizar
         title: validatedProject.title || projectDB.title,
@@ -38,12 +38,14 @@ const updatedProjectController = async (
         }
       }
     )
-    console.log(existingProject)
+
     return {
       message: `Cambio exitoso del projecto con ID: ${projectDB.id}`
     }
   } catch (error) {
-    return { message: "Error Buscando el Projecto por id" }
+    const errorMessage =
+      (error as Error).message || "Error desconocido al guardar ImagenAzure"
+    return { errorMessage }
   }
 }
 

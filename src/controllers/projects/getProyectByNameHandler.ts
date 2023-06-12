@@ -10,12 +10,14 @@ const getProyectByNameController = async (
       }
     })
     if (!existingProject) {
-      return { message: "Project no existe" }
+      throw new Error("Project no existe")
     }
 
     return existingProject
   } catch (error) {
-    return { message: "Error Buscando el Projecto por ID" }
+    const errorMessage =
+      (error as Error).message || "Error desconocido al guardar ImagenAzure"
+    return { errorMessage }
   }
 }
 
