@@ -5,14 +5,14 @@ export interface IUser {
   password: string
 }
 
-// export interface IUpdateComment {
-//   id: string
-//   firstName: string
-//   comments: string
-//   likes: number
-//   dislikes: number
-//   date: string
-// }
+export interface IComment {
+  id: string
+  firstName: string
+  comments: string
+  likes: number
+  dislikes: number
+  date: string
+}
 
 // export interface ICreator {
 //   id: DataTypeUUID
