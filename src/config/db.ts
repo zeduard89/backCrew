@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize-typescript"
 import dotenv from "dotenv"
-import UserModel from "../models/User"
-import ProjectModel from "../models/Project"
+import UserModel from "../models/UserModel"
+import ProjectModel from "../models/ProjectModel"
 
 dotenv.config()
 
@@ -13,13 +13,12 @@ const sequelize = new Sequelize(
   }/${DB_NAME ?? ""}`,
   {
     logging: false,
-    native: false
+    native: false,
+    models: [UserModel, ProjectModel]
   }
 )
-// sequelize.addModels([Popo])
-// sequelize.addModels([ProjectModel])
-// sequelize.addModels([UserModel])
 
-sequelize.addModels([ProjectModel, UserModel])
+sequelize.addModels([UserModel])
+sequelize.addModels([ProjectModel])
 
 export { sequelize, UserModel, ProjectModel }
