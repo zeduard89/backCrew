@@ -12,6 +12,7 @@ export interface IComment {
   likes: number
   dislikes: number
   date: string
+  displayComment: boolean
 }
 
 // export interface ICreator {

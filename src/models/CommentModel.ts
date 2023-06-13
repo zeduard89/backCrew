@@ -25,44 +25,6 @@ export default class Project extends Model<IComment> {
   description!: string
 
   @Column({
-    type: DataType.STRING,
-    allowNull: true
-  })
-  shortDescription!: string
-
-  @Column({
-    type: DataType.FLOAT,
-    allowNull: true,
-    defaultValue: 0
-  })
-  fundingCurrent!: number
-
-  @Column({
-    type: DataType.FLOAT,
-    allowNull: false
-  })
-  fundingGoal!: number
-
-  @Column({
-    type: DataType.BOOLEAN,
-    allowNull: false
-  })
-  fundingGoalReached!: boolean
-
-  @Column({
-    type: DataType.FLOAT,
-    allowNull: true,
-    defaultValue: 0
-  })
-  fundingPercentage!: number
-
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false
-  })
-  fundingDayLeft!: number
-
-  @Column({
     type: DataType.INTEGER,
     allowNull: true,
     defaultValue: 0
@@ -77,21 +39,15 @@ export default class Project extends Model<IComment> {
   disLikes!: number
 
   @Column({
-    type: DataType.ARRAY(DataType.STRING),
-    allowNull: false
-  })
-  categories!: string[]
-
-  @Column({
     type: DataType.STRING,
     allowNull: true,
     defaultValue: null
   })
-  image!: string
+  date!: string
 
   @Column({
     type: DataType.BOOLEAN,
     allowNull: false
   })
-  displayProject!: boolean
+  displayComment!: boolean
 }
