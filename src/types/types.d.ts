@@ -1,9 +1,12 @@
 export interface IUser {
   name: string
   lastName: string
-  email: strin
+  email: string
   password: string
+  verified?: boolean
 }
+
+export type IUserLD = Omit<IUser, "name", "lastName">
 
 // export interface IUpdateComment {
 //   id: string
