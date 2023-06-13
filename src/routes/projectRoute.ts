@@ -7,8 +7,8 @@ import {
   updateFundingCurrentValidator,
   updateLikes
 } from "../schemas/projectSchemas"
-import createProjectController from "../controllers/projects/postProyectHandler"
-import getProjectByNameController from "../controllers/projects/getProyectByNameHandler"
+import createProjectController from "../controllers/projects/postProjectHandler"
+import getProjectByNameController from "../controllers/projects/getProjectByNameHandler"
 import deleteProjectByNameController from "../controllers/projects/deleteProjectByName"
 import getAllProjects from "../controllers/projects/getAllProjects"
 import updateProjectController from "../controllers/projects/updateProjectController"

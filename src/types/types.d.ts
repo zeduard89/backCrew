@@ -8,14 +8,15 @@ export interface IUser {
 
 export type IUserLD = Omit<IUser, "name", "lastName">
 
-// export interface IUpdateComment {
-//   id: string
-//   firstName: string
-//   comments: string
-//   likes: number
-//   dislikes: number
-//   date: string
-// }
+export interface IComment {
+  id: string
+  firstName: string
+  comments: string
+  likes: number
+  dislikes: number
+  date: string
+  displayComment: boolean
+}
 
 // export interface ICreator {
 //   id: DataTypeUUID

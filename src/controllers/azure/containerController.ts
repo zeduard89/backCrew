@@ -14,12 +14,20 @@ const blobService = BlobServiceClient.fromConnectionString(connectionString) // 
 // Creo un contendor
 export const createContainer = async (req: Request, res: Response) => {
   try {
-    const container = req.body
+    const { container } = req.body
     if (!container)
       throw new Error("Por favor ingresar un valor de container valido")
+
+    // Buscamos si existe el contenedor
+    const containerClient = blobService.getContainerClient(container)
+    const containerExist = await containerClient.exists()
+    if (containerExist) throw new Error(`El container: ${container} ya existe`)
+
     await blobService.createContainer(container)
 
-    res.status(200).json({ message: "success" })
+    res
+      .status(200)
+      .json({ message: `El container: ${container} fue creado correctamente` })
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Error desconocido al crear un container"
@@ -28,14 +36,20 @@ export const createContainer = async (req: Request, res: Response) => {
 }
 
 // Borrar un contendor
-export const deleteContainer = (req: Request, res: Response) => {
+export const deleteContainer = async (req: Request, res: Response) => {
   try {
     const { container } = req.body
     if (!container)
       throw new Error("Por favor ingresar un valor de container valido")
+
+    // Buscamos si existe el contenedor
+    const containerClient = blobService.getContainerClient(container)
+    const containerExist = await containerClient.exists()
+    if (!containerExist) throw new Error(`El container: ${container} no existe`)
+
     blobService.deleteContainer(container)
 
-    res.json({ message: "success" })
+    res.json({ message: `El container: ${container} fue eliminado con exito` })
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Error desconocido al borrar un container"
@@ -51,6 +65,8 @@ export const listContainer = async (_req: Request, res: Response) => {
     for await (const container of blobService.listContainers()) {
       containers.push(container.name)
     }
+    if (containers.length === 0)
+      throw new Error("No hay elementos en el contenedor")
 
     res.json({ containers })
   } catch (error) {
