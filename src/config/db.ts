@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import UserModel from "../models/UserModel"
 import ProjectModel from "../models/ProjectModel"
 import CommentModel from "../models/CommentModel"
+import AdminModel from "../models/AdminModel"
 
 dotenv.config()
 
@@ -15,10 +16,10 @@ const sequelize = new Sequelize(
   {
     logging: false,
     native: false,
-    models: [UserModel, ProjectModel, CommentModel]
+    models: [UserModel, ProjectModel, CommentModel, AdminModel]
   }
 )
 
-sequelize.addModels([UserModel, ProjectModel, CommentModel])
+sequelize.addModels([UserModel, ProjectModel, CommentModel, AdminModel])
 
-export { sequelize, UserModel, ProjectModel, CommentModel }
+export { sequelize, UserModel, ProjectModel, CommentModel, AdminModel }
