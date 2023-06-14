@@ -5,7 +5,7 @@ import {
   deleteProjectValidator,
   updateProjectValidator,
   updateFundingCurrentValidator,
-  updateLikes
+  updateLikesValidator
 } from "../schemas/projectSchemas"
 import createProjectController from "../controllers/projects/postProjectHandler"
 import getProjectByNameController from "../controllers/projects/getProjectByNameHandler"
@@ -71,7 +71,7 @@ router.put(
 // Ruta UPDATE likes
 router.put("/update/likes", async (req: Request, res: Response) => {
   try {
-    const validatedProject = updateLikes.parse(req.body)
+    const validatedProject = updateLikesValidator.parse(req.body)
 
     const updatedProject = await updateLikesController(validatedProject)
     res.status(200).json(updatedProject)

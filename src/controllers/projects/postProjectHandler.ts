@@ -39,7 +39,7 @@ const createProjectController = async (
 
     await blobService.createContainer(newIdProjectContainer)
     //! ---------------------------------
-    return createdProject
+    return { message: `Proyecto: ${createdProject.title} Creado con exito` }
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Error desconocido al guardar ImagenAzure"

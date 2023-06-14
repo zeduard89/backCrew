@@ -40,7 +40,8 @@ export interface IProject {
   likes?: number
   disLikes?: number
   categories: string[]
-  image: string
+  banco: string
+  cuenta: string
   displayProject: boolean
 }
 // Uso title displayProject
@@ -54,7 +55,8 @@ export type deleteIProyect = Omit<
   "fundingPercentage",
   "fundingDayLeft",
   "categories",
-  "image"
+  "banco",
+  "cuenta"
 >
 // Uso title y currentFunding
 export type updateFundingCurrentIProyect = Omit<
@@ -65,7 +67,8 @@ export type updateFundingCurrentIProyect = Omit<
   "fundingGoalReached",
   "fundingDayLeft",
   "categories",
-  "image",
+  "banco",
+  "cuenta",
   "displayProject"
 >
 
@@ -79,7 +82,8 @@ export type updateLikes = Omit<
   "fundingPercentage",
   "fundingDayLeft",
   "categories",
-  "image",
+  "banco",
+  "cuenta",
   "displayProject"
 >
 
@@ -92,6 +96,8 @@ export interface updateProject {
   fundingGoal: number
   fundingDayLeft: number
   categories: string[]
+  banco: string
+  cuenta: string
 }
 
 export interface limitDate {
@@ -110,6 +116,7 @@ export interface limitDate {
 //! export type Visibility = 'great' | 'good' | 'ok' | 'poor'
 
 // import { Weather, Visibility } from '../enums/enums'
+// import { updateFundingCurrentValidator } from "../schemas/projectSchemas"
 
 // export interface DiaryEntry {
 //   id: number

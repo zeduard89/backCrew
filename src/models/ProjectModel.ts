@@ -85,9 +85,16 @@ export default class Project extends Model<IProject> {
   @Column({
     type: DataType.STRING,
     allowNull: true,
-    defaultValue: null
+    defaultValue: false
   })
-  image!: string
+  banco!: string
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: true,
+    defaultValue: false
+  })
+  cuenta!: string
 
   @Column({
     type: DataType.BOOLEAN,
