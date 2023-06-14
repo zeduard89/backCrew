@@ -1,21 +1,27 @@
-# Update
+# Delete Container
 
-**URL** : `/userRoute/login/`
+**URL** : `/blobContainerRoute/delete`
 
-**Method** : `POST`
+**Method** : `DELETE`
 
-**Auth required** : NO
+**Auth required** : YES
 
 **Data constraints**
 
 ```json
-{}
+{
+  "email": "[valid email address]",
+  "password": "[password in plain text]"
+}
 ```
 
 **Data example**
 
 ```json
-{}
+{
+  "email": "john@example6.com",
+  "password": "1234"
+}
 ```
 
 ## Success Response
@@ -36,9 +42,9 @@
 
 **Content** :
 
-```json
+```json //Corregir detalles
 {
-  //Corregir detalles
+  "non_field_errors": "Unexpected token: in JSON at position 44."
 }
 ```
 
@@ -47,7 +53,10 @@
 **Code**: `400 NOT FOUND`
 
 ```json
-{}
+{
+  "User not found"
+}
+
 ```
 
 - [Back](../../readme.md) : `MainPage`
