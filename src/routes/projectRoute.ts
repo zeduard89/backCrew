@@ -15,6 +15,7 @@ import updateProjectController from "../controllers/projects/updateProjectContro
 import updateFundingCurrentController from "../controllers/projects/updateFundingCurrentController"
 import getDayLeftByNameController from "../controllers/projects/getDayLeftByNameHandler"
 import updateLikesController from "../controllers/projects/updateLikesControllers"
+import getFilteredProjects from "../controllers/projects/getFilteredProjects"
 
 const router = Router()
 //* Datos IMPORTANTES
@@ -91,6 +92,26 @@ router.get("/search/", async (req: Request, res: Response) => {
       const getProjectByName = await getProjectByNameController(validatedName)
       res.status(200).json(getProjectByName)
     }
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message || "Error desconocido al buscar Project by ID"
+    res.status(400).send(errorMessage)
+  }
+})
+
+// Route filter by name, category and sort (most founding and trending)
+router.get("/searchProjects/", async (req: Request, res: Response) => {
+  try {
+    const { category, sort, q, p, s } = req.query
+    const validatedCategory = validatorString.parse(category)
+    const validatedSort = validatorString.parse(sort)
+    const validatedQ = validatorString.parse(q)
+    const validatedP = validatorString.parse(p)
+    const validatedS = validatorString.parse(s)
+   
+      const getProjectsFiltered = await getFilteredProjects(validatedCategory, validatedSort, validatedQ, validatedP, validatedS)
+      res.status(200).json(getProjectsFiltered)
+
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Error desconocido al buscar Project by ID"
