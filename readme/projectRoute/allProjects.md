@@ -11,13 +11,25 @@
 ```json
 {
   //Completar con los filtrados
+  "title": "titulo",
+  "categori": "music",
+  "likes": "likes",
+  "disLikes": "disLikes",
+  "founding": "founding"
 }
 ```
 
 **Data example**
 
 ```json
-
+{
+  // Completar con los filtrados
+  "title": "titulo",
+  "categori": "music",
+  "likes": "likes",
+  "disLikes": "disLikes",
+  "founding": "founding"
+}
 ```
 
 ## Success Response
@@ -28,12 +40,29 @@
 
 ```json
 {
-  //El objeto que filtra (varias logicas CHEQUEAR)
-  "title": "titulo",
-  "categori": "music",
-  "likes": "likes",
-  "disLikes": "disLikes",
-  "founding": "founding"
+  //Ejemplo ARRAY de objetos
+  {
+    "id": 1,
+    "title": "ProjectX",
+    "description": "Ese te un ejemplo de una descripcion muy larga y extensa",
+    "shortDescription": "Esto es una short description como la lora",
+    "fundingCurrent": 0,
+    "fundingGoal": 2000,
+    "fundingGoalReached": false,
+    "fundingPercentage": 0,
+    "fundingDayLeft": 30,
+    "likes": 0,
+    "disLikes": 0,
+    "categories": [
+      "Asi",
+      "TeGUsta",
+      "MAs?"
+    ],
+    "image": "https://www.istockphoto.com/es/foto/un-gato-y-un-perro-yacen-juntos-en-la-cama-mascotas-durmiendo-en-un-acogedor-plaid-gm1385113345-444056757",
+    "displayProject": true,
+    "createdAt": "2023-06-12T14:26:51.346Z",
+    "updatedAt": "2023-06-12T14:26:51.346Z"
+  }
 }
 ```
 
