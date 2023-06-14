@@ -4,6 +4,7 @@ export interface IUser {
   email: string
   password: string
   verified?: boolean
+  access: boolean
 }
 
 export type IUserLD = Omit<IUser, "name", "lastName">

@@ -13,12 +13,14 @@ export const registerUser = async (
     if (user != null) {
       throw new Error("Email already used")
     }
+
     const passwordHash = await encrypt(password)
     const registerUser: IUser = await UserModel.create({
       name,
       lastName,
       email,
-      password: passwordHash
+      password: passwordHash,
+      access: false
     })
     res.status(200).send({ registerUser })
   } catch (error) {

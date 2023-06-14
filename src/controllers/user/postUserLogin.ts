@@ -13,7 +13,13 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
     if (user?.password != null) {
       const checkPassword = await compare(password, user.password)
       if (checkPassword) {
-        res.status(200).send({ data: user })
+        const newEmail = email
+        await UserModel.update({ access: true }, { where: { email: newEmail } })
+        const userAccess: IUser | null = await UserModel.findOne({
+          where: { email }
+        })
+
+        res.status(200).send({ data: userAccess })
       }
       if (!checkPassword) {
         throw new Error("Password invalid")
