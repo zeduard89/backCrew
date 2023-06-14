@@ -44,13 +44,19 @@ const getFilteredProjects = async (
 
     // Query search
     if (validatedQ) {
+      const words = validatedQ.split("_");
+      const titleClauses = words.map((word) => ({
+        title: {
+          [Op.substring]: word, 
+        },
+      }));
+
       whereClause = {
         ...whereClause,
-        title: {
-          [Op.like]: `%${validatedQ}%`,
-        },
+        [Op.and]: titleClauses,
       };
     }
+
 
 
     let existingProjects = await ProjectModel.findAll({ where: whereClause });
@@ -79,6 +85,10 @@ const getFilteredProjects = async (
         limit: "No hay más que mostrar",
       };
     }
+
+    return {
+      projects: dividedArrayProjects[validatedPIndex],
+    };
 
   } catch (error) {
     const errorMessage =
