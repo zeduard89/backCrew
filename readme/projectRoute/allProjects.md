@@ -29,6 +29,7 @@
 ```json
 {
   //El objeto que filtra (varias logicas CHEQUEAR)
+  "title": "titulo",
   "categori": "music",
   "likes": "likes",
   "disLikes": "disLikes",

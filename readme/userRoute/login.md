@@ -21,6 +21,19 @@ Used to collect a Token for a registered User.
 
 ```json
 {
+  "email": "john@example6.com",
+  "password": "1234"
+}
+```
+
+## Success Response
+
+**Code** : `200 OK`
+
+**Content example**
+
+```json
+{
   "data": {
     "id": "222b5b2f-19f5-4654-b2cd-67c69a2675bd",
     "name": "Johnn",
@@ -33,19 +46,6 @@ Used to collect a Token for a registered User.
     "createdAt": "2023-06-14T00:36:39.085Z", //no
     "updatedAt": "2023-06-14T04:59:38.239Z" //no
   }
-}
-```
-
-## Success Response
-
-**Code** : `200 OK`
-
-**Content example**
-
-```json
-{
-  //lo que deberia ser
-  "token": "93144b288eb1fdccbe46d6fc0f241a51766ecd3d"
 }
 ```
 
