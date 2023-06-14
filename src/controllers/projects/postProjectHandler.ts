@@ -16,9 +16,16 @@ const createProjectController = async (
 ): Promise<object> => {
   try {
     const { title, ...rest } = validatedProject
-    const existingProject = await ProjectModel.findOne({ where: { title } })
-    if (existingProject) {
-      throw new Error("El Proyecto ya existe ")
+
+    const allProjects = await ProjectModel.findAll()
+    const newAllProjects = allProjects.filter(
+      (project) =>
+        project.title.toLowerCase().trim().replace(/\s/g, "") ===
+        title.toLowerCase().trim().replace(/\s/g, "")
+    )
+
+    if (newAllProjects) {
+      throw new Error("Project  existe")
     }
 
     const createdProject = await ProjectModel.create({

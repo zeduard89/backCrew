@@ -4,16 +4,19 @@ const getProyectByNameController = async (
   validatedName: string
 ): Promise<object> => {
   try {
-    const existingProject = await ProjectModel.findOne({
-      where: {
-        title: validatedName
-      }
-    })
-    if (!existingProject) {
+    // Busco todos los projects, filtro y generalizo la escritura al buscarlos
+    const allProjects = await ProjectModel.findAll()
+    const newAllProjects = allProjects.filter(
+      (project) =>
+        project.title.toLowerCase().trim().replace(/\s/g, "") ===
+        validatedName.toLowerCase().trim().replace(/\s/g, "")
+    )
+
+    if (!newAllProjects) {
       throw new Error("Project no existe")
     }
 
-    return existingProject
+    return newAllProjects
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Error desconocido al guardar ImagenAzure"
