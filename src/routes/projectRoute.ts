@@ -9,6 +9,7 @@ import {
 } from "../schemas/projectSchemas"
 import createProjectController from "../controllers/projects/postProjectHandler"
 import getProjectByNameController from "../controllers/projects/getProjectByNameHandler"
+import getAllProjectsByNameController from "../controllers/projects/getAllProjectsByNameHandler"
 import deleteProjectByNameController from "../controllers/projects/deleteProjectByName"
 import getAllProjects from "../controllers/projects/getAllProjects"
 import updateProjectController from "../controllers/projects/updateProjectController"
@@ -83,13 +84,31 @@ router.put("/update/likes", async (req: Request, res: Response) => {
   }
 })
 
-// Ruta busca por name
-router.get("/search/", async (req: Request, res: Response) => {
+// Ruta busca por nombre (UNIDAD) o devuelve un array de posibles coincidencias
+router.get("/search/byName", async (req: Request, res: Response) => {
   try {
     const { name } = req.query
     const validatedName = validatorString.parse(name)
     if (name !== undefined) {
       const getProjectByName = await getProjectByNameController(validatedName)
+      res.status(200).json(getProjectByName)
+    }
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message || "Error desconocido al buscar Project by ID"
+    res.status(400).send(errorMessage)
+  }
+})
+
+// Filtra por nombre y devuelve un array con coincidencias o similitudes
+router.get("/search/byNameGeneral", async (req: Request, res: Response) => {
+  try {
+    const { name } = req.query
+    const validatedName = validatorString.parse(name)
+    if (name !== undefined) {
+      const getProjectByName = await getAllProjectsByNameController(
+        validatedName
+      )
       res.status(200).json(getProjectByName)
     }
   } catch (error) {
@@ -108,10 +127,15 @@ router.get("/searchProjects/", async (req: Request, res: Response) => {
     const validatedQ = validatorString.parse(q)
     const validatedP = validatorString.parse(p)
     const validatedS = validatorString.parse(s)
-   
-      const getProjectsFiltered = await getFilteredProjects(validatedCategory, validatedSort, validatedQ, validatedP, validatedS)
-      res.status(200).json(getProjectsFiltered)
 
+    const getProjectsFiltered = await getFilteredProjects(
+      validatedCategory,
+      validatedSort,
+      validatedQ,
+      validatedP,
+      validatedS
+    )
+    res.status(200).json(getProjectsFiltered)
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Error desconocido al buscar Project by ID"

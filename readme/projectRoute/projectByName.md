@@ -1,6 +1,6 @@
 # Get Project By Name
 
-**URL** : `/projectRoute/search/?name=string`
+**URL** : `/projectRoute/search/byName/?name=string`
 
 **Method** : `GET`
 
