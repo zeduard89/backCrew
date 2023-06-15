@@ -19,13 +19,13 @@ export default class Project extends Model<IProject> {
   title!: string
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT,
     allowNull: false
   })
   description!: string
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT,
     allowNull: true
   })
   shortDescription!: string

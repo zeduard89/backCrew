@@ -1,19 +1,25 @@
 import { Router, Request, Response } from "express"
 import {
-  projectValidator,
+  //  projectValidator,
   validatorString,
   deleteProjectValidator,
   updateProjectValidator,
   updateFundingCurrentValidator,
   updateLikesValidator
 } from "../schemas/projectSchemas"
-import createProjectController from "../controllers/projects/postProjectHandler"
+// Crear project
+//  import createProjectController from "../controllers/projects/postProjectHandler"
+import createRandomProjectController from "../controllers/projects/postRandomProjectHandler"
+// Get by Name
 import getProjectByNameController from "../controllers/projects/getProjectByNameHandler"
 import getAllProjectsByNameController from "../controllers/projects/getAllProjectsByNameHandler"
+// Delete y getAll
 import deleteProjectByNameController from "../controllers/projects/deleteProjectByName"
 import getAllProjects from "../controllers/projects/getAllProjects"
+// Update
 import updateProjectController from "../controllers/projects/updateProjectController"
 import updateFundingCurrentController from "../controllers/projects/updateFundingCurrentController"
+// Varios
 import getDayLeftByNameController from "../controllers/projects/getDayLeftByNameHandler"
 import updateLikesController from "../controllers/projects/updateLikesControllers"
 import getFilteredProjects from "../controllers/projects/getFilteredProjects"
@@ -23,11 +29,24 @@ const router = Router()
 //* Title es unico - displaysProject'habilita/deshabilita el projecto'
 
 // Ruta crea un project.
-router.post("/", async (req: Request, res: Response) => {
+router.post("/", async (_req: Request, res: Response) => {
   try {
-    const validatedProject = projectValidator.parse(req.body)
+    // const validatedProject = projectValidator.parse(req.body)
+    // const newProject = await createProjectController(validatedProject)
+    // res.status(200).json(newProject)
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message || "Error desconocido al buscar proyecto por Id"
+    res.status(400).send(errorMessage)
+  }
+})
 
-    const newProject = await createProjectController(validatedProject)
+// Llenar la DB.
+router.post("/llenarDB:auxNum", async (req: Request, res: Response) => {
+  try {
+    const { auxNum } = req.params
+    console.log(auxNum)
+    const newProject = await createRandomProjectController(+auxNum)
     res.status(200).json(newProject)
   } catch (error) {
     const errorMessage =

@@ -1,6 +1,6 @@
 import { ProjectModel } from "../../config/db"
 
-const getProyectByNameController = async (
+const getAllProyectByNameController = async (
   validatedName: string
 ): Promise<object> => {
   try {
@@ -46,4 +46,4 @@ const getProyectByNameController = async (
   }
 }
 
-export default getProyectByNameController
+export default getAllProyectByNameController
