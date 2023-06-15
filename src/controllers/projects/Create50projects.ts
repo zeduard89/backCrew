@@ -92,7 +92,10 @@ const create50Projects = async (): Promise<object> => {
         ],
         displayProject: true,
         banco: "MercadoLibre",
-        cuenta: "mercadopago@mercadopago.com"
+        cuenta: "mercadopago@mercadopago.com",
+        pais: "argentina",
+        projectFase: Math.floor(Math.random() * 4)
+
       })
 
       generatedProjects.push(createdProject)

@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express"
 import {
-  //  projectValidator,
+  projectValidator,
   validatorString,
   deleteProjectValidator,
   updateProjectValidator,
@@ -8,7 +8,7 @@ import {
   updateLikesValidator
 } from "../schemas/projectSchemas"
 // Crear project
-//  import createProjectController from "../controllers/projects/postProjectHandler"
+import createProjectController from "../controllers/projects/postProjectHandler"
 import createRandomProjectController from "../controllers/projects/postRandomProjectHandler"
 // Get by Name
 import getProjectByNameController from "../controllers/projects/getProjectByNameHandler"
@@ -32,11 +32,11 @@ const router = Router()
 //* Title es unico - displaysProject'habilita/deshabilita el projecto'
 
 // Ruta crea un project.
-router.post("/", async (_req: Request, res: Response) => {
+router.post("/", async (req: Request, res: Response) => {
   try {
-    // const validatedProject = projectValidator.parse(req.body)
-    // const newProject = await createProjectController(validatedProject)
-    // res.status(200).json(newProject)
+    const validatedProject = projectValidator.parse(req.body)
+    const newProject = await createProjectController(validatedProject)
+    res.status(200).json(newProject)
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Error desconocido al buscar proyecto por Id"
@@ -216,9 +216,8 @@ router.get("/create50projects/", async (_req: Request, res: Response) => {
     res.status(200).json(c50Projects)
   } catch (error) {
     const errorMessage =
-      (error as Error).message ||
-      "Error al crear los Projectos"
-      console.log(error);
+      (error as Error).message || "Error al crear los Projectos"
+    console.log(error)
     res.status(400).send(errorMessage)
   }
 })
@@ -229,4 +228,3 @@ router.get("*", (_req: Request, res: Response) => {
 })
 
 export { router }
-
