@@ -1,4 +1,4 @@
-import { ProjectModel } from "../../config/db";
+import { ProjectModel } from "../../config/db"
 
 const projectNames = [
   "Energia renovable",
@@ -51,8 +51,7 @@ const projectNames = [
   "Sistemas de purificacion de agua",
   "Dispositivos de realidad mixta",
   "Impresion 3D de organos humanos"
-];
-
+]
 
 // const projectImages = [
 //   "https://www.simplilearn.com/ice9/free_resources_article_thumb/What_Is_a_Project.jpg",
@@ -67,18 +66,18 @@ const categoriesExample = [
   "Tech & Innovation",
   "Creative Works",
   "Creative Works"
-];
+]
 
-const create50Projects = async (
-  ): Promise<object> => {
+const create50Projects = async (): Promise<object> => {
   try {
-    const generatedProjects = [];
+    const generatedProjects = []
     for (let i = 0; i < 50; i++) {
-
       const createdProject = await ProjectModel.create({
         title: projectNames[i],
-        description: "Lorem ipsum dolor sit amet consectetur adipiscing elit phasellus cras rhoncus consequat tempor, id condimentum lacus taciti porttitor ac scelerisque sem.",
-        shortDescription: "Est augue gravida morbi purus facilisis fermentum feugiat penatibus molestie, tortor vulputate in metus blandit convallis parturient cum consequat.",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipiscing elit phasellus cras rhoncus consequat tempor, id condimentum lacus taciti porttitor ac scelerisque sem.",
+        shortDescription:
+          "Est augue gravida morbi purus facilisis fermentum feugiat penatibus molestie, tortor vulputate in metus blandit convallis parturient cum consequat.",
         fundingCurrent: Math.floor(Math.random() * 1000000000),
         fundingGoal: Math.floor(Math.random() * 1000000000),
         fundingGoalReached: false,
@@ -86,22 +85,25 @@ const create50Projects = async (
         fundingDayLeft: Math.floor(Math.random() * 30),
         likes: Math.floor(Math.random() * 1500),
         disLikes: Math.floor(Math.random() * 1500),
-        categories: [categoriesExample[Math.floor(Math.random() * categoriesExample.length)]],
+        categories: [
+          categoriesExample[
+            Math.floor(Math.random() * categoriesExample.length)
+          ]
+        ],
         displayProject: true,
         banco: "MercadoLibre",
         cuenta: "mercadopago@mercadopago.com"
-      });
-    
+      })
 
-      generatedProjects.push(createdProject);
+      generatedProjects.push(createdProject)
     }
 
-    return generatedProjects;
+    return generatedProjects
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al guardar ImagenAzure";
-    return { errorMessage };
+      (error as Error).message || "Error desconocido al guardar ImagenAzure"
+    return { errorMessage }
   }
-};
+}
 
-export default create50Projects;
+export default create50Projects
