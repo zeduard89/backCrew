@@ -31,7 +31,6 @@ const updatedProjectController = async (
         categories: validatedProject.categories || projectDB.categories,
         banco: validatedProject.banco || projectDB.banco,
         cuenta: validatedProject.cuenta || projectDB.cuenta
-        // comment: model
       },
       {
         // Aquí se especifica la condición de búsqueda
