@@ -16,9 +16,16 @@ const createProjectController = async (
 ): Promise<object> => {
   try {
     const { title, ...rest } = validatedProject
-    const existingProject = await ProjectModel.findOne({ where: { title } })
-    if (existingProject) {
-      throw new Error("El Proyecto ya existe ")
+
+    const allProjects = await ProjectModel.findAll()
+    const newAllProjects = allProjects.filter(
+      (project) =>
+        project.title.toLowerCase().trim().replace(/\s/g, "") ===
+        title.toLowerCase().trim().replace(/\s/g, "")
+    )
+
+    if (newAllProjects.length > 0) {
+      throw new Error("Project  existe")
     }
 
     const createdProject = await ProjectModel.create({
@@ -39,7 +46,7 @@ const createProjectController = async (
 
     await blobService.createContainer(newIdProjectContainer)
     //! ---------------------------------
-    return createdProject
+    return { message: `Proyecto: ${createdProject.title} Creado con exito` }
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Error desconocido al guardar ImagenAzure"

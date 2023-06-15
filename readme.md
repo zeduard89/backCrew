@@ -32,7 +32,7 @@ has permissions to access.
 
 ### Projects related
 
-Endpoints for viewing and manipulating the Projects that the Authenticated User
+Endpoints for viewing and manipulating the Projects that the Admin
 has permissions to access
 
 - [Create Project](./readme/projectRoute/createProject.md) : `POST /projectRoute/`
@@ -43,3 +43,22 @@ has permissions to access
 - [Update Project](./readme/projectRoute/updateProject.md) : `PUT /projectRoute/update`
 - [UpdateCurrent Founding](./readme/projectRoute/updateCurrentFouding.md) : `PUT /projectRoute/update/addToFundingCurrent`
 - [UpdateLikes](./readme/projectRoute/updateLikes.md) : `PUT /projectRoute/likes`
+
+### Azure Containers related
+
+Endpoints for viewing and manipulating the Projects that the Admin
+has permissions to access
+
+- [Create Contaiener](./readme/blobContainerRoute/create.md) : `POST /blobContainerRoute/create`
+- [Get All Containers](./readme/blobContainerRoute/containers.md) : `GET /blobContainerRoute/containers`
+- [Delete Container](./readme/blobContainerRoute/delete.md) : `DELETE /blobContainerRoute/delete`
+
+### Azure Blobs
+
+Endpoints for viewing and manipulating the Projects that the Admin
+has permissions to access
+
+- [Deposit/Create Blob](./readme/blobRoute/create.md) : `POST /blobRoute/create`
+- [Get Urls from Container](./readme/blobRoute/getAllFiles.md) : `GET /blobRoute/getAllFiles/images`
+- [Get Image Buffer](./readme/blobRoute/images.md) : `GET /blobRoute/get/images/`
+- [Delete Image](./readme/blobRoute/delete.md) : `DELETE /blobRoute/delete/`

@@ -1,31 +1,10 @@
 # Get Day Left Project
 
-**URL** : `/projectRoute/search/dayLeft`
+**URL** : `/projectRoute/search/dayLeft/?name=ProjectX`
 
 **Method** : `GET`
 
 **Auth required** : YES
-
-**Data constraints**
-
-```json
-{
-  "email": "[valid email address]",
-  "password": "[password in plain text]"
-}
-```
-
-**Data example**
-
-```json
-{
-  "data": {
-    "id": "222b5b2f-19f5-4654-b2cd-67c69a2675bd",
-    "name": "Johnn",
-    "lastName": "Morel"
-  }
-}
-```
 
 ## Success Response
 
@@ -35,35 +14,26 @@
 
 ```json
 {
-  //lo que deberia ser
-  "token": "93144b288eb1fdccbe46d6fc0f241a51766ecd3d"
+  "year": 2023,
+  "month": 7,
+  "day": 12,
+  "hours": 15,
+  "minutes": 35,
+  "seconds": 44,
+  "daysLeft": 29
 }
 ```
 
 ## Error Response
 
-**Condition** : If 'username' and 'password' combination is wrong.
-
-**Code** : `400 BAD REQUEST`
-
-**Content** :
-
-```json
-{
-  //Corregir detalles
-  "non_field_errors": ["Unexpected token } in JSON at position 44."]
-}
-```
-
-**Condition** : If 'username' not found
+**Condition** : If 'Query' not found
 
 **Code**: `400 NOT FOUND`
 
 ```json
 {
-  "User not found"
+  "errorMessage": "Project no existe"
 }
-
 ```
 
-- [readme](../../readme.md) : `BackReadme`
+- [Back](../../readme.md) : `MainPage`

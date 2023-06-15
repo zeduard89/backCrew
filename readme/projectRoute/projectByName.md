@@ -1,6 +1,6 @@
 # Get Project By Name
 
-**URL** : `/projectRoute/search/daysleft/?name=string`
+**URL** : `/projectRoute/search/byName/?name=string`
 
 **Method** : `GET`
 
@@ -30,13 +30,22 @@
 
 ```json
 {
-  "year": 2023,
-  "month": 7,
-  "day": 11,
-  "hours": 18,
-  "minutes": 46,
-  "seconds": 20,
-  "daysLeft": 28
+  "id": 1,
+  "title": "ProjectX",
+  "description": "Ese te un ejemplo de una descripcion larga y extensa",
+  "shortDescription": "Esto es una short description",
+  "fundingCurrent": 0,
+  "fundingGoal": 2000,
+  "fundingGoalReached": false,
+  "fundingPercentage": 0,
+  "fundingDayLeft": 30,
+  "likes": 0,
+  "disLikes": 0,
+  "categories": ["Asi", "TeGUsta", "MAs?"],
+  "image": "https://www.istockphoto.com/es/foto/un-gato-y-un-perro-yacen-juntos-en-la-cama-mascotas-durmiendo-en-un-acogedor-plaid-gm1385113345-444056757",
+  "displayProject": true,
+  "createdAt": "2023-06-11T21:46:20.445Z",
+  "updatedAt": "2023-06-14T14:48:02.124Z"
 }
 ```
 
@@ -51,7 +60,7 @@
 ```json
 {
   //Corregir detalles
-  "errorMessage": ["Project no existe"
+  "errorMessage": "Project no existe"
 }
 ```
 
@@ -72,4 +81,4 @@
 ]
 ```
 
-- [readme](../../readme.md) : `BackReadme`
+- [Back](../../readme.md) : `MainPage`
