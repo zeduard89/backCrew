@@ -42,6 +42,8 @@ export interface IProject {
   categories: string[]
   banco: string
   cuenta: string
+  pais: string
+  projectFase: number
   displayProject: boolean
 }
 // Uso title displayProject
@@ -109,7 +111,6 @@ export interface limitDate {
   seconds: number
   daysLeft: number
 }
-
 
 // Por defecto TS utiliza este nombre en el fichero 'types.d.ts'
 // Puedo tener varios esparcidos, pero ahora solo los coloco en este luegar

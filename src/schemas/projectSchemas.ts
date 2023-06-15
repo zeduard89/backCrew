@@ -13,7 +13,7 @@ export const projectValidator = z.object({
   fundingGoal: z.number().positive({
     message: "La meta de financiamiento debe ser un número positivo"
   }),
-  fundingGoalReached: z.boolean(),
+  fundingGoalReached: z.boolean().default(false),
   fundingDayLeft: z.number().positive({
     message: "Los días restantes de financiamiento deben ser un número positivo"
   }),
@@ -26,7 +26,17 @@ export const projectValidator = z.object({
   cuenta: z.string().min(2, {
     message: "El número de cuenta debe tener al menos 2 caracteres"
   }),
-  displayProject: z.boolean()
+  pais: z.string().min(2, {
+    message: "El número de cuenta debe tener al menos 2 caracteres"
+  }),
+  projectFase: z
+    .number()
+    .nonnegative({
+      message: "La meta de financiamiento debe ser un número positivo"
+    })
+    .max(3)
+    .default(0),
+  displayProject: z.boolean().default(false)
 })
 
 export const deleteProjectValidator = z.object({
