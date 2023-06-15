@@ -104,6 +104,7 @@ export interface limitDate {
   daysLeft: number
 }
 
+
 // Por defecto TS utiliza este nombre en el fichero 'types.d.ts'
 // Puedo tener varios esparcidos, pero ahora solo los coloco en este luegar
 // traduce elementos para que TC los entienda como lo de color ROJO, eso lo cree en ENUM
