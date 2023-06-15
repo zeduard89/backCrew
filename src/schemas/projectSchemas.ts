@@ -87,3 +87,5 @@ export const updateLikesValidator = z.object({
 })
 
 export const validatorString = z.string()
+
+export const validatorNumber = z.number()
