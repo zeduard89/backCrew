@@ -2,7 +2,7 @@ import { Model, Column, Table, DataType } from "sequelize-typescript"
 import { IProject } from "../types/types"
 
 @Table({ tableName: "projects" })
-export default class Project extends Model<IProject> {
+export default class ProjectModel extends Model<IProject> {
   @Column({
     type: DataType.INTEGER,
     primaryKey: true,

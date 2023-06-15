@@ -24,6 +24,9 @@ import getDayLeftByNameController from "../controllers/projects/getDayLeftByName
 import updateLikesController from "../controllers/projects/updateLikesControllers"
 import getFilteredProjects from "../controllers/projects/getFilteredProjects"
 
+// 50 Projects controller
+import create50Projects from "../controllers/projects/Create50projects"
+
 const router = Router()
 //* Datos IMPORTANTES
 //* Title es unico - displaysProject'habilita/deshabilita el projecto'
@@ -206,9 +209,24 @@ router.delete("/deleteProject", async (req: Request, res: Response) => {
   }
 })
 
+// Create 50projects
+router.get("/create50projects/", async (_req: Request, res: Response) => {
+  try {
+    const c50Projects = await create50Projects()
+    res.status(200).json(c50Projects)
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message ||
+      "Error al crear los Projectos"
+      console.log(error);
+    res.status(400).send(errorMessage)
+  }
+})
+
 // Controlador de rutas no especificadas
 router.get("*", (_req: Request, res: Response) => {
   res.status(404).send("Ruta no encontrada")
 })
 
 export { router }
+
