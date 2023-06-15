@@ -54,14 +54,14 @@ const projectNames = [
 ];
 
 
-const projectImages = [
-  "https://www.simplilearn.com/ice9/free_resources_article_thumb/What_Is_a_Project.jpg",
-  "https://crehana-blog.imgix.net/media/filer_public/0e/8d/0e8daf29-5923-4a22-96bd-495cc49abca0/dibujo-tecnico-para-arquitectura.jpg?auto=format&q=50",
-  "https://media.licdn.com/dms/image/C5612AQFMQ2qWHw_L2A/article-cover_image-shrink_720_1280/0/1619541231522?e=2147483647&v=beta&t=XLCNAEFfkT5r0q4TiRKhxMjuxMFMMhnXq4yrhIm2Yzo",
-  "https://res.cloudinary.com/dyw8mv3b0/image/upload/c_fill,g_face,q_85,w_710,h_355,f_auto/v1/news/2023_01/AdobeStock_200024314_s22cmn.jpg",
-  "https://energia.roams.es/images/post/es_ES_energy/energia-renovable-energia-solar-innovaciones-energia-solar.jpg",
-  "https://cdn-3.expansion.mx/dims4/default/d4c2bb4/2147483647/strip/true/crop/9000x4725+0+169/resize/1200x630!/format/jpg/quality/80/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F41%2F35%2F7916850a4694a00a9475c0b2c5b2%2Fistock-1223521808.jpg"
-];
+// const projectImages = [
+//   "https://www.simplilearn.com/ice9/free_resources_article_thumb/What_Is_a_Project.jpg",
+//   "https://crehana-blog.imgix.net/media/filer_public/0e/8d/0e8daf29-5923-4a22-96bd-495cc49abca0/dibujo-tecnico-para-arquitectura.jpg?auto=format&q=50",
+//   "https://media.licdn.com/dms/image/C5612AQFMQ2qWHw_L2A/article-cover_image-shrink_720_1280/0/1619541231522?e=2147483647&v=beta&t=XLCNAEFfkT5r0q4TiRKhxMjuxMFMMhnXq4yrhIm2Yzo",
+//   "https://res.cloudinary.com/dyw8mv3b0/image/upload/c_fill,g_face,q_85,w_710,h_355,f_auto/v1/news/2023_01/AdobeStock_200024314_s22cmn.jpg",
+//   "https://energia.roams.es/images/post/es_ES_energy/energia-renovable-energia-solar-innovaciones-energia-solar.jpg",
+//   "https://cdn-3.expansion.mx/dims4/default/d4c2bb4/2147483647/strip/true/crop/9000x4725+0+169/resize/1200x630!/format/jpg/quality/80/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F41%2F35%2F7916850a4694a00a9475c0b2c5b2%2Fistock-1223521808.jpg"
+// ];
 
 const categoriesExample = [
   "Tech & Innovation",
@@ -87,9 +87,11 @@ const create50Projects = async (
         likes: Math.floor(Math.random() * 1500),
         disLikes: Math.floor(Math.random() * 1500),
         categories: [categoriesExample[Math.floor(Math.random() * categoriesExample.length)]],
-        image: projectImages[Math.floor(Math.random() * projectImages.length)],
         displayProject: true,
+        banco: "MercadoLibre",
+        cuenta: "mercadopago@mercadopago.com"
       });
+    
 
       generatedProjects.push(createdProject);
     }
