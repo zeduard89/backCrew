@@ -38,6 +38,13 @@ export default class User extends Model<IUser> {
   verified!: boolean
 
   @Column({
+    type: DataType.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  })
+  access!: boolean
+
+  @Column({
     type: DataType.STRING,
     allowNull: false
   })
@@ -49,4 +56,5 @@ export default class User extends Model<IUser> {
     defaultValue: false
   })
   image!: string
+
 }

@@ -1,18 +1,23 @@
 export interface IUser {
   name: string
   lastName: string
-  email: strin
+  email: string
   password: string
+  verified?: boolean
+  access: boolean
 }
 
-// export interface IUpdateComment {
-//   id: string
-//   firstName: string
-//   comments: string
-//   likes: number
-//   dislikes: number
-//   date: string
-// }
+export type IUserLD = Omit<IUser, "name", "lastName">
+
+export interface IComment {
+  id: string
+  firstName: string
+  comments: string
+  likes: number
+  dislikes: number
+  date: string
+  displayComment: boolean
+}
 
 // export interface ICreator {
 //   id: DataTypeUUID
@@ -35,7 +40,8 @@ export interface IProject {
   likes?: number
   disLikes?: number
   categories: string[]
-  image: string
+  banco: string
+  cuenta: string
   displayProject: boolean
 }
 // Uso title displayProject
@@ -49,7 +55,8 @@ export type deleteIProyect = Omit<
   "fundingPercentage",
   "fundingDayLeft",
   "categories",
-  "image"
+  "banco",
+  "cuenta"
 >
 // Uso title y currentFunding
 export type updateFundingCurrentIProyect = Omit<
@@ -60,7 +67,8 @@ export type updateFundingCurrentIProyect = Omit<
   "fundingGoalReached",
   "fundingDayLeft",
   "categories",
-  "image",
+  "banco",
+  "cuenta",
   "displayProject"
 >
 
@@ -74,7 +82,8 @@ export type updateLikes = Omit<
   "fundingPercentage",
   "fundingDayLeft",
   "categories",
-  "image",
+  "banco",
+  "cuenta",
   "displayProject"
 >
 
@@ -87,6 +96,8 @@ export interface updateProject {
   fundingGoal: number
   fundingDayLeft: number
   categories: string[]
+  banco: string
+  cuenta: string
 }
 
 export interface limitDate {
@@ -99,12 +110,14 @@ export interface limitDate {
   daysLeft: number
 }
 
+
 // Por defecto TS utiliza este nombre en el fichero 'types.d.ts'
 // Puedo tener varios esparcidos, pero ahora solo los coloco en este luegar
 // traduce elementos para que TC los entienda como lo de color ROJO, eso lo cree en ENUM
 //! export type Visibility = 'great' | 'good' | 'ok' | 'poor'
 
 // import { Weather, Visibility } from '../enums/enums'
+// import { updateFundingCurrentValidator } from "../schemas/projectSchemas"
 
 // export interface DiaryEntry {
 //   id: number

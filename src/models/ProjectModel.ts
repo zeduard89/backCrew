@@ -2,7 +2,7 @@ import { Model, Column, Table, DataType } from "sequelize-typescript"
 import { IProject } from "../types/types"
 
 @Table({ tableName: "projects" })
-export default class Project extends Model<IProject> {
+export default class ProjectModel extends Model<IProject> {
   @Column({
     type: DataType.INTEGER,
     primaryKey: true,
@@ -19,13 +19,13 @@ export default class Project extends Model<IProject> {
   title!: string
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT,
     allowNull: false
   })
   description!: string
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT,
     allowNull: true
   })
   shortDescription!: string
@@ -85,9 +85,16 @@ export default class Project extends Model<IProject> {
   @Column({
     type: DataType.STRING,
     allowNull: true,
-    defaultValue: null
+    defaultValue: false
   })
-  image!: string
+  banco!: string
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: true,
+    defaultValue: false
+  })
+  cuenta!: string
 
   @Column({
     type: DataType.BOOLEAN,
