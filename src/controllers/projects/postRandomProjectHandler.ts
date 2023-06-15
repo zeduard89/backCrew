@@ -40,6 +40,8 @@ const createRandomProjectController = (auxNum: number) => {
       categories: [categoriaActual],
       banco: randomBanco,
       cuenta: randomCuenta,
+      pais: "argentina",
+      projectFase: Math.floor(Math.random() * 4),
       displayProject: true
     }
 

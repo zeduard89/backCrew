@@ -28,6 +28,7 @@ const getProyectByNameController = async (
       newAllProjects.forEach((project) => auxArray.push(project.title))
       return auxArray
     }
+
     // Limito la info del array
     const auxProject = {
       id: projectByName[0].id,
@@ -43,8 +44,11 @@ const getProyectByNameController = async (
       disLikes: projectByName[0].disLikes,
       categories: projectByName[0].categories,
       banco: projectByName[0].banco,
-      cuenta: projectByName[0].cuenta
+      cuenta: projectByName[0].cuenta,
+      pais: projectByName[0].pais,
+      projectFase: projectByName[0].projectFase
     }
+
     return auxProject
   } catch (error) {
     const errorMessage =

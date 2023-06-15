@@ -45,7 +45,8 @@ export default class ProjectModel extends Model<IProject> {
 
   @Column({
     type: DataType.BOOLEAN,
-    allowNull: false
+    allowNull: false,
+    defaultValue: false
   })
   fundingGoalReached!: boolean
 
@@ -95,6 +96,20 @@ export default class ProjectModel extends Model<IProject> {
     defaultValue: false
   })
   cuenta!: string
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: true,
+    defaultValue: false
+  })
+  pais!: string
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+    defaultValue: 0
+  })
+  projectFase!: number
 
   @Column({
     type: DataType.BOOLEAN,
