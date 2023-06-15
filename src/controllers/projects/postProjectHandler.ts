@@ -24,7 +24,7 @@ const createProjectController = async (
         title.toLowerCase().trim().replace(/\s/g, "")
     )
 
-    if (newAllProjects) {
+    if (newAllProjects.length > 0) {
       throw new Error("Project  existe")
     }
 
