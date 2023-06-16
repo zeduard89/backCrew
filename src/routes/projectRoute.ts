@@ -224,7 +224,7 @@ router.delete("/deleteProject", async (req: Request, res: Response) => {
 
 // Controlador de rutas no especificadas
 router.get("*", (_req: Request, res: Response) => {
-  res.status(404).send("Ruta no encontrada")
+  res.status(404).send("Route not found")
 })
 
 export { router }
