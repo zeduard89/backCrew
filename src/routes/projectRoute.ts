@@ -28,7 +28,7 @@ import getTwentyMostTrending  from "../controllers/projects/getTwentyMostTrendin
 import getFiveMostFunding  from "../controllers/projects/getFiveMostFunding"
 
 // 50 Projects controller
-import create50Projects from "../controllers/projects/getCreate50projects"
+import create50Projects from "../controllers/projects/getCreate50Projects"
 
 const router = Router()
 //* Datos IMPORTANTES
@@ -42,7 +42,7 @@ router.post("/", async (req: Request, res: Response) => {
     res.status(200).json(newProject)
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al buscar proyecto por Id"
+      (error as Error).message || "Unknown error while searching for Project by ID"
     res.status(400).send(errorMessage)
   }
 })
@@ -56,7 +56,7 @@ router.post("/llenarDB:auxNum", async (req: Request, res: Response) => {
     res.status(200).json(newProject)
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al buscar proyecto por Id"
+      (error as Error).message || "Unknown error while searching for Project by ID"
     res.status(400).send(errorMessage)
   }
 })
@@ -70,7 +70,7 @@ router.put("/update", async (req: Request, res: Response) => {
     res.status(200).json(updatedProject)
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al buscar proyecto por Id"
+      (error as Error).message || "Unknown error while searching for Project by ID"
     res.status(400).send(errorMessage)
   }
 })
@@ -89,7 +89,7 @@ router.put(
     } catch (error) {
       const errorMessage =
         (error as Error).message ||
-        "Error desconocido al buscar proyecto por Id"
+        "Unknown error while searching for Project by ID"
       res.status(400).send(errorMessage)
     }
   }
@@ -104,7 +104,7 @@ router.put("/update/likes", async (req: Request, res: Response) => {
     res.status(200).json(updatedProject)
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al buscar proyecto por Id"
+      (error as Error).message || "Unknown error while searching for Project by ID"
     res.status(400).send(errorMessage)
   }
 })
@@ -120,7 +120,7 @@ router.get("/search/byName", async (req: Request, res: Response) => {
     }
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al buscar Project by ID"
+      (error as Error).message || "Unknown error while searching for Project by ID"
     res.status(400).send(errorMessage)
   }
 })
@@ -138,7 +138,7 @@ router.get("/search/byNameGeneral", async (req: Request, res: Response) => {
     }
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al buscar Project by ID"
+      (error as Error).message || "Unknown error while searching for Project by ID"
     res.status(400).send(errorMessage)
   }
 })
@@ -165,7 +165,7 @@ router.get("/searchProjects/", async (req: Request, res: Response) => {
     res.status(200).json(getProjectsFiltered)
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al buscar Project by ID"
+      (error as Error).message || "Unknown error while searching for Project by ID"
     res.status(400).send(errorMessage)
   }
 })
@@ -181,7 +181,7 @@ router.get("/search/daysleft", async (req: Request, res: Response) => {
     }
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al buscar Project by ID"
+      (error as Error).message || "Unknown error while searching for Project by ID"
     res.status(400).send(errorMessage)
   }
 })
@@ -194,7 +194,7 @@ router.get("/allProjects", async (_req: Request, res: Response) => {
   } catch (error) {
     const errorMessage =
       (error as Error).message ||
-      "Error desconocido al buscar todos los Projectos"
+      "Unknown error while searching all Projects"
     res.status(400).send(errorMessage)
   }
 })
@@ -207,7 +207,7 @@ router.get("/fiveMostFunding", async (_req: Request, res: Response) => {
   } catch (error) {
     const errorMessage =
       (error as Error).message ||
-      "Error desconocido al buscar los 5 proyectos más fondeados"
+      "Unknown error while fetch five most funding Projects"
     res.status(400).send(errorMessage)
   }
 })
@@ -220,7 +220,7 @@ router.get("/twentyMostTrending", async (_req: Request, res: Response) => {
   } catch (error) {
     const errorMessage =
       (error as Error).message ||
-      "Error desconocido al buscar los 5 proyectos más fondeados"
+      "Unknown error while fetch twenty most trending Projects"
     res.status(400).send(errorMessage)
   }
 })
@@ -235,7 +235,7 @@ router.delete("/deleteProject", async (req: Request, res: Response) => {
     res.status(200).json(deleteProjectByName)
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al buscar Project by ID"
+      (error as Error).message || "Unknown error while searching for Project by ID"
     res.status(400).send(errorMessage)
   }
 })
@@ -247,7 +247,7 @@ router.get("/create50projects/", async (_req: Request, res: Response) => {
     res.status(200).json(c50Projects)
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error al crear los Projectos"
+      (error as Error).message || "Error to load the projects"
     console.log(error)
     res.status(400).send(errorMessage)
   }
@@ -255,7 +255,7 @@ router.get("/create50projects/", async (_req: Request, res: Response) => {
 
 // Controlador de rutas no especificadas
 router.get("*", (_req: Request, res: Response) => {
-  res.status(404).send("Ruta no encontrada")
+  res.status(404).send("Route not found")
 })
 
 export { router }
