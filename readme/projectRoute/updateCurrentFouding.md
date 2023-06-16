@@ -38,6 +38,20 @@
 
 ## Error Response
 
+**Condition** : If 'title' don't exist.
+
+**Code** : `400 BAD REQUEST`
+
+**Content** :
+
+```json
+[
+  {
+    "errorMessage": "Project does not exist"
+  }
+]
+```
+
 **Condition** : If 'title' and 'addFoundingCurrent' combination is wrong.
 
 **Code** : `400 BAD REQUEST`
