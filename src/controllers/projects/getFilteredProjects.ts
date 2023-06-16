@@ -27,7 +27,7 @@ const getFilteredProjects = async (
   validatedQ: string | undefined,
   validatedP: string,
   validatedS: string,
-  validatedCountry: string | undefined,
+  // validatedCountry: string | undefined,
 ): Promise<object> => {
   try {
     let whereClause = {}; // Object to record the filter orders
@@ -42,31 +42,30 @@ const getFilteredProjects = async (
       };
     }
 
-   //  Country Filter
-    if (validatedCountry) {
-      whereClause = {
-        ...whereClause,
-        pais: validatedCountry,
-      };
-    }
+  //  //  Country Filter
+  //   if (validatedCountry) {
+  //     whereClause = {
+  //       ...whereClause,
+  //       pais: validatedCountry,
+  //     };
+  //   }
 
     // Query search
-    if (validatedQ) {
-      const decodedQ = decodeURIComponent(validatedQ);
-      const words = decodedQ.split(" ");
-      console.log(words)
-      const titleClauses = words.map((word) => ({
-        title: {
+      if (validatedQ) {
+        const decodedQ = decodeURIComponent(validatedQ);
+        const words = decodedQ.split(" ");
+        const titleClauses = words.map((word) => ({
+          title: {
           [Op.iLike]: `%${word}%`,
         },
       }));
 
       whereClause = {
         ...whereClause,
-        [Op.and]: titleClauses,
-      };
-    }
-
+        [Op.or]: titleClauses,
+        };
+      }
+      console.log('este es el whereClause',whereClause)
     let existingProjects = await ProjectModel.findAll({ where: whereClause });
 
     if (existingProjects.length === 0) {
