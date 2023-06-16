@@ -16,7 +16,7 @@
   "shortDescription": "[valid short description]",
   "fundingGoal": "[valid number]",
   "fundingDayLeft": "[valid number]",
-  "categories": "[valid array of strings]"
+  "category": "[valid strings]"
 }
 ```
 
@@ -26,11 +26,11 @@
 {
   "id": 1,
   "title": "ProjectX",
-  "description": "Ese te un ejemplo de un texto que deberia ser muy largo",
-  "shortDescription": "Este es un ejemplo corto",
+  "description": "This is an example of a description.",
+  "shortDescription": "This is a short description.",
   "fundingGoal": 100000,
   "fundingDayLeft": 10000,
-  "categories": ["movies", "music", "healt"]
+  "category": "category"
 }
 ```
 
@@ -42,7 +42,7 @@
 
 ```json
 {
-  "message": "Cambio exitoso del projecto con ID: 1"
+  "message": "Successful update of the project with ID: 1"
 }
 ```
 
@@ -60,7 +60,7 @@
     "code": "invalid_type",
     "expected": "number",
     "received": "undefined",
-    "path": ["id"],
+    "path": ["fundingDayLeft"],
     "message": "Required"
   }
 ]
@@ -72,7 +72,7 @@
 
 ```json
 {
-  "errorMessage": "El titulo ya existe"
+  "errorMessage": "The title already exists"
 }
 ```
 
