@@ -56,5 +56,4 @@ export default class User extends Model<IUser> {
     defaultValue: false
   })
   image!: string
-
 }
