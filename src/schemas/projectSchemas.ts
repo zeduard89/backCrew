@@ -108,3 +108,5 @@ export const updateLikesValidator = z.object({
 export const validatorString = z.string()
 
 export const validatorNumber = z.number()
+
+export const validatorQuerySearch = z.string().nullable()
