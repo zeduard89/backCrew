@@ -42,10 +42,10 @@ const getProyectByNameController = async (
       fundingDayLeft: projectByName[0].fundingDayLeft,
       likes: projectByName[0].likes,
       disLikes: projectByName[0].disLikes,
-      categories: projectByName[0].categories,
+      categories: projectByName[0].category,
       banco: projectByName[0].banco,
       cuenta: projectByName[0].cuenta,
-      pais: projectByName[0].pais,
+      pais: projectByName[0].location,
       projectFase: projectByName[0].projectFase
     }
 
