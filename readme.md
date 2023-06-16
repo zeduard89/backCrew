@@ -32,7 +32,7 @@ has permissions to access.
 
 ### Projects related
 
-Endpoints for viewing and manipulating the Projects that the Admin
+Endpoints for viewing and manipulating the Projects that the Front
 has permissions to access
 
 - [Create Project](./readme/projectRoute/createProject.md) : `POST /projectRoute/`
@@ -43,6 +43,10 @@ has permissions to access
 - [Update Project](./readme/projectRoute/updateProject.md) : `PUT /projectRoute/update`
 - [UpdateCurrent Founding](./readme/projectRoute/updateCurrentFouding.md) : `PUT /projectRoute/update/addToFundingCurrent`
 - [UpdateLikes](./readme/projectRoute/updateLikes.md) : `PUT /projectRoute/likes`
+- [Get the twenty most trending](./readme/projectRoute/twentyMostTrending.md) : `GET /twentyMostTrending`
+- [Get five most funding](./readme/projectRoute/fiveMostFunding.md) : `GET /fiveMostFunding`
+- [Get search Filter](./readme/projectRoute/searchProjects.md) : `GET /searchProjects/`
+
 
 ### Azure Containers related
 
