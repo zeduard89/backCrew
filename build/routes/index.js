@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -33,7 +37,7 @@ const express_1 = require("express");
 const fs_1 = require("fs");
 // __dirname nos devuelve la ruta del directorio actual
 const PATH_ROUTER = `${__dirname}`;
-const router = express_1.Router();
+const router = (0, express_1.Router)();
 exports.router = router;
 const cleanFileName = (fileName) => {
     var _a;
@@ -43,11 +47,11 @@ const cleanFileName = (fileName) => {
 // Funcion Async que se encarga de leer cuantos/cuales archivos hay en el directorio
 // devolviendo un array de los nombre de estos archivos
 const loadRouters = () => __awaiter(void 0, void 0, void 0, function* () {
-    const files = fs_1.readdirSync(PATH_ROUTER);
+    const files = (0, fs_1.readdirSync)(PATH_ROUTER);
     for (const fileName of files) {
         const cleanName = cleanFileName(fileName);
         if (cleanName !== 'index') {
-            const moduleRouter = yield Promise.resolve().then(() => __importStar(require(`./${cleanName}`)));
+            const moduleRouter = yield Promise.resolve(`${`./${cleanName}`}`).then(s => __importStar(require(s)));
             router.use(`/${cleanName}`, moduleRouter.router);
         }
     }
