@@ -23,6 +23,7 @@ import updateFundingCurrentController from "../controllers/projects/updateFundin
 import getDayLeftByNameController from "../controllers/projects/getDayLeftByNameHandler"
 import updateLikesController from "../controllers/projects/updateLikesControllers"
 import getFilteredProjects from "../controllers/projects/getFilteredProjects"
+import getFiveMostFunding  from "../controllers/projects/getFiveMostFunding"
 
 // 50 Projects controller
 import create50Projects from "../controllers/projects/Create50projects"
@@ -143,19 +144,21 @@ router.get("/search/byNameGeneral", async (req: Request, res: Response) => {
 // Route filter by name, category and sort (most founding and trending)
 router.get("/searchProjects/", async (req: Request, res: Response) => {
   try {
-    const { category, sort, q, p, s } = req.query
+    const { category, sort, q, p, s, country } = req.query
     const validatedCategory = validatorString.parse(category)
     const validatedSort = validatorString.parse(sort)
     const validatedQ = validatorString.parse(q)
     const validatedP = validatorString.parse(p)
     const validatedS = validatorString.parse(s)
-
+    const validatedCountry = validatorString.parse(country)
+    console.log(validatedP)
     const getProjectsFiltered = await getFilteredProjects(
       validatedCategory,
       validatedSort,
       validatedQ,
       validatedP,
-      validatedS
+      validatedS,
+      validatedCountry
     )
     res.status(200).json(getProjectsFiltered)
   } catch (error) {
@@ -190,6 +193,19 @@ router.get("/allProjects", async (_req: Request, res: Response) => {
     const errorMessage =
       (error as Error).message ||
       "Error desconocido al buscar todos los Projectos"
+    res.status(400).send(errorMessage)
+  }
+})
+
+// Search the five most funding projects
+router.get("/fiveMostFunding", async (_req: Request, res: Response) => {
+  try {
+    const fiveMostFunding = await getFiveMostFunding()
+    res.status(200).json(fiveMostFunding)
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message ||
+      "Error desconocido al buscar los 5 proyectos más fondeados"
     res.status(400).send(errorMessage)
   }
 })
