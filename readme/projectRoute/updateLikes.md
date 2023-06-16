@@ -20,7 +20,7 @@
 
 ```json
 {
-  "title": "string",
+  "title": "ProjectX",
   "likes": 100,
   "disLikes": 0
 }
@@ -34,7 +34,7 @@
 
 ```json
 {
-  "message": "Se modifico Correctamente el valor de likes: 100 y disLikes: 0"
+  "message": "Successfully modified the values of likes: 200 and dislikes: 0"
 }
 ```
 
@@ -52,7 +52,7 @@
     "code": "invalid_type",
     "expected": "number",
     "received": "undefined",
-    "path": ["disLikes"],
+    "path": ["likes"],
     "message": "Required"
   }
 ]
@@ -64,7 +64,7 @@
 
 ```json
 {
-  "errorMessage": "El Project no existe"
+  "message": "Successfully modified the values of likes: 300 and dislikes: 0"
 }
 ```
 

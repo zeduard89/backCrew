@@ -78,31 +78,30 @@ export default class ProjectModel extends Model<IProject> {
   disLikes!: number
 
   @Column({
-    type: DataType.ARRAY(DataType.STRING),
+    type: DataType.STRING,
     allowNull: false
   })
-  categories!: string[]
+  category!: string
 
   @Column({
     type: DataType.STRING,
-    allowNull: true,
-    defaultValue: false
+    allowNull: true
   })
-  banco!: string
+  bank!: string
 
   @Column({
     type: DataType.STRING,
-    allowNull: true,
+    allowNull: false,
     defaultValue: false
   })
-  cuenta!: string
+  account!: string
 
   @Column({
     type: DataType.STRING,
-    allowNull: true,
+    allowNull: false,
     defaultValue: false
   })
-  pais!: string
+  location!: string
 
   @Column({
     type: DataType.INTEGER,

@@ -68,7 +68,7 @@ const categoriesExample = [
   "Creative Works"
 ]
 
-const create50Projects = async (): Promise<object> => {
+const getCreate50Projects = async (): Promise<object> => {
   try {
     const generatedProjects = []
     for (let i = 0; i < 50; i++) {
@@ -85,16 +85,15 @@ const create50Projects = async (): Promise<object> => {
         fundingDayLeft: Math.floor(Math.random() * 30),
         likes: Math.floor(Math.random() * 1500),
         disLikes: Math.floor(Math.random() * 1500),
-        categories: [
+        category:
           categoriesExample[
             Math.floor(Math.random() * categoriesExample.length)
-          ]
-        ],
+          ],
         displayProject: true,
-        banco: "MercadoLibre",
-        cuenta: "mercadopago@mercadopago.com",
-        pais: "argentina",
-        projectFase: Math.floor(Math.random() * 4)
+        // bank: "MercadoLibre",
+        // account: "mercadopago@mercadopago.com",
+        // location: "argentina",
+        // projectFase: Math.floor(Math.random() * 4)
 
       })
 
@@ -104,9 +103,9 @@ const create50Projects = async (): Promise<object> => {
     return generatedProjects
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al guardar ImagenAzure"
+      (error as Error).message || "Unknown error while saving Azure Image"
     return { errorMessage }
   }
 }
 
-export default create50Projects
+export default getCreate50Projects
