@@ -85,17 +85,16 @@ export default class ProjectModel extends Model<IProject> {
 
   @Column({
     type: DataType.STRING,
-    allowNull: false,
-    defaultValue: false
+    allowNull: true
   })
-  banco!: string
+  bank!: string
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
     defaultValue: false
   })
-  cuenta!: string
+  account!: string
 
   @Column({
     type: DataType.STRING,

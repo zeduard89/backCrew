@@ -38,9 +38,9 @@ const createRandomProjectController = (auxNum: number) => {
       likes: Math.floor(Math.random() * 10000),
       disLikes: Math.floor(Math.random() * 10000),
       category: categoriaActual,
-      // banco: randomBanco,
-      // cuenta: randomCuenta,
-      // pais: "argentina",
+      // bank: randomBanco,
+      // account: randomCuenta,
+      // location: "argentina",
       // projectFase: Math.floor(Math.random() * 4),
       displayProject: true
     }

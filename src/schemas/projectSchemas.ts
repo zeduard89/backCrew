@@ -20,13 +20,13 @@ export const projectValidator = z.object({
   category: z
     .string()
     .min(1, { message: "Debes seleccionar al menos una categoría" }),
-  banco: z
+  bank: z
     .string()
     .min(2, {
       message: "El nombre del banco debe tener al menos 2 caracteres"
     })
     .optional(),
-  cuenta: z
+  account: z
     .string()
     .min(2, {
       message: "El número de cuenta debe tener al menos 2 caracteres"
@@ -75,10 +75,10 @@ export const updateProjectValidator = z.object({
   category: z
     .string()
     .min(1, { message: "Debes seleccionar al menos una categoría" }),
-  banco: z.string().min(2, {
+  bank: z.string().min(2, {
     message: "El nombre del banco debe tener al menos 2 caracteres"
   }),
-  cuenta: z
+  account: z
     .string()
     .min(2, { message: "El número de cuenta debe tener al menos 2 caracteres" })
 })

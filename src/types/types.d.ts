@@ -40,8 +40,8 @@ export interface IProject {
   likes?: number
   disLikes?: number
   category?: string
-  banco?: string
-  cuenta?: string
+  bank?: string
+  account?: string
   location?: string
   projectFase?: number
   displayProject?: boolean
@@ -57,8 +57,8 @@ export type deleteIProyect = Omit<
   "fundingPercentage",
   "fundingDayLeft",
   "category",
-  "banco",
-  "cuenta"
+  "bank",
+  "account"
 >
 // Uso title y currentFunding
 export type updateFundingCurrentIProyect = Omit<
@@ -69,8 +69,8 @@ export type updateFundingCurrentIProyect = Omit<
   "fundingGoalReached",
   "fundingDayLeft",
   "category",
-  "banco",
-  "cuenta",
+  "bank",
+  "account",
   "displayProject"
 >
 
@@ -84,8 +84,8 @@ export type updateLikes = Omit<
   "fundingPercentage",
   "fundingDayLeft",
   "category",
-  "banco",
-  "cuenta",
+  "bank",
+  "account",
   "displayProject"
 >
 
@@ -98,8 +98,8 @@ export interface updateProject {
   fundingGoal: number
   fundingDayLeft: number
   category: string
-  banco: string
-  cuenta: string
+  bank: string
+  account: string
 }
 
 export interface limitDate {
