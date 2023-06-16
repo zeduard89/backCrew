@@ -10,15 +10,16 @@ let PORT;
 if (process.env.PORT != null)
     PORT = process.env.PORT;
 else
-    PORT = '3002';
+    PORT = "3002";
 // Syncing all the models at once.
-db_1.sequelize.sync({ force: false })
+db_1.sequelize
+    .sync({ force: false })
     .then(() => {
     server_1.default.listen(PORT, () => {
-        console.log('Master, servidor levantado en el puerto', PORT);
+        console.log("Master, servidor levantado en el puerto", PORT);
     });
 })
     .catch((error) => {
-    console.error('Error al sincronizar los modelos de Sequelize:', error);
+    console.error("Error al sincronizar los modelos de Sequelize:", error);
 });
 //# sourceMappingURL=index.js.map

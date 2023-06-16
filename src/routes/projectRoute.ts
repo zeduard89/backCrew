@@ -24,8 +24,8 @@ import updateFundingCurrentController from "../controllers/projects/updateFundin
 import getDayLeftByNameController from "../controllers/projects/getDayLeftByNameHandler"
 import updateLikesController from "../controllers/projects/updateLikesControllers"
 import getFilteredProjects from "../controllers/projects/getFilteredProjects"
-import getTwentyMostTrending  from "../controllers/projects/getTwentyMostTrending"
-import getFiveMostFunding  from "../controllers/projects/getFiveMostFunding"
+import getTwentyMostTrending from "../controllers/projects/getTwentyMostTrending"
+import getFiveMostFunding from "../controllers/projects/getFiveMostFunding"
 
 // 50 Projects controller
 import create50Projects from "../controllers/projects/getCreate50Projects"
@@ -146,7 +146,7 @@ router.get("/search/byNameGeneral", async (req: Request, res: Response) => {
 // Route filter by name, category and sort (most founding and trending)
 router.get("/searchProjects/", async (req: Request, res: Response) => {
   try {
-    const { category, sort, q, p, s, /* country */ } = req.query
+    const { category, sort, q, p, s /* country */ } = req.query
     const validatedCategory = validatorString.parse(category)
     const validatedSort = validatorString.parse(sort)
     const validatedQ = validatorQuerySearch.parse(q)
@@ -159,7 +159,7 @@ router.get("/searchProjects/", async (req: Request, res: Response) => {
       validatedSort,
       validatedQ,
       validatedP,
-      validatedS,
+      validatedS
       // validatedCountry
     )
     res.status(200).json(getProjectsFiltered)
