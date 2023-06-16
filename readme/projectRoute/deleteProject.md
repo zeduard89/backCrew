@@ -32,7 +32,7 @@
 
 ```json
 {
-  "message": "Cambio exitoso displayProject"
+  "message": "Successful displayProject change: true"
 }
 ```
 
@@ -46,8 +46,7 @@
 
 ```json
 {
-  //Corregir detalles
-  "errorMessage": "Projecto no encontrado"
+  "errorMessage": "Project not found"
 }
 ```
 

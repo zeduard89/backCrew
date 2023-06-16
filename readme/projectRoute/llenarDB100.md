@@ -1,8 +1,8 @@
-# Get all Projects
+# POST 100 Random Project
 
-**URL** : `/projectRoute/allProject`
+**URL** : `/projectRoute/llenarDB:number`
 
-**Method** : `GET`
+**Method** : `POST` This Route just can use one Time
 
 **Auth required** : YES
 
@@ -16,8 +16,8 @@
 {
   //Example of Success Response
   [ {
-        "id": 2,
-        "title": "Proyecto 2",
+        "id": 1,
+        "title": "Proyecto 1",
         "description": "This is an example of a description.",
         "shortDescription": "This is a short description.",
         "fundingCurrent": 3665,

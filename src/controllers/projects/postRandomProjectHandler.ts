@@ -44,7 +44,7 @@ Please note that this is a fictional description and may not have a specific mea
       // projectFase: Math.floor(Math.random() * 4),
       displayProject: true
     }
-
+    console.log("esto es el proyecto",proyecto)
     return proyecto
   }
   const numProyectos = auxNum
