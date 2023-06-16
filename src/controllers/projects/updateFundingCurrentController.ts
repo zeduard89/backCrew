@@ -9,8 +9,9 @@ const updatedProjectController = async (
     const projectDB = await ProjectModel.findOne({
       where: { title: validatedProject.title }
     })
-    if (!projectDB) throw new Error("Project no existe")
-
+    if (!projectDB) {
+      throw new Error("Project does not exist")
+    }
     // Actualizo fundingCurrent
     const newFundingCurrent =
       validatedProject.addToFundingCurrent + projectDB.fundingCurrent
@@ -33,11 +34,12 @@ const updatedProjectController = async (
     )
 
     return {
-      message: `Se modifico Correctamente el valor de fundingCurrent y fundingPercentage`
+      message: `Successfully modified the value of fundingCurrent and fundingPercentage`
     }
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al guardar ImagenAzure"
+      (error as Error).message ||
+      "Unknown error while updating founding project"
     return { errorMessage }
   }
 }
