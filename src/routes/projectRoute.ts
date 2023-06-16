@@ -9,7 +9,7 @@ import {
 } from "../schemas/projectSchemas"
 // Crear project
 import createProjectController from "../controllers/projects/postProjectHandler"
-// import createRandomProjectController from "../controllers/projects/postRandomProjectHandler"
+import createRandomProjectController from "../controllers/projects/postRandomProjectHandler"
 // Get by Name
 import getProjectByNameController from "../controllers/projects/getProjectByNameHandler"
 import getAllProjectsByNameController from "../controllers/projects/getAllProjectsByNameHandler"
@@ -44,19 +44,19 @@ router.post("/", async (req: Request, res: Response) => {
   }
 })
 
-// // Llenar la DB.
-// router.post("/llenarDB:auxNum", async (req: Request, res: Response) => {
-//   try {
-//     const { auxNum } = req.params
-//     console.log(auxNum)
-//     const newProject = await createRandomProjectController(+auxNum)
-//     res.status(200).json(newProject)
-//   } catch (error) {
-//     const errorMessage =
-//       (error as Error).message || "Error desconocido al buscar proyecto por Id"
-//     res.status(400).send(errorMessage)
-//   }
-// })
+// Llenar la DB.
+router.post("/llenarDB:auxNum", async (req: Request, res: Response) => {
+  try {
+    const { auxNum } = req.params
+    console.log(auxNum)
+    const newProject = await createRandomProjectController(+auxNum)
+    res.status(200).json(newProject)
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message || "Error desconocido al buscar proyecto por Id"
+    res.status(400).send(errorMessage)
+  }
+})
 
 // Ruta UPDATE DATOS de un project.
 router.put("/update", async (req: Request, res: Response) => {
