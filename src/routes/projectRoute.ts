@@ -5,7 +5,8 @@ import {
   deleteProjectValidator,
   updateProjectValidator,
   updateFundingCurrentValidator,
-  updateLikesValidator
+  updateLikesValidator,
+  validatorQuerySearch
 } from "../schemas/projectSchemas"
 // Crear project
 import createProjectController from "../controllers/projects/postProjectHandler"
@@ -24,9 +25,10 @@ import getDayLeftByNameController from "../controllers/projects/getDayLeftByName
 import updateLikesController from "../controllers/projects/updateLikesControllers"
 import getFilteredProjects from "../controllers/projects/getFilteredProjects"
 import getTwentyMostTrending  from "../controllers/projects/getTwentyMostTrending"
+import getFiveMostFunding  from "../controllers/projects/getFiveMostFunding"
 
 // 50 Projects controller
-// import create50Projects from "../controllers/projects/Create50projects"
+import create50Projects from "../controllers/projects/getCreate50projects"
 
 const router = Router()
 //* Datos IMPORTANTES
@@ -147,7 +149,7 @@ router.get("/searchProjects/", async (req: Request, res: Response) => {
     const { category, sort, q, p, s, /* country */ } = req.query
     const validatedCategory = validatorString.parse(category)
     const validatedSort = validatorString.parse(sort)
-    const validatedQ = validatorString.parse(q)
+    const validatedQ = validatorQuerySearch.parse(q)
     const validatedP = validatorString.parse(p)
     const validatedS = validatorString.parse(s)
     // const validatedCountry = validatorString.parse(country)
@@ -157,7 +159,7 @@ router.get("/searchProjects/", async (req: Request, res: Response) => {
       validatedSort,
       validatedQ,
       validatedP,
-      validatedS
+      validatedS,
       // validatedCountry
     )
     res.status(200).json(getProjectsFiltered)
@@ -198,10 +200,10 @@ router.get("/allProjects", async (_req: Request, res: Response) => {
 })
 
 // Search the five most funding projects
-router.get("/twentyMostTrending", async (_req: Request, res: Response) => {
+router.get("/fiveMostFunding", async (_req: Request, res: Response) => {
   try {
-    const twentyMostTrending = await getTwentyMostTrending()
-    res.status(200).json(twentyMostTrending)
+    const fiveMostFunding = await getFiveMostFunding()
+    res.status(200).json(fiveMostFunding)
   } catch (error) {
     const errorMessage =
       (error as Error).message ||
@@ -239,17 +241,17 @@ router.delete("/deleteProject", async (req: Request, res: Response) => {
 })
 
 // Create 50projects
-// router.get("/create50projects/", async (_req: Request, res: Response) => {
-//   try {
-//     const c50Projects = await create50Projects()
-//     res.status(200).json(c50Projects)
-//   } catch (error) {
-//     const errorMessage =
-//       (error as Error).message || "Error al crear los Projectos"
-//     console.log(error)
-//     res.status(400).send(errorMessage)
-//   }
-// })
+router.get("/create50projects/", async (_req: Request, res: Response) => {
+  try {
+    const c50Projects = await create50Projects()
+    res.status(200).json(c50Projects)
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message || "Error al crear los Projectos"
+    console.log(error)
+    res.status(400).send(errorMessage)
+  }
+})
 
 // Controlador de rutas no especificadas
 router.get("*", (_req: Request, res: Response) => {
