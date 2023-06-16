@@ -69,7 +69,7 @@ const getFilteredProjects = async (
     let existingProjects = await ProjectModel.findAll({ where: whereClause });
 
     if (existingProjects.length === 0) {
-      throw new Error("No hay proyectos que cumplan los criterios de búsqueda");
+      throw new Error("There are no projects with this parameters");
     }
 
     // Trending sort & Most funded sort
@@ -83,13 +83,13 @@ const getFilteredProjects = async (
     const validatedPIndex = parseInt(validatedP);
 
     if (validatedPIndex >= dividedArrayProjects.length) {
-      throw new Error("No hay más proyectos que mostrar");
+      throw new Error("There are no more projects to display.");
     }
 
     if (validatedPIndex === dividedArrayProjects.length - 1) {
       return {
         projects: dividedArrayProjects[validatedPIndex],
-        limit: "No hay más que mostrar",
+        limit: "There is nothing else to show.",
       };
     }
 
@@ -98,7 +98,7 @@ const getFilteredProjects = async (
     };
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al obtener proyectos filtrados";
+      (error as Error).message || "Unknown error while fetching filtered projects.";
     return { errorMessage };
   }
 };

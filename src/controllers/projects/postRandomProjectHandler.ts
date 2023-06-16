@@ -44,7 +44,7 @@ const createRandomProjectController = (auxNum: number) => {
       // projectFase: Math.floor(Math.random() * 4),
       displayProject: true
     }
-
+    console.log("esto es el proyecto",proyecto)
     return proyecto
   }
   const numProyectos = auxNum

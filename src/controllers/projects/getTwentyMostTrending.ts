@@ -11,7 +11,7 @@ const getTwentyMostTrending = async (
     let existingProjects = await ProjectModel.findAll();
 
     if (existingProjects.length === 0) {
-      throw new Error("No hay proyectos que cumplan los criterios de búsqueda");
+      throw new Error("There are no projects with this parameters");
     }
 
     //  Most trending sort
@@ -24,7 +24,7 @@ const getTwentyMostTrending = async (
 
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al obtener proyectos mas fondeados";
+      (error as Error).message || "Unknown error while fetching trending projects.";
     return { errorMessage };
   }
 };

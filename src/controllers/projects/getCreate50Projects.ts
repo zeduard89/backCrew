@@ -103,7 +103,7 @@ const getCreate50Projects = async (): Promise<object> => {
     return generatedProjects
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al guardar ImagenAzure"
+      (error as Error).message || "Unknown error while saving Azure Image"
     return { errorMessage }
   }
 }
