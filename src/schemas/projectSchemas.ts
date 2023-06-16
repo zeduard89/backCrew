@@ -23,8 +23,7 @@ export const projectValidator = z.object({
   bank: z
     .string()
     .min(2, { message: "The bank name must have at least 2 characters" })
-    .optional()
-    .default(""),
+    .optional(),
   account: z
     .string()
     .min(2, { message: "The account number must have at least 2 characters" })
