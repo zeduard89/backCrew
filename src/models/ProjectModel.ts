@@ -45,7 +45,8 @@ export default class ProjectModel extends Model<IProject> {
 
   @Column({
     type: DataType.BOOLEAN,
-    allowNull: false
+    allowNull: false,
+    defaultValue: false
   })
   fundingGoalReached!: boolean
 
@@ -77,24 +78,37 @@ export default class ProjectModel extends Model<IProject> {
   disLikes!: number
 
   @Column({
-    type: DataType.ARRAY(DataType.STRING),
+    type: DataType.STRING,
     allowNull: false
   })
-  categories!: string[]
+  category!: string
 
   @Column({
     type: DataType.STRING,
-    allowNull: true,
-    defaultValue: false
+    allowNull: true
   })
-  banco!: string
+  bank!: string
 
   @Column({
     type: DataType.STRING,
-    allowNull: true,
+    allowNull: false,
     defaultValue: false
   })
-  cuenta!: string
+  account!: string
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+    defaultValue: false
+  })
+  location!: string
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+    defaultValue: 0
+  })
+  projectFase!: number
 
   @Column({
     type: DataType.BOOLEAN,

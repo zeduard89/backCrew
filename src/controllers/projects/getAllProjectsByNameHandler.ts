@@ -31,9 +31,11 @@ const getAllProyectByNameController = async (
         fundingDayLeft: project.fundingDayLeft,
         likes: project.likes,
         disLikes: project.disLikes,
-        categories: project.categories,
-        banco: project.banco,
-        cuenta: project.cuenta
+        category: project.category,
+        bank: project.bank,
+        account: project.account,
+        location: project.location,
+        projectFase: project.projectFase
       }
       return auxArray.push(auxProject)
     })

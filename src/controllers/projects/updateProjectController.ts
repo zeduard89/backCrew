@@ -28,9 +28,10 @@ const updatedProjectController = async (
         fundingGoal: validatedProject.fundingGoal || projectDB.fundingGoal,
         fundingDayLeft:
           validatedProject.fundingDayLeft || projectDB.fundingDayLeft,
-        categories: validatedProject.categories || projectDB.categories,
-        banco: validatedProject.banco || projectDB.banco,
-        cuenta: validatedProject.cuenta || projectDB.cuenta
+        category: validatedProject.category || projectDB.category
+        // bank: validatedProject.banco || projectDB.banco,
+        // account: validatedProject.cuenta || projectDB.cuenta,
+        // location: validatedProject.country || projectDB.country
       },
       {
         // Aquí se especifica la condición de búsqueda

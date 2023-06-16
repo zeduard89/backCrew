@@ -14,6 +14,7 @@ sequelize
       console.log("Master, servidor levantado en el puerto", PORT)
     })
   })
+
   .catch((error) => {
     console.error("Error al sincronizar los modelos de Sequelize:", error)
   })
