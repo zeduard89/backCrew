@@ -7,7 +7,7 @@ import { IProject } from "../../types/types"
 // dotenv.config()
 // const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING
 // if (!connectionString) {
-//   throw new Error("La cadena de conexión de Azure Storage no está configurada")
+//  throw new Error("Azure Storage connection string is not configured");
 // }
 // const blobService = BlobServiceClient.fromConnectionString(connectionString) // conexion
 
@@ -25,7 +25,7 @@ const createProjectController = async (
     )
 
     if (newAllProjects.length > 0) {
-      throw new Error("Project  existe")
+      throw new Error("Project exists")
     }
 
     const createdProject = await ProjectModel.create({
@@ -42,14 +42,14 @@ const createProjectController = async (
     // )
     // const containerExist = await containerClient.exists()
     // if (containerExist)
-    //   throw new Error(`El container: ${newIdProjectContainer} ya existe`)
+    // throw new Error(`The container: ${newIdProjectContainer} already exists`);
 
     // await blobService.createContainer(newIdProjectContainer)
     //! ---------------------------------
-    return { message: `Proyecto: ${createdProject.title} Creado con exito` }
+    return { message: `Project: ${createdProject.title} created successfully` }
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al guardar ImagenAzure"
+      (error as Error).message || "Unknown error while saving ImageAzure"
     return { errorMessage }
   }
 }

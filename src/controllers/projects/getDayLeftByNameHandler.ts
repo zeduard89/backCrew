@@ -41,7 +41,8 @@ const getLeftDayByNameController = async (
     return limitDate
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al guardar ImagenAzure"
+      (error as Error).message ||
+      "Unknown error while searching for dayleft by name"
     return { errorMessage }
   }
 }

@@ -14,8 +14,9 @@ const getAllProyectByNameController = async (
         .includes(validatedName.toLowerCase().trim().replace(/\s/g, ""))
     })
     // Si obtengo un array vacio, retorno respusta STRING
-    if (newAllProjects.length === 0) throw new Error("Project no existe")
-
+    if (newAllProjects.length === 0) {
+      throw new Error("Project does not exist")
+    }
     // Limito la info del array
     const auxArray: object[] = []
     newAllProjects.map((project) => {
@@ -43,7 +44,7 @@ const getAllProyectByNameController = async (
     return auxArray
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al guardar ImagenAzure"
+      (error as Error).message || "Unknown error while searching for projects"
     return { errorMessage }
   }
 }
