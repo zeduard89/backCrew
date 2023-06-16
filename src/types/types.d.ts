@@ -39,12 +39,12 @@ export interface IProject {
   fundingDayLeft: number
   likes?: number
   disLikes?: number
-  category?: string[]
+  category?: string
   banco?: string
   cuenta?: string
   location?: string
-  projectFase: number
-  displayProject: boolean
+  projectFase?: number
+  displayProject?: boolean
 }
 // Uso title displayProject
 export type deleteIProyect = Omit<
@@ -97,7 +97,7 @@ export interface updateProject {
   shortDescription: string
   fundingGoal: number
   fundingDayLeft: number
-  category: string[]
+  category: string
   banco: string
   cuenta: string
 }

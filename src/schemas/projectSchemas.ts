@@ -18,7 +18,7 @@ export const projectValidator = z.object({
     message: "Los días restantes de financiamiento deben ser un número positivo"
   }),
   category: z
-    .array(z.string())
+    .string()
     .min(1, { message: "Debes seleccionar al menos una categoría" }),
   banco: z
     .string()
@@ -73,7 +73,7 @@ export const updateProjectValidator = z.object({
     message: "Los días restantes de financiamiento deben ser un número positivo"
   }),
   category: z
-    .array(z.string())
+    .string()
     .min(1, { message: "Debes seleccionar al menos una categoría" }),
   banco: z.string().min(2, {
     message: "El nombre del banco debe tener al menos 2 caracteres"

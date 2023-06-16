@@ -31,7 +31,7 @@ const getAllProyectByNameController = async (
         fundingDayLeft: project.fundingDayLeft,
         likes: project.likes,
         disLikes: project.disLikes,
-        categories: project.category,
+        category: project.category,
         banco: project.banco,
         cuenta: project.cuenta,
         pais: project.location,

@@ -44,7 +44,7 @@ router.post("/", async (req: Request, res: Response) => {
   }
 })
 
-// Llenar la DB.
+// // Llenar la DB.
 // router.post("/llenarDB:auxNum", async (req: Request, res: Response) => {
 //   try {
 //     const { auxNum } = req.params
