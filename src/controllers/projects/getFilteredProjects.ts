@@ -2,52 +2,62 @@ import { Op } from "sequelize";
 import { ProjectModel } from "../../config/db";
 
 // sort
-const sortByTrending = (a: ProjectModel, b:ProjectModel) => a.likes - b.likes;
-const orderByMostFunding = (a: ProjectModel , b: ProjectModel) => a.fundingCurrent - b.fundingCurrent;
+const sortByTrending = (a: ProjectModel, b: ProjectModel) => b.likes - a.likes;
+const orderByMostFunding = (a: ProjectModel, b: ProjectModel) => b.fundingCurrent - a.fundingCurrent;
 
 // function to slice array existingProjects
 function divideArray(array: Array<object>, size: number) {
-    if (array.length <= size) {
-        return [array];
-      }
-    
-      const result = [];
-      for (let i = 0; i < array.length; i += size) {
-        const chunk = array.slice(i, i + size);
-        result.push(chunk);
-      }
-      
-      return result;
-    } 
-      
-        
-// Controller   
+  if (array.length <= size) {
+    return [array];
+  }
+
+  const result = [];
+  for (let i = 0; i < array.length; i += size) {
+    const chunk = array.slice(i, i + size);
+    result.push(chunk);
+  }
+
+  return result;
+}
+
+// Controller
 const getFilteredProjects = async (
   validatedCategory: string,
   validatedSort: string,
   validatedQ: string | undefined,
   validatedP: string,
   validatedS: string,
+  validatedCountry: string | undefined,
 ): Promise<object> => {
   try {
-    let whereClause = {}; // Objet to record the filter orders
+    let whereClause = {}; // Object to record the filter orders
 
     // Category Filter
     if (validatedCategory !== "all") {
-        whereClause = {
-          ...whereClause,
-          categories: {
-            [Op.contains]: [validatedCategory],
-          },
-        };
-      }
+      whereClause = {
+        ...whereClause,
+        categories: {
+          [Op.contains]: [validatedCategory],
+        },
+      };
+    }
+
+   //  Country Filter
+    if (validatedCountry) {
+      whereClause = {
+        ...whereClause,
+        pais: validatedCountry,
+      };
+    }
 
     // Query search
     if (validatedQ) {
-      const words = validatedQ.split("_");
+      const decodedQ = decodeURIComponent(validatedQ);
+      const words = decodedQ.split(" ");
+      console.log(words)
       const titleClauses = words.map((word) => ({
         title: {
-          [Op.substring]: word, 
+          [Op.iLike]: `%${word}%`,
         },
       }));
 
@@ -57,8 +67,6 @@ const getFilteredProjects = async (
       };
     }
 
-
-
     let existingProjects = await ProjectModel.findAll({ where: whereClause });
 
     if (existingProjects.length === 0) {
@@ -67,8 +75,8 @@ const getFilteredProjects = async (
 
     // Trending sort & Most funded sort
     validatedSort === "trending"
-    ? existingProjects = existingProjects.sort(sortByTrending) 
-    : existingProjects = existingProjects.sort(orderByMostFunding)
+      ? (existingProjects = existingProjects.sort(sortByTrending))
+      : (existingProjects = existingProjects.sort(orderByMostFunding));
 
     // Slice existingProjects for deliver to Front by infiniteScroll
     const size = parseInt(validatedS);
@@ -76,7 +84,7 @@ const getFilteredProjects = async (
     const validatedPIndex = parseInt(validatedP);
 
     if (validatedPIndex >= dividedArrayProjects.length) {
-      throw new Error("No hay más projectos que mostrar");
+      throw new Error("No hay más proyectos que mostrar");
     }
 
     if (validatedPIndex === dividedArrayProjects.length - 1) {
@@ -89,7 +97,6 @@ const getFilteredProjects = async (
     return {
       projects: dividedArrayProjects[validatedPIndex],
     };
-
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Error desconocido al obtener proyectos filtrados";
