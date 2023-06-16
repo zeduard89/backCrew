@@ -32,9 +32,10 @@ has permissions to access.
 
 ### Projects related
 
-Endpoints for viewing and manipulating the Projects that the Admin
+Endpoints for viewing and manipulating the Projects that the Front
 has permissions to access
 
+- [Create Random Project](./readme/projectRoute/llenarDB100.md) : `POST /projectRoute/llenarDB100`
 - [Create Project](./readme/projectRoute/createProject.md) : `POST /projectRoute/`
 - [Get All Project](./readme/projectRoute/allProjects.md) : `GET /projectRoute/allProject`
 - [Get Project By Name](./readme/projectRoute/projectByName.md) : `GET /projectRoute/search`
@@ -43,6 +44,10 @@ has permissions to access
 - [Update Project](./readme/projectRoute/updateProject.md) : `PUT /projectRoute/update`
 - [UpdateCurrent Founding](./readme/projectRoute/updateCurrentFouding.md) : `PUT /projectRoute/update/addToFundingCurrent`
 - [UpdateLikes](./readme/projectRoute/updateLikes.md) : `PUT /projectRoute/likes`
+- [Get the twenty most trending](./readme/projectRoute/twentyMostTrending.md) : `GET /twentyMostTrending`
+- [Get five most funding](./readme/projectRoute/fiveMostFunding.md) : `GET /fiveMostFunding`
+- [Get search Filter](./readme/projectRoute/searchProjects.md) : `GET /searchProjects/`
+
 
 ### Azure Containers related
 
