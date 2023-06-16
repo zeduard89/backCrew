@@ -1,18 +1,14 @@
 # Get Project By Name
 
-**URL** : `/projectRoute/search/?name=string`
+**URL** : `/projectRoute/search/byName/?name=string`
 
 **Method** : `GET`
 
 **Auth required** : YES
 
-**Data constraints**
+**Data Query**
 
-```json
-{
-  "name": "[valid name]"
-}
-```
+      "name": "[valid string]"
 
 **Data example**
 
@@ -32,26 +28,42 @@
 {
   "id": 1,
   "title": "ProjectX",
-  "description": "Ese te un ejemplo de una descripcion larga y extensa",
-  "shortDescription": "Esto es una short description",
+  "description": "This is an example of a description.",
+  "shortDescription": "This is a short description.",
   "fundingCurrent": 0,
   "fundingGoal": 2000,
   "fundingGoalReached": false,
   "fundingPercentage": 0,
   "fundingDayLeft": 30,
-  "likes": 0,
+  "likes": 100,
   "disLikes": 0,
-  "categories": ["Asi", "TeGUsta", "MAs?"],
-  "image": "https://www.istockphoto.com/es/foto/un-gato-y-un-perro-yacen-juntos-en-la-cama-mascotas-durmiendo-en-un-acogedor-plaid-gm1385113345-444056757",
-  "displayProject": true,
-  "createdAt": "2023-06-11T21:46:20.445Z",
-  "updatedAt": "2023-06-14T14:48:02.124Z"
+  "category": "Tech & Innovation",
+  "bank": null,
+  "account": "false",
+  "location": "Argentina",
+  "projectFase": 0
 }
 ```
 
 ## Error Response
 
-**Condition** : If 'username' and 'password' combination is wrong.
+**Condition** :If the letter is found in any title of the database.
+
+**Code** : `200 BAD REQUEST` //CORREGIR 200
+
+**Content** :
+
+```Array
+[
+    "Proyecto 2",
+    "Proyecto 3",
+    "Proyecto 4",
+    "Proyecto 5",
+    ...
+]
+```
+
+**Condition** : If 'name' don't exist.
 
 **Code** : `200 BAD REQUEST` //CORREGIR 200
 
@@ -59,8 +71,7 @@
 
 ```json
 {
-  //Corregir detalles
-  "errorMessage": "Project no existe"
+  "errorMessage": "Project does not exist"
 }
 ```
 
@@ -71,7 +82,6 @@
 ```json
 [
   {
-    //Corregir
     "code": "invalid_type",
     "expected": "string",
     "received": "undefined",

@@ -2,7 +2,7 @@ import { Model, Column, Table, DataType } from "sequelize-typescript"
 import { IProject } from "../types/types"
 
 @Table({ tableName: "projects" })
-export default class Project extends Model<IProject> {
+export default class ProjectModel extends Model<IProject> {
   @Column({
     type: DataType.INTEGER,
     primaryKey: true,
@@ -19,13 +19,13 @@ export default class Project extends Model<IProject> {
   title!: string
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT,
     allowNull: false
   })
   description!: string
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT,
     allowNull: true
   })
   shortDescription!: string
@@ -45,7 +45,8 @@ export default class Project extends Model<IProject> {
 
   @Column({
     type: DataType.BOOLEAN,
-    allowNull: false
+    allowNull: false,
+    defaultValue: false
   })
   fundingGoalReached!: boolean
 
@@ -77,17 +78,37 @@ export default class Project extends Model<IProject> {
   disLikes!: number
 
   @Column({
-    type: DataType.ARRAY(DataType.STRING),
+    type: DataType.STRING,
     allowNull: false
   })
-  categories!: string[]
+  category!: string
 
   @Column({
     type: DataType.STRING,
-    allowNull: true,
-    defaultValue: null
+    allowNull: true
   })
-  image!: string
+  bank!: string
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+    defaultValue: false
+  })
+  account!: string
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+    defaultValue: false
+  })
+  location!: string
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+    defaultValue: 0
+  })
+  projectFase!: number
 
   @Column({
     type: DataType.BOOLEAN,

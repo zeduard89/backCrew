@@ -14,11 +14,8 @@
   "description": "[valid description]",
   "shortDescription": "[valid short description]",
   "fundingGoal": "[valid number]",
-  "fundingGoalReached": "[valid boolean]",
   "fundingDayLeft": "[valid number]",
-  "categories": "[valid categories]",
-  "image": "[valid image]", //Borrar
-  "displayProject": "[valid boolean]" //a futurno no enviar al front
+  "category": "[valid string]"
 }
 ```
 
@@ -26,15 +23,12 @@
 
 ```json
 {
-  "title": "Usuario",
-  "description": "Ese te un ejemplo de una descripcion",
-  "shortDescription": "Esto es una descripcion corta",
-  "fundingGoal": 10000,
-  "fundingGoalReached": false,
+  "title": "ProjectX",
+  "description": "Here an Example of a Describe Project",
+  "shortDescription": "Here an Example of a Describe Project",
+  "fundingGoal": 2000,
   "fundingDayLeft": 30,
-  "categories": ["Asi", "TeGUsta", "MAs?"],
-  "image": "https://www.istockphoto.com/es/foto/un-gato-y-un-perro-yacen-juntos-en-la-cama-mascotas-durmiendo-en-un-acogedor-plaid-gm1385113345-444056757",
-  "displayProject": true
+  "category": "Tech & Innovation"
 }
 ```
 
@@ -46,26 +40,7 @@
 
 ```json
 {
-    "title": "Usuario",
-    "id": 15,
-    "description": "Ese te un ejemplo de una descripcion",
-    "shortDescription": "Esto es una descripcion corta",
-    "fundingGoal": 10000,
-    "fundingGoalReached": false,
-    "fundingCurrent": 0,
-    "fundingPercentage": 0,
-    "fundingDayLeft": 30,
-    "categories": [
-      "likes": 0,
-      "disLikes": 0,
-        "Asi",
-        "TeGUsta",
-        "MAs?"
-    ],
-    "image": "https://www.istockphoto.com/es/foto/un-gato-y-un-perro-yacen-juntos-en-la-cama-mascotas-durmiendo-en-un-acogedor-plaid-gm1385113345-444056757",
-    "displayProject": true,
-    "updatedAt": "2023-06-14T13:36:35.165Z",
-    "createdAt": "2023-06-14T13:36:35.165Z"
+  "message": "Project: ProjectX created successfully"
 }
 ```
 
@@ -79,11 +54,11 @@
 
 ```json
 {
-  "errorMessage": "El Proyecto ya existe "
+  "errorMessage": "Project exists"
 }
 ```
 
-**Condition** : If 'atribute' not found
+**Condition** : If 'atribute' in json not found
 
 **Code**: `400 NOT FOUND`
 
@@ -93,7 +68,7 @@
     "code": "invalid_type",
     "expected": "number",
     "received": "undefined",
-    "path": ["fundingGoal"],
+    "path": ["fundingDayLeft"],
     "message": "Required"
   }
 ]

@@ -9,11 +9,11 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const morgan_1 = __importDefault(require("morgan"));
 // Importacion de Rutas Dinamicas
 const index_1 = require("../routes/index");
-const server = express_1.default();
+const server = (0, express_1.default)();
 server.use(body_parser_1.default.urlencoded({ extended: true, limit: '50mb' }));
 server.use(body_parser_1.default.json({ limit: '50mb' }));
-server.use(cookie_parser_1.default());
-server.use(morgan_1.default('dev'));
+server.use((0, cookie_parser_1.default)());
+server.use((0, morgan_1.default)('dev'));
 server.use((_, res, next) => {
     res.header('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
     res.header('Access-Control-Allow-Credentials', 'true');

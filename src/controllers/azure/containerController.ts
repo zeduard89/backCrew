@@ -7,7 +7,7 @@ import dotenv from "dotenv"
 dotenv.config()
 const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING
 if (!connectionString) {
-  throw new Error("La cadena de conexión de Azure Storage no está configurada")
+  throw new Error("Azure Storage connection string is not configured")
 }
 const blobService = BlobServiceClient.fromConnectionString(connectionString) // conexion
 
@@ -15,22 +15,22 @@ const blobService = BlobServiceClient.fromConnectionString(connectionString) // 
 export const createContainer = async (req: Request, res: Response) => {
   try {
     const { container } = req.body
-    if (!container)
-      throw new Error("Por favor ingresar un valor de container valido")
+    if (!container) throw new Error("Please enter a valid container value")
 
     // Buscamos si existe el contenedor
     const containerClient = blobService.getContainerClient(container)
     const containerExist = await containerClient.exists()
-    if (containerExist) throw new Error(`El container: ${container} ya existe`)
-
+    if (containerExist) {
+      throw new Error(`The container "${container}" already exists`)
+    }
     await blobService.createContainer(container)
 
-    res
-      .status(200)
-      .json({ message: `El container: ${container} fue creado correctamente` })
+    res.status(200).json({
+      message: `The container "${container}" was created successfully`
+    })
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al crear un container"
+      (error as Error).message || "Unknown error while creating a container"
     res.status(500).send(errorMessage)
   }
 }
@@ -39,20 +39,22 @@ export const createContainer = async (req: Request, res: Response) => {
 export const deleteContainer = async (req: Request, res: Response) => {
   try {
     const { container } = req.body
-    if (!container)
-      throw new Error("Por favor ingresar un valor de container valido")
+    if (!container) throw new Error("Please enter a valid container value")
 
     // Buscamos si existe el contenedor
     const containerClient = blobService.getContainerClient(container)
     const containerExist = await containerClient.exists()
-    if (!containerExist) throw new Error(`El container: ${container} no existe`)
-
+    if (!containerExist) {
+      throw new Error(`The container "${container}" does not exist`)
+    }
     blobService.deleteContainer(container)
 
-    res.json({ message: `El container: ${container} fue eliminado con exito` })
+    res.json({
+      message: `The container "${container}" was successfully deleted`
+    })
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al borrar un container"
+      (error as Error).message || "Unknown error while deleting a container"
     res.status(500).send(errorMessage)
   }
 }
@@ -65,14 +67,14 @@ export const listContainer = async (_req: Request, res: Response) => {
     for await (const container of blobService.listContainers()) {
       containers.push(container.name)
     }
-    if (containers.length === 0)
-      throw new Error("No hay elementos en el contenedor")
-
+    if (containers.length === 0) {
+      throw new Error("There are no elements in the container")
+    }
     res.json({ containers })
   } catch (error) {
     const errorMessage =
       (error as Error).message ||
-      "Error desconocido al obtener lista de container"
+      "Unknown error while retrieving the list of containers"
     res.status(500).send(errorMessage)
   }
 }

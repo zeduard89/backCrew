@@ -5,16 +5,30 @@ import {
   deleteProjectValidator,
   updateProjectValidator,
   updateFundingCurrentValidator,
-  updateLikes
+  updateLikesValidator,
+  validatorQuerySearch
 } from "../schemas/projectSchemas"
+// Crear project
 import createProjectController from "../controllers/projects/postProjectHandler"
+import createRandomProjectController from "../controllers/projects/postRandomProjectHandler"
+// Get by Name
 import getProjectByNameController from "../controllers/projects/getProjectByNameHandler"
+import getAllProjectsByNameController from "../controllers/projects/getAllProjectsByNameHandler"
+// Delete y getAll
 import deleteProjectByNameController from "../controllers/projects/deleteProjectByName"
 import getAllProjects from "../controllers/projects/getAllProjects"
+// Update
 import updateProjectController from "../controllers/projects/updateProjectController"
 import updateFundingCurrentController from "../controllers/projects/updateFundingCurrentController"
+// Varios
 import getDayLeftByNameController from "../controllers/projects/getDayLeftByNameHandler"
 import updateLikesController from "../controllers/projects/updateLikesControllers"
+import getFilteredProjects from "../controllers/projects/getFilteredProjects"
+import getTwentyMostTrending  from "../controllers/projects/getTwentyMostTrending"
+import getFiveMostFunding  from "../controllers/projects/getFiveMostFunding"
+
+// 50 Projects controller
+import create50Projects from "../controllers/projects/getCreate50projects"
 
 const router = Router()
 //* Datos IMPORTANTES
@@ -24,8 +38,21 @@ const router = Router()
 router.post("/", async (req: Request, res: Response) => {
   try {
     const validatedProject = projectValidator.parse(req.body)
-
     const newProject = await createProjectController(validatedProject)
+    res.status(200).json(newProject)
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message || "Error desconocido al buscar proyecto por Id"
+    res.status(400).send(errorMessage)
+  }
+})
+
+// Llenar la DB.
+router.post("/llenarDB:auxNum", async (req: Request, res: Response) => {
+  try {
+    const { auxNum } = req.params
+    console.log(auxNum)
+    const newProject = await createRandomProjectController(+auxNum)
     res.status(200).json(newProject)
   } catch (error) {
     const errorMessage =
@@ -71,7 +98,7 @@ router.put(
 // Ruta UPDATE likes
 router.put("/update/likes", async (req: Request, res: Response) => {
   try {
-    const validatedProject = updateLikes.parse(req.body)
+    const validatedProject = updateLikesValidator.parse(req.body)
 
     const updatedProject = await updateLikesController(validatedProject)
     res.status(200).json(updatedProject)
@@ -82,8 +109,8 @@ router.put("/update/likes", async (req: Request, res: Response) => {
   }
 })
 
-// Ruta busca por name
-router.get("/search/", async (req: Request, res: Response) => {
+// Ruta busca por nombre (UNIDAD) o devuelve un array de posibles coincidencias
+router.get("/search/byName", async (req: Request, res: Response) => {
   try {
     const { name } = req.query
     const validatedName = validatorString.parse(name)
@@ -91,6 +118,51 @@ router.get("/search/", async (req: Request, res: Response) => {
       const getProjectByName = await getProjectByNameController(validatedName)
       res.status(200).json(getProjectByName)
     }
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message || "Error desconocido al buscar Project by ID"
+    res.status(400).send(errorMessage)
+  }
+})
+
+// Filtra por nombre y devuelve un array con coincidencias o similitudes
+router.get("/search/byNameGeneral", async (req: Request, res: Response) => {
+  try {
+    const { name } = req.query
+    const validatedName = validatorString.parse(name)
+    if (name !== undefined) {
+      const getProjectByName = await getAllProjectsByNameController(
+        validatedName
+      )
+      res.status(200).json(getProjectByName)
+    }
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message || "Error desconocido al buscar Project by ID"
+    res.status(400).send(errorMessage)
+  }
+})
+
+// Route filter by name, category and sort (most founding and trending)
+router.get("/searchProjects/", async (req: Request, res: Response) => {
+  try {
+    const { category, sort, q, p, s, /* country */ } = req.query
+    const validatedCategory = validatorString.parse(category)
+    const validatedSort = validatorString.parse(sort)
+    const validatedQ = validatorQuerySearch.parse(q)
+    const validatedP = validatorString.parse(p)
+    const validatedS = validatorString.parse(s)
+    // const validatedCountry = validatorString.parse(country)
+    console.log(validatedP)
+    const getProjectsFiltered = await getFilteredProjects(
+      validatedCategory,
+      validatedSort,
+      validatedQ,
+      validatedP,
+      validatedS,
+      // validatedCountry
+    )
+    res.status(200).json(getProjectsFiltered)
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Error desconocido al buscar Project by ID"
@@ -127,6 +199,32 @@ router.get("/allProjects", async (_req: Request, res: Response) => {
   }
 })
 
+// Search the five most funding projects
+router.get("/fiveMostFunding", async (_req: Request, res: Response) => {
+  try {
+    const fiveMostFunding = await getFiveMostFunding()
+    res.status(200).json(fiveMostFunding)
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message ||
+      "Error desconocido al buscar los 5 proyectos más fondeados"
+    res.status(400).send(errorMessage)
+  }
+})
+
+// Search the twenty most trending projects
+router.get("/twentyMostTrending", async (_req: Request, res: Response) => {
+  try {
+    const twentyMostTrending = await getTwentyMostTrending()
+    res.status(200).json(twentyMostTrending)
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message ||
+      "Error desconocido al buscar los 5 proyectos más fondeados"
+    res.status(400).send(errorMessage)
+  }
+})
+
 // Ruta delete por name (actualiza booleano de displayProject)
 router.delete("/deleteProject", async (req: Request, res: Response) => {
   try {
@@ -142,9 +240,22 @@ router.delete("/deleteProject", async (req: Request, res: Response) => {
   }
 })
 
+// Create 50projects
+router.get("/create50projects/", async (_req: Request, res: Response) => {
+  try {
+    const c50Projects = await create50Projects()
+    res.status(200).json(c50Projects)
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message || "Error al crear los Projectos"
+    console.log(error)
+    res.status(400).send(errorMessage)
+  }
+})
+
 // Controlador de rutas no especificadas
 router.get("*", (_req: Request, res: Response) => {
-  res.status(404).send("Ruta no encontrada")
+  res.status(404).send("Route not found")
 })
 
 export { router }

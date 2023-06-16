@@ -2,7 +2,7 @@ import { Model, Column, Table, DataType } from "sequelize-typescript"
 import { IComment } from "../types/types"
 
 @Table({ tableName: "comments" })
-export default class Project extends Model<IComment> {
+export default class Comments extends Model<IComment> {
   @Column({
     type: DataType.INTEGER,
     primaryKey: true,
