@@ -6,8 +6,8 @@ const createRandomProjectController = (auxNum: number) => {
     "Creative Works",
     "Community Projects"
   ]
-  const bancos = ["Galicia", "Frances", "Nacion", "Vacio", "Colchon"]
-  const cuentas = ["Cuenta 1", "Cuenta 2", "Cuenta 3", "Cuenta 4", "Cuenta 5"]
+  // const bancos = ["Galicia", "Frances", "Nacion", "Vacio", "Colchon"]
+  // const cuentas = ["Cuenta 1", "Cuenta 2", "Cuenta 3", "Cuenta 4", "Cuenta 5"]
   let count = 0
 
   const createRandom = () => {
@@ -16,8 +16,8 @@ const createRandomProjectController = (auxNum: number) => {
       categorias[Math.floor(Math.random() * categorias.length)]
     const mathR1 = Math.floor(Math.random() * 10000)
     const mathR2 = Math.floor(Math.random() * 10000)
-    const randomBanco = bancos[Math.floor(Math.random() * bancos.length)]
-    const randomCuenta = cuentas[Math.floor(Math.random() * cuentas.length)]
+    // const randomBanco = bancos[Math.floor(Math.random() * bancos.length)]
+    // const randomCuenta = cuentas[Math.floor(Math.random() * cuentas.length)]
 
     const proyecto = {
       title: `Proyecto ${count}`,
@@ -27,8 +27,8 @@ const createRandomProjectController = (auxNum: number) => {
         Math.random() * 100
       )}`,
       shortDescription: `"Descubre la emoción en cada paso."
-      Ten en cuenta que esta es una descripción ficticia y puede no tener un 
-      significado específico. Puedes ajustarla o personalizarla según tus necesidades 
+      Ten en cuenta que esta es una descripción ficticia y puede no tener un
+      significado específico. Puedes ajustarla o personalizarla según tus necesidades
       o contexto. ${Math.floor(Math.random() * 100)}`,
       fundingCurrent: mathR1,
       fundingGoal: mathR2,
@@ -37,9 +37,11 @@ const createRandomProjectController = (auxNum: number) => {
       fundingDayLeft: Math.floor(Math.random() * 30),
       likes: Math.floor(Math.random() * 10000),
       disLikes: Math.floor(Math.random() * 10000),
-      categories: [categoriaActual],
-      banco: randomBanco,
-      cuenta: randomCuenta,
+      category: categoriaActual,
+      // bank: randomBanco,
+      // account: randomCuenta,
+      // location: "argentina",
+      // projectFase: Math.floor(Math.random() * 4),
       displayProject: true
     }
 

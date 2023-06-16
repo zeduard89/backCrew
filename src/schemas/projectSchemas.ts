@@ -13,20 +13,39 @@ export const projectValidator = z.object({
   fundingGoal: z.number().positive({
     message: "La meta de financiamiento debe ser un número positivo"
   }),
-  fundingGoalReached: z.boolean(),
+  fundingGoalReached: z.boolean().default(false),
   fundingDayLeft: z.number().positive({
     message: "Los días restantes de financiamiento deben ser un número positivo"
   }),
-  categories: z
-    .array(z.string())
+  category: z
+    .string()
     .min(1, { message: "Debes seleccionar al menos una categoría" }),
-  banco: z.string().min(2, {
-    message: "El nombre del banco debe tener al menos 2 caracteres"
-  }),
-  cuenta: z.string().min(2, {
-    message: "El número de cuenta debe tener al menos 2 caracteres"
-  }),
-  displayProject: z.boolean()
+  bank: z
+    .string()
+    .min(2, {
+      message: "El nombre del banco debe tener al menos 2 caracteres"
+    })
+    .optional(),
+  account: z
+    .string()
+    .min(2, {
+      message: "El número de cuenta debe tener al menos 2 caracteres"
+    })
+    .optional(),
+  location: z
+    .string()
+    .min(2, {
+      message: "El número de cuenta debe tener al menos 2 caracteres"
+    })
+    .default("Argentina"),
+  projectFase: z
+    .number()
+    .nonnegative({
+      message: "La meta de financiamiento debe ser un número positivo"
+    })
+    .max(3)
+    .default(0),
+  displayProject: z.boolean().default(false)
 })
 
 export const deleteProjectValidator = z.object({
@@ -53,13 +72,13 @@ export const updateProjectValidator = z.object({
   fundingDayLeft: z.number().positive({
     message: "Los días restantes de financiamiento deben ser un número positivo"
   }),
-  categories: z
-    .array(z.string())
+  category: z
+    .string()
     .min(1, { message: "Debes seleccionar al menos una categoría" }),
-  banco: z.string().min(2, {
+  bank: z.string().min(2, {
     message: "El nombre del banco debe tener al menos 2 caracteres"
   }),
-  cuenta: z
+  account: z
     .string()
     .min(2, { message: "El número de cuenta debe tener al menos 2 caracteres" })
 })
