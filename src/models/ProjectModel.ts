@@ -81,7 +81,7 @@ export default class ProjectModel extends Model<IProject> {
     type: DataType.ARRAY(DataType.STRING),
     allowNull: false
   })
-  categories!: string[]
+  category!: string[]
 
   @Column({
     type: DataType.STRING,
@@ -102,7 +102,7 @@ export default class ProjectModel extends Model<IProject> {
     allowNull: true,
     defaultValue: false
   })
-  pais!: string
+  location!: string
 
   @Column({
     type: DataType.INTEGER,

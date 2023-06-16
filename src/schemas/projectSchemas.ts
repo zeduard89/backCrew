@@ -17,18 +17,27 @@ export const projectValidator = z.object({
   fundingDayLeft: z.number().positive({
     message: "Los días restantes de financiamiento deben ser un número positivo"
   }),
-  categories: z
+  category: z
     .array(z.string())
     .min(1, { message: "Debes seleccionar al menos una categoría" }),
-  banco: z.string().min(2, {
-    message: "El nombre del banco debe tener al menos 2 caracteres"
-  }),
-  cuenta: z.string().min(2, {
-    message: "El número de cuenta debe tener al menos 2 caracteres"
-  }),
-  pais: z.string().min(2, {
-    message: "El número de cuenta debe tener al menos 2 caracteres"
-  }),
+  banco: z
+    .string()
+    .min(2, {
+      message: "El nombre del banco debe tener al menos 2 caracteres"
+    })
+    .optional(),
+  cuenta: z
+    .string()
+    .min(2, {
+      message: "El número de cuenta debe tener al menos 2 caracteres"
+    })
+    .optional(),
+  location: z
+    .string()
+    .min(2, {
+      message: "El número de cuenta debe tener al menos 2 caracteres"
+    })
+    .default("Argentina"),
   projectFase: z
     .number()
     .nonnegative({
@@ -63,7 +72,7 @@ export const updateProjectValidator = z.object({
   fundingDayLeft: z.number().positive({
     message: "Los días restantes de financiamiento deben ser un número positivo"
   }),
-  categories: z
+  category: z
     .array(z.string())
     .min(1, { message: "Debes seleccionar al menos una categoría" }),
   banco: z.string().min(2, {

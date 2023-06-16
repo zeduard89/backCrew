@@ -16,6 +16,7 @@ const createProjectController = async (
 ): Promise<object> => {
   try {
     const { title, ...rest } = validatedProject
+    console.log(validatedProject)
 
     const allProjects = await ProjectModel.findAll()
     const newAllProjects = allProjects.filter(
