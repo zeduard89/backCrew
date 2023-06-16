@@ -24,7 +24,7 @@ function divideArray(array: Array<object>, size: number) {
 const getFilteredProjects = async (
   validatedCategory: string,
   validatedSort: string,
-  validatedQ: string | undefined,
+  validatedQ: string | null,
   validatedP: string,
   validatedS: string,
   // validatedCountry: string | undefined,
@@ -33,20 +33,20 @@ const getFilteredProjects = async (
     let whereClause = {}; // Object to record the filter orders
 
     // Category Filter
+    const decodedCategory = decodeURIComponent(validatedCategory);
+    console.log("Esto es la category",decodedCategory )
     if (validatedCategory !== "all") {
       whereClause = {
         ...whereClause,
-        categories: {
-          [Op.contains]: [validatedCategory],
-        },
+        category: decodedCategory
       };
     }
 
   //  //  Country Filter
-  //   if (validatedCountry) {
+  //   if (validatedCountry !== "all") {
   //     whereClause = {
   //       ...whereClause,
-  //       pais: validatedCountry,
+  //       location: validatedCountry,
   //     };
   //   }
 
@@ -65,7 +65,7 @@ const getFilteredProjects = async (
         [Op.or]: titleClauses,
         };
       }
-      console.log('este es el whereClause',whereClause)
+
     let existingProjects = await ProjectModel.findAll({ where: whereClause });
 
     if (existingProjects.length === 0) {
