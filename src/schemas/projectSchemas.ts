@@ -3,46 +3,38 @@ import { z } from "zod"
 export const projectValidator = z.object({
   title: z
     .string()
-    .min(3, { message: "El título debe tener al menos 3 caracteres" }),
+    .min(3, { message: "Title must have at least 3 characters" }),
   description: z
     .string()
-    .min(10, { message: "La descripción debe tener al menos 10 caracteres" }),
-  shortDescription: z.string().min(5, {
-    message: "La descripción corta debe tener al menos 5 caracteres"
-  }),
-  fundingGoal: z.number().positive({
-    message: "La meta de financiamiento debe ser un número positivo"
-  }),
+    .min(10, { message: "Description must have at least 10 characters" }),
+  shortDescription: z
+    .string()
+    .min(5, { message: "Short description must have at least 5 characters" }),
+  fundingGoal: z
+    .number()
+    .positive({ message: "Funding goal must be a positive number" }),
   fundingGoalReached: z.boolean().default(false),
-  fundingDayLeft: z.number().positive({
-    message: "Los días restantes de financiamiento deben ser un número positivo"
-  }),
+  fundingDayLeft: z
+    .number()
+    .positive({ message: "Remaining funding days must be a positive number" }),
   category: z
     .string()
-    .min(1, { message: "Debes seleccionar al menos una categoría" }),
+    .min(1, { message: "You must select at least one category" }),
   bank: z
     .string()
-    .min(2, {
-      message: "El nombre del banco debe tener al menos 2 caracteres"
-    })
+    .min(2, { message: "Bank name must have at least 2 characters" })
     .optional(),
   account: z
     .string()
-    .min(2, {
-      message: "El número de cuenta debe tener al menos 2 caracteres"
-    })
+    .min(2, { message: "Account number must have at least 2 characters" })
     .optional(),
   location: z
     .string()
-    .min(2, {
-      message: "El número de cuenta debe tener al menos 2 caracteres"
-    })
+    .min(2, { message: "Location must have at least 2 characters" })
     .default("Argentina"),
   projectFase: z
     .number()
-    .nonnegative({
-      message: "La meta de financiamiento debe ser un número positivo"
-    })
+    .nonnegative({ message: "Project phase must be a non-negative number" })
     .max(3)
     .default(0),
   displayProject: z.boolean().default(false)
@@ -51,7 +43,7 @@ export const projectValidator = z.object({
 export const deleteProjectValidator = z.object({
   title: z
     .string()
-    .min(3, { message: "El título debe tener al menos 3 caracteres" }),
+    .min(3, { message: "Title must have at least 3 characters" }),
   displayProject: z.boolean()
 })
 
@@ -59,50 +51,51 @@ export const updateProjectValidator = z.object({
   id: z.number(),
   title: z
     .string()
-    .min(3, { message: "El título debe tener al menos 3 caracteres" }),
+    .min(3, { message: "Title must have at least 3 characters" }),
   description: z
     .string()
-    .min(10, { message: "La descripción debe tener al menos 10 caracteres" }),
-  shortDescription: z.string().min(5, {
-    message: "La descripción corta debe tener al menos 5 caracteres"
-  }),
-  fundingGoal: z.number().positive({
-    message: "La meta de financiamiento debe ser un número positivo"
-  }),
-  fundingDayLeft: z.number().positive({
-    message: "Los días restantes de financiamiento deben ser un número positivo"
-  }),
+    .min(10, { message: "Description must have at least 10 characters" }),
+  shortDescription: z
+    .string()
+    .min(5, { message: "Short description must have at least 5 characters" }),
+  fundingGoal: z
+    .number()
+    .positive({ message: "Funding goal must be a positive number" }),
+  fundingDayLeft: z
+    .number()
+    .positive({ message: "Remaining funding days must be a positive number" }),
   category: z
     .string()
-    .min(1, { message: "Debes seleccionar al menos una categoría" }),
-  bank: z.string().min(2, {
-    message: "El nombre del banco debe tener al menos 2 caracteres"
-  }),
+    .min(1, { message: "You must select at least one category" }),
+  bank: z
+    .string()
+    .min(2, { message: "Bank name must have at least 2 characters" }),
   account: z
     .string()
-    .min(2, { message: "El número de cuenta debe tener al menos 2 caracteres" })
+    .min(2, { message: "Account number must have at least 2 characters" })
 })
 
 export const updateFundingCurrentValidator = z.object({
   title: z
     .string()
-    .min(3, { message: "El título debe tener al menos 3 caracteres" }),
-  addToFundingCurrent: z.number().positive({
-    message:
-      "El valor a agregar al financiamiento actual debe ser un número positivo"
-  })
+    .min(3, { message: "Title must have at least 3 characters" }),
+  addToFundingCurrent: z
+    .number()
+    .positive({
+      message: "The value to add to current funding must be a positive number"
+    })
 })
 
 export const updateLikesValidator = z.object({
   title: z
     .string()
-    .min(3, { message: "El título debe tener al menos 3 caracteres" }),
-  likes: z.number().nonnegative({
-    message: "El número de 'likes' debe ser un valor no negativo"
-  }),
-  disLikes: z.number().nonnegative({
-    message: "El número de 'dislikes' debe ser un valor no negativo"
-  })
+    .min(3, { message: "Title must have at least 3 characters" }),
+  likes: z
+    .number()
+    .nonnegative({ message: "Number of likes must be a non-negative value" }),
+  disLikes: z
+    .number()
+    .nonnegative({ message: "Number of dislikes must be a non-negative value" })
 })
 
 export const validatorString = z.string()
