@@ -22,8 +22,9 @@ const getProyectByNameController = async (
           .includes(validatedName.toLowerCase().trim().replace(/\s/g, ""))
       })
       // Si obtengo un array vacio, retorno respusta STRING
-      if (newAllProjects.length === 0) throw new Error("Project no existe")
-      // Si obtengo resultados devuelvo un array de opciones
+      if (newAllProjects.length === 0) {
+        throw new Error("Project does not exist")
+      } // Si obtengo resultados devuelvo un array de opciones
       const auxArray: string[] = []
       newAllProjects.forEach((project) => auxArray.push(project.title))
       return auxArray
@@ -52,7 +53,8 @@ const getProyectByNameController = async (
     return auxProject
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error desconocido al guardar ImagenAzure"
+      (error as Error).message ||
+      "Unknown error while searching for projects by name"
     return { errorMessage }
   }
 }
