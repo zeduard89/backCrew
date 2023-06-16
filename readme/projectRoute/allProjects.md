@@ -6,32 +6,6 @@
 
 **Auth required** : YES
 
-**Data constraints**
-
-```json
-{
-  //Completar con los filtrados
-  "title": "titulo",
-  "categori": "music",
-  "likes": "likes",
-  "disLikes": "disLikes",
-  "founding": "founding"
-}
-```
-
-**Data example**
-
-```json
-{
-  // Completar con los filtrados
-  "title": "titulo",
-  "categori": "music",
-  "likes": "likes",
-  "disLikes": "disLikes",
-  "founding": "founding"
-}
-```
-
 ## Success Response
 
 **Code** : `200 OK`
@@ -40,29 +14,29 @@
 
 ```json
 {
-  //Ejemplo ARRAY de objetos
-  {
-    "id": 1,
-    "title": "ProjectX",
-    "description": "Ese te un ejemplo de una descripcion muy larga y extensa",
-    "shortDescription": "Esto es una short description como la lora",
-    "fundingCurrent": 0,
-    "fundingGoal": 2000,
-    "fundingGoalReached": false,
-    "fundingPercentage": 0,
-    "fundingDayLeft": 30,
-    "likes": 0,
-    "disLikes": 0,
-    "categories": [
-      "Asi",
-      "TeGUsta",
-      "MAs?"
-    ],
-    "image": "https://www.istockphoto.com/es/foto/un-gato-y-un-perro-yacen-juntos-en-la-cama-mascotas-durmiendo-en-un-acogedor-plaid-gm1385113345-444056757",
-    "displayProject": true,
-    "createdAt": "2023-06-12T14:26:51.346Z",
-    "updatedAt": "2023-06-12T14:26:51.346Z"
-  }
+  //Example of Success Response
+  [ {
+        "id": 2,
+        "title": "Proyecto 2",
+        "description": "This is an example of a description.",
+        "shortDescription": "This is a short description.",
+        "fundingCurrent": 3665,
+        "fundingGoal": 3890,
+        "fundingGoalReached": false,
+        "fundingPercentage": 94.2159383033419,
+        "fundingDayLeft": 6,
+        "likes": 6961,
+        "disLikes": 7418,
+        "category": "Community Projects",
+        "bank": null,
+        "account": "false",
+        "location": "false",
+        "projectFase": 0,
+        "displayProject": true,
+        "createdAt": "2023-06-16T13:42:16.273Z",
+        "updatedAt": "2023-06-16T13:42:16.273Z"
+    },
+ {}... ]
 }
 ```
 
@@ -74,8 +48,8 @@
 
 **Content** :
 
-```json
-"Ruta no encontrada"
+```String
+"Route not found"
 ```
 
 - [Back](../../readme.md) : `MainPage`
