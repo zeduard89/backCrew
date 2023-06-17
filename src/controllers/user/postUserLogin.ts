@@ -1,7 +1,6 @@
 // import { Request, Response } from "express"
 // import { UserModel } from "../../config/db"
 // import { IUser } from "../../types/types"
-// import { compare } from "../../utils/handleBcrypt"
 
 // export const loginUser = async (req: Request, res: Response): Promise<void> => {
 //   try {

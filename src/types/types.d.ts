@@ -11,7 +11,7 @@ export interface IUser {
   // access: boolean
 }
 
-export type IUserLD = Omit<IUser, "name", "lastName">
+export type IUserLD = Omit<IUser, "name", "lastName", "id">
 
 export interface IComment {
   id: string

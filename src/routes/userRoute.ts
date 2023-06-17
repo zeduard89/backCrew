@@ -4,7 +4,7 @@ import { Router } from "express"
 import { registerUser } from "../controllers/user/postUserRegister"
 // import { deleteUser } from "../controllers/user/updateUserDelete"
 // import { uploadImageUser } from "../controllers/user/postUserImage"
-// import { getUserInfo } from "../controllers/user/getUserInfo"
+import { getUserInfo } from "../controllers/user/getUserInfo"
 
 // const upload = multer()
 const router = Router()
@@ -15,7 +15,7 @@ router.post("/register", registerUser)
 
 // router.post("/uploadImage", upload.single("file"), uploadImageUser)
 
-// router.get("/user", getUserInfo)
+router.get("/user", getUserInfo)
 
 // router.put("/delete", deleteUser)
 
