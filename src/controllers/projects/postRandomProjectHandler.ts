@@ -42,9 +42,10 @@ Please note that this is a fictional description and may not have a specific mea
       // account: randomCuenta,
       // location: "argentina",
       // projectFase: Math.floor(Math.random() * 4),
-      displayProject: true
+      displayProject: true,
+      creatorId: categoriaActual
     }
-    console.log("esto es el proyecto",proyecto)
+    console.log("esto es el proyecto", proyecto)
     return proyecto
   }
   const numProyectos = auxNum

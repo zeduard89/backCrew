@@ -115,4 +115,11 @@ export default class ProjectModel extends Model<IProject> {
     allowNull: false
   })
   displayProject!: boolean
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+    defaultValue: false
+  })
+  creatorId!: string
 }

@@ -49,6 +49,7 @@ export interface IProject {
   location?: string
   projectFase?: number
   displayProject?: boolean
+  creatorId: string
 }
 // Uso title displayProject
 export type deleteIProyect = Omit<
@@ -62,7 +63,8 @@ export type deleteIProyect = Omit<
   "fundingDayLeft",
   "category",
   "bank",
-  "account"
+  "account",
+  "creatorId"
 >
 // Uso title y currentFunding
 export type updateFundingCurrentIProyect = Omit<
@@ -75,7 +77,8 @@ export type updateFundingCurrentIProyect = Omit<
   "category",
   "bank",
   "account",
-  "displayProject"
+  "displayProject",
+  "creatorId"
 >
 
 // Uso title y likes/disLikes
@@ -90,7 +93,8 @@ export type updateLikes = Omit<
   "category",
   "bank",
   "account",
-  "displayProject"
+  "displayProject",
+  "creatorId"
 >
 
 // Uso una interface nueva Proyect x 2
