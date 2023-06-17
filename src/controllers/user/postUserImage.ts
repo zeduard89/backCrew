@@ -23,7 +23,8 @@ export const uploadImageUser = async (req: Request, res: Response) => {
     const { email } = req.body
     const container = "azureusercontainer"
     // Recibimos el archivo (su nombre y el buffer)
-    const { buffer } = req.file
+    //      const { buffer, originalname } = req.file
+    const { originalname } = req.file
     if (!container || !email)
       throw new Error(`Datos del contendor/email incompletos`)
     // Buscamos si existe el contenedor
@@ -35,11 +36,12 @@ export const uploadImageUser = async (req: Request, res: Response) => {
     const exist = await containerClient.getBlockBlobClient(email).exists()
     if (exist) throw new Error(`El elemento: ${email} ya existe`)
 
+    console.log(originalname)
     // Guardamos el archivo con el nombre de la variable email
-    await containerClient.getBlockBlobClient(email).uploadData(buffer)
-    res.json({
-      message: `La foto de perfil: ${email} fue creado Exitosamente`
-    })
+    // await containerClient.getBlockBlobClient(email).uploadData(buffer)
+    // res.json({
+    //   message: `La foto de perfil: ${email} fue creado Exitosamente`
+    // })
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Error desconocido al guardar ImagenAzure"
