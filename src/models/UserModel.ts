@@ -4,10 +4,11 @@ import { IUser } from "../types/types"
 @Table({ tableName: "users" })
 export default class User extends Model<IUser> {
   @Column({
-    type: DataType.UUID,
+    type: DataType.STRING,
     primaryKey: true,
-    allowNull: false,
-    defaultValue: DataType.UUIDV4
+    allowNull: false
+    // autoIncrement: true
+    // defaultValue: DataType.UUIDV4
   })
   id!: string
 
@@ -30,30 +31,31 @@ export default class User extends Model<IUser> {
   })
   email!: string
 
-  @Column({
-    type: DataType.BOOLEAN,
-    allowNull: false,
-    defaultValue: false
-  })
-  verified!: boolean
+  // @Column({
+  //   type: DataType.BOOLEAN,
+  //   allowNull: false,
+  //   defaultValue: false
+  // })
+  // verified!: boolean
 
-  @Column({
-    type: DataType.BOOLEAN,
-    allowNull: false,
-    defaultValue: false
-  })
-  access!: boolean
+  // @Column({
+  //   type: DataType.BOOLEAN,
+  //   allowNull: false,
+  //   defaultValue: false
+  // })
+  // access!: boolean
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: false
-  })
-  password!: string
+  // @Column({
+  //   type: DataType.STRING,
+  //   allowNull: false
+  // })
+  // password!: string
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: true,
-    defaultValue: false
-  })
-  image!: string
+  // @Column({
+  //   type: DataType.STRING,
+  //   allowNull: true,
+  //   defaultValue: false
+  // })
+  // image!: string
+  // imgen predeterminada luego la cambian
 }

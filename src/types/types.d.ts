@@ -1,10 +1,14 @@
 export interface IUser {
+  id: string
   name: string
   lastName: string
   email: string
-  password: string
-  verified?: boolean
-  access: boolean
+  // image: string
+  // projects: Array[]
+  // date: string
+  // password: string
+  // verified?: boolean
+  // access: boolean
 }
 
 export type IUserLD = Omit<IUser, "name", "lastName">
