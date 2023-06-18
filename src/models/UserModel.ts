@@ -1,5 +1,6 @@
-import { Model, Column, Table, DataType } from "sequelize-typescript"
+import { Model, Column, Table, DataType, HasMany } from "sequelize-typescript"
 import { IUser } from "../types/types"
+import { ProjectModel } from "../config/db"
 
 @Table({ tableName: "users" })
 export default class User extends Model<IUser> {
@@ -7,8 +8,6 @@ export default class User extends Model<IUser> {
     type: DataType.STRING,
     primaryKey: true,
     allowNull: false
-    // autoIncrement: true
-    // defaultValue: DataType.UUIDV4
   })
   id!: string
 
@@ -64,4 +63,7 @@ export default class User extends Model<IUser> {
     defaultValue: false
   })
   date!: string
+
+  @HasMany(() => ProjectModel)
+  projects!: ProjectModel[]
 }

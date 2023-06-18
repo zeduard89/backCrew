@@ -22,4 +22,17 @@ const sequelize = new Sequelize(
 
 sequelize.addModels([UserModel, ProjectModel, CommentModel, AdminModel])
 
+//! Favoritos
+// UserModel.belongsToMany(favoriteProjectModel, { through: "FavoriteProject" })
+// FavoriteProjectModel.belongsToMany(UserModel, { through: "UserProject" })
+
+// 1:1 Esto permite que un usuario tenga un perfil asociado.
+
+// UserModel.hasOne(ProfileModel, { foreignKey: 'profileId' });
+// ProfileModel.belongsTo(UserModel, { foreignKey: 'userId'
+
+// 1:N Esto permite que un usuario tenga múltiples proyectos asociados.
+UserModel.hasMany(ProjectModel, { foreignKey: "creatorId" })
+ProjectModel.belongsTo(UserModel, { foreignKey: "creatorId" })
+
 export { sequelize, UserModel, ProjectModel, CommentModel, AdminModel }

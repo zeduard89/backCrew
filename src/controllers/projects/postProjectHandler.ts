@@ -1,4 +1,4 @@
-import { ProjectModel } from "../../config/db"
+import { ProjectModel, UserModel } from "../../config/db"
 import { IProject } from "../../types/types"
 // import { BlobServiceClient } from "@azure/storage-blob"
 
@@ -15,7 +15,7 @@ const createProjectController = async (
   validatedProject: IProject
 ): Promise<object> => {
   try {
-    const { title, ...rest } = validatedProject
+    const { title, creatorId, ...rest } = validatedProject
 
     const allProjects = await ProjectModel.findAll()
     const newAllProjects = allProjects.filter(
@@ -30,8 +30,14 @@ const createProjectController = async (
 
     const createdProject = await ProjectModel.create({
       title,
+      creatorId,
       ...rest
     })
+
+    const user = await UserModel.findByPk(creatorId)
+    if (!user) throw new Error("User does not exist in DB")
+    // Establecer el proyecto asociado al usuario
+    // await user.setProjects(createdProject)
 
     // //! Omitir este sector y sus elementos para limitar la creacion de Containers
     // // Ejemplo crew1 con id=1

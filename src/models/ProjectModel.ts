@@ -1,11 +1,18 @@
-import { Model, Column, Table, DataType } from "sequelize-typescript"
+import {
+  Model,
+  Column,
+  Table,
+  DataType,
+  BelongsTo,
+  ForeignKey
+} from "sequelize-typescript"
 import { IProject } from "../types/types"
+import { UserModel } from "../config/db"
 
 @Table({ tableName: "projects" })
 export default class ProjectModel extends Model<IProject> {
   @Column({
     type: DataType.INTEGER,
-    primaryKey: true,
     allowNull: false,
     autoIncrement: true
   })
@@ -13,6 +20,7 @@ export default class ProjectModel extends Model<IProject> {
 
   @Column({
     type: DataType.STRING,
+    primaryKey: true,
     unique: true,
     allowNull: false
   })
@@ -116,10 +124,16 @@ export default class ProjectModel extends Model<IProject> {
   })
   displayProject!: boolean
 
+  @ForeignKey(() => UserModel)
   @Column({
     type: DataType.STRING,
-    allowNull: false,
-    defaultValue: false
+    references: {
+      model: UserModel,
+      key: "id"
+    }
   })
   creatorId!: string
+
+  @BelongsTo(() => UserModel)
+  creator!: UserModel
 }
