@@ -12,11 +12,13 @@ import { UserModel } from "../config/db"
 @Table({ tableName: "projects" })
 export default class ProjectModel extends Model<IProject> {
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.STRING,
     allowNull: false,
-    autoIncrement: true
+    primaryKey: true,
+    unique: true,
+    defaultValue: DataType.UUIDV4
   })
-  id!: number
+  id!: string
 
   @Column({
     type: DataType.STRING,
@@ -127,13 +129,10 @@ export default class ProjectModel extends Model<IProject> {
   @ForeignKey(() => UserModel)
   @Column({
     type: DataType.STRING,
-    references: {
-      model: UserModel,
-      key: "id"
-    }
+    allowNull: false
   })
   creatorId!: string
 
-  @BelongsTo(() => UserModel)
-  creator!: UserModel
+  @BelongsTo(() => UserModel, "creatorId") // Asigna un alias único a la asociación
+  user!: UserModel
 }

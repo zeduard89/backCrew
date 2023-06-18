@@ -52,14 +52,14 @@ export default class User extends Model<IUser> {
 
   @Column({
     type: DataType.STRING,
-    allowNull: true,
+    allowNull: false,
     defaultValue: false
   })
   avatar!: string
 
   @Column({
     type: DataType.STRING,
-    allowNull: true,
+    allowNull: false,
     defaultValue: false
   })
   date!: string

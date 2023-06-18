@@ -79,6 +79,7 @@ export const registerUser = async (
       email,
       avatar: blobUrlWithSAS,
       date: dateNow.toString()
+      // se puede sacar el pais "date": "Sun Jun 18 2023 02:11:25 GMT-0300 (Argentina Standard Time)",
     })
     res.status(200).send({ registerUser })
   } catch (error) {

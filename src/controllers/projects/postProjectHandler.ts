@@ -30,14 +30,19 @@ const createProjectController = async (
 
     const createdProject = await ProjectModel.create({
       title,
-      creatorId,
+      // creatorId,
       ...rest
     })
 
     const user = await UserModel.findByPk(creatorId)
     if (!user) throw new Error("User does not exist in DB")
-    // Establecer el proyecto asociado al usuario
-    // await user.setProjects(createdProject)
+    // if (user) await user.addUserModel(createdProject)
+
+    await createdProject.$set("user", user)
+
+    // B createdProject.user = user // Asignar el usuario al campo 'user' del proyecto
+    // c await user.$set("projects", [createdProject])
+    // await createdProject.save() // Guardar el proyecto actualizado en la base de datos
 
     // //! Omitir este sector y sus elementos para limitar la creacion de Containers
     // // Ejemplo crew1 con id=1
@@ -54,8 +59,7 @@ const createProjectController = async (
     //! ---------------------------------
     return { message: `Project: ${createdProject.title} created successfully` }
   } catch (error) {
-    const errorMessage =
-      (error as Error).message || "Unknown error while saving ImageAzure"
+    const errorMessage = (error as Error).message || "Unknown error "
     return { errorMessage }
   }
 }
