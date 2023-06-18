@@ -48,11 +48,13 @@ router.post("/", async (req: Request, res: Response) => {
 })
 
 // Llenar la DB.
-router.post("/llenarDB:auxNum", async (req: Request, res: Response) => {
+router.post("/llenarDB", (req: Request, res: Response) => {
   try {
-    const { auxNum } = req.params
-    console.log(auxNum)
-    const newProject = await createRandomProjectController(+auxNum)
+    const { projectos, usuarios } = req.query
+    if (projectos === undefined || usuarios === undefined)
+      throw new Error("Ingrese todos los datos")
+
+    const newProject = createRandomProjectController(+projectos, +usuarios)
     res.status(200).json(newProject)
   } catch (error) {
     const errorMessage =

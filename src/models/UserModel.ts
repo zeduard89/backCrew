@@ -51,11 +51,17 @@ export default class User extends Model<IUser> {
   // })
   // password!: string
 
-  // @Column({
-  //   type: DataType.STRING,
-  //   allowNull: true,
-  //   defaultValue: false
-  // })
-  // image!: string
-  // imgen predeterminada luego la cambian
+  @Column({
+    type: DataType.STRING,
+    allowNull: true,
+    defaultValue: false
+  })
+  avatar!: string
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: true,
+    defaultValue: false
+  })
+  date!: string
 }

@@ -1,59 +1,115 @@
-import { ProjectModel } from "../../config/db"
+import { ProjectModel, UserModel } from "../../config/db"
+import { faker } from "@faker-js/faker"
 
-const createRandomProjectController = (auxNum: number) => {
+const createRandomProjectController = (projectos: number, usuarios: number) => {
+  // Creo Projectos
+
   const categorias = [
     "Tech & Innovation",
     "Creative Works",
     "Community Projects"
   ]
-  // const bancos = ["Galicia", "Frances", "Nacion", "Vacio", "Colchon"]
-  // const cuentas = ["Cuenta 1", "Cuenta 2", "Cuenta 3", "Cuenta 4", "Cuenta 5"]
+
   let count = 0
 
-  const createRandom = () => {
+  const createRandomProject = () => {
     count++
     const categoriaActual =
       categorias[Math.floor(Math.random() * categorias.length)]
-    const mathR1 = Math.floor(Math.random() * 10000)
-    const mathR2 = Math.floor(Math.random() * 10000)
-    // const randomBanco = bancos[Math.floor(Math.random() * bancos.length)]
-    // const randomCuenta = cuentas[Math.floor(Math.random() * cuentas.length)]
+    const mathR1 = +faker.commerce.price({ min: 0, max: 500000, dec: 0 })
+    const mathR2 = +faker.commerce.price({ min: 0, max: 500000, dec: 0 })
 
     const proyecto = {
-      title: `Project ${count}`,
-      description: `Dive into a vibrant and surprising universe, where imagination runs wild and dreams come true. Discover new horizons, challenge your limits, and find passion in every adventure. Become the protagonist of your story and live each moment with intensity. Welcome to a world where possibilities are endless and magic is within your reach.
-
-Please note that this is just a fictional description and you can adjust or customize it according to your specific needs or context. ${Math.floor(
-        Math.random() * 100
-      )}`,
-      shortDescription: `Discover the thrill at every step. 
-Please note that this is a fictional description and may not have a specific meaning. You can adjust or customize it according to your needs or context. ${Math.floor(
-        Math.random() * 100
-      )}`,
+      title: faker.commerce.product() + count,
+      description: faker.commerce.productDescription(),
+      shortDescription: faker.lorem.sentence({ min: 5, max: 15 }),
       fundingCurrent: mathR1,
       fundingGoal: mathR2,
       fundingGoalReached: false,
       fundingPercentage: (mathR1 / mathR2) * 100,
-      fundingDayLeft: Math.floor(Math.random() * 30),
-      likes: Math.floor(Math.random() * 10000),
-      disLikes: Math.floor(Math.random() * 10000),
+      fundingDayLeft: faker.helpers.rangeToNumber({ min: 30, max: 360 }),
+      likes: faker.helpers.rangeToNumber({ min: 1, max: 10 }),
+      disLikes: faker.helpers.rangeToNumber({ min: 1, max: 10 }),
       category: categoriaActual,
-      // bank: randomBanco,
-      // account: randomCuenta,
+      // bank: faker.finance.creditCardIssuer(),
+      // account: faker.finance.accountNumber,
       // location: "argentina",
       // projectFase: Math.floor(Math.random() * 4),
       displayProject: true,
-      creatorId: categoriaActual
+      creatorId: faker.string.uuid()
     }
-    console.log("esto es el proyecto", proyecto)
+
     return proyecto
   }
-  const numProyectos = auxNum
+  const numProyectos = projectos
   for (let i = 0; i < numProyectos; i++) {
-    const proyecto = createRandom()
+    const proyecto = createRandomProject()
 
     ProjectModel.create(proyecto)
   }
+
+  // CREO USUARIOS
+  count = 0
+  const createRandomUsers = () => {
+    count++
+    const newName = faker.person.firstName() + count
+    const newLastname = faker.person.lastName()
+
+    const user = {
+      id: faker.string.uuid().toString(),
+      name: newName,
+      lastName: newLastname,
+      email: faker.internet.email({
+        firstName: newName,
+        lastName: newLastname
+      }),
+      avatar: faker.image.avatar(),
+      date: faker.git.commitDate()
+    }
+
+    return user
+  }
+
+  const numUsuarios = usuarios
+  for (let i = 0; i < numUsuarios; i++) {
+    const user = createRandomUsers()
+
+    UserModel.create(user)
+  }
+  return "Creacion con exito"
 }
 
 export default createRandomProjectController
+
+/* 
+
+faker.image.avatar(): string
+faker.image.avatar()
+ 'https://avatars.githubusercontent.com/u/97165289'
+
+faker.image.avatarGitHub(): string
+faker.image.avatarGitHub()
+ 'https://avatars.githubusercontent.com/u/97165289'
+
+
+Returns: string
+
+ts
+faker.image.url(options: {
+  height: number,
+  width: number
+} = {}): string
+faker.image.url() // 'https://loremflickr.com/640/480?lock=1234'
+
+
+faker.company.catchPhrase(): string
+faker.company.catchPhrase() // 'Upgradable systematic flexibility'
+
+const hello = faker.helpers.fake(
+    "Hi, my name is {{person.firstName}} {{person.lastName}}!"
+)
+const message = faker.helpers.fake(
+  "You can call me at {{phone.number(+!# !## #### #####!)}}."
+)
+
+*/
