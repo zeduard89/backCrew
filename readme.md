@@ -26,7 +26,15 @@ Endpoints for viewing and manipulating the Accounts that the Authenticated User
 has permissions to access.
 
 - [Create Account](./readme/userRoute/register.md) : `POST /userRoute/register/`
-- [Upload User image](./readme/userRoute/uploadImage.md) : `POST /userRoute/uploadImage`
+  {
+  "id": "ac8ec82d-fc39-450b-bcab-bc2cc4b539b1",
+  "name":"luis",
+  "lastName":"pato",
+  "email":"pato@ganzo.com"
+  }
+- [All User Projects](./readme/userRoute/) : `POST /userRoute/getAllUsersProjects?userId=ac8ec82d-fc39-450b-bcab-bc2cc4b539b35`
+- [All Users](./readme/userRoute/) : `POST /userRoute/getAllUsers`
+- [User info](./readme/userRoute/) : `POST /userRoute/user?email=pato@ganzo.com`
 - [Update An Account](./readme/userRoute/updateInfo.md) : `PUT /*Working in progress*`
 - [Delete An Account](./readme/userRoute/delete.md) : `DELETE /userRoute/delete`
 
@@ -35,7 +43,7 @@ has permissions to access.
 Endpoints for viewing and manipulating the Projects that the Admin
 has permissions to access
 
-- [Create Random Project](./readme/projectRoute/llenarDB100.md) : `POST /projectRoute/llenarDB100`
+- [Create Random Project](./readme/projectRoute/llenarDB100.md) : `POST /projectRoute/llenarDB?usuarios${number}`
 - [Create Project](./readme/projectRoute/createProject.md) : `POST /projectRoute/`
 - [Get All Project](./readme/projectRoute/allProjects.md) : `GET /projectRoute/allProject`
 - [Get Project By Name](./readme/projectRoute/projectByName.md) : `GET /projectRoute/search`
