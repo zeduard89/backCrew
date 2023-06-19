@@ -1,5 +1,7 @@
 import { ProjectModel, UserModel } from "../../config/db"
 import { IProject } from "../../types/types"
+//! Omitir este sector y sus elementos para limitar la creacion de Containers
+
 // import { BlobServiceClient } from "@azure/storage-blob"
 
 // // Cargamos las variables de entorno con config y la ejecuto para conectar
@@ -10,6 +12,7 @@ import { IProject } from "../../types/types"
 //  throw new Error("Azure Storage connection string is not configured");
 // }
 // const blobService = BlobServiceClient.fromConnectionString(connectionString) // conexion
+//! --------------------------------------------------------------------------------
 
 const createProjectController = async (
   validatedProject: IProject
@@ -37,18 +40,7 @@ const createProjectController = async (
       ...rest
     })
 
-    // createdProject.creatorId = user.id
-    // await createdProject.save()
-
-    // ------------------------------------------------------------
-    // if (user) await user.addUserModel(createdProject)
-    // await createdProject.$set("user", user)
-    // await user.$set("projects", [createdProject])
-    // createdProject.user = user // Asignar el usuario al campo 'user' del proyecto
-    // await createdProject.save() // Guardar el proyecto actualizado en la base de datos
-    // -----------------------------------------------------------------------
-
-    // //! Omitir este sector y sus elementos para limitar la creacion de Containers
+    //! Omitir este sector y sus elementos para limitar la creacion de Containers
     // // Ejemplo crew1 con id=1
     // const newIdProjectContainer = `crew${createdProject.id.toString()}`
     // // Buscamos si existe el contenedor, sino existe lo creo con el id del Project
