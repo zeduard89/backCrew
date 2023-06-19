@@ -32,9 +32,9 @@ has permissions to access.
   "lastName":"pato",
   "email":"pato@ganzo.com"
   }
-- [All User Projects](./readme/userRoute/) : `POST /userRoute/getAllUsersProjects?userId=ac8ec82d-fc39-450b-bcab-bc2cc4b539b35`
-- [All Users](./readme/userRoute/) : `POST /userRoute/getAllUsers`
-- [User info](./readme/userRoute/) : `POST /userRoute/user?email=pato@ganzo.com`
+- [All User Projects](./readme/userRoute/) : `GET /userRoute/getAllUsersProjects?userId=ac8ec82d-fc39-450b-bcab-bc2cc4b539b35`
+- [All Users](./readme/userRoute/) : `GET /userRoute/getAllUsers`
+- [User info](./readme/userRoute/) : `GET /userRoute/user?email=pato@ganzo.com`
 - [Update An Account](./readme/userRoute/updateInfo.md) : `PUT /*Working in progress*`
 - [Delete An Account](./readme/userRoute/delete.md) : `DELETE /userRoute/delete`
 
