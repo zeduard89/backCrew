@@ -1,25 +1,21 @@
-import { UserModel } from "../../config/db"
 import { Request, Response } from "express"
+import { UserModel } from "../../config/db"
 
 const getAllUsers = async (_req: Request, res: Response): Promise<Response> => {
   try {
-    const existingUsers = await UserModel.findAll()
+    const users = await UserModel.findAll()
+    if (users.length === 0) throw new Error("There are no users")
 
-    if (Object.keys(existingUsers).length === 0) {
-      throw new Error("There are no Users in the DB")
-    }
-
-    return res.status(200).json(existingUsers)
+    return res.status(200).json(users)
   } catch (error) {
-    const errorMessage =
-      (error as Error).message || "Unknown error while retrieving all projects"
-    res.status(400).send({ errorMessage })
-  }
+    console.error("Error fetching users:", error)
 
-  return res.status(500).json({
-    success: false,
-    error: "Internal server error"
-  })
+    // Si ocurre un error, envía una respuesta de error al cliente
+    return res.status(500).json({
+      success: false,
+      error: "Internal server error"
+    })
+  }
 }
 
 export default getAllUsers

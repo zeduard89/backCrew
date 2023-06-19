@@ -50,11 +50,10 @@ router.post("/", async (req: Request, res: Response) => {
 // Llenar la DB.
 router.post("/llenarDB", (req: Request, res: Response) => {
   try {
-    const { projectos, usuarios } = req.query
-    if (projectos === undefined || usuarios === undefined)
-      throw new Error("Ingrese todos los datos")
+    const { usuarios } = req.query
+    if (usuarios === undefined) throw new Error("Ingrese todos los datos")
 
-    const newProject = createRandomProjectController(+projectos, +usuarios)
+    const newProject = createRandomProjectController(+usuarios)
     res.status(200).json(newProject)
   } catch (error) {
     const errorMessage =
