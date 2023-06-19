@@ -1,13 +1,13 @@
-import { Model, Column, Table, DataType } from "sequelize-typescript"
+import { Model, Column, Table, DataType, HasMany } from "sequelize-typescript"
 import { IUser } from "../types/types"
+import { ProjectModel } from "../config/db"
 
 @Table({ tableName: "users" })
 export default class User extends Model<IUser> {
   @Column({
-    type: DataType.UUID,
+    type: DataType.STRING,
     primaryKey: true,
-    allowNull: false,
-    defaultValue: DataType.UUIDV4
+    allowNull: false
   })
   id!: string
 
@@ -30,30 +30,40 @@ export default class User extends Model<IUser> {
   })
   email!: string
 
-  @Column({
-    type: DataType.BOOLEAN,
-    allowNull: false,
-    defaultValue: false
-  })
-  verified!: boolean
+  // @Column({
+  //   type: DataType.BOOLEAN,
+  //   allowNull: false,
+  //   defaultValue: false
+  // })
+  // verified!: boolean
 
-  @Column({
-    type: DataType.BOOLEAN,
-    allowNull: false,
-    defaultValue: false
-  })
-  access!: boolean
+  // @Column({
+  //   type: DataType.BOOLEAN,
+  //   allowNull: false,
+  //   defaultValue: false
+  // })
+  // access!: boolean
+
+  // @Column({
+  //   type: DataType.STRING,
+  //   allowNull: false
+  // })
+  // password!: string
 
   @Column({
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
+    defaultValue: false
   })
-  password!: string
+  avatar!: string
 
   @Column({
     type: DataType.STRING,
-    allowNull: true,
+    allowNull: false,
     defaultValue: false
   })
-  image!: string
+  date!: string
+
+  @HasMany(() => ProjectModel)
+  projects!: ProjectModel[]
 }
