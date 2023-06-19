@@ -32,7 +32,8 @@ sequelize.addModels([UserModel, ProjectModel, CommentModel, AdminModel])
 // ProfileModel.belongsTo(UserModel, { foreignKey: 'userId'
 
 // 1:N Esto permite que un usuario tenga múltiples proyectos asociados.
+
 UserModel.hasMany(ProjectModel, { foreignKey: "creatorId" })
-ProjectModel.belongsTo(UserModel, { foreignKey: "creatorId" })
+ProjectModel.belongsTo(UserModel, { foreignKey: "creatorId", targetKey: "id" })
 
 export { sequelize, UserModel, ProjectModel, CommentModel, AdminModel }

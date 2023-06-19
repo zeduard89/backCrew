@@ -16,6 +16,9 @@ const createProjectController = async (
 ): Promise<object> => {
   try {
     const { title, creatorId, ...rest } = validatedProject
+    console.log(creatorId)
+    const user = await UserModel.findOne({ where: { id: creatorId } })
+    if (!user) throw new Error("User does not exist in DB")
 
     const allProjects = await ProjectModel.findAll()
     const newAllProjects = allProjects.filter(
@@ -30,19 +33,20 @@ const createProjectController = async (
 
     const createdProject = await ProjectModel.create({
       title,
-      // creatorId,
+      creatorId,
       ...rest
     })
 
-    const user = await UserModel.findByPk(creatorId)
-    if (!user) throw new Error("User does not exist in DB")
+    // createdProject.creatorId = user.id
+    // await createdProject.save()
+
+    // ------------------------------------------------------------
     // if (user) await user.addUserModel(createdProject)
-
-    await createdProject.$set("user", user)
-
-    // B createdProject.user = user // Asignar el usuario al campo 'user' del proyecto
-    // c await user.$set("projects", [createdProject])
+    // await createdProject.$set("user", user)
+    // await user.$set("projects", [createdProject])
+    // createdProject.user = user // Asignar el usuario al campo 'user' del proyecto
     // await createdProject.save() // Guardar el proyecto actualizado en la base de datos
+    // -----------------------------------------------------------------------
 
     // //! Omitir este sector y sus elementos para limitar la creacion de Containers
     // // Ejemplo crew1 con id=1
