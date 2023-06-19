@@ -13,6 +13,13 @@ export interface IUser {
 
 export type IUserLD = Omit<IUser, "name", "lastName", "id", "Date">
 
+export interface IUpdateUser {
+  id: string
+  updateName?: string
+  updateLastName?: string
+  updateEmail?: string
+}
+
 export interface IComment {
   id: string
   firstName: string
