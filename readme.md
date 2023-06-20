@@ -26,16 +26,10 @@ Token is provided with the request:
 Endpoints for viewing and manipulating the Accounts that the Authenticated User
 has permissions to access.
 
-- [Create Account](./readme/userRoute/register.md) : `POST /userRoute/register/`
-  {
-  "id": "ac8ec82d-fc39-450b-bcab-bc2cc4b539b1",
-  "name":"luis",
-  "lastName":"pato",
-  "email":"pato@ganzo.com"
-  }
-- [All User Projects](./readme/userRoute/) : `GET /userRoute/getAllUsersProjects?userId=ac8ec82d-fc39-450b-bcab-bc2cc4b539b35`
+- [User Register](./readme/userRoute/register.md) : `POST /userRoute/register/`
+- [All User Projects](./readme/userRoute/getAllUsersProjects) : `GET /userRoute/getAllUsersProjects?creatorId={creatorId}`
 - [All Users](./readme/userRoute/) : `GET /userRoute/getAllUsers`
-- [User info](./readme/userRoute/) : `GET /userRoute/user?email=pato@ganzo.com`
+- [User info](./readme/userRoute/getUserInfo.md) : `GET /userRoute/user?email=pato@ganzo.com`
 - [Update An Account](./readme/userRoute/updateInfo.md) : `PUT /*Working in progress*`
 - [Delete An Account](./readme/userRoute/delete.md) : `DELETE /userRoute/delete`
 

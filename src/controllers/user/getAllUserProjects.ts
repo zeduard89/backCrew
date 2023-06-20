@@ -7,14 +7,14 @@ const getAllUserProjects = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const userId = req.query.userId as string
-    validatorString.parse(userId)
+    const creatorId = req.query.creatorId as string
+    validatorString.parse(creatorId)
 
-    if (!userId || userId === undefined) {
+    if (!creatorId || creatorId === undefined) {
       throw new Error("UserId is required")
     }
 
-    const user = await UserModel.findByPk(userId)
+    const user = await UserModel.findByPk(creatorId)
     if (!user) {
       throw new Error("User not found")
     }
