@@ -5,15 +5,15 @@ const getProjectByIdController = async (
 ): Promise<object> => {
   try {
     // Busco todos los projects, filtro y generalizo la escritura al buscarlos
-    const allProjects = await ProjectModel.findByPk(validatedName)
+    const Project = await ProjectModel.findByPk(validatedName)
 
-    if (!allProjects) throw new Error("The project does not exist")
+    if (!Project) throw new Error("The project does not exist")
 
-    return allProjects
+    return Project
   } catch (error) {
     const errorMessage =
       (error as Error).message ||
-      "Unknown error while searching for projects by name"
+      "Unknown error while searching for projects by Id"
     return { errorMessage }
   }
 }

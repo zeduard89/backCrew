@@ -13,7 +13,7 @@ export const getUserInfo = async (
       throw new Error("User not found")
     }
 
-    res.status(200).json({ user })
+    res.status(200).json(user)
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Unknown error searching for user"
