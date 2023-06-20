@@ -1,6 +1,6 @@
 # Get all url Image from container
 
-**URL** : `/blobRoute/getAllFiles/:params`
+**URL** : `/blobRoute/getAllFiles/:crew1`
 
 **Method** : `GET`
 
