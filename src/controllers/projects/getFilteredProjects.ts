@@ -87,12 +87,12 @@ const getFilteredProjects = async (
       throw new Error("There are no more projects to display.")
     }
 
-    if (validatedPIndex === dividedArrayProjects.length - 1) {
-      return {
-        projects: dividedArrayProjects[validatedPIndex],
-        limit: "There is nothing else to show."
-      }
-    }
+    // if (validatedPIndex === dividedArrayProjects.length - 1) {
+    //   return {
+    //     projects: dividedArrayProjects[validatedPIndex],
+    //     limit: "There is nothing else to show."
+    //   }
+    // }
 
     return dividedArrayProjects[validatedPIndex]
   } catch (error) {
