@@ -11,6 +11,9 @@ import {
 // Crear project
 import createProjectController from "../controllers/projects/postProjectHandler"
 import createRandomProjectController from "../controllers/projects/postRandomProjectHandler"
+// Get by Id
+import getProjectByIdController from "../controllers/projects/getProjectByIdController"
+
 // Get by Name
 import getProjectByNameController from "../controllers/projects/getProjectByNameHandler"
 import getAllProjectsByNameController from "../controllers/projects/getAllProjectsByNameHandler"
@@ -118,6 +121,22 @@ router.get("/search/byName", async (req: Request, res: Response) => {
     if (name !== undefined) {
       const getProjectByName = await getProjectByNameController(validatedName)
       res.status(200).json(getProjectByName)
+    }
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message || "Error desconocido al buscar Project by ID"
+    res.status(400).send(errorMessage)
+  }
+})
+
+// Ruta busca por ID
+router.get("/search/byId", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.query
+    const validatedId = validatorString.parse(id)
+    if (id !== undefined) {
+      const getProjectById = await getProjectByIdController(validatedId)
+      res.status(200).json(getProjectById)
     }
   } catch (error) {
     const errorMessage =
