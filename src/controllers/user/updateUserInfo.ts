@@ -58,6 +58,7 @@ export const updateUserInfo = async (
           })
       } else {
         // Sino, guardo la imagen en el depósito sin pisar ninguna imagen
+        // f5d769fa-5c29-4a60-aab3-99d32a55d063 + jpg
         await containerClient
           .getBlockBlobClient(id + "." + extension)
           .uploadData(buffer)
