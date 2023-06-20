@@ -10,9 +10,9 @@
 
 ```json
 {
-  "file": "[valid FILE]",
   "container": "[valid string]",
-  "name": "[valid string]"
+  "name": "[valid string]",
+  "file": "[valid FILE]"
 }
 ```
 
@@ -20,9 +20,9 @@
 
 ```json
 {
-  "file": "ejmplo@gmail.com",
   "container": "crew1",
-  "name": "carrusel"
+  "name": "CarruselAuto1",
+  "file": "auto1.jpg"
 }
 ```
 
@@ -32,9 +32,11 @@
 
 **Content example**
 
+// The file is storage with the extension of the orignal name of the image
+
 ```json
 {
-  "message": "El elemento: cesar fue creado Exitosamente"
+  "message": "El elemento: CarruselAuto1.jpg fue creado Exitosamente"
 }
 ```
 
