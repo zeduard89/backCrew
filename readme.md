@@ -1,4 +1,3 @@
-
 # Crew Docs
 
 `Develope url: https://localhost:3000/...`
@@ -7,7 +6,7 @@
 
 Open endpoints require no Authentication.
 
-- [Login](./readme/userRoute/login.md) : `POST /userRoute/login/`
+- [Login] : `Login With SuperBase`
 
 ## Endpoints that require Authentication
 
@@ -19,19 +18,18 @@ request. A Token can be acquired from the Login view above.
 Each endpoint manipulates or displays information related to the User whose
 Token is provided with the request:
 
-- [Show info](./readme/userRoute/user.md) : `GET /userRoute/user/`
+- [User Register](./readme/userRoute/register.md) : `POST /userRoute/register/`
 
 ### Account related
 
 Endpoints for viewing and manipulating the Accounts that the Authenticated User
 has permissions to access.
 
-- [User Register](./readme/userRoute/register.md) : `POST /userRoute/register/`
 - [All User Projects](./readme/userRoute/getAllUsersProjects) : `GET /userRoute/getAllUsersProjects?creatorId={creatorId}`
-- [All Users](./readme/userRoute/) : `GET /userRoute/getAllUsers`
-- [User info](./readme/userRoute/getUserInfo.md) : `GET /userRoute/user?email=pato@ganzo.com`
-- [Update An Account](./readme/userRoute/updateInfo.md) : `PUT /*Working in progress*`
-- [Delete An Account](./readme/userRoute/delete.md) : `DELETE /userRoute/delete`
+- [All Users](./readme/userRoute/getAllUsers) : `GET /userRoute/getAllUsers`
+- [User info](./readme/userRoute/getUserInfo.md) : `GET /userRoute/userDetails?id=${id}`
+- [User Update](./readme/userRoute/updateUserInfo.md) : `PUT /userRoute/updateUserInfo`
+- [Delete An Account](./readme/userRoute/delete.md) : `DELETE /WORKING_IN_PROGRESS`
 
 ### Projects related
 
@@ -66,4 +64,3 @@ has permissions to access
 - [Get Urls from Container](./readme/blobRoute/getAllFiles.md) : `GET /blobRoute/getAllFiles/images`
 - [Get Image Buffer](./readme/blobRoute/images.md) : `GET /blobRoute/get/images/`
 - [Delete Image](./readme/blobRoute/delete.md) : `DELETE /blobRoute/delete/`
-

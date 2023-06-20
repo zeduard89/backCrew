@@ -7,8 +7,8 @@ export const getUserInfo = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { email }: IUserLD = req.query
-    const user: IUserLD | null = await UserModel.findOne({ where: { email } })
+    const { id }: IUserLD = req.query
+    const user: IUserLD | null = await UserModel.findOne({ where: { id } })
     if (user == null) {
       throw new Error("User not found")
     }

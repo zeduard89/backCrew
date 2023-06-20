@@ -1,6 +1,6 @@
 # Get user Info
 
-**URL** : `/userRoute/userDetails`
+**URL** : `/userRoute/userDetails?id=ac8ec82d-fc39-450b-bcab-bc2cc4b539b1`
 
 **Method** : `GET`
 
