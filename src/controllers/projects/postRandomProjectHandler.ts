@@ -39,7 +39,7 @@ const createRandomProject = (id: string) => {
     fundingCurrent: mathR1,
     fundingGoal: mathR2,
     fundingGoalReached: false,
-    fundingPercentage: (mathR1 / mathR2) * 100,
+    fundingPercentage: Math.floor((mathR1 / mathR2) * 100),
     fundingDayLeft: faker.helpers.rangeToNumber({ min: 30, max: 360 }),
     likes: faker.helpers.rangeToNumber({ min: 1, max: 10 }),
     disLikes: faker.helpers.rangeToNumber({ min: 1, max: 10 }),
