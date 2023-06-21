@@ -146,21 +146,21 @@ router.get("/search/byNameGeneral", async (req: Request, res: Response) => {
 // Route filter by name, category and sort (most founding and trending)
 router.get("/searchProjects/", async (req: Request, res: Response) => {
   try {
-    const { category, sort, q, p, s /* country */ } = req.query
+    const { category, sort, q, p, s, country } = req.query
     const validatedCategory = validatorString.parse(category)
     const validatedSort = validatorString.parse(sort)
     const validatedQ = validatorQuerySearch.parse(q)
     const validatedP = validatorString.parse(p)
     const validatedS = validatorString.parse(s)
-    // const validatedCountry = validatorString.parse(country)
+    const validatedCountry = validatorString.parse(country)
     console.log(validatedP)
     const getProjectsFiltered = await getFilteredProjects(
       validatedCategory,
       validatedSort,
       validatedQ,
       validatedP,
-      validatedS
-      // validatedCountry
+      validatedS,
+      validatedCountry
     )
     res.status(200).json(getProjectsFiltered)
   } catch (error) {
