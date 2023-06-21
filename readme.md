@@ -6,7 +6,7 @@
 
 Open endpoints require no Authentication.
 
-- [Login](./readme/userRoute/login.md) : `POST /userRoute/login/`
+- [Login] : `Login With SuperBase`
 
 ## Endpoints that require Authentication
 
@@ -18,24 +18,27 @@ request. A Token can be acquired from the Login view above.
 Each endpoint manipulates or displays information related to the User whose
 Token is provided with the request:
 
-- [Show info](./readme/userRoute/user.md) : `GET /userRoute/user/`
+- [User Register](./readme/userRoute/register.md) : `POST /userRoute/register/`
 
 ### Account related
 
 Endpoints for viewing and manipulating the Accounts that the Authenticated User
 has permissions to access.
 
-- [Create Account](./readme/userRoute/register.md) : `POST /userRoute/register/`
-- [Upload User image](./readme/userRoute/uploadImage.md) : `POST /userRoute/uploadImage`
-- [Update An Account](./readme/userRoute/updateInfo.md) : `PUT /*Working in progress*`
-- [Delete An Account](./readme/userRoute/delete.md) : `DELETE /userRoute/delete`
+- [All User Projects](./readme/userRoute/getAllUsersProjects) : `GET /userRoute/getAllUsersProjects?creatorId={creatorId}`
+- [All Users](./readme/userRoute/getAllUsers) : `GET /userRoute/getAllUsers`
+- [User info](./readme/userRoute/getUserInfo.md) : `GET /userRoute/userDetails?id=${id}`
+- [User Update](./readme/userRoute/updateUserInfo.md) : `PUT /userRoute/updateUserInfo`
+- [Delete An Account](./readme/userRoute/delete.md) : `DELETE /WORKING_IN_PROGRESS`
+- [Add User Favorite](./readme/userRoute/postUserFavorite.md) : `POST /userRoute/create/UserFavoriteRelationship?userId=${userId}&projectId=${projectId}`
+- [Get all User Favorites ](./readme/userRoute/getAllUserFavorites.md) : `GET /userRoute/getAllUsersFavorites?userId=${userId}`
 
 ### Projects related
 
-Endpoints for viewing and manipulating the Projects that the Front
+Endpoints for viewing and manipulating the Projects that the Admin
 has permissions to access
 
-- [Create Random Project](./readme/projectRoute/llenarDB100.md) : `POST /projectRoute/llenarDB100`
+- [Create Random Project](./readme/projectRoute/llenarDB100.md) : `POST /projectRoute/llenarDB?usuarios${number}`
 - [Create Project](./readme/projectRoute/createProject.md) : `POST /projectRoute/`
 - [Get All Project](./readme/projectRoute/allProjects.md) : `GET /projectRoute/allProject`
 - [Get Project By Name](./readme/projectRoute/projectByName.md) : `GET /projectRoute/search`
@@ -44,10 +47,6 @@ has permissions to access
 - [Update Project](./readme/projectRoute/updateProject.md) : `PUT /projectRoute/update`
 - [UpdateCurrent Founding](./readme/projectRoute/updateCurrentFouding.md) : `PUT /projectRoute/update/addToFundingCurrent`
 - [UpdateLikes](./readme/projectRoute/updateLikes.md) : `PUT /projectRoute/likes`
-- [Get the twenty most trending](./readme/projectRoute/twentyMostTrending.md) : `GET /twentyMostTrending`
-- [Get five most funding](./readme/projectRoute/fiveMostFunding.md) : `GET /fiveMostFunding`
-- [Get search Filter](./readme/projectRoute/searchProjects.md) : `GET /searchProjects/`
-
 
 ### Azure Containers related
 
@@ -68,3 +67,6 @@ has permissions to access
 - [Get Image Buffer](./readme/blobRoute/images.md) : `GET /blobRoute/get/images/`
 - [Delete Image](./readme/blobRoute/delete.md) : `DELETE /blobRoute/delete/`
 
+### Build Tsc
+
+npm run tsc

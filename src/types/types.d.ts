@@ -1,13 +1,29 @@
 export interface IUser {
+  id: string
   name: string
   lastName: string
   email: string
-  password: string
-  verified?: boolean
-  access: boolean
+  avatar: string
+  // projects: Array[]
+  date: string
+  // password: string
+  // verified?: boolean
+  // access: boolean
 }
 
-export type IUserLD = Omit<IUser, "name", "lastName">
+export type IUserLD = Omit<IUser, "name", "lastName", "id", "Date">
+
+export interface IUpdateUser {
+  id: string
+  updateName?: string
+  updateLastName?: string
+  updateEmail?: string
+}
+
+export interface IUserFavorite {
+  userId: string
+  projectsId: string
+}
 
 export interface IComment {
   id: string
@@ -45,6 +61,7 @@ export interface IProject {
   location?: string
   projectFase?: number
   displayProject?: boolean
+  creatorId?: string
 }
 // Uso title displayProject
 export type deleteIProyect = Omit<
@@ -59,6 +76,7 @@ export type deleteIProyect = Omit<
   "category",
   "bank",
   "account"
+  // "creatorId"
 >
 // Uso title y currentFunding
 export type updateFundingCurrentIProyect = Omit<
@@ -72,6 +90,7 @@ export type updateFundingCurrentIProyect = Omit<
   "bank",
   "account",
   "displayProject"
+  // "creatorId"
 >
 
 // Uso title y likes/disLikes
@@ -87,6 +106,7 @@ export type updateLikes = Omit<
   "bank",
   "account",
   "displayProject"
+  // "creatorId"
 >
 
 // Uso una interface nueva Proyect x 2
