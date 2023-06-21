@@ -1,20 +1,85 @@
 import { Request, Response } from "express"
 import { UserModel } from "../../config/db"
 import { IUser } from "../../types/types"
+import {
+  BlobServiceClient,
+  BlobSASPermissions,
+  generateBlobSASQueryParameters,
+  StorageSharedKeyCredential
+} from "@azure/storage-blob"
+
+// Cargamos las variables de entorno con config y la ejecuto para conectar
+import dotenv from "dotenv"
+dotenv.config()
+
+const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING // Obtén la cadena de conexión desde tus variables de entorno
+
+if (!connectionString) {
+  throw new Error("Azure Storage connection string is not configured")
+}
+const blobService = BlobServiceClient.fromConnectionString(connectionString)
 
 export const registerUser = async (
   req: Request,
   res: Response
 ): Promise<void> => {
+  const blobName = "userDefault.png"
+  const containerName = "defaultcontainer"
+
   try {
-    const { id }: IUser = req.body
-    const user: IUser | null = await UserModel.findOne({ where: { id } })
+    const { name, lastName, email, id }: IUser = req.body
+    const user: IUser | null = await UserModel.findOne({ where: { email } })
     if (user != null) {
-      throw new Error("ID already used")
+      throw new Error("Email already used")
     }
-    const newId = id
+
+    // Buscamos si existe el contenedor
+    const containerClient = blobService.getContainerClient(containerName)
+    const containerExist = await containerClient.exists()
+    if (!containerExist) {
+      throw new Error(`The container: ${containerName} does not exist`)
+    }
+    // Buscamos si existe la imagen
+    const blobClient = await containerClient.getBlockBlobClient(blobName)
+    const blobExist = await blobClient.exists()
+    if (!blobExist) {
+      throw new Error(`The element: ${blobName} does not exists`)
+    }
+    // Genero el permisos para podes acceder a al elemento
+    const sasPermissions = new BlobSASPermissions()
+    sasPermissions.read = true // Set the desired permissions
+    if (!process.env.ACCOUNT_NAME || !process.env.ACCOUNT_KEY) {
+      throw new Error("Error in Azure accreditation")
+    }
+    const sasExpiresOn = new Date(new Date().valueOf() + 86400 * 1000) // Expires in 24 hours
+    const sharedKeyCredential = new StorageSharedKeyCredential(
+      process.env.ACCOUNT_NAME,
+      process.env.ACCOUNT_KEY
+    )
+
+    // Genero el token con los detalles necesario
+    const sasToken = generateBlobSASQueryParameters(
+      {
+        containerName: containerClient.containerName,
+        blobName: blobClient.name,
+        permissions: sasPermissions,
+        startsOn: new Date(),
+        expiresOn: sasExpiresOn,
+        contentDisposition: "inline" // Establece el valor "inline" para mostrar el archivo en el navegador
+      },
+      sharedKeyCredential
+    ).toString()
+    const blobUrlWithSAS = blobClient.url + "?" + sasToken
+
+    const dateNow = new Date()
     const registerUser: IUser = await UserModel.create({
-      id: newId
+      id,
+      name,
+      lastName,
+      email,
+      avatar: blobUrlWithSAS,
+      date: dateNow.toString()
+      // se puede sacar el pais "date": "Sun Jun 18 2023 02:11:25 GMT-0300 (Argentina Standard Time)",
     })
     res.status(200).send({ registerUser })
   } catch (error) {

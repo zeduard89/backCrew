@@ -44,10 +44,15 @@ export const uploadBlob = async (req: Request, res: Response) => {
     if (exist) {
       throw new Error(`The element: ${originalname} already exists`)
     }
+    // Obtengo la extension de original name para usarla al final del name
+    const extension = originalname.split(".").pop()
+
     // Guardamos el archivo con el nombre de la variable name
-    await containerClient.getBlockBlobClient(name).uploadData(buffer)
+    await containerClient
+      .getBlockBlobClient(name + "." + extension)
+      .uploadData(buffer)
     res.json({
-      message: `The element: ${name} was created successfully`
+      message: `The element: ${name + "." + extension} was created successfully`
     })
   } catch (error) {
     const errorMessage =
