@@ -19,6 +19,7 @@ if (!connectionString) {
 }
 const blobService = BlobServiceClient.fromConnectionString(connectionString)
 
+
 export const registerUser = async (
   req: Request,
   res: Response
@@ -27,10 +28,14 @@ export const registerUser = async (
   const containerName = "defaultcontainer"
 
   try {
-    const { name, lastName, email, id }: IUser = req.body
-    const user: IUser | null = await UserModel.findOne({ where: { email } })
+
+    const { id,
+      name,
+      lastName,
+      email, }: IUser = req.body
+    const user: IUser | null = await UserModel.findOne({ where: { id } })
     if (user != null) {
-      throw new Error("Email already used")
+      throw new Error("ID already used")
     }
 
     // Buscamos si existe el contenedor
@@ -80,6 +85,7 @@ export const registerUser = async (
       avatar: blobUrlWithSAS,
       date: dateNow.toString()
       // se puede sacar el pais "date": "Sun Jun 18 2023 02:11:25 GMT-0300 (Argentina Standard Time)",
+
     })
     res.status(200).send({ registerUser })
   } catch (error) {
