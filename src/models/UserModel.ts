@@ -1,6 +1,13 @@
-import { Model, Column, Table, DataType, HasMany } from "sequelize-typescript"
+import {
+  Model,
+  Column,
+  Table,
+  DataType,
+  HasMany,
+  BelongsToMany
+} from "sequelize-typescript"
 import { IUser } from "../types/types"
-import { ProjectModel } from "../config/db"
+import { ProjectModel, UserFavoritesModel } from "../config/db"
 
 @Table({ tableName: "users" })
 export default class User extends Model<IUser> {
@@ -66,4 +73,7 @@ export default class User extends Model<IUser> {
 
   @HasMany(() => ProjectModel)
   projects!: ProjectModel[]
+
+  @BelongsToMany(() => ProjectModel, () => UserFavoritesModel)
+  favoriteProjects!: ProjectModel[]
 }

@@ -6,6 +6,8 @@ import { updateUserInfo } from "../controllers/user/updateUserInfo"
 import { getUserInfo } from "../controllers/user/getUserInfo"
 import getAllUsers from "../controllers/user/getAllUsers"
 import getAllUserProjects from "../controllers/user/getAllUserProjects"
+import { postUserFavoriteRelationship } from "../controllers/user/postUserFavorite"
+import getAllUsersFavorites from "../controllers/user/getAllUsersFavorites"
 
 const upload = multer()
 const router = Router()
@@ -21,5 +23,9 @@ router.get("/getAllUsers", getAllUsers)
 router.get("/getAllUsersProjects", getAllUserProjects)
 
 router.put("/updateUserInfo", upload.single("file"), updateUserInfo)
+
+router.post("/create/UserFavoriteRelationship", postUserFavoriteRelationship)
+
+router.get("/getAllUsersFavorites", getAllUsersFavorites)
 
 export { router }

@@ -4,6 +4,7 @@ import UserModel from "../models/UserModel"
 import ProjectModel from "../models/ProjectModel"
 import CommentModel from "../models/CommentModel"
 import AdminModel from "../models/AdminModel"
+import UserFavoritesModel from "../models/UserFavoritesModel"
 
 dotenv.config()
 
@@ -14,26 +15,58 @@ const sequelize = new Sequelize(
     DB_PORT ?? ""
   }/${DB_NAME ?? ""}`,
   {
+    dialect: "postgres",
     logging: false,
     native: false,
-    models: [UserModel, ProjectModel, CommentModel, AdminModel]
+    models: [
+      UserModel,
+      ProjectModel,
+      CommentModel,
+      AdminModel,
+      UserFavoritesModel
+    ]
   }
 )
 
-sequelize.addModels([UserModel, ProjectModel, CommentModel, AdminModel])
-
-//! Favoritos
-// UserModel.belongsToMany(favoriteProjectModel, { through: "FavoriteProject" })
-// FavoriteProjectModel.belongsToMany(UserModel, { through: "UserProject" })
+sequelize.addModels([
+  UserModel,
+  ProjectModel,
+  CommentModel,
+  AdminModel,
+  UserFavoritesModel
+])
 
 // 1:1 Esto permite que un usuario tenga un perfil asociado.
 
 // UserModel.hasOne(ProfileModel, { foreignKey: 'profileId' });
-// ProfileModel.belongsTo(UserModel, { foreignKey: 'userId'
+// ProfileModel.belongsTo(UserModel, { foreignKey: 'userId'})
 
-// 1:N Esto permite que un usuario tenga múltiples proyectos asociados.
-
+//! 1:N Esto permite que un usuario tenga múltiples proyectos asociados.
+// creatorId, es un atributo de ProjectModel y tarjetkey apunta al id del UserModel
 UserModel.hasMany(ProjectModel, { foreignKey: "creatorId" })
 ProjectModel.belongsTo(UserModel, { foreignKey: "creatorId", targetKey: "id" })
 
-export { sequelize, UserModel, ProjectModel, CommentModel, AdminModel }
+export {
+  sequelize,
+  UserModel,
+  ProjectModel,
+  CommentModel,
+  AdminModel,
+  UserFavoritesModel
+}
+
+//     Ejemplo de uso de los métodos de relación
+//     const project = new ProjectModel();
+//     project.title = "Nuevo proyecto";
+//     await foundUser.$add('favoriteProjects', project); // Agregar un proyecto a la lista de favoritos
+
+//     const favoriteProjects = await foundUser.$get('favoriteProjects'); // Obtener la lista de proyectos favoritos
+
+//     const projectCount = await foundUser.$count('favoriteProjects'); // Contar la cantidad de proyectos favoritos
+
+//     const hasFavoriteProjects = await foundUser.$has('favoriteProjects'); // Verificar si tiene proyectos favoritos
+
+//     const projectToRemove = favoriteProjects[0];
+//     await foundUser.$remove('favoriteProjects', projectToRemove); // Eliminar un proyecto de la lista de favoritos
+
+//     const newProject = await foundUser.$create('favoriteProjects', { title: 'Nuevo proyecto' }); // Crear un nuevo proyecto y agregarlo a la lista de favoritos

@@ -20,6 +20,11 @@ export interface IUpdateUser {
   updateEmail?: string
 }
 
+export interface IUserFavorite {
+  userId: string
+  projectsId: string
+}
+
 export interface IComment {
   id: string
   firstName: string

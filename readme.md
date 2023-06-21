@@ -30,6 +30,8 @@ has permissions to access.
 - [User info](./readme/userRoute/getUserInfo.md) : `GET /userRoute/userDetails?id=${id}`
 - [User Update](./readme/userRoute/updateUserInfo.md) : `PUT /userRoute/updateUserInfo`
 - [Delete An Account](./readme/userRoute/delete.md) : `DELETE /WORKING_IN_PROGRESS`
+- [Add User Favorite](./readme/userRoute/postUserFavorite.md) : `POST /userRoute/create/UserFavoriteRelationship?userId=${userId}&projectId=${projectId}`
+- [Get all User Favorites ](./readme/userRoute/getAllUserFavorites.md) : `GET /userRoute/getAllUsersFavorites?userId=${userId}`
 
 ### Projects related
 
