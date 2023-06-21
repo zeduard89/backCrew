@@ -19,7 +19,6 @@ const createProjectController = async (
 ): Promise<object> => {
   try {
     const { title, creatorId, ...rest } = validatedProject
-    console.log(creatorId)
     const user = await UserModel.findOne({ where: { id: creatorId } })
     if (!user) throw new Error("User does not exist in DB")
 

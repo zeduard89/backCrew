@@ -15,7 +15,8 @@
   "shortDescription": "[valid short description]",
   "fundingGoal": "[valid number]",
   "fundingDayLeft": "[valid number]",
-  "category": "[valid string]"
+  "category": "[valid string]",
+  "creatorId": "[valid string]"
 }
 ```
 
@@ -28,7 +29,8 @@
   "shortDescription": "Here an Example of a Describe Project",
   "fundingGoal": 2000,
   "fundingDayLeft": 30,
-  "category": "Tech & Innovation"
+  "category": "Tech & Innovation",
+  "creatorId": "ac8ec82d-fc39-450b-bcab-bc2cc4b539b1" // UUID string
 }
 ```
 
@@ -40,7 +42,7 @@
 
 ```json
 {
-  "message": "Project: ProjectX created successfully"
+  "message": "ac8ec82d-fc39-450b-bcab-bc2cc4b539b1"
 }
 ```
 

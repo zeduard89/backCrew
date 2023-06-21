@@ -4,13 +4,14 @@ import {
   Table,
   DataType,
   BelongsTo,
-  ForeignKey
+  ForeignKey,
+  BelongsToMany
 } from "sequelize-typescript"
 import { IProject } from "../types/types"
-import { UserModel } from "../config/db"
+import { UserModel, UserFavoritesModel } from "../config/db"
 
 @Table({ tableName: "projects" })
-export default class ProjectModel extends Model<IProject> {
+export default class Project extends Model<IProject> {
   @Column({
     type: DataType.STRING,
     allowNull: false,
@@ -135,4 +136,7 @@ export default class ProjectModel extends Model<IProject> {
 
   @BelongsTo(() => UserModel, "creatorId") // Asigna un alias único a la asociación
   user!: UserModel
+
+  @BelongsToMany(() => UserModel, () => UserFavoritesModel)
+  favoriteUsers!: UserModel[]
 }
