@@ -24,7 +24,7 @@ export const createOrder = async (
       ],
       // Le indico hacia donde yo retorno la respuesta (2)
       back_urls: {
-        success: "http://localhost:3001/paymentRoute/success", // se realizo
+        success: "http://localhost:3001/paymentRoute/success", // si se realizo el pago me redirige ACA al tocar el boton VOLVER al sitio en la pagina de MP
         failure: "http://localhost:3001/paymentRoute/failure", // fallo
         pending: "http://localhost:3001/paymentRoute/pending" // pendiente
       },
@@ -33,22 +33,44 @@ export const createOrder = async (
       // y ese dominio va a redireccionar a su localhost, bajo archivo y agrego al proyecto en carpeta raiz
       // ejecuto en terminal   .\ngrok.exe http 3001    copiar la (http.... io)+/webhook a notification_url
       notification_url:
-        "https://ef62-2800-810-538-16b9-58ec-87c7-f19b-773d.sa.ngrok.io/paymentRoute/webhook"
+        "https://8f57-2800-810-538-16b9-14a0-2fcb-436e-eda6.sa.ngrok.io/paymentRoute/webhook"
     })
     // (3) envio la info gral la cual tiene un atributo,tipo url que recibe el usario para terminar el pago
     // es la url que ve el comprador 1 , EJ:
     // init_point: 'https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=1400674523-90c85025-16f5-4065-9673-b88a42b76f10',
-    console.log(result)
     if (!result) throw new Error("Error with mercado pago")
+    console.log(result)
     return res.status(200).json(result.body)
   } catch (error) {
     return res.status(500).json({ messageError: "Something went wrong" })
   }
 }
 
-export const reciveWebHook = (req: Request, res: Response) => {
-  // (4) req query por que de la DB de MP te envia el id de la transaccion y el payment
-  console.log("hola")
-  console.log(req.query)
-  res.status(200).send("perfecto")
+export const reciveWebHook = async (req: Request, res: Response) => {
+  /*
+  (4) MP enviar 2 peiticiones post Secuenciadas
+  console.log(req.query) es un objeto con toda la info
+  Primera peticion que nos envia de MP 
+  { id: '9960489771', topic: 'merchant_order' }
+  POST /paymentRoute/webhook?id=9960489771&topic=merchant_order 200 7.059 ms - 8
+  Segunda peticion que nos envia MP con el ID del pago 
+  { 'data.id': '1313494274', type: 'payment' }
+  POST /paymentRoute/webhook?data.id=1313494274&type=payment 200 2.222 ms - 8
+  */
+
+  const { type, data } = req.query
+
+  if (type === "payment" && typeof data === "object" && "data.id" in data) {
+    const paymentId = data["data.id"] as string
+
+    try {
+      const response = await mercadopago.payment.findById(+paymentId)
+      console.log(response)
+      // Aquí puedes manejar la información del pago recibido de Mercado Pago
+    } catch (error) {
+      res.status(500).send({ message: `${error}` })
+    }
+  }
+
+  res.status(204).send("Transaction was successfully")
 }
