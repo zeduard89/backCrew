@@ -8,6 +8,7 @@ import getAllUsers from "../controllers/user/getAllUsers"
 import getAllUserProjects from "../controllers/user/getAllUserProjects"
 import { postUserFavoriteRelationship } from "../controllers/user/postUserFavorite"
 import getAllUsersFavorites from "../controllers/user/getAllUsersFavorites"
+import { deleteUserFavorite } from "../controllers/user/deleteUserFavorite"
 
 const upload = multer()
 const router = Router()
@@ -27,5 +28,7 @@ router.put("/updateUserInfo", upload.single("file"), updateUserInfo)
 router.post("/create/UserFavoriteRelationship", postUserFavoriteRelationship)
 
 router.get("/getAllUsersFavorites", getAllUsersFavorites)
+
+router.delete("/deleteUserFavorite", deleteUserFavorite)
 
 export { router }

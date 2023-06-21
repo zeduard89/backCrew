@@ -24,6 +24,6 @@ router.get("/pending", (_req, res) => {
 })
 
 // Escucha eventos que lleguen por mecado pago(usuario esta pagando/ya pago)
-router.get("/webhook", reciveWebHook)
+router.post("/webhook", reciveWebHook)
 
 export { router }
