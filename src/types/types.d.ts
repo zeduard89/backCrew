@@ -1,6 +1,5 @@
 export interface IUser {
   id: string
-<<<<<<< HEAD
   name: string
   lastName: string
   email: string
@@ -26,10 +25,6 @@ export interface IUserFavorite {
   projectsId: string
 }
 
-=======
-}
-
->>>>>>> 8bb5c4143d14c61e90543da825b0f0959553949b
 export interface IComment {
   id: string
   firstName: string
@@ -116,7 +111,7 @@ export type updateLikes = Omit<
 
 // Uso una interface nueva Proyect x 2
 export interface updateProject {
-  id: number
+  id: string
   title: string
   description: string
   shortDescription: string
