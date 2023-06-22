@@ -76,5 +76,4 @@ export default class User extends Model<IUser> {
 
   @BelongsToMany(() => ProjectModel, () => UserFavoritesModel)
   favoriteProjects!: ProjectModel[]
-
 }
