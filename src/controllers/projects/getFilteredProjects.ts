@@ -27,8 +27,8 @@ const getFilteredProjects = async (
   validatedSort: string,
   validatedQ: string | null,
   validatedP: string,
-  validatedS: string
-  // validatedCountry: string | undefined,
+  validatedS: string,
+  validatedCountry: string
 ): Promise<object> => {
   try {
     let whereClause = {} // Object to record the filter orders
@@ -43,13 +43,13 @@ const getFilteredProjects = async (
       }
     }
 
-    //  //  Country Filter
-    //   if (validatedCountry !== "all") {
-    //     whereClause = {
-    //       ...whereClause,
-    //       location: validatedCountry,
-    //     };
-    //   }
+   //  Country Filter
+    if (validatedCountry !== "all") {
+      whereClause = {
+        ...whereClause,
+        location: validatedCountry,
+      };
+    }
 
     // Query search
     if (validatedQ) {
