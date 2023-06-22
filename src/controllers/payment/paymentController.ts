@@ -1,5 +1,7 @@
 import { Response, Request } from "express"
 import mercadopago from "mercadopago"
+let user = ""
+let project = ""
 
 export const createOrder = async (
   req: Request,
@@ -10,7 +12,17 @@ export const createOrder = async (
       // token del vendedor 1
       "TEST-6906507892593651-061712-2b4875eb25700da93a4beb6f9edb70be-1400674523"
   })
-  const { titleProject, unitePrice, currencyId, quantityNumber } = req.body
+  const {
+    titleProject,
+    unitePrice,
+    currencyId,
+    quantityNumber,
+    userId,
+    projectId
+  } = req.body
+  // Guardo user y project en la variables globales
+  user = userId
+  project = projectId
   try {
     const result = await mercadopago.preferences.create({
       // Genero un item para simular una venta luego hacerlo dinamico (1)
@@ -41,7 +53,7 @@ export const createOrder = async (
       // y ese dominio va a redireccionar a su localhost, bajo archivo y agrego al proyecto en carpeta raiz
       // ejecuto en terminal   .\ngrok.exe http 3001    copiar la (http.... io)+/webhook a notification_url
       notification_url:
-        "https://4b5a-2800-810-538-16b9-14a0-2fcb-436e-eda6.sa.ngrok.io/paymentRoute/webhook"
+        "https://5b71-2800-810-538-16b9-14a0-2fcb-436e-eda6.sa.ngrok.io/paymentRoute/webhook"
       //! "https://9ce0-2800-810-538-16b9-14a0-2fcb-436e-eda6.sa.ngrok.io/paymentRoute/webhook"
     })
     // (3) envio la info gral la cual tiene un atributo,tipo url que recibe el usario para terminar el pago
@@ -103,9 +115,10 @@ export const reciveWebHook = async (req: Request, res: Response) => {
           dateApproved: detail.date_approved,
           dateCreated: detail.date_created
         }
-        console.log(newDetail)
-
-        res.status(200).json(newDetail)
+        console.log(user, project)
+        res.status(200).json({
+          message: `Paymente is ${newDetail.status} and ${newDetail.statusDetail}`
+        })
       }
     } catch (error) {
       res.status(500).send({ message: `${error}` })
