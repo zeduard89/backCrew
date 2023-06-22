@@ -42,6 +42,7 @@ has permissions to access
 - [Create Random Project](./readme/projectRoute/llenarDB100.md) : `POST /projectRoute/llenarDB?usuarios${number}`
 - [Create Project](./readme/projectRoute/createProject.md) : `POST /projectRoute/`
 - [Get All Project](./readme/projectRoute/allProjects.md) : `GET /projectRoute/allProject`
+- [Get All Project with Users/Fav](./readme/projectRoute/allProjectsWithUsers.md) : `GET /projectRoute/getAllProjects/withUsers`
 - [Get Project By Name](./readme/projectRoute/projectByName.md) : `GET /projectRoute/search`
 - [Get Day Left](./readme/projectRoute/projectDeyLeft.md) : `GET /projectRoute/search/dayLeft`
 - [Delete Project](./readme/projectRoute/deleteProject.md) : `DELETE /projectRoute/deleteProject`
