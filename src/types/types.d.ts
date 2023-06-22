@@ -111,7 +111,7 @@ export type updateLikes = Omit<
 
 // Uso una interface nueva Proyect x 2
 export interface updateProject {
-  id: number
+  id: string
   title: string
   description: string
   shortDescription: string

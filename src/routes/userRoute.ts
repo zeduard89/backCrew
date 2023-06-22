@@ -32,6 +32,4 @@ router.get("/getAllUsersFavorites", getAllUsersFavorites)
 
 router.delete("/deleteUserFavorite", deleteUserFavorite)
 
-router.post("/register", registerUser)
-
 export { router }
