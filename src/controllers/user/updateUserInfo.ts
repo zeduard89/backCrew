@@ -96,7 +96,7 @@ export const updateUserInfo = async (
       }
     )
 
-    res.status(200).send({ data: user })
+    res.status(200).send({ message: "Update was successfully" })
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Unknown error deleting user"

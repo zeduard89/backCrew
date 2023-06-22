@@ -111,7 +111,7 @@ export type updateLikes = Omit<
 
 // Uso una interface nueva Proyect x 2
 export interface updateProject {
-  id: number
+  id: string
   title: string
   description: string
   shortDescription: string
@@ -130,6 +130,35 @@ export interface limitDate {
   minutes: number
   seconds: number
   daysLeft: number
+}
+
+export interface IPaymentDetail {
+  id: number
+  currencyId: string
+  description: string
+  operationType: string
+  orderId: string
+  ordertype: string
+  firstName?: string
+  lastName?: string
+  email: string
+  identificationNumber: string
+  identificationType: string
+  phoneAreaCode?: string
+  phoneNumber?: string
+  phoneExtension?: string
+  type?: string
+  entityType?: string
+  paymentMetodId: string
+  status: string
+  statusDetail: string
+  taxesAmount: string
+  transactionAmount: number
+  transactionAmountRefunded: number
+  transactionReceived: number
+  dateApproved: string
+  dateCreated: string
+  payerId: string
 }
 
 // Por defecto TS utiliza este nombre en el fichero 'types.d.ts'
