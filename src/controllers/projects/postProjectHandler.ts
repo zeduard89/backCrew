@@ -1,5 +1,7 @@
-import { ProjectModel } from "../../config/db"
+import { ProjectModel, UserModel } from "../../config/db"
 import { IProject } from "../../types/types"
+//! Omitir este sector y sus elementos para limitar la creacion de Containers
+
 // import { BlobServiceClient } from "@azure/storage-blob"
 
 // // Cargamos las variables de entorno con config y la ejecuto para conectar
@@ -10,12 +12,15 @@ import { IProject } from "../../types/types"
 //  throw new Error("Azure Storage connection string is not configured");
 // }
 // const blobService = BlobServiceClient.fromConnectionString(connectionString) // conexion
+//! --------------------------------------------------------------------------------
 
 const createProjectController = async (
   validatedProject: IProject
 ): Promise<object> => {
   try {
-    const { title, ...rest } = validatedProject
+    const { title, creatorId, ...rest } = validatedProject
+    const user = await UserModel.findOne({ where: { id: creatorId } })
+    if (!user) throw new Error("User does not exist in DB")
 
     const allProjects = await ProjectModel.findAll()
     const newAllProjects = allProjects.filter(
@@ -28,12 +33,13 @@ const createProjectController = async (
       throw new Error("Project exists")
     }
 
-    const createdProject = await ProjectModel.create({
+    await ProjectModel.create({
       title,
+      creatorId,
       ...rest
     })
 
-    // //! Omitir este sector y sus elementos para limitar la creacion de Containers
+    //! Omitir este sector y sus elementos para limitar la creacion de Containers
     // // Ejemplo crew1 con id=1
     // const newIdProjectContainer = `crew${createdProject.id.toString()}`
     // // Buscamos si existe el contenedor, sino existe lo creo con el id del Project
@@ -46,10 +52,9 @@ const createProjectController = async (
 
     // await blobService.createContainer(newIdProjectContainer)
     //! ---------------------------------
-    return { message: `Project: ${createdProject.title} created successfully` }
+    return { message: `${user.id}` }
   } catch (error) {
-    const errorMessage =
-      (error as Error).message || "Unknown error while saving ImageAzure"
+    const errorMessage = (error as Error).message || "Unknown error "
     return { errorMessage }
   }
 }

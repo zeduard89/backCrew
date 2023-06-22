@@ -37,7 +37,8 @@ export const projectValidator = z.object({
     .nonnegative({ message: "The project phase must be a non-negative number" })
     .max(3)
     .default(0),
-  displayProject: z.boolean().default(false)
+  displayProject: z.boolean().default(false),
+  creatorId: z.string()
 })
 
 export const deleteProjectValidator = z.object({
@@ -48,7 +49,7 @@ export const deleteProjectValidator = z.object({
 })
 
 export const updateProjectValidator = z.object({
-  id: z.number(),
+  id: z.string(),
   title: z
     .string()
     .min(3, { message: "Title must have at least 3 characters" }),

@@ -1,4 +1,4 @@
-# Register
+# User Register
 
 **URL** : `/userRoute/register/`
 
@@ -10,11 +10,10 @@
 
 ```json
 {
-  "name": "[valid email name]",
-  "lastName": "[valid email lastName]",
-  "email": "[valid email email]",
-  "password": "[valid email password]",
-  "access": false //no debe salir del front
+  "id": "[valid String]",
+  "name": "[valid String]",
+  "lastName": "[valid String]",
+  "email": "[valid String]"
 }
 ```
 
@@ -23,11 +22,10 @@
 ```json
 {
   "data": {
+    "id": "ac8ec82d-fc39-450b-bcab-bc2cc4b539b12333",
     "name": "Johnn",
     "lastName": "Morel",
-    "email": "john@example5.com",
-    "password": "1234",
-    "access": false
+    "email": "john@example5.com"
   }
 }
 ```
@@ -41,33 +39,42 @@
 ```json
 {
   "registerUser": {
-    "id": "2ecd08e3-2422-4741-8287-15e407f424f1",
-    "verified": false,
-    "image": "false", //que sea URL de azure
+    "id": "ac8ec82d-fc39-450b-bcab-bc2cc4b539b12333",
     "name": "Johnn",
     "lastName": "Morel",
-    "email": "john@example6.com",
-    "password": "$2a$10$npIx7QBDWvjKdJNDv8yAueIVefRTPZmn/5hiDbaYPWKLo33Jg8R7G", //luego hacerlo temporal
-    "access": false, //quitar
-    "updatedAt": "2023-06-14T05:25:38.953Z", //quitar
-    "createdAt": "2023-06-14T05:25:38.953Z" // quitar
+    "email": "john@example5.com",
+    "avatar": "https://proyectofinalhenry.blob.core.windows.net/defaultcontainer/userDefault.png?sv=2022-11-02&st=2023-06-19T20%3A29%3A43Z&se=2023-06-20T20%3A29%3A43Z&sr=b&sp=r&sig=o0A9JlctL0UMOFYpiQFjHCL26QNNxH09r5mytjQPdw8%3D&rscd=inline",
+    "date": "Mon Jun 19 2023 17:29:43 GMT-0300 (Argentina Standard Time)",
+    "updatedAt": "2023-06-19T20:29:43.299Z",
+    "createdAt": "2023-06-19T20:29:43.299Z"
   }
 }
 ```
 
 ## Error Response
 
-**Condition** : If 'email' don't exist .
+**Condition** : If 'email' is missing in sended attributes.
 
 **Code** : `400 BAD REQUEST`
 
 **Content** :
 
-```json
-{
-  //Corregir detalles
-  "Illegal arguments": "undefined, number"
-}
+```Notjson
+
+Email already used
+
+```
+
+**Condition** : If 'email' exist in DB .
+
+**Code** : `400 BAD REQUEST`
+
+**Content** :
+
+```Notjson
+
+Email already used
+
 ```
 
 - [Back](../../readme.md) : `MainPage`
