@@ -5,6 +5,7 @@ import ProjectModel from "../models/ProjectModel"
 import CommentModel from "../models/CommentModel"
 import AdminModel from "../models/AdminModel"
 import UserFavoritesModel from "../models/UserFavoritesModel"
+import PaymentsModel from "../models/PaymentModel"
 
 dotenv.config()
 
@@ -23,7 +24,8 @@ const sequelize = new Sequelize(
       ProjectModel,
       CommentModel,
       AdminModel,
-      UserFavoritesModel
+      UserFavoritesModel,
+      PaymentsModel
     ]
   }
 )
@@ -33,7 +35,8 @@ sequelize.addModels([
   ProjectModel,
   CommentModel,
   AdminModel,
-  UserFavoritesModel
+  UserFavoritesModel,
+  PaymentsModel
 ])
 
 // 1:1 Esto permite que un usuario tenga un perfil asociado.
@@ -46,13 +49,24 @@ sequelize.addModels([
 UserModel.hasMany(ProjectModel, { foreignKey: "creatorId" })
 ProjectModel.belongsTo(UserModel, { foreignKey: "creatorId", targetKey: "id" })
 
+// Payments
+UserModel.hasMany(PaymentsModel, { foreignKey: "payerId" })
+PaymentsModel.belongsTo(UserModel, { foreignKey: "payerId", targetKey: "id" })
+
+ProjectModel.hasMany(PaymentsModel, { foreignKey: "projectId" })
+PaymentsModel.belongsTo(ProjectModel, {
+  foreignKey: "projectId",
+  targetKey: "id"
+})
+
 export {
   sequelize,
   UserModel,
   ProjectModel,
   CommentModel,
   AdminModel,
-  UserFavoritesModel
+  UserFavoritesModel,
+  PaymentsModel
 }
 
 //     Ejemplo de uso de los métodos de relación

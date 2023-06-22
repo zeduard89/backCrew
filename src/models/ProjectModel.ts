@@ -4,11 +4,12 @@ import {
   Table,
   DataType,
   BelongsTo,
+  HasMany,
   ForeignKey,
   BelongsToMany
 } from "sequelize-typescript"
 import { IProject } from "../types/types"
-import { UserModel, UserFavoritesModel } from "../config/db"
+import { UserModel, UserFavoritesModel, PaymentsModel } from "../config/db"
 
 @Table({ tableName: "projects" })
 export default class Project extends Model<IProject> {
@@ -134,9 +135,15 @@ export default class Project extends Model<IProject> {
   })
   creatorId!: string
 
+  // 1:N project-payment
+  @HasMany(() => PaymentsModel)
+  projectPayments!: PaymentsModel[]
+
+  // 1:N project-user
   @BelongsTo(() => UserModel, "creatorId") // Asigna un alias único a la asociación
   user!: UserModel
 
+  // N:N project-favorite-user
   @BelongsToMany(() => UserModel, () => UserFavoritesModel)
   favoriteUsers!: UserModel[]
 }
