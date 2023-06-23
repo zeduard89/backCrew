@@ -33,7 +33,7 @@ const getAllUsersFavorites = async (
     //   success: false,
     //   error: "Internal server error"
     // })
-    return res.status(500).send({ message: `${error}` })
+    return res.status(400).send({ message: `${error}` })
   }
 }
 

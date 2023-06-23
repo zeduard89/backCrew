@@ -9,7 +9,7 @@ import {
   BelongsToMany
 } from "sequelize-typescript"
 import { IProject } from "../types/types"
-import { UserModel, UserFavoritesModel, PaymentsModel } from "../config/db"
+import { UserModel, PaymentsModel, UserFavoritesModel } from "../config/db"
 
 @Table({ tableName: "projects" })
 export default class Project extends Model<IProject> {

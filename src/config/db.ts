@@ -5,7 +5,7 @@ import ProjectModel from "../models/ProjectModel"
 import CommentModel from "../models/CommentModel"
 import AdminModel from "../models/AdminModel"
 import UserFavoritesModel from "../models/UserFavoritesModel"
-import PaymentsModel from "../models/PaymentModel"
+import PaymentsModel from "../models/PaymentsModel"
 
 dotenv.config()
 
@@ -50,8 +50,8 @@ UserModel.hasMany(ProjectModel, { foreignKey: "creatorId" })
 ProjectModel.belongsTo(UserModel, { foreignKey: "creatorId", targetKey: "id" })
 
 // Payments
-UserModel.hasMany(PaymentsModel, { foreignKey: "payerId" })
-PaymentsModel.belongsTo(UserModel, { foreignKey: "payerId", targetKey: "id" })
+UserModel.hasMany(PaymentsModel, { foreignKey: "userId" })
+PaymentsModel.belongsTo(UserModel, { foreignKey: "userId", targetKey: "id" })
 
 ProjectModel.hasMany(PaymentsModel, { foreignKey: "projectId" })
 PaymentsModel.belongsTo(ProjectModel, {

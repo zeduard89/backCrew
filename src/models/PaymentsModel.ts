@@ -9,15 +9,20 @@ import {
 import { IPaymentDetail } from "../types/types"
 import { UserModel, ProjectModel } from "../config/db"
 
-@Table({ tableName: "payments" })
+@Table({ tableName: "payments", timestamps: false })
 export default class Payments extends Model<IPaymentDetail> {
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
-    primaryKey: true,
-    autoIncrement: true
+    primaryKey: true
   })
   id!: number
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false
+  })
+  payerId!: string
 
   @Column({
     type: DataType.STRING,
@@ -33,7 +38,7 @@ export default class Payments extends Model<IPaymentDetail> {
 
   @Column({
     type: DataType.STRING,
-    allowNull: true
+    allowNull: false
   })
   operationType!: string
 
@@ -51,13 +56,15 @@ export default class Payments extends Model<IPaymentDetail> {
 
   @Column({
     type: DataType.STRING,
-    allowNull: true
+    allowNull: true,
+    defaultValue: "firstName"
   })
   firstName?: string
 
   @Column({
     type: DataType.STRING,
-    allowNull: true
+    allowNull: true,
+    defaultValue: "lastName"
   })
   lastName?: string
 
@@ -69,9 +76,10 @@ export default class Payments extends Model<IPaymentDetail> {
 
   @Column({
     type: DataType.STRING,
-    allowNull: true
+    allowNull: true,
+    defaultValue: "identificationNumber"
   })
-  identificationNumber!: string
+  identificationNumber?: string
 
   @Column({
     type: DataType.STRING,
@@ -81,31 +89,36 @@ export default class Payments extends Model<IPaymentDetail> {
 
   @Column({
     type: DataType.STRING,
-    allowNull: true
+    allowNull: true,
+    defaultValue: "phoneAreaCode"
   })
   phoneAreaCode?: string
 
   @Column({
     type: DataType.STRING,
-    allowNull: true
+    allowNull: true,
+    defaultValue: "phoneNumber"
   })
   phoneNumber?: string
 
   @Column({
     type: DataType.STRING,
-    allowNull: true
+    allowNull: true,
+    defaultValue: "phoneExtension"
   })
   phoneExtension?: string
 
   @Column({
     type: DataType.STRING,
-    allowNull: true
+    allowNull: true,
+    defaultValue: "type"
   })
   type?: string
 
   @Column({
     type: DataType.STRING,
-    allowNull: true
+    allowNull: true,
+    defaultValue: "entityType"
   })
   entityType?: string
 
@@ -169,9 +182,9 @@ export default class Payments extends Model<IPaymentDetail> {
     type: DataType.STRING,
     allowNull: false
   })
-  payerId!: string
+  userId!: string
 
-  @BelongsTo(() => UserModel, "payerId") // Asigna un alias único a la asociación
+  @BelongsTo(() => UserModel, "userId") // Asigna un alias único a la asociación
   paymentUser!: UserModel
 
   // 1:N project-payment
