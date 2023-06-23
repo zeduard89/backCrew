@@ -11,7 +11,7 @@ const getTwentyMostTrending = async (
     let existingProjects = await ProjectModel.findAll();
 
     if (existingProjects.length === 0) {
-      throw new Error("There are no projects with this parameters");
+      throw new Error("There are no projects");
     }
 
     //  Most trending sort
