@@ -1,6 +1,11 @@
 import { Response, Request } from "express"
 import { PaymentsModel, ProjectModel } from "../../config/db"
 import mercadopago from "mercadopago"
+import dotenv from "dotenv"
+dotenv.config()
+const { TOKEN_MP, MP_SUCCESS, MP_FAILURE, MP_PENDING, MP_NOTIFICATION } =
+  process.env
+
 let user = ""
 let project = ""
 
@@ -11,7 +16,7 @@ export const createOrder = async (
   mercadopago.configure({
     access_token:
       // token del vendedor 1
-      "TEST-6906507892593651-061712-2b4875eb25700da93a4beb6f9edb70be-1400674523"
+      `${TOKEN_MP}`
   })
   const {
     titleProject,
@@ -36,17 +41,15 @@ export const createOrder = async (
       ],
       // Le indico hacia donde yo retorno la respuesta (2)
       back_urls: {
-        success: "http://127.0.0.1:5173/paymentRoute/success", // si se realizo el pago me redirige ACA al tocar el boton VOLVER al sitio en la pagina de MP
-        failure: "http://127.0.0.1:5173/paymentRoute/failure", // fallo
-        pending: "http://127.0.0.1:5173/paymentRoute/pending" // pendiente
+        success: `${MP_SUCCESS}`, // si se realizo el pago me redirige ACA al tocar el boton VOLVER al sitio en la pagina de MP
+        failure: `${MP_FAILURE}`, // fallo
+        pending: `${MP_PENDING}` // pendiente
       },
       // Cuando el pago este echo, se envia a esta url, pero debe ser una transaccion segura https(en DEV no tenemos)
       // por ende use agrega "ngrok" se descarga un ejecutable que genera un tunnel HTTP, da un dominio SSL
       // y ese dominio va a redireccionar a su localhost, bajo archivo y agrego al proyecto en carpeta raiz
       // ejecuto en terminal   .\ngrok.exe http 3001    copiar la (http.... io)+/webhook a notification_url
-      notification_url:
-
-        "https://e9af-2800-810-538-16b9-c9f2-4c4c-ad9d-ff33.sa.ngrok.io/paymentRoute/webhook"
+      notification_url: `${MP_NOTIFICATION}/paymentRoute/webhook`
 
       //! "https://9ce0-2800-810-538-16b9-14a0-2fcb-436e-eda6.sa.ngrok.io/paymentRoute/webhook"
     })
