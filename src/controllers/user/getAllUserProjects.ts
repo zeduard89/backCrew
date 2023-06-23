@@ -1,4 +1,4 @@
-import { ProjectModel, UserModel } from "../../config/db"
+import { UserModel } from "../../config/db"
 import { Request, Response } from "express"
 import { validatorString } from "../../schemas/projectSchemas"
 
@@ -18,20 +18,13 @@ const getAllUserProjects = async (
     if (!user) {
       throw new Error("User not found")
     }
+    // Busco por medio de su relacion (projects esta dentro del modelo user)
+    const findedUser = await user.$get("projects")
 
-    const findedUser = await UserModel.findOne({
-      where: { id: user.id },
-      include: [ProjectModel]
-    })
-
-    if (!findedUser || !findedUser.projects) {
-      throw new Error("No Projects found")
-    }
-
-    return res.status(200).json(findedUser.projects)
+    return res.status(200).json(findedUser)
   } catch (error) {
     console.error("Error fetching projects for user:", error)
-    return res.status(500).json({
+    return res.status(400).json({
       success: false,
       error: "Internal server error"
     })
