@@ -23,7 +23,7 @@ const getAllUsersFavorites = async (
     const favoriteProjects = await user.$get("favoriteProjects") // Obtener la lista de proyectos favoritos
 
     if (!favoriteProjects || favoriteProjects.length === 0) {
-      throw new Error("No Projects found")
+      return res.status(200).json([])
     }
 
     return res.status(200).json(favoriteProjects)
@@ -33,7 +33,7 @@ const getAllUsersFavorites = async (
     //   success: false,
     //   error: "Internal server error"
     // })
-    return res.status(500).send({ message: `${error}` })
+    return res.status(400).send({ message: `${error}` })
   }
 }
 

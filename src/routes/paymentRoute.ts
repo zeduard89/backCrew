@@ -3,6 +3,9 @@ import {
   createOrder,
   reciveWebHook
 } from "../controllers/payment/paymentController"
+import getAllPaymentsFromOneUser from "../controllers/payment/getAllPaymentsFromOneUser"
+import getPaymentById from "../controllers/payment/getPaymentById"
+import getAllPaymentsFromOneProject from "../controllers/payment/getAllPaymentsFromOneProject"
 
 const router = Router()
 
@@ -25,5 +28,13 @@ router.get("/pending", (_req, res) => {
 
 // Escucha eventos que lleguen por mecado pago(usuario esta pagando/ya pago)
 router.post("/webhook", reciveWebHook)
+
+//! ------------------
+// All Payments from User/Project
+router.get("/info/getAllPaymentsFromOneUser", getAllPaymentsFromOneUser) //!
+router.get("/info/getAllPaymentsFromOneProject", getAllPaymentsFromOneProject) //!
+
+// Todos los payments que tiene el project
+router.get("/info/getPaymentById", getPaymentById)
 
 export { router }
