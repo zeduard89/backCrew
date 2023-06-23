@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "ts-node-dev src/index.ts",
     "lint": "ts-standard",
-    "start": "ts-node src/index.ts",
-    "tsc": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
