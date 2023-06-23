@@ -1,4 +1,5 @@
 import { Response, Request } from "express"
+import { PaymentsModel, ProjectModel } from "../../config/db"
 import mercadopago from "mercadopago"
 let user = ""
 let project = ""
@@ -25,15 +26,6 @@ export const createOrder = async (
   project = projectId
   try {
     const result = await mercadopago.preferences.create({
-      // Genero un item para simular una venta luego hacerlo dinamico (1)
-      // items: [
-      //   {
-      //     title: "Laptop Lenovo",
-      //     unit_price: 500,
-      //     currency_id: "ARS",
-      //     quantity: 1
-      //   }
-      // ],
       items: [
         {
           title: titleProject,
@@ -53,7 +45,7 @@ export const createOrder = async (
       // y ese dominio va a redireccionar a su localhost, bajo archivo y agrego al proyecto en carpeta raiz
       // ejecuto en terminal   .\ngrok.exe http 3001    copiar la (http.... io)+/webhook a notification_url
       notification_url:
-        "https://5b71-2800-810-538-16b9-14a0-2fcb-436e-eda6.sa.ngrok.io/paymentRoute/webhook"
+        "https://d995-2800-810-538-16b9-c9f2-4c4c-ad9d-ff33.sa.ngrok.io/paymentRoute/webhook"
       //! "https://9ce0-2800-810-538-16b9-14a0-2fcb-436e-eda6.sa.ngrok.io/paymentRoute/webhook"
     })
     // (3) envio la info gral la cual tiene un atributo,tipo url que recibe el usario para terminar el pago
@@ -89,22 +81,22 @@ export const reciveWebHook = async (req: Request, res: Response) => {
         // Aquí puedes manejar la información del pago recibido de Mercado Pago
         const newDetail = {
           id: detail.id,
+          payerId: detail.payer.id,
           currencyId: detail.currency_id,
           description: detail.description,
           operationType: detail.operation_type,
           orderId: detail.order.id,
           ordertype: detail.order.type,
-          firstName: detail.payer.first_name,
-          lastName: detail.payer.last_name,
+          firstName: detail.payer.first_name || "firstName",
+          lastName: detail.payer.last_name || "lastName",
           email: detail.payer.email,
           identificationNumber: detail.payer.identification.number,
           identificationType: detail.payer.identification.type,
-          phoneAreaCode: detail.payer.phone.area_code,
-          phoneNumber: detail.payer.phone.number,
-          phoneExtension: detail.payer.phone.extension,
-          type: detail.payer.type,
-          entityType: detail.payer.entity_type,
-          payerId: detail.payer.id,
+          phoneAreaCode: detail.payer.phone.area_code || "phoneAreaCode",
+          phoneNumber: detail.payer.phone.number || "phoneNumber",
+          phoneExtension: detail.payer.phone.extension || "phoneExtension",
+          type: detail.payer.type || "type",
+          entityType: detail.payer.entity_type || "entityType",
           paymentMetodId: detail.payment_method_id,
           status: detail.status,
           statusDetail: detail.status_detail,
@@ -112,16 +104,43 @@ export const reciveWebHook = async (req: Request, res: Response) => {
           transactionAmount: detail.transaction_amount,
           transactionAmountRefunded: detail.transaction_amount_refunded,
           transactionReceived: detail.transaction_details.net_received_amount,
-          dateApproved: detail.date_approved,
-          dateCreated: detail.date_created
+          dateApproved: detail.date_approved.toString(),
+          dateCreated: detail.date_created.toString(),
+          userId: user.toString(),
+          projectId: project.toString()
         }
-        console.log(user, project)
+        // Creo el paymente en la DB
+        await PaymentsModel.create(newDetail)
+
+        const upDateProject = await ProjectModel.findByPk(project)
+        if (upDateProject) {
+          const updatedCurrentFounding =
+            parseFloat(newDetail.transactionReceived) -
+            parseFloat(newDetail.transactionAmountRefunded)
+
+          await upDateProject.update(
+            {
+              fundingCurrent:
+                upDateProject.fundingCurrent + updatedCurrentFounding,
+              fundingPercentage:
+                ((upDateProject.fundingCurrent + updatedCurrentFounding) *
+                  100) /
+                upDateProject.fundingGoal
+            },
+            {
+              where: {
+                id: project
+              }
+            }
+          )
+        }
+
         res.status(200).json({
-          message: `Paymente is ${newDetail.status} and ${newDetail.statusDetail}`
+          message: `Paymente is ${newDetail.id} and ${newDetail.payerId}`
         })
       }
     } catch (error) {
-      res.status(500).send({ message: `${error}` })
+      res.status(400).send({ message: `${error}` })
     }
   }
 }

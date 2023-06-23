@@ -134,31 +134,33 @@ export interface limitDate {
 
 export interface IPaymentDetail {
   id: number
+  payerId: string
   currencyId: string
   description: string
   operationType: string
   orderId: string
   ordertype: string
-  firstName?: string
-  lastName?: string
+  firstName?: string | null
+  lastName?: string | null
   email: string
   identificationNumber: string
   identificationType: string
-  phoneAreaCode?: string
-  phoneNumber?: string
-  phoneExtension?: string
-  type?: string
-  entityType?: string
+  phoneAreaCode?: string | null
+  phoneNumber?: string | null
+  phoneExtension?: string | null
+  type?: string | null
+  entityType?: string | null
   paymentMetodId: string
   status: string
   statusDetail: string
-  taxesAmount: string
+  taxesAmount: number
   transactionAmount: number
   transactionAmountRefunded: number
   transactionReceived: number
-  dateApproved: string
-  dateCreated: string
-  payerId: string
+  // dateApproved: string
+  // dateCreated: string
+  userId: string
+  projectId: string
 }
 
 // Por defecto TS utiliza este nombre en el fichero 'types.d.ts'
