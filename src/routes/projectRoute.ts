@@ -17,6 +17,7 @@ import getProjectByIdController from "../controllers/projects/getProjectByIdCont
 // Get by Name
 import getProjectByNameController from "../controllers/projects/getProjectByNameHandler"
 import getAllProjectsByNameController from "../controllers/projects/getAllProjectsByNameHandler"
+import getAllProjetsWithUser from "../controllers/projects/getAllProjetsWithUser"
 // Delete y getAll
 import deleteProjectByNameController from "../controllers/projects/deleteProjectByName"
 import getAllProjects from "../controllers/projects/getAllProjects"
@@ -215,6 +216,19 @@ router.get("/allProjects", async (_req: Request, res: Response) => {
     const errorMessage =
       (error as Error).message ||
       "Unknown error while searching all Projects"
+    res.status(400).send(errorMessage)
+  }
+})
+
+// Rutra que busca todos los projectos de la DB y los usuarios que dieron favoritos
+router.get("/getAllProjets/withUsers", async (_req: Request, res: Response) => {
+  try {
+    const allProjects = await getAllProjetsWithUser()
+    res.status(200).json(allProjects)
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message ||
+      "Error desconocido al buscar todos los Projectos"
     res.status(400).send(errorMessage)
   }
 })

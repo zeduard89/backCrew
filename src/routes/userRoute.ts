@@ -1,4 +1,5 @@
 import { Router } from "express"
+import multer from "multer"
 // import { loginUser } from "../controllers/user/postUserLogin"
 import { registerUser } from "../controllers/user/postUserRegister"
 import { updateUserInfo } from "../controllers/user/updateUserInfo"
@@ -9,9 +10,7 @@ import { postUserFavoriteRelationship } from "../controllers/user/postUserFavori
 import getAllUsersFavorites from "../controllers/user/getAllUsersFavorites"
 import { deleteUserFavorite } from "../controllers/user/deleteUserFavorite"
 
-import multer from "multer"
 const upload = multer()
-
 const router = Router()
 
 // router.post("/login", loginUser)

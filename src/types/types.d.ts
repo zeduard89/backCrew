@@ -132,6 +132,37 @@ export interface limitDate {
   daysLeft: number
 }
 
+export interface IPaymentDetail {
+  id: number
+  payerId: string
+  currencyId: string
+  description: string
+  operationType: string
+  orderId: string
+  ordertype: string
+  firstName?: string | null
+  lastName?: string | null
+  email: string
+  identificationNumber: string
+  identificationType: string
+  phoneAreaCode?: string | null
+  phoneNumber?: string | null
+  phoneExtension?: string | null
+  type?: string | null
+  entityType?: string | null
+  paymentMetodId: string
+  status: string
+  statusDetail: string
+  taxesAmount: number
+  transactionAmount: number
+  transactionAmountRefunded: number
+  transactionReceived: number
+  // dateApproved: string
+  // dateCreated: string
+  userId: string
+  projectId: string
+}
+
 // Por defecto TS utiliza este nombre en el fichero 'types.d.ts'
 // Puedo tener varios esparcidos, pero ahora solo los coloco en este luegar
 // traduce elementos para que TC los entienda como lo de color ROJO, eso lo cree en ENUM

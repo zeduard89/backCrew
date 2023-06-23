@@ -39,9 +39,9 @@ has permissions to access.
 Endpoints for viewing and manipulating the Projects that the Admin
 has permissions to access
 
-- [Create Random Project](./readme/projectRoute/llenarDB100.md) : `POST /projectRoute/llenarDB?usuarios${number}`
 - [Create Project](./readme/projectRoute/createProject.md) : `POST /projectRoute/`
 - [Get All Project](./readme/projectRoute/allProjects.md) : `GET /projectRoute/allProject`
+- [Get All Project with Users/Fav](./readme/projectRoute/allProjectsWithUsers.md) : `GET /projectRoute/getAllProjects/withUsers`
 - [Get Project By Name](./readme/projectRoute/projectByName.md) : `GET /projectRoute/search`
 - [Get Day Left](./readme/projectRoute/projectDeyLeft.md) : `GET /projectRoute/search/dayLeft`
 - [Delete Project](./readme/projectRoute/deleteProject.md) : `DELETE /projectRoute/deleteProject`
@@ -67,6 +67,17 @@ has permissions to access
 - [Get Urls from Container](./readme/blobRoute/getAllFiles.md) : `GET /blobRoute/getAllFiles/images`
 - [Get Image Buffer](./readme/blobRoute/images.md) : `GET /blobRoute/get/images/`
 - [Delete Image](./readme/blobRoute/delete.md) : `DELETE /blobRoute/delete/`
+
+### Payment Methods
+
+- [Get payment made on a project](./readme/paymentRoute/getAllPaymentsFromOneProject.md) : `GET /paymentRoute/info/getAllPaymentsFromOneProject?projectId=${projectId}`
+- [get payment made by User](./readme/paymentRoute/getAllPaymentsFromOneUser.md) : `GET /paymentRoute/info/getAllPaymentsFromOneUser?userId=${userId}`
+- [Get Payment by Id](./readme/paymentRoute/getPaymentById.md) : `GET /paymentRoute/info/getPaymentById?paymentId=${paymentId}`
+- [Mercado Pago Controller](./readme/paymentRoute/paymentController.md)
+
+### Developer Tools
+
+- [Create Random Project](./readme/projectRoute/llenarDB100.md) : `POST /projectRoute/llenarDB?usuarios${number}`
 
 ### Build Tsc
 

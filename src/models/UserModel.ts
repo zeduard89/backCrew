@@ -7,7 +7,7 @@ import {
   BelongsToMany
 } from "sequelize-typescript"
 import { IUser } from "../types/types"
-import { ProjectModel, UserFavoritesModel } from "../config/db"
+import { ProjectModel, UserFavoritesModel, PaymentsModel } from "../config/db"
 
 @Table({ tableName: "users" })
 export default class User extends Model<IUser> {
@@ -71,9 +71,15 @@ export default class User extends Model<IUser> {
   })
   date!: string
 
+  // 1:N user-project
   @HasMany(() => ProjectModel)
   projects!: ProjectModel[]
 
+  // 1:N usuario-payment
+  @HasMany(() => PaymentsModel)
+  userPayments!: PaymentsModel[]
+
+  // N:N user-favorite-project
   @BelongsToMany(() => ProjectModel, () => UserFavoritesModel)
   favoriteProjects!: ProjectModel[]
 }
