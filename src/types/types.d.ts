@@ -9,15 +9,27 @@ export interface IUser {
   // password: string
   // verified?: boolean
   // access: boolean
+
+  // Add country, city, postalCode, shortDescription, aboutMe
+  country: string
+  city: string
+  postalCode: number
+  shortDescription: string
+  aboutMe: string
 }
 
-export type IUserLD = Omit<IUser, "name", "lastName", "id", "Date">
+export type IUserLD = Omit<IUser, "name", "lastName", "id", "Date", "country", "city", "postalCode", "shortDescription", "aboutMe">
 
 export interface IUpdateUser {
   id: string
   updateName?: string
   updateLastName?: string
   updateEmail?: string
+  updateCountry?: string
+  updateCity?: string
+  updatePostalCode?: number
+  updateShortDescription?: string
+  updateAboutMe?: string
 }
 
 export interface IUserFavorite {
