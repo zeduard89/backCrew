@@ -51,10 +51,10 @@ export default class User extends Model<IUser> {
   city!: string
 
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.STRING,
     allowNull: false
   })
-  postalCode!: number
+  postalCode!: string
 
   @Column({
     type: DataType.STRING,

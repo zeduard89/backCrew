@@ -13,7 +13,7 @@ export interface IUser {
   // Add country, city, postalCode, shortDescription, aboutMe
   country: string
   city: string
-  postalCode: number
+  postalCode: string
   shortDescription: string
   aboutMe: string
 }
@@ -27,7 +27,7 @@ export interface IUpdateUser {
   updateEmail?: string
   updateCountry?: string
   updateCity?: string
-  updatePostalCode?: number
+  updatePostalCode?: string
   updateShortDescription?: string
   updateAboutMe?: string
 }
