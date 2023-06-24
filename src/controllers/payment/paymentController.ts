@@ -59,7 +59,7 @@ export const createOrder = async (
     if (!result) throw new Error("Error with mercado pago")
     return res.status(200).json(result.body)
   } catch (error) {
-    return res.status(500).json({ messageError: "Something went wrong" })
+    return res.status(400).json({ messageError: "Something went wrong" })
   }
 }
 
