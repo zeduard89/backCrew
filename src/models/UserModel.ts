@@ -37,6 +37,37 @@ export default class User extends Model<IUser> {
   })
   email!: string
 
+  // Add country, city, postalCode, shortDescription, aboutMe
+  @Column({
+    type: DataType.STRING,
+    allowNull: false
+  })
+  country!: string
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false
+  })
+  city!: string
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false
+  })
+  postalCode!: number
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false
+  })
+  shortDescription!: string
+
+  @Column({
+    type: DataType.TEXT,
+    allowNull: false
+  })
+  aboutMe!: string
+
   // @Column({
   //   type: DataType.BOOLEAN,
   //   allowNull: false,
