@@ -14,7 +14,12 @@
   "updateName": "[valid string]",
   "updateLastName": "[valid string]",
   "updateEmail": "[valid string]",
-  "file": "[valid file {orignalname,buffer}]"
+  "file": "[valid file {orignalname,buffer}]",
+  "country": "[valid string]",
+  "city": "[valid string]",
+  "postalCode": "[valid string]",
+  "shortDescription": "[valid string]",
+  "aboutMe": "[valid string]"
 }
 ```
 
@@ -26,7 +31,12 @@
   "updateName": "Ruben",
   "updateLastName": "Perez",
   "updateEmail": "example@example.com",
-  "file": "fotoProfile.jpg"
+  "file": "fotoProfile.jpg",
+  "country": "Argentina",
+  "city": "Buenos Aires",
+  "postalCode": "12346",
+  "shortDescription": "Lorem ipsum dolor sit amet consect.",
+  "aboutMe": "Lorem ipsum dolor sit amet consectetur adipiscing elit phasellus cras rhoncus consequat tempor, id condimentum lacus taciti porttitor ac scelerisque sem."
 }
 ```
 
@@ -44,6 +54,11 @@
     "lastName": "Paez",
     "email": "zeduard@gmail.com",
     "avatar": "https://proyectofinalhenry.blob.core.windows.net/azureusercontainer/ac8ec82d-fc39-450b-bcab-bc2cc4b539b1.jpg",
+    "country": "Argentina",
+    "city": "Buenos Aires",
+    "postalCode": "12346",
+    "shortDescription": "Lorem ipsum dolor sit amet consect.",
+    "aboutMe": "Lorem ipsum dolor sit amet consectetur adipiscing elit phasellus cras rhoncus consequat tempor, id condimentum lacus taciti porttitor ac scelerisque sem.",
     "date": "Mon Jun 19 02:10:03 2023 +0300",
     "createdAt": "2023-06-19T02:36:34.834Z",
     "updatedAt": "2023-06-19T23:46:46.535Z"
