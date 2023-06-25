@@ -14,7 +14,12 @@
   "updateName": "[valid string]",
   "updateLastName": "[valid string]",
   "updateEmail": "[valid string]",
-  "file": "[valid file {orignalname,buffer}]"
+  "file": "[valid file {orignalname,buffer}]",
+  "updateCountry": "[valid string]",
+  "updateCity": "[valid string]",
+  "updatePostalCode": "[valid string]",
+  "updateShortDescription": "[valid string]",
+  "updateAboutMe": "[valid string]"
 }
 ```
 
@@ -26,7 +31,12 @@
   "updateName": "Ruben",
   "updateLastName": "Perez",
   "updateEmail": "example@example.com",
-  "file": "fotoProfile.jpg"
+  "file": "fotoProfile.jpg",
+  "updateCountry": "Venezuela",
+  "updateCity": "Ciudad de Venezuela",
+  "updatePostalCode": "1668",
+  "updateShortDescription": "It's is a short description",
+  "updateAboutMe": "Here is a short description about me"
 }
 ```
 
@@ -38,16 +48,7 @@
 
 ```json
 {
-  "data": {
-    "id": "ac8ec82d-fc39-450b-bcab-bc2cc4b539b1",
-    "name": "Guillermo",
-    "lastName": "Paez",
-    "email": "zeduard@gmail.com",
-    "avatar": "https://proyectofinalhenry.blob.core.windows.net/azureusercontainer/ac8ec82d-fc39-450b-bcab-bc2cc4b539b1.jpg",
-    "date": "Mon Jun 19 02:10:03 2023 +0300",
-    "createdAt": "2023-06-19T02:36:34.834Z",
-    "updatedAt": "2023-06-19T23:46:46.535Z"
-  }
+  "message": "Update was successfully"
 }
 ```
 

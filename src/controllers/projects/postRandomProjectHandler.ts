@@ -2,6 +2,7 @@ import { ProjectModel, UserModel } from "../../config/db"
 import { faker } from "@faker-js/faker"
 
 const categorias = ["Tech & Innovation", "Creative Works", "Community Projects"]
+const location = ["Argentina", "Mexico", "Colombia", "Peru", "Venezuela"]
 
 // CREO USUARIOS
 let count = 0
@@ -19,7 +20,12 @@ const createRandomUsers = () => {
       lastName: newLastname
     }),
     avatar: faker.image.avatar(),
-    date: faker.git.commitDate()
+    date: faker.git.commitDate(),
+    country: faker.location.country(),
+    city: faker.location.city(),
+    postalCode: faker.location.zipCode(),
+    shortDescription: "Lorem ipsum dolor sit amet consect.",
+    aboutMe: "Lorem ipsum dolor sit amet consectetur adipiscing elit phasellus cras rhoncus consequat tempor, id condimentum lacus taciti porttitor ac scelerisque sem."
   }
 
   return user
@@ -29,6 +35,8 @@ const createRandomProject = (id: string) => {
   count++
   const categoriaActual =
     categorias[Math.floor(Math.random() * categorias.length)]
+  const locationActual = 
+    location[Math.floor(Math.random() * location.length)]
   const mathR1 = +faker.commerce.price({ min: 0, max: 500000, dec: 0 })
   const mathR2 = +faker.commerce.price({ min: 0, max: 500000, dec: 0 })
 
@@ -46,11 +54,12 @@ const createRandomProject = (id: string) => {
     category: categoriaActual,
     // bank: faker.finance.creditCardIssuer(),
     // account: faker.finance.accountNumber,
-    // location: "argentina",
+    location: locationActual,
     // projectFase: Math.floor(Math.random() * 4),
     displayProject: true,
     creatorId: id
   }
+  console.log(proyecto)
   return proyecto
 }
 

@@ -2,6 +2,13 @@ import { Request, Response } from "express"
 import { UserModel } from "../../config/db"
 import { IUpdateUser } from "../../types/types"
 import { BlobServiceClient } from "@azure/storage-blob"
+import {
+  validatorCountry,
+  validatorCity,
+  validatorPostalCode,
+  validatorShortDescription,
+  validatorAboutMe
+} from "../../schemas/userSchemas"
 
 // Cargamos las variables de entorno con config y la ejecuto para conectar
 import dotenv from "dotenv"
@@ -19,8 +26,26 @@ export const updateUserInfo = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { id, updateName, updateLastName, updateEmail }: IUpdateUser =
+    const { 
+      id,
+      updateName, 
+      updateLastName, 
+      updateEmail,
+      updateCountry, 
+      updateCity, 
+      updatePostalCode,
+      updateShortDescription,
+      updateAboutMe 
+    }: IUpdateUser =
       req.body
+
+    // Validar los campos
+    validatorCountry.parse(updateCountry);
+    validatorCity.parse(updateCity);
+    validatorPostalCode.parse(updatePostalCode);
+    validatorShortDescription.parse(updateShortDescription);
+    validatorAboutMe.parse(updateAboutMe);
+
     // Contenedor Defalult de los usuarios
     const containerName = "azureusercontainer"
 
@@ -71,7 +96,12 @@ export const updateUserInfo = async (
           name: updateName || user.name,
           lastName: updateLastName || user.lastName,
           email: updateEmail || user.email,
-          avatar: blobUrl + "." + extension || user.avatar
+          avatar: blobUrl + "." + extension || user.avatar,
+          country: updateCountry || user.country, 
+          city: updateCity || user.city, 
+          postalCode: updatePostalCode || user.postalCode,
+          shortDescription: updateShortDescription || user.shortDescription,
+          aboutMe: updateAboutMe || user.aboutMe
         },
         {
           where: {
@@ -87,7 +117,12 @@ export const updateUserInfo = async (
       {
         name: updateName || user.name,
         lastName: updateLastName || user.lastName,
-        email: updateEmail || user.email
+        email: updateEmail || user.email,
+        country: updateCountry || user.country, 
+        city: updateCity || user.city, 
+        postalCode: updatePostalCode || user.postalCode,
+        shortDescription: updateShortDescription || user.shortDescription,
+        aboutMe: updateAboutMe || user.aboutMe
       },
       {
         where: {

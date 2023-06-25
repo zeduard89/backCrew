@@ -8,6 +8,7 @@ const { TOKEN_MP, MP_SUCCESS, MP_FAILURE, MP_PENDING, MP_NOTIFICATION } =
 
 let user = ""
 let project = ""
+console.log()
 
 export const createOrder = async (
   req: Request,
@@ -50,7 +51,6 @@ export const createOrder = async (
       // y ese dominio va a redireccionar a su localhost, bajo archivo y agrego al proyecto en carpeta raiz
       // ejecuto en terminal   .\ngrok.exe http 3001    copiar la (http.... io)+/webhook a notification_url
       notification_url: `${MP_NOTIFICATION}/paymentRoute/webhook`
-
       //! "https://9ce0-2800-810-538-16b9-14a0-2fcb-436e-eda6.sa.ngrok.io/paymentRoute/webhook"
     })
     // (3) envio la info gral la cual tiene un atributo,tipo url que recibe el usario para terminar el pago
@@ -59,7 +59,7 @@ export const createOrder = async (
     if (!result) throw new Error("Error with mercado pago")
     return res.status(200).json(result.body)
   } catch (error) {
-    return res.status(400).json({ messageError: "Something went wrong" })
+    return res.status(500).json({ messageError: "Something went wrong" })
   }
 }
 
@@ -115,6 +115,7 @@ export const reciveWebHook = async (req: Request, res: Response) => {
           projectId: project.toString()
         }
         // Creo el paymente en la DB
+
         await PaymentsModel.create(newDetail)
 
         const upDateProject = await ProjectModel.findByPk(project)

@@ -7,6 +7,13 @@ import {
   generateBlobSASQueryParameters,
   StorageSharedKeyCredential
 } from "@azure/storage-blob"
+import {
+  validatorCountry,
+  validatorCity,
+  validatorPostalCode,
+  validatorShortDescription,
+  validatorAboutMe
+} from "../../schemas/userSchemas"
 
 // Cargamos las variables de entorno con config y la ejecuto para conectar
 import dotenv from "dotenv"
@@ -27,7 +34,25 @@ export const registerUser = async (
   const containerName = "defaultcontainer"
 
   try {
-    const { name, lastName, email, id }: IUser = req.body
+    const {
+      name,
+      lastName,
+      email,
+      id,
+      country,
+      city,
+      postalCode,
+      shortDescription,
+      aboutMe
+    }: IUser = req.body
+
+    // Validate country, city, postalCode, ShortDescription and aboutMe
+    validatorCountry.parse(country)
+    validatorCity.parse(city)
+    validatorPostalCode.parse(postalCode)
+    validatorShortDescription.parse(shortDescription)
+    validatorAboutMe.parse(aboutMe)
+
     const user: IUser | null = await UserModel.findOne({ where: { email } })
     if (user != null) {
       throw new Error("Email already used")
@@ -78,8 +103,13 @@ export const registerUser = async (
       lastName,
       email,
       avatar: blobUrlWithSAS,
-      date: dateNow.toString()
+      date: dateNow.toString(),
       // se puede sacar el pais "date": "Sun Jun 18 2023 02:11:25 GMT-0300 (Argentina Standard Time)",
+      country,
+      city,
+      postalCode,
+      shortDescription,
+      aboutMe
     })
     res.status(200).send({ registerUser })
   } catch (error) {

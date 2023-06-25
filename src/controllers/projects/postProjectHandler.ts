@@ -33,7 +33,7 @@ const createProjectController = async (
       throw new Error("Project exists")
     }
 
-    await ProjectModel.create({
+    const newProject = await ProjectModel.create({
       title,
       creatorId,
       ...rest
@@ -52,7 +52,7 @@ const createProjectController = async (
 
     // await blobService.createContainer(newIdProjectContainer)
     //! ---------------------------------
-    return { message: `${user.id}` }
+    return { message: `${newProject.id}` }
   } catch (error) {
     const errorMessage = (error as Error).message || "Unknown error "
     return { errorMessage }
