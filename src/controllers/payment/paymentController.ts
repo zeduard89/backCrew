@@ -3,8 +3,7 @@ import { PaymentsModel, ProjectModel } from "../../config/db"
 import mercadopago from "mercadopago"
 import dotenv from "dotenv"
 dotenv.config()
-const { TOKEN_MP, MP_SUCCESS, MP_FAILURE, MP_PENDING, MP_NOTIFICATION } =
-  process.env
+const { TOKEN_MP, MP_FAILURE, MP_PENDING, MP_NOTIFICATION } = process.env
 
 let user = ""
 let project = ""
@@ -42,7 +41,7 @@ export const createOrder = async (
       ],
       // Le indico hacia donde yo retorno la respuesta (2)
       back_urls: {
-        success: `${MP_SUCCESS}`, // si se realizo el pago me redirige ACA al tocar el boton VOLVER al sitio en la pagina de MP
+        success: `https://crew-omega.vercel.app/projects/${projectId}`, // si se realizo el pago me redirige ACA al tocar el boton VOLVER al sitio en la pagina de MP
         failure: `${MP_FAILURE}`, // fallo
         pending: `${MP_PENDING}` // pendiente
       },
