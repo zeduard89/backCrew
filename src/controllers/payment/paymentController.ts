@@ -7,7 +7,6 @@ const { TOKEN_MP, MP_FAILURE, MP_PENDING, MP_NOTIFICATION } = process.env
 
 let user = ""
 let project = ""
-console.log()
 
 export const createOrder = async (
   req: Request,
@@ -34,7 +33,7 @@ export const createOrder = async (
       items: [
         {
           title: titleProject,
-          unit_price: unitePrice,
+          unit_price: +unitePrice,
           currency_id: currencyId,
           quantity: quantityNumber
         }
