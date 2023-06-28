@@ -1,12 +1,15 @@
 import { Response, Request } from "express"
 import { PaymentsModel, ProjectModel } from "../../config/db"
+import main from "./emailNotificacion"
 import mercadopago from "mercadopago"
 import dotenv from "dotenv"
 dotenv.config()
-const { TOKEN_MP, MP_FAILURE, MP_PENDING, MP_NOTIFICATION } = process.env
+const { TOKEN_MP, MP_SUCCESS, MP_FAILURE, MP_PENDING, MP_NOTIFICATION } =
+  process.env
 
 let user = ""
 let project = ""
+let title = ""
 
 export const createOrder = async (
   req: Request,
@@ -28,28 +31,29 @@ export const createOrder = async (
   // Guardo user y project en la variables globales
   user = userId
   project = projectId
+  title = titleProject
   try {
     const result = await mercadopago.preferences.create({
       items: [
         {
           title: titleProject,
-          unit_price: +unitePrice,
+          unit_price: unitePrice,
           currency_id: currencyId,
           quantity: quantityNumber
         }
       ],
       // Le indico hacia donde yo retorno la respuesta (2)
       back_urls: {
-        success: `https://crew-omega.vercel.app/projects/${projectId}`, // si se realizo el pago me redirige ACA al tocar el boton VOLVER al sitio en la pagina de MP
+        success: `${MP_SUCCESS}`, // si se realizo el pago me redirige ACA al tocar el boton VOLVER al sitio en la pagina de MP
         failure: `${MP_FAILURE}`, // fallo
         pending: `${MP_PENDING}` // pendiente
       },
       // Cuando el pago este echo, se envia a esta url, pero debe ser una transaccion segura https(en DEV no tenemos)
       // por ende use agrega "ngrok" se descarga un ejecutable que genera un tunnel HTTP, da un dominio SSL
       // y ese dominio va a redireccionar a su localhost, bajo archivo y agrego al proyecto en carpeta raiz
-      // ejecuto en terminal   .\ngrok.exe http 3001    copiar la (http.... io)+/webhook a notification_url
+      // ejecuto en terminal   .\ngrok.exe http 3001    copiar la (http.... io)+/paymentRoute/webhook a notification_url
       notification_url: `${MP_NOTIFICATION}/paymentRoute/webhook`
-      //! "https://9ce0-2800-810-538-16b9-14a0-2fcb-436e-eda6.sa.ngrok.io/paymentRoute/webhook"
+      //! "https://1f02-2800-810-538-16b9-2123-10a6-3eb0-4055.sa.ngrok.io/paymentRoute/webhook"
     })
     // (3) envio la info gral la cual tiene un atributo,tipo url que recibe el usario para terminar el pago
     // es la url que ve el comprador 1 , EJ:
@@ -115,6 +119,14 @@ export const reciveWebHook = async (req: Request, res: Response) => {
         // Creo el paymente en la DB
 
         await PaymentsModel.create(newDetail)
+        main(
+          newDetail.email,
+          newDetail.firstName,
+          newDetail.id,
+          title,
+          newDetail.transactionAmount,
+          newDetail.status
+        )
 
         const upDateProject = await ProjectModel.findByPk(project)
         if (upDateProject) {

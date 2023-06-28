@@ -1,4 +1,5 @@
 import { Router, Request, Response } from "express"
+
 import {
   projectValidator,
   validatorString,
@@ -10,7 +11,9 @@ import {
 } from "../schemas/projectSchemas"
 // Crear project
 import createProjectController from "../controllers/projects/postProjectHandler"
+import deleteProject from "../controllers/projects/deleteProject"
 import createRandomProjectController from "../controllers/projects/postRandomProjectHandler"
+
 // Get by Id
 import getProjectByIdController from "../controllers/projects/getProjectByIdController"
 
@@ -32,7 +35,7 @@ import getTwentyMostTrending from "../controllers/projects/getTwentyMostTrending
 import getFiveMostFunding from "../controllers/projects/getFiveMostFunding"
 
 // 50 Projects controller
-import create50Projects from "../controllers/projects/getCreate50Projects"
+// import create50Projects from "../controllers/projects/getCreate50Projects"
 
 const router = Router()
 //* Datos IMPORTANTES
@@ -46,7 +49,8 @@ router.post("/", async (req: Request, res: Response) => {
     res.status(200).json(newProject)
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Unknown error while searching for Project by ID"
+      (error as Error).message ||
+      "Unknown error while searching for Project by ID"
     res.status(400).send(errorMessage)
   }
 })
@@ -55,13 +59,13 @@ router.post("/", async (req: Request, res: Response) => {
 router.post("/llenarDB", (req: Request, res: Response) => {
   try {
     const { usuarios } = req.query
-    if (usuarios === undefined) throw new Error("Ingrese todos los datos")
+    if (usuarios === undefined) throw new Error("Users Query is Missing")
 
-    const newProject = createRandomProjectController(+usuarios)
-    res.status(200).json(newProject)
+    createRandomProjectController(+usuarios)
+    res.status(200).send({ message: "Database filled successfully" })
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Unknown error while searching for Project by ID"
+      (error as Error).message || "Unknown error while filling the database"
     res.status(400).send(errorMessage)
   }
 })
@@ -69,13 +73,23 @@ router.post("/llenarDB", (req: Request, res: Response) => {
 // Ruta UPDATE DATOS de un project.
 router.put("/update", async (req: Request, res: Response) => {
   try {
+    if (
+      !req.body.id ||
+      !req.body.title ||
+      !req.body.description ||
+      !req.body.shortDescription ||
+      !req.body.fundingGoal ||
+      !req.body.fundingDayLeft ||
+      !req.body.category
+    )
+      throw new Error("All fields are required")
     const validatedProject = updateProjectValidator.parse(req.body)
 
     const updatedProject = await updateProjectController(validatedProject)
-    res.status(200).json(updatedProject)
+    res.status(200).send(updatedProject)
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Unknown error while searching for Project by ID"
+      (error as Error).message || "Unknown error while updating project"
     res.status(400).send(errorMessage)
   }
 })
@@ -109,7 +123,8 @@ router.put("/update/likes", async (req: Request, res: Response) => {
     res.status(200).json(updatedProject)
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Unknown error while searching for Project by ID"
+      (error as Error).message ||
+      "Unknown error while searching for Project by ID"
     res.status(400).send(errorMessage)
   }
 })
@@ -119,13 +134,13 @@ router.get("/search/byName", async (req: Request, res: Response) => {
   try {
     const { name } = req.query
     const validatedName = validatorString.parse(name)
-    if (name !== undefined) {
-      const getProjectByName = await getProjectByNameController(validatedName)
-      res.status(200).json(getProjectByName)
-    }
+    if (name === undefined) throw Error("Name is required")
+    const getProjectByName = await getProjectByNameController(validatedName)
+    res.status(200).json(getProjectByName)
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Unknown error while searching for Project by ID"
+      (error as Error).message ||
+      "Unknown error while searching for Project by Name"
     res.status(400).send(errorMessage)
   }
 })
@@ -159,7 +174,8 @@ router.get("/search/byNameGeneral", async (req: Request, res: Response) => {
     }
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Unknown error while searching for Project by ID"
+      (error as Error).message ||
+      "Unknown error while searching for Project by ID"
     res.status(400).send(errorMessage)
   }
 })
@@ -174,7 +190,6 @@ router.get("/searchProjects/", async (req: Request, res: Response) => {
     const validatedP = validatorString.parse(p)
     const validatedS = validatorString.parse(s)
     const validatedCountry = validatorString.parse(country)
-    console.log(validatedP)
     const getProjectsFiltered = await getFilteredProjects(
       validatedCategory,
       validatedSort,
@@ -186,7 +201,8 @@ router.get("/searchProjects/", async (req: Request, res: Response) => {
     res.status(200).json(getProjectsFiltered)
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Unknown error while searching for Project by ID"
+      (error as Error).message ||
+      "Unknown error while searching for Project by ID"
     res.status(400).send(errorMessage)
   }
 })
@@ -194,15 +210,16 @@ router.get("/searchProjects/", async (req: Request, res: Response) => {
 // Ruta busca por name los Dias restantes
 router.get("/search/daysleft", async (req: Request, res: Response) => {
   try {
-    const { name } = req.query
-    const validatedName = validatorString.parse(name)
-    if (name !== undefined) {
-      const getProjectByName = await getDayLeftByNameController(validatedName)
+    const { id } = req.query
+    const validatedId = validatorString.parse(id)
+    if (id !== undefined) {
+      const getProjectByName = await getDayLeftByNameController(validatedId)
       res.status(200).json(getProjectByName)
     }
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Unknown error while searching for Project by ID"
+      (error as Error).message ||
+      "Unknown error while searching for Project by ID"
     res.status(400).send(errorMessage)
   }
 })
@@ -214,8 +231,7 @@ router.get("/allProjects", async (_req: Request, res: Response) => {
     res.status(200).json(allProjects)
   } catch (error) {
     const errorMessage =
-      (error as Error).message ||
-      "Unknown error while searching all Projects"
+      (error as Error).message || "Unknown error while searching all Projects"
     res.status(400).send(errorMessage)
   }
 })
@@ -269,20 +285,37 @@ router.delete("/deleteProject", async (req: Request, res: Response) => {
     res.status(200).json(deleteProjectByName)
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Unknown error while searching for Project by ID"
+      (error as Error).message ||
+      "Unknown error while searching for Project by ID"
     res.status(400).send(errorMessage)
   }
 })
 
-// Create 50projects
-router.get("/create50projects/", async (_req: Request, res: Response) => {
+// // Create 50projects
+// router.get("/create50projects/", async (_req: Request, res: Response) => {
+//   try {
+//     const c50Projects = await create50Projects()
+//     res.status(200).json(c50Projects)
+//   } catch (error) {
+//     const errorMessage =
+//       (error as Error).message || "Error to load the projects"
+//     console.log(error)
+//     res.status(400).send(errorMessage)
+//   }
+// })
+
+// Ruta delete por name (actualiza booleano de displayProject)
+router.delete("/delete", async (req: Request, res: Response) => {
   try {
-    const c50Projects = await create50Projects()
-    res.status(200).json(c50Projects)
+    const projectId = req.query.projectId
+    if (!projectId || typeof projectId !== "string")
+      throw new Error("valid projectId is required")
+    const deleteProjectByName = await deleteProject(projectId)
+    res.status(200).json(deleteProjectByName)
   } catch (error) {
     const errorMessage =
-      (error as Error).message || "Error to load the projects"
-    console.log(error)
+      (error as Error).message ||
+      "Unknown error while searching for Project by ID"
     res.status(400).send(errorMessage)
   }
 })

@@ -6,10 +6,7 @@ export interface IUser {
   avatar: string
   // projects: Array[]
   date: string
-  // password: string
   // verified?: boolean
-  // access: boolean
-
   // Add country, city, postalCode, shortDescription, aboutMe
   country: string
   city: string
@@ -18,7 +15,31 @@ export interface IUser {
   aboutMe: string
 }
 
-export type IUserLD = Omit<IUser, "name", "lastName", "id", "Date", "country", "city", "postalCode", "shortDescription", "aboutMe">
+export type IUserDelete = Omit<
+  IUser,
+  "name",
+  "lastName",
+  "avatar",
+  "Date",
+  "country",
+  "city",
+  "postalCode",
+  "shortDescription",
+  "aboutMe"
+>
+
+export type IUserLD = Omit<
+  IUser,
+  "name",
+  "lastName",
+  "id",
+  "Date",
+  "country",
+  "city",
+  "postalCode",
+  "shortDescription",
+  "aboutMe"
+>
 
 export interface IUpdateUser {
   id: string
@@ -93,6 +114,7 @@ export type deleteIProyect = Omit<
 // Uso title y currentFunding
 export type updateFundingCurrentIProyect = Omit<
   IProject,
+  "title",
   "description",
   "shortDescription",
   "fundingGoal",
@@ -108,6 +130,7 @@ export type updateFundingCurrentIProyect = Omit<
 // Uso title y likes/disLikes
 export type updateLikes = Omit<
   IProject,
+  "title",
   "description",
   "fundingCurrent",
   "fundingGoal",
@@ -173,6 +196,13 @@ export interface IPaymentDetail {
   // dateCreated: string
   userId: string
   projectId: string
+}
+
+interface ErrorBody {
+  code: string
+  expected: string
+  received: string
+  path: string
 }
 
 // Por defecto TS utiliza este nombre en el fichero 'types.d.ts'

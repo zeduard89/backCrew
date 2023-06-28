@@ -42,9 +42,7 @@ export const projectValidator = z.object({
 })
 
 export const deleteProjectValidator = z.object({
-  title: z
-    .string()
-    .min(3, { message: "Title must have at least 3 characters" }),
+  id: z.string().min(3, { message: "Title must have at least 3 characters" }),
   displayProject: z.boolean()
 })
 
@@ -79,18 +77,14 @@ export const updateProjectValidator = z.object({
 })
 
 export const updateFundingCurrentValidator = z.object({
-  title: z
-    .string()
-    .min(3, { message: "Title must have at least 3 characters" }),
+  id: z.string().min(3, { message: "Id must have at least 3 characters" }),
   addToFundingCurrent: z.number().positive({
     message: "The value to add to current funding must be a positive number"
   })
 })
 
 export const updateLikesValidator = z.object({
-  title: z
-    .string()
-    .min(3, { message: "Title must have at least 3 characters" }),
+  id: z.string().min(3, { message: "Id must have at least 3 characters" }),
   likes: z
     .number()
     .nonnegative({ message: "Number of likes must be a non-negative value" }),

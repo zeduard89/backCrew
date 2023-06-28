@@ -3,11 +3,11 @@ import { updateLikes } from "../../types/types"
 
 const updateLikesController = async (
   validatedProject: updateLikes
-): Promise<object> => {
+): Promise<string> => {
   try {
     // Busco el projecto y compruebo y edito
     const projectDB = await ProjectModel.findOne({
-      where: { title: validatedProject.title }
+      where: { id: validatedProject.id }
     })
     if (!projectDB) {
       throw new Error("The project does not exist")
@@ -25,17 +25,15 @@ const updateLikesController = async (
       {
         // Aquí se especifica la condición de búsqueda
         where: {
-          title: validatedProject.title
+          id: validatedProject.id
         }
       }
     )
-    return {
-      message: `Successfully modified the values of likes: ${newLikes} and dislikes: ${newDisLikes}`
-    }
+    return "Successfully modified the values of likes"
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Unknown error while updating likes"
-    return { errorMessage }
+    return errorMessage
   }
 }
 

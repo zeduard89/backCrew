@@ -46,6 +46,8 @@ export const registerUser = async (
       aboutMe
     }: IUser = req.body
 
+    if (!name || !lastName || !email || !id)
+      throw new Error("Name, lastName, email and Id are Required")
     // Validate country, city, postalCode, ShortDescription and aboutMe
     validatorCountry.parse(country)
     validatorCity.parse(city)
@@ -97,7 +99,7 @@ export const registerUser = async (
     const blobUrlWithSAS = blobClient.url + "?" + sasToken
 
     const dateNow = new Date()
-    const registerUser: IUser = await UserModel.create({
+    await UserModel.create({
       id,
       name,
       lastName,
@@ -111,7 +113,7 @@ export const registerUser = async (
       shortDescription,
       aboutMe
     })
-    res.status(200).send({ registerUser })
+    res.status(200).send("User was registered successfully")
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Unknown error registering user"

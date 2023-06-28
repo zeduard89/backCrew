@@ -25,7 +25,8 @@ const createRandomUsers = () => {
     city: faker.location.city(),
     postalCode: faker.location.zipCode(),
     shortDescription: "Lorem ipsum dolor sit amet consect.",
-    aboutMe: "Lorem ipsum dolor sit amet consectetur adipiscing elit phasellus cras rhoncus consequat tempor, id condimentum lacus taciti porttitor ac scelerisque sem."
+    aboutMe:
+      "Lorem ipsum dolor sit amet consectetur adipiscing elit phasellus cras rhoncus consequat tempor, id condimentum lacus taciti porttitor ac scelerisque sem."
   }
 
   return user
@@ -35,8 +36,7 @@ const createRandomProject = (id: string) => {
   count++
   const categoriaActual =
     categorias[Math.floor(Math.random() * categorias.length)]
-  const locationActual = 
-    location[Math.floor(Math.random() * location.length)]
+  const locationActual = location[Math.floor(Math.random() * location.length)]
   const mathR1 = +faker.commerce.price({ min: 0, max: 500000, dec: 0 })
   const mathR2 = +faker.commerce.price({ min: 0, max: 500000, dec: 0 })
 
@@ -59,7 +59,6 @@ const createRandomProject = (id: string) => {
     displayProject: true,
     creatorId: id
   }
-  console.log(proyecto)
   return proyecto
 }
 
@@ -81,7 +80,6 @@ const createRandomProjectController = async (usuarios: number) => {
     }
     return "Creacion con exito"
   } catch (error) {
-    console.log(error)
     return error
   }
 }

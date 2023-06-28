@@ -35,7 +35,6 @@ const getFilteredProjects = async (
 
     // Category Filter
     const decodedCategory = decodeURIComponent(validatedCategory)
-    console.log("Esto es la category", decodedCategory)
     if (validatedCategory !== "all") {
       whereClause = {
         ...whereClause,
@@ -43,12 +42,12 @@ const getFilteredProjects = async (
       }
     }
 
-   //  Country Filter
+    //  Country Filter
     if (validatedCountry !== "all") {
       whereClause = {
         ...whereClause,
-        location: validatedCountry,
-      };
+        location: validatedCountry
+      }
     }
 
     // Query search

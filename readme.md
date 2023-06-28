@@ -40,7 +40,7 @@ Endpoints for viewing and manipulating the Projects that the Admin
 has permissions to access
 
 - [Create Project](./readme/projectRoute/createProject.md) : `POST /projectRoute/`
-- [Get All Project](./readme/projectRoute/allProjects.md) : `GET /projectRoute/allProjects`
+- [Get All Project](./readme/projectRoute/allProjects.md) : `GET /projectRoute/allProject`
 - [Get All Project with Users/Fav](./readme/projectRoute/allProjectsWithUsers.md) : `GET /projectRoute/getAllProjects/withUsers`
 - [Get Project By Name](./readme/projectRoute/projectByName.md) : `GET /projectRoute/search`
 - [Get Day Left](./readme/projectRoute/projectDeyLeft.md) : `GET /projectRoute/search/dayLeft`
@@ -48,6 +48,9 @@ has permissions to access
 - [Update Project](./readme/projectRoute/updateProject.md) : `PUT /projectRoute/update`
 - [UpdateCurrent Founding](./readme/projectRoute/updateCurrentFouding.md) : `PUT /projectRoute/update/addToFundingCurrent`
 - [UpdateLikes](./readme/projectRoute/updateLikes.md) : `PUT /projectRoute/likes`
+- [Get Five Most Funding](./readme/projectRoute/fiveMostFunding.md) : `Get /projectRoute/fiveMostFunding`
+- [Get Twenty Most Trending](./readme/projectRoute/twentyMostTrending.md) : `Get /projectRoute/twentyMostTrending`
+- [Get Filtered Porjects](./readme/projectRoute/searchProjects.md) : `Get /projectRoute/searchProjects/`
 
 ### Azure Containers related
 

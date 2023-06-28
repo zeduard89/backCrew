@@ -2,16 +2,16 @@ import { ProjectModel, UserModel } from "../../config/db"
 import { IProject } from "../../types/types"
 //! Omitir este sector y sus elementos para limitar la creacion de Containers
 
-// import { BlobServiceClient } from "@azure/storage-blob"
+import { BlobServiceClient } from "@azure/storage-blob"
 
-// // Cargamos las variables de entorno con config y la ejecuto para conectar
-// import dotenv from "dotenv"
-// dotenv.config()
-// const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING
-// if (!connectionString) {
-//  throw new Error("Azure Storage connection string is not configured");
-// }
-// const blobService = BlobServiceClient.fromConnectionString(connectionString) // conexion
+// Cargamos las variables de entorno con config y la ejecuto para conectar
+import dotenv from "dotenv"
+dotenv.config()
+const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING
+if (!connectionString) {
+  throw new Error("Azure Storage connection string is not configured")
+}
+const blobService = BlobServiceClient.fromConnectionString(connectionString) // conexion
 //! --------------------------------------------------------------------------------
 
 const createProjectController = async (
@@ -40,17 +40,17 @@ const createProjectController = async (
     })
 
     //! Omitir este sector y sus elementos para limitar la creacion de Containers
-    // // Ejemplo crew1 con id=1
-    // const newIdProjectContainer = `crew${createdProject.id.toString()}`
-    // // Buscamos si existe el contenedor, sino existe lo creo con el id del Project
-    // const containerClient = blobService.getContainerClient(
-    //   newIdProjectContainer
-    // )
-    // const containerExist = await containerClient.exists()
-    // if (containerExist)
-    // throw new Error(`The container: ${newIdProjectContainer} already exists`);
+    // Ejemplo crew1 con id=1
+    const newIdProjectContainer = newProject.id
+    // Buscamos si existe el contenedor, sino existe lo creo con el id del Project
+    const containerClient = blobService.getContainerClient(
+      newIdProjectContainer
+    )
+    const containerExist = await containerClient.exists()
+    if (containerExist)
+      throw new Error(`The container: ${newIdProjectContainer} already exists`)
 
-    // await blobService.createContainer(newIdProjectContainer)
+    await blobService.createContainer(newIdProjectContainer)
     //! ---------------------------------
     return { message: `${newProject.id}` }
   } catch (error) {
