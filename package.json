@@ -7,6 +7,7 @@
     "dev": "ts-node-dev src/index.ts",
     "lint": "ts-standard",
     "start": "node build/index.js",
+    "build": "tsc",
     "tsc": "tsc"
   },
   "keywords": [],
