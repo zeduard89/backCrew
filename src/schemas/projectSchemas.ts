@@ -41,6 +41,27 @@ export const projectValidator = z.object({
   creatorId: z.string()
 })
 
+export const projectPostValidator = z.object({
+  title: z
+    .string()
+    .min(3, { message: "The title must have at least 3 characters" }),
+  description: z
+    .string()
+    .min(10, { message: "The description must have at least 10 characters" }),
+  shortDescription: z.string().min(5, {
+    message: "The short description must have at least 5 characters"
+  }),
+  fundingGoal: z.string(),
+  fundingGoalReached: z.boolean().default(false),
+  fundingDayLeft: z.string(),
+  category: z
+    .string()
+    .min(1, { message: "Please select at least one category" }),
+  displayProject: z.boolean().default(false),
+  creatorId: z.string(),
+  names: z.string()
+})
+
 export const deleteProjectValidator = z.object({
   id: z.string().min(3, { message: "Title must have at least 3 characters" }),
   displayProject: z.boolean()

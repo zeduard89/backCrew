@@ -1,4 +1,5 @@
 import { Router, Request, Response } from "express"
+import multer from "multer"
 
 import {
   projectValidator,
@@ -7,7 +8,8 @@ import {
   updateProjectValidator,
   updateFundingCurrentValidator,
   updateLikesValidator,
-  validatorQuerySearch
+  validatorQuerySearch,
+  projectPostValidator
 } from "../schemas/projectSchemas"
 // Crear project
 import createProjectController from "../controllers/projects/postProjectHandler"
@@ -34,19 +36,24 @@ import getFilteredProjects from "../controllers/projects/getFilteredProjects"
 import getTwentyMostTrending from "../controllers/projects/getTwentyMostTrending"
 import getFiveMostFunding from "../controllers/projects/getFiveMostFunding"
 
+//! ----
+import { uploadBlobNew } from "../controllers/azure/blob"
+
 // 50 Projects controller
 // import create50Projects from "../controllers/projects/getCreate50Projects"
 
+const upload = multer()
 const router = Router()
+
 //* Datos IMPORTANTES
 //* Title es unico - displaysProject'habilita/deshabilita el projecto'
 
-// Ruta crea un project.
+/// Ruta crea un project. VIEJA
 router.post("/", async (req: Request, res: Response) => {
   try {
     const validatedProject = projectValidator.parse(req.body)
     const newProject = await createProjectController(validatedProject)
-    res.status(200).json(newProject)
+    res.status(200).json({ message: newProject })
   } catch (error) {
     const errorMessage =
       (error as Error).message ||
@@ -54,6 +61,33 @@ router.post("/", async (req: Request, res: Response) => {
     res.status(400).send(errorMessage)
   }
 })
+
+// Ruta crea un project.  NUEVA
+router.post(
+  "/superPost",
+  upload.array("files"),
+  async (req: Request, res: Response) => {
+    try {
+      const validatedProject = projectPostValidator.parse(req.body)
+      const files = req.files as Express.Multer.File[]
+      const newProject = await createProjectController(validatedProject)
+      const container = newProject
+      const names = validatedProject.names.split(",")
+      if (!files || files.length === 0) {
+        throw new Error("No files have been provided in the request")
+      }
+      await Promise.all(
+        files.map((file, index) => uploadBlobNew(file, container, names[index]))
+      )
+      res.status(200).json(newProject)
+    } catch (error) {
+      const errorMessage =
+        (error as Error).message ||
+        "Unknown error while searching for Project by ID"
+      res.status(400).send(errorMessage)
+    }
+  }
+)
 
 // Llenar la DB.
 router.post("/llenarDB", (req: Request, res: Response) => {

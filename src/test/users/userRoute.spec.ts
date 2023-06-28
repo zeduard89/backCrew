@@ -48,6 +48,35 @@ describe("User Detail", () => {
   })
 })
 
+describe("Get all Users", () => {
+  test("Get all Users should respond with a 200 status code", async () => {
+    const response = await request(server).get("/userRoute/getAllUsers")
+    expect(response.status).toBe(200)
+    expect(response.body).toBeInstanceOf(Object)
+    expect(response.body).toBeTruthy()
+    expect(response.body).toBeDefined()
+  })
+})
+
+describe("All User's Projects", () => {
+  test("All User's Projects should respond with a 200 status code", async () => {
+    const response = await request(server)
+      .get("/userRoute/getAllUsersProjects")
+      .query({ creatorId: newUser.id })
+    expect(response.status).toBe(200)
+    expect(response.body).toBeInstanceOf(Object)
+    expect(response.body).toBeTruthy()
+    expect(response.body).toBeDefined()
+  })
+  test("All User's Projects , querys are missing", async () => {
+    const response = await request(server)
+      .get("/userRoute/getAllUsersProjects")
+      .query({})
+    expect(response.status).toBe(400)
+    expect(response.text).toContain("creatorId is required")
+  })
+})
+
 describe("Delete User", () => {
   test("User Delete should respond with a 200 status code", async () => {
     const response = await request(server).delete("/userRoute/delete").query({
