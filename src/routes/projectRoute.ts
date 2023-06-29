@@ -44,8 +44,8 @@ import { uploadBlobNew } from "../controllers/azure/blob"
 
 const upload = multer()
 const router = Router()
-// let projectId = ""
-// let newContainer = ""
+let projectId = ""
+let newContainer = ""
 
 //* Datos IMPORTANTES
 //* Title es unico - displaysProject'habilita/deshabilita el projecto'
@@ -65,38 +65,6 @@ router.post("/", async (req: Request, res: Response) => {
 })
 
 // Ruta crea un project.  NUEVA
-// router.post(
-//   "/superPost",
-//   upload.array("files"),
-//   async (req: Request, res: Response) => {
-//     try {
-//       const validatedProject = projectPostValidator.parse(req.body)
-//       const files = req.files as Express.Multer.File[]
-
-//       if (!files || files.length === 0) {
-//         const newProject = await createProjectController(validatedProject)
-//         projectId = newProject
-//         newContainer = newProject
-//       }
-//       if (files) {
-//         const names = files.map((_, index) => String(index))
-//         await Promise.all(
-//           files.map((file, index) =>
-//             uploadBlobNew(file, newContainer, names[index])
-//           )
-//         )
-//       }
-//       res.status(200).json(projectId)
-//     } catch (error) {
-//       const errorMessage =
-//         (error as Error).message ||
-//         "Unknown error while searching for Project by ID"
-//       res.status(400).send(errorMessage)
-//     }
-//   }
-// )
-
-// Ruta crea un project.  NUEVA
 router.post(
   "/superPost",
   upload.array("files"),
@@ -104,19 +72,21 @@ router.post(
     try {
       const validatedProject = projectPostValidator.parse(req.body)
       const files = req.files as Express.Multer.File[]
-      const newProject = await createProjectController(validatedProject)
-      const container = newProject
-      // const names = validatedProject.names.split(",")
-      if (!files || files.length === 0) {
-        throw new Error("No files have been provided in the request")
-      }
-      const names = files.map((_, index) => "Foto" + String(index))
-      console.log(names)
-      await Promise.all(
-        files.map((file, index) => uploadBlobNew(file, container, names[index]))
-      )
 
-      res.status(200).json(newProject)
+      if (!files || files.length === 0) {
+        const newProject = await createProjectController(validatedProject)
+        projectId = newProject
+        newContainer = newProject
+      }
+      if (files) {
+        const names = files.map((_, index) => "Foto" + String(index))
+        await Promise.all(
+          files.map((file, index) =>
+            uploadBlobNew(file, newContainer, names[index])
+          )
+        )
+      }
+      res.status(200).json(projectId)
     } catch (error) {
       const errorMessage =
         (error as Error).message ||
@@ -125,6 +95,36 @@ router.post(
     }
   }
 )
+
+// // Ruta crea un project.  NUEVA
+// router.post(
+//   "/superPost",
+//   upload.array("files"),
+//   async (req: Request, res: Response) => {
+//     try {
+//       const validatedProject = projectPostValidator.parse(req.body)
+//       const files = req.files as Express.Multer.File[]
+//       const newProject = await createProjectController(validatedProject)
+//       const container = newProject
+//       // const names = validatedProject.names.split(",")
+//       if (!files || files.length === 0) {
+//         throw new Error("No files have been provided in the request")
+//       }
+//       const names = files.map((_, index) => "Foto" + String(index))
+//       console.log(names)
+//       await Promise.all(
+//         files.map((file, index) => uploadBlobNew(file, container, names[index]))
+//       )
+
+//       res.status(200).json(newProject)
+//     } catch (error) {
+//       const errorMessage =
+//         (error as Error).message ||
+//         "Unknown error while searching for Project by ID"
+//       res.status(400).send(errorMessage)
+//     }
+//   }
+// )
 
 // Llenar la DB.
 router.post("/llenarDB", (req: Request, res: Response) => {
