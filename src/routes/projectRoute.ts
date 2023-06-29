@@ -70,10 +70,10 @@ router.post(
   upload.array("files"),
   async (req: Request, res: Response) => {
     try {
-      const validatedProject = projectPostValidator.parse(req.body)
       const files = req.files as Express.Multer.File[]
 
       if (!files || files.length === 0) {
+        const validatedProject = projectPostValidator.parse(req.body)
         const newProject = await createProjectController(validatedProject)
         projectId = newProject
         newContainer = newProject
