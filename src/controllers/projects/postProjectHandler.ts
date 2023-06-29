@@ -28,6 +28,7 @@ const createProjectController = async (
       creatorId,
       ...rest
     } = validatedProject
+
     const user = await UserModel.findOne({ where: { id: creatorId } })
     if (!user) throw new Error("User does not exist in DB")
 
@@ -35,7 +36,7 @@ const createProjectController = async (
     const newAllProjects: Array<object> = allProjects.filter(
       (project) =>
         project.title.toLowerCase().trim().replace(/\s/g, "") ===
-        title.toLowerCase().trim().replace(/\s/g, "")
+        title?.toLowerCase().trim().replace(/\s/g, "")
     )
 
     if (newAllProjects.length > 0) {
@@ -46,8 +47,8 @@ const createProjectController = async (
       title,
       description,
       shortDescription,
-      fundingGoal: +fundingGoal,
-      fundingDayLeft: +fundingDayLeft,
+      fundingGoal: fundingGoal ? +fundingGoal : "fundingGoal",
+      fundingDayLeft: fundingDayLeft ? +fundingDayLeft : "fundingDayLeft",
       category,
       creatorId,
       ...rest
