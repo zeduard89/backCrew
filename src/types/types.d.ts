@@ -78,14 +78,14 @@ export interface IComment {
 // El signo de pregunta permite que sea opcional
 export interface IProject {
   id?: number
-  title: string
-  description: string
+  title?: string
+  description?: string
   shortDescription?: string
   fundingCurrent?: number
-  fundingGoal: number | string
+  fundingGoal?: number | string
   fundingGoalReached?: boolean
   fundingPercentage?: number
-  fundingDayLeft: number | string
+  fundingDayLeft?: number | string
   likes?: number
   disLikes?: number
   category?: string

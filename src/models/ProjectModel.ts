@@ -26,19 +26,22 @@ export default class Project extends Model<IProject> {
     type: DataType.STRING,
     primaryKey: true,
     unique: true,
-    allowNull: false
+    allowNull: true,
+    defaultValue: "titulo"
   })
   title!: string
 
   @Column({
     type: DataType.TEXT,
-    allowNull: false
+    allowNull: true,
+    defaultValue: "description"
   })
   description!: string
 
   @Column({
     type: DataType.TEXT,
-    allowNull: true
+    allowNull: true,
+    defaultValue: "shortDescription"
   })
   shortDescription!: string
 
@@ -51,7 +54,8 @@ export default class Project extends Model<IProject> {
 
   @Column({
     type: DataType.FLOAT,
-    allowNull: false
+    allowNull: true,
+    defaultValue: 0
   })
   fundingGoal!: number
 
@@ -71,7 +75,8 @@ export default class Project extends Model<IProject> {
 
   @Column({
     type: DataType.INTEGER,
-    allowNull: false
+    allowNull: true,
+    defaultValue: 0
   })
   fundingDayLeft!: number
 
@@ -91,7 +96,8 @@ export default class Project extends Model<IProject> {
 
   @Column({
     type: DataType.STRING,
-    allowNull: false
+    allowNull: true,
+    defaultValue: "Category"
   })
   category!: string
 
