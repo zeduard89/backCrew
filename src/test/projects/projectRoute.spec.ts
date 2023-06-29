@@ -91,7 +91,7 @@ describe("Update project Info", () => {
       .send(updateFields)
     expect(response.status).toBe(200)
     expect(response.text).toContain(
-      `Successful update of the project with ID: ${updateFields.id}`
+      `Successful update of the project with ID: ${findedNewProject?.id}`
     )
   })
 

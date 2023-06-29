@@ -22,7 +22,7 @@ const main = async (
 ) => {
   try {
     // Send mail with defined transport object
-    const info = await transporter.sendMail({
+    await transporter.sendMail({
       from: '"Crew Inspiring Support 👨‍💻 " <ccrewdb@gmail.com>',
       to: email,
       subject: "The Biggest crowdfunding",
@@ -48,8 +48,6 @@ const main = async (
         }
       ]
     })
-
-    console.log("Message sent: %s", info.messageId)
   } catch (error) {
     console.log(error)
   }

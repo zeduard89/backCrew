@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express"
 import { validatorComment } from "../schemas/commentSchema"
-import createCommentController from "../controllers/comments/postCommentController"
+import postCommentController from "../controllers/comments/postCommentController"
 
 const router = Router()
 
@@ -11,9 +11,8 @@ router.post("/commentProject", async (req: Request, res: Response) => {
 
     // Valido la informacion
     const validatedComment = validatorComment.parse(comment)
-    const newComment = await createCommentController(validatedComment)
+    const newComment = await postCommentController(validatedComment)
     res.status(200).json(newComment)
-    
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Error desconocido al buscar proyecto por Id"

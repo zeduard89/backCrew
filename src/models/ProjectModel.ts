@@ -9,7 +9,12 @@ import {
   BelongsToMany
 } from "sequelize-typescript"
 import { IProject } from "../types/types"
-import { UserModel, PaymentsModel, UserFavoritesModel } from "../config/db"
+import {
+  UserModel,
+  PaymentsModel,
+  UserFavoritesModel,
+  CommentModel
+} from "../config/db"
 
 @Table({ tableName: "projects" })
 export default class Project extends Model<IProject> {
@@ -145,6 +150,10 @@ export default class Project extends Model<IProject> {
   // 1:N project-payment
   @HasMany(() => PaymentsModel)
   projectPayments!: PaymentsModel[]
+
+  // 1:N project-payment
+  @HasMany(() => CommentModel)
+  projectComments!: CommentModel[]
 
   // 1:N project-user
   @BelongsTo(() => UserModel, "creatorId") // Asigna un alias único a la asociación

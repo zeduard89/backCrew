@@ -59,6 +59,16 @@ PaymentsModel.belongsTo(ProjectModel, {
   targetKey: "id"
 })
 
+// Comments
+UserModel.hasMany(CommentModel, { foreignKey: "userId" })
+CommentModel.belongsTo(UserModel, { foreignKey: "userId", targetKey: "id" })
+
+ProjectModel.hasMany(CommentModel, { foreignKey: "projectId" })
+ProjectModel.belongsTo(ProjectModel, {
+  foreignKey: "projectId",
+  targetKey: "id"
+})
+
 export {
   sequelize,
   UserModel,
