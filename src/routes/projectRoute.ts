@@ -95,6 +95,53 @@ router.post(
     }
   }
 )
+// ! ---------------
+
+router.post(
+  "/superProject",
+  upload.array("files"),
+  async (req: Request, res: Response) => {
+    try {
+      const validatedProject = projectPostValidator.parse(req.body)
+      const newProject = await createProjectController(validatedProject)
+      projectId = newProject
+      newContainer = newProject
+
+      res.status(200).json(projectId)
+    } catch (error) {
+      const errorMessage =
+        (error as Error).message ||
+        "Unknown error while searching for Project by ID"
+      res.status(400).send(errorMessage)
+    }
+  }
+)
+
+router.post(
+  "/superImage",
+  upload.array("files"),
+  async (req: Request, res: Response) => {
+    try {
+      const files = req.files as Express.Multer.File[]
+
+      const names = files.map((_, index) => "Foto" + String(index))
+      await Promise.all(
+        files.map((file, index) =>
+          uploadBlobNew(file, newContainer, names[index])
+        )
+      )
+
+      res.status(200).json(projectId)
+    } catch (error) {
+      const errorMessage =
+        (error as Error).message ||
+        "Unknown error while searching for Project by ID"
+      res.status(400).send(errorMessage)
+    }
+  }
+)
+
+// ! ---------------------
 
 // // Ruta crea un project.  NUEVA
 // router.post(
