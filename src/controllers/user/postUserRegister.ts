@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import { UserModel } from "../../config/db"
 import { IUser } from "../../types/types"
+import main from "./emailNotificacionUser"
 import {
   BlobServiceClient,
   BlobSASPermissions,
@@ -99,7 +100,7 @@ export const registerUser = async (
     const blobUrlWithSAS = blobClient.url + "?" + sasToken
 
     const dateNow = new Date()
-    await UserModel.create({
+    const newUser = await UserModel.create({
       id,
       name,
       lastName,
@@ -113,6 +114,9 @@ export const registerUser = async (
       shortDescription,
       aboutMe
     })
+
+    main(newUser.name, newUser.lastName, newUser.email, newUser.country)
+
     res.status(200).send("User was registered successfully")
   } catch (error) {
     const errorMessage =
@@ -120,3 +124,13 @@ export const registerUser = async (
     res.status(400).send(errorMessage)
   }
 }
+// import main from "./emailNotificacion"
+
+// main(
+//   newDetail.email,
+//   newDetail.firstName,
+//   newDetail.id,
+//   title,
+//   newDetail.transactionAmount,
+//   newDetail.status
+// )

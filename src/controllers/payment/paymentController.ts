@@ -1,6 +1,6 @@
 import { Response, Request } from "express"
-import { PaymentsModel, ProjectModel } from "../../config/db"
-import main from "./emailNotificacion"
+import { PaymentsModel, ProjectModel, UserModel } from "../../config/db"
+import { mainUser, mainProject } from "./emailNotificacionPayment"
 import mercadopago from "mercadopago"
 import dotenv from "dotenv"
 dotenv.config()
@@ -119,7 +119,8 @@ export const reciveWebHook = async (req: Request, res: Response) => {
         // Creo el paymente en la DB
 
         await PaymentsModel.create(newDetail)
-        main(
+        // Envio el email al donante
+        mainUser(
           newDetail.email,
           newDetail.firstName,
           newDetail.id,
@@ -129,6 +130,18 @@ export const reciveWebHook = async (req: Request, res: Response) => {
         )
 
         const upDateProject = await ProjectModel.findByPk(project)
+        const userProject = await UserModel.findByPk(upDateProject?.creatorId)
+
+        // Envio un email a dueño del proyecto
+        if (!userProject) throw new Error("Id Project not found")
+        mainProject(
+          userProject.email,
+          userProject.name,
+          title,
+          newDetail.transactionAmount,
+          newDetail.status
+        )
+        // Actualizo el proyecto
         if (upDateProject) {
           const updatedCurrentFounding =
             parseFloat(newDetail.transactionReceived) -
