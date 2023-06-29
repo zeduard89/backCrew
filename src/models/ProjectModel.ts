@@ -151,7 +151,7 @@ export default class Project extends Model<IProject> {
   @HasMany(() => PaymentsModel)
   projectPayments!: PaymentsModel[]
 
-  // 1:N project-payment
+  // 1:N project-comments
   @HasMany(() => CommentModel)
   projectComments!: CommentModel[]
 

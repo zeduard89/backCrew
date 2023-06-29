@@ -59,14 +59,27 @@ export interface IUserFavorite {
 }
 
 export interface IComment {
-  id: string
-  firstName: string
-  comments: string
-  likes: number
-  dislikes: number
-  date: string
-  displayComment: boolean
+  id?: number
+  name: string
+  description: string
+  likes?: number
+  dislikes?: number
+  date?: string
+  displayComment?: boolean
+  userId: string
+  projectId: string
+  parentId?: number
 }
+
+export type childComment = Omit<
+  // Si uso
+  IComment,
+  "id",
+  "likes",
+  "dislikes",
+  "date",
+  "displayComment"
+>
 
 // export interface ICreator {
 //   id: DataTypeUUID

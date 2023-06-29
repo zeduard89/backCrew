@@ -1,11 +1,16 @@
 import { z } from "zod"
 
-export const validatorComment = z.object({
-  id: z.number().positive(),
-  firstName: z.string().min(5),
-  comments: z.string().min(10),
-  likes: z.number().positive(),
-  dislikes: z.number().positive(),
-  date: z.string().datetime(),
-  displayComment: z.boolean()
+export const validatorCommentUserToProject = z.object({
+  userId: z.string(),
+  projectId: z.string(),
+  name: z.string(),
+  description: z.string().min(10)
+})
+
+export const validatorCommentUserToUser = z.object({
+  name: z.string(),
+  description: z.string().min(10),
+  userId: z.string(),
+  projectId: z.string(),
+  parentId: z.number().positive()
 })

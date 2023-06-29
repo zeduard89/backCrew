@@ -59,7 +59,7 @@ PaymentsModel.belongsTo(ProjectModel, {
   targetKey: "id"
 })
 
-// Comments
+// Comments (User/Project)
 UserModel.hasMany(CommentModel, { foreignKey: "userId" })
 CommentModel.belongsTo(UserModel, { foreignKey: "userId", targetKey: "id" })
 
@@ -78,19 +78,3 @@ export {
   UserFavoritesModel,
   PaymentsModel
 }
-
-//     Ejemplo de uso de los métodos de relación
-//     const project = new ProjectModel();
-//     project.title = "Nuevo proyecto";
-//     await foundUser.$add('favoriteProjects', project); // Agregar un proyecto a la lista de favoritos
-
-//     const favoriteProjects = await foundUser.$get('favoriteProjects'); // Obtener la lista de proyectos favoritos
-
-//     const projectCount = await foundUser.$count('favoriteProjects'); // Contar la cantidad de proyectos favoritos
-
-//     const hasFavoriteProjects = await foundUser.$has('favoriteProjects'); // Verificar si tiene proyectos favoritos
-
-//     const projectToRemove = favoriteProjects[0];
-//     await foundUser.$remove('favoriteProjects', projectToRemove); // Eliminar un proyecto de la lista de favoritos
-
-//     const newProject = await foundUser.$create('favoriteProjects', { title: 'Nuevo proyecto' }); // Crear un nuevo proyecto y agregarlo a la lista de favoritos
