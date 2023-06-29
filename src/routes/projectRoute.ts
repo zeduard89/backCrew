@@ -8,8 +8,8 @@ import {
   updateProjectValidator,
   updateFundingCurrentValidator,
   updateLikesValidator,
-  validatorQuerySearch
-  // projectPostValidator
+  validatorQuerySearch,
+  projectPostValidator
 } from "../schemas/projectSchemas"
 // Crear project
 import createProjectController from "../controllers/projects/postProjectHandler"
@@ -68,14 +68,14 @@ router.post(
   upload.array("files"),
   async (req: Request, res: Response) => {
     try {
-      const validatedProject = req.body
+      const validatedProject = projectPostValidator.parse(req.body)
       const files = req.files as Express.Multer.File[]
       const newProject = await createProjectController(validatedProject)
       const container = newProject
-      const names = validatedProject.names.split(",")
       if (!files || files.length === 0) {
         throw new Error("No files have been provided in the request")
       }
+      const names = validatedProject.names.split(",")
       await Promise.all(
         files.map((file, index) => uploadBlobNew(file, container, names[index]))
       )

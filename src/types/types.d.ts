@@ -83,7 +83,7 @@ export interface IProject {
   shortDescription?: string
   fundingCurrent?: number
   fundingGoal: number | string
-  fundingGoalReached: boolean
+  fundingGoalReached?: boolean
   fundingPercentage?: number
   fundingDayLeft: number | string
   likes?: number
