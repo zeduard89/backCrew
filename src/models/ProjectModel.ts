@@ -124,7 +124,8 @@ export default class Project extends Model<IProject> {
 
   @Column({
     type: DataType.BOOLEAN,
-    allowNull: false
+    allowNull: true,
+    defaultValue: true
   })
   displayProject!: boolean
 

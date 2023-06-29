@@ -87,11 +87,11 @@ export const uploadBlobNew = async (
       throw new Error(`The container ${container} does not exist`)
     }
 
-    // Buscar si existe el archivo en el contenedor
+    // Buscar si existe la imagen
     const exist = await containerClient.getBlockBlobClient(names).exists()
 
     if (exist) {
-      throw new Error(`The element: ${name} already exists`)
+      throw new Error(`The element: ${names} already exists`)
     }
 
     // Obtengo la extension de original name para usarla al final del name
