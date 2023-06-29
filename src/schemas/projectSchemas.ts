@@ -56,8 +56,7 @@ export const projectPostValidator = z.object({
   category: z
     .string()
     .min(1, { message: "Please select at least one category" }),
-  creatorId: z.string(),
-  names: z.string()
+  creatorId: z.string()
 })
 
 export const deleteProjectValidator = z.object({

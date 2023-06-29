@@ -65,7 +65,7 @@ export const uploadBlob = async (req: Request, res: Response) => {
 export const uploadBlobNew = async (
   file: Express.Multer.File,
   container: string,
-  name: string
+  names: string
 ) => {
   try {
     // Verificar si se proporcionó un archivo
@@ -75,7 +75,7 @@ export const uploadBlobNew = async (
     const { originalname, buffer } = file
 
     // Verificar si se proporcionó el nombre del contenedor y el nombre del archivo
-    if (!container || !name) {
+    if (!container || !names) {
       throw new Error("Incomplete container/name data")
     }
 
@@ -88,7 +88,7 @@ export const uploadBlobNew = async (
     }
 
     // Buscar si existe el archivo en el contenedor
-    const exist = await containerClient.getBlockBlobClient(name).exists()
+    const exist = await containerClient.getBlockBlobClient(names).exists()
 
     if (exist) {
       throw new Error(`The element: ${name} already exists`)
@@ -99,14 +99,14 @@ export const uploadBlobNew = async (
 
     // Guardamos el archivo con el nombre de la variable name
     await containerClient
-      .getBlockBlobClient(name + "." + extension)
+      .getBlockBlobClient(names + "." + extension)
       .uploadData(buffer)
 
     // Subir el archivo al contenedor
     // await containerClient.getBlockBlobClient(name).uploadData(file.buffer)
 
     return {
-      message: `The element: ${name} was created successfully`
+      message: `The element: ${names} was created successfully`
     }
   } catch (error) {
     const errorMessage =
