@@ -27,7 +27,7 @@ export default class Comments extends Model<IComment> {
   name!: string
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT,
     allowNull: false
   })
   description!: string
