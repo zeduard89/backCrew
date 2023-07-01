@@ -70,7 +70,6 @@ router.post(
   upload.array("files"),
   async (req: Request, res: Response) => {
     try {
-      console.log("hola")
       const files = req.files as Express.Multer.File[]
 
       if (!files || files.length === 0) {

@@ -47,8 +47,6 @@ export const registerUser = async (
       aboutMe
     }: IUser = req.body
 
-    if (!name || !lastName || !email || !id)
-      throw new Error("Name, lastName, email and Id are Required")
     // Validate country, city, postalCode, ShortDescription and aboutMe
     validatorCountry.parse(country)
     validatorCity.parse(city)

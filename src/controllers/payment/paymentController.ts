@@ -44,7 +44,7 @@ export const createOrder = async (
       ],
       // Le indico hacia donde yo retorno la respuesta (2)
       back_urls: {
-        success: `${MP_SUCCESS}`, // si se realizo el pago me redirige ACA al tocar el boton VOLVER al sitio en la pagina de MP
+        success: `${MP_SUCCESS}${projectId}`, // si se realizo el pago me redirige ACA al tocar el boton VOLVER al sitio en la pagina de MP
         failure: `${MP_FAILURE}`, // fallo
         pending: `${MP_PENDING}` // pendiente
       },
@@ -143,18 +143,24 @@ export const reciveWebHook = async (req: Request, res: Response) => {
         )
         // Actualizo el proyecto
         if (upDateProject) {
+          // Actualizo el current Founding
           const updatedCurrentFounding =
             parseFloat(newDetail.transactionReceived) -
             parseFloat(newDetail.transactionAmountRefunded)
+          // Actualizo el founding Percentaje
+          const newFundingPercentage =
+            ((upDateProject.fundingCurrent + updatedCurrentFounding) * 100) /
+            upDateProject.fundingGoal
+          // Compruebo si se supero el fundingGoal
+          let goalTrue = false
+          if (newFundingPercentage >= 100) goalTrue = true
 
           await upDateProject.update(
             {
               fundingCurrent:
                 upDateProject.fundingCurrent + updatedCurrentFounding,
-              fundingPercentage:
-                ((upDateProject.fundingCurrent + updatedCurrentFounding) *
-                  100) /
-                upDateProject.fundingGoal
+              fundingPercentage: newFundingPercentage,
+              fundingGoalReached: goalTrue
             },
             {
               where: {
