@@ -1,11 +1,16 @@
-import { ProjectModel } from "../../config/db"
+import { ProjectModel, ImagesModel } from "../../config/db"
 
 const getAllProyectByNameController = async (
   validatedName: string
 ): Promise<object> => {
   try {
     // Busco todos los projects, filtro y generalizo la escritura al buscarlos
-    const allProjects = await ProjectModel.findAll()
+    const allProjects = await ProjectModel.findAll({
+      include: {
+        model: ImagesModel, // Incluir el modelo de imágenes relacionadas al proyecto
+        attributes: ["url"] // Seleccionar solo la propiedad 'url'
+      }
+    })
     const newAllProjects = allProjects.filter((project) => {
       return project.title
         .toLowerCase()
@@ -17,31 +22,8 @@ const getAllProyectByNameController = async (
     if (newAllProjects.length === 0) {
       throw new Error("Project does not exist")
     }
-    // Limito la info del array
-    const auxArray: object[] = []
-    newAllProjects.map((project) => {
-      const auxProject = {
-        id: project.id,
-        title: project.title,
-        description: project.description,
-        shortDescription: project.shortDescription,
-        fundingCurrent: project.fundingCurrent,
-        fundingGoal: project.fundingGoal,
-        fundingGoalReached: project.fundingGoalReached,
-        fundingPercentage: project.fundingPercentage,
-        fundingDayLeft: project.fundingDayLeft,
-        likes: project.likes,
-        disLikes: project.disLikes,
-        category: project.category,
-        bank: project.bank,
-        account: project.account,
-        location: project.location,
-        projectFase: project.projectFase
-      }
-      return auxArray.push(auxProject)
-    })
 
-    return auxArray
+    return newAllProjects
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Unknown error while searching for projects"

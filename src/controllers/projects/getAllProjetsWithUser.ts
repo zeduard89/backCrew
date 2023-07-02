@@ -1,30 +1,22 @@
-// import { UserModel } from "../../config/db"
-
-// const getAllProjetsWithUser = async (): Promise<object> => {
-//   try {
-//     const allUsers = await UserModel.findAll()
-//     if (!allUsers) {
-//       throw new Error("User not found")
-//     }
-
-//     const promises = allUsers.map((user) => user.$get("favoriteProjects"))
-//     const favoriteProjects = await Promise.all(promises)
-
-//     return favoriteProjects
-//   } catch (error) {
-//     return { message: `${error}` }
-//   }
-// }
-
-// export default getAllProjetsWithUser
-
-import { UserModel } from "../../config/db"
+import { UserModel, ProjectModel, ImagesModel } from "../../config/db"
 
 const getAllProjetsWithUser = async (): Promise<object> => {
   try {
     const allUsers = await UserModel.findAll({
-      include: "favoriteProjects" // Incluir la relación "favoriteProjects"
+      include: [
+        {
+          model: ProjectModel,
+          as: "favoriteProjects", // Nombre de la relación en el modelo de usuario
+          include: [
+            {
+              model: ImagesModel, // Incluir el modelo de imágenes relacionadas al proyecto
+              attributes: ["url"] // Seleccionar solo la propiedad 'url'
+            }
+          ]
+        }
+      ]
     })
+
     if (!allUsers) {
       throw new Error("User not found")
     }
@@ -38,15 +30,13 @@ const getAllProjetsWithUser = async (): Promise<object> => {
           // Si el proyecto no existe en el Map, agregarlo con un array vacío de userIds
           projectsMap.set(projectId, {
             ...favoriteProject.toJSON(),
-            UserFavorite: {
-              userIds: []
-            }
+            userFavorites: [] // Cambiar el nombre a 'userFavorites' para reflejar que es un array de usuarios favoritos
           })
         }
 
         const project = projectsMap.get(projectId)
-        // Agregar el userId al array de userIds del proyecto
-        project.UserFavorite.userIds.push(user.id)
+        // Agregar el usuario favorito al array de 'userFavorites' del proyecto
+        project.userFavorites.push(user.toJSON())
       })
     })
 
