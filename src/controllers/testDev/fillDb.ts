@@ -99,7 +99,7 @@ const fillDb = async (_req: Request, res: Response) => {
       })
     )
 
-    for (let i = 1; i <= 0; i++) {
+    for (let i = 1; i <= 50; i++) {
       let objectImage: any[] = []
 
       objectImage = (
