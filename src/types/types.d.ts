@@ -1,3 +1,9 @@
+export interface IImages {
+  projectId: string
+  name: string
+  url: string
+}
+
 export interface IUser {
   id: string
   name: string
@@ -109,6 +115,31 @@ export interface IProject {
   displayProject?: boolean
   creatorId?: string
 }
+
+export interface Project extends Model {
+  // Propiedades existentes de Project
+  id?: number
+  title?: string
+  description?: string
+  shortDescription?: string
+  fundingCurrent?: number
+  fundingGoal?: number | string
+  fundingGoalReached?: boolean
+  fundingPercentage?: number
+  fundingDayLeft?: number | string
+  likes?: number
+  disLikes?: number
+  category?: string
+  bank?: string
+  account?: string
+  location?: string
+  projectFase?: number
+  displayProject?: boolean
+  creatorId?: string
+  // Propiedad adicional mainImage
+  mainImage: string[]
+}
+
 // Uso title displayProject
 export type deleteIProyect = Omit<
   IProject,
