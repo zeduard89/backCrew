@@ -105,7 +105,7 @@ const fillDb = async (_req: Request, res: Response) => {
       objectImage = (
         await axios.get(`${RAILWAY}/blobRoute/getAllFiles/crew${i}`)
       ).data
-
+      console.log(objectImage)
       objectImage.forEach((object) => {
         ImagesModel.create({
           name: object.name,
