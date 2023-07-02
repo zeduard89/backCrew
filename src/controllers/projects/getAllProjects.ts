@@ -1,46 +1,19 @@
-import { ProjectModel } from "../../config/db"
-// import axios from "axios"
-import dotenv from "dotenv"
-dotenv.config()
-
-// let URL: string | undefined
-// if (process.env.RAILWAY != null) URL = process.env.RAILWAY
-// else URL = "http://localhost:3001"
-// const URL = "http://localhost:3001"
+import { ProjectModel, ImagesModel } from "../../config/db"
 
 const getAllProjects = async (): Promise<object> => {
   try {
-    const newExistingProject = await ProjectModel.findAll()
-    // const existingProject = await ProjectModel.findAll()
+    // const newExistingProject = await ProjectModel.findAll()
+    const project = await ProjectModel.findAll({
+      include: {
+        model: ImagesModel, // Incluir el modelo de imágenes relacionadas al proyecto
+        attributes: ["url"] // Seleccionar solo la propiedad 'url'
+      }
+    })
 
-    // const newExistingProject = await Promise.all(
-    //   existingProject.map(async (project) => {
-    //     let objectImage: any[] = []
-    //     if (project.id.length < 4) {
-    //       objectImage = (
-    //         await axios.get(`${URL}/blobRoute/getAllFiles/crew${project.id}`)
-    //       ).data
-    //     }
-    //     if (project.id.length > 4) {
-    //       objectImage = (
-    //         await axios.get(`${URL}/blobRoute/getAllFiles/${project.id}`)
-    //       ).data
-    //     }
-    //     const mainImage: string[] = Array.isArray(objectImage)
-    //       ? objectImage.map((image: any) => image.url)
-    //       : []
-
-    //     return {
-    //       ...project,
-    //       mainImage
-    //     }
-    //   })
-    // )
-
-    if (Object.keys(newExistingProject).length === 0) {
+    if (Object.keys(project).length === 0) {
       throw new Error("There are no projects in the DB")
     }
-    return newExistingProject
+    return project
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Unknown error while retrieving all projects"

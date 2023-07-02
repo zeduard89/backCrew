@@ -26,7 +26,7 @@ export default class Images extends Model<IImages> {
   name!: string
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT,
     allowNull: false
   })
   url!: string

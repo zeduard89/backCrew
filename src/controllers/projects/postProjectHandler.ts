@@ -8,6 +8,7 @@ import { BlobServiceClient } from "@azure/storage-blob"
 import dotenv from "dotenv"
 dotenv.config()
 const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING
+
 if (!connectionString) {
   throw new Error("Azure Storage connection string is not configured")
 }
@@ -68,7 +69,6 @@ const createProjectController = async (
     await blobService.createContainer(newIdProjectContainer)
     //! ---------------------------------
 
-    //! ----------------------------------
     return newProject.id
   } catch (error) {
     const errorMessage = (error as Error).message || "Unknown error "
