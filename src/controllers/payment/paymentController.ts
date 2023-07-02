@@ -4,8 +4,7 @@ import { mainUser, mainProject } from "./emailNotificacionPayment"
 import mercadopago from "mercadopago"
 import dotenv from "dotenv"
 dotenv.config()
-const { TOKEN_MP, MP_SUCCESS, MP_FAILURE, MP_PENDING, MP_NOTIFICATION } =
-  process.env
+const { TOKEN_MP, MP_SUCCESS, MP_NOTIFICATION } = process.env
 
 let user = ""
 let project = ""
