@@ -1,18 +1,26 @@
-import { ProjectModel, ImagesModel, CommentModel } from "../../config/db"
+import {
+  ProjectModel,
+  ImagesModel,
+  CommentModel,
+  UserModel
+} from "../../config/db"
 
 const getProjectByIdController = async (
   validatedName: string
 ): Promise<object> => {
   try {
-    // Busco todos los projects, filtro y generalizo la escritura al buscarlos
     // const Project = await ProjectModel.findByPk(validatedName, {
     //   include: [
     //     {
     //       model: ImagesModel,
     //       attributes: ["url"]
+    //     },
+    //     {
+    //       model: CommentModel
     //     }
     //   ]
     // })
+
     const Project = await ProjectModel.findByPk(validatedName, {
       include: [
         {
@@ -20,7 +28,13 @@ const getProjectByIdController = async (
           attributes: ["url"]
         },
         {
-          model: CommentModel
+          model: CommentModel,
+          include: [
+            {
+              model: UserModel,
+              attributes: ["avatar"]
+            }
+          ]
         }
       ]
     })
