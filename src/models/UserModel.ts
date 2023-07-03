@@ -45,60 +45,33 @@ export default class User extends Model<IUser> {
   // Add country, city, postalCode, shortDescription, aboutMe
   @Column({
     type: DataType.STRING,
-<<<<<<< HEAD
-    allowNull: false
-=======
     allowNull: true
->>>>>>> f6ec82db1ed1f2015a8bb41b23fb14905e684af7
   })
   country!: string
 
   @Column({
     type: DataType.STRING,
-<<<<<<< HEAD
-    allowNull: false
-=======
     allowNull: true
->>>>>>> f6ec82db1ed1f2015a8bb41b23fb14905e684af7
   })
   city!: string
 
   @Column({
     type: DataType.STRING,
-<<<<<<< HEAD
-    allowNull: false
-=======
     allowNull: true
->>>>>>> f6ec82db1ed1f2015a8bb41b23fb14905e684af7
   })
   postalCode!: string
 
   @Column({
     type: DataType.STRING,
-<<<<<<< HEAD
-    allowNull: false
-=======
     allowNull: true
->>>>>>> f6ec82db1ed1f2015a8bb41b23fb14905e684af7
   })
   shortDescription!: string
 
   @Column({
     type: DataType.TEXT,
-<<<<<<< HEAD
-    allowNull: false
-=======
     allowNull: true
->>>>>>> f6ec82db1ed1f2015a8bb41b23fb14905e684af7
   })
   aboutMe!: string
-
-  // @Column({
-  //   type: DataType.BOOLEAN,
-  //   allowNull: false,
-  //   defaultValue: false
-  // })
-  // verified!: boolean
 
   // @Column({
   //   type: DataType.BOOLEAN,
@@ -137,7 +110,7 @@ export default class User extends Model<IUser> {
   @Column({
     type: DataType.BOOLEAN,
     allowNull: true,
-    defaultValue: false
+    defaultValue: true
   })
   verified!: boolean
 

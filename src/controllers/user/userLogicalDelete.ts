@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 import { UserModel } from "../../config/db"
 import { IUserDelete } from "../../types/types"
 
-export const deleteUser = async (
+export const logicaldeleteUser = async (
   req: Request,
   res: Response
 ): Promise<void> => {
@@ -12,9 +12,15 @@ export const deleteUser = async (
     const user = await UserModel.findByPk(userId)
     if (!user) throw new Error("User not found")
 
-    await user.destroy()
+    user.verified = !user.verified;
+    await user.save();
 
-    res.status(200).send("User Was Destroyed Successfully")
+    if (user.verified === false) {
+      res.status(200).json({ message: "User Was Deleted Successfully" })
+    } else {
+      res.status(200).json({ message: "User Was Restored Successfully" })
+    }
+    
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Unknown error deleting user"
