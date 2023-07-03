@@ -1,4 +1,4 @@
-import { CommentModel } from "../../config/db"
+import { CommentModel, UserModel } from "../../config/db"
 import { childComment } from "../../types/types"
 
 const userToUserComment = async (
@@ -20,8 +20,13 @@ const userToUserComment = async (
       parentId: parentComment.id
     })
 
+    // const allProjectComments = await CommentModel.findAll({
+    //   where: { projectId }
+    // })
+
     const allProjectComments = await CommentModel.findAll({
-      where: { projectId }
+      where: { projectId },
+      include: [{ model: UserModel, attributes: ["image"] }]
     })
 
     return allProjectComments
