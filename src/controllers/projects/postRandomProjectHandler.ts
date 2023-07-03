@@ -2,6 +2,7 @@ import { ProjectModel, UserModel } from "../../config/db"
 import { faker } from "@faker-js/faker"
 
 const categorias = ["Tech & Innovation", "Creative Works", "Community Projects"]
+const location = ["Argentina", "Mexico", "Colombia", "Peru", "Venezuela"]
 
 // CREO USUARIOS
 let count = 0
@@ -24,7 +25,12 @@ const createRandomUsers = () => {
     city: faker.location.city(),
     postalCode: faker.location.zipCode(),
     shortDescription: "Lorem ipsum dolor sit amet consect.",
+<<<<<<< HEAD
     aboutMe: "Lorem ipsum dolor sit amet consectetur adipiscing elit phasellus cras rhoncus consequat tempor, id condimentum lacus taciti porttitor ac scelerisque sem."
+=======
+    aboutMe:
+      "Lorem ipsum dolor sit amet consectetur adipiscing elit phasellus cras rhoncus consequat tempor, id condimentum lacus taciti porttitor ac scelerisque sem."
+>>>>>>> f6ec82db1ed1f2015a8bb41b23fb14905e684af7
   }
 
   return user
@@ -34,6 +40,7 @@ const createRandomProject = (id: string) => {
   count++
   const categoriaActual =
     categorias[Math.floor(Math.random() * categorias.length)]
+  const locationActual = location[Math.floor(Math.random() * location.length)]
   const mathR1 = +faker.commerce.price({ min: 0, max: 500000, dec: 0 })
   const mathR2 = +faker.commerce.price({ min: 0, max: 500000, dec: 0 })
 
@@ -51,7 +58,7 @@ const createRandomProject = (id: string) => {
     category: categoriaActual,
     // bank: faker.finance.creditCardIssuer(),
     // account: faker.finance.accountNumber,
-    // location: "argentina",
+    location: locationActual,
     // projectFase: Math.floor(Math.random() * 4),
     displayProject: true,
     creatorId: id
@@ -77,7 +84,6 @@ const createRandomProjectController = async (usuarios: number) => {
     }
     return "Creacion con exito"
   } catch (error) {
-    console.log(error)
     return error
   }
 }

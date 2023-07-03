@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import { UserModel } from "../../config/db"
 import { IUser } from "../../types/types"
+import main from "./emailNotificacionUser"
 import {
   BlobServiceClient,
   BlobSASPermissions,
@@ -34,23 +35,24 @@ export const registerUser = async (
   const containerName = "defaultcontainer"
 
   try {
-    const { 
-      name, 
-      lastName, 
-      email, 
-      id, 
-      country, 
-      city, 
+    const {
+      name,
+      lastName,
+      email,
+      id,
+      country,
+      city,
       postalCode,
       shortDescription,
-      aboutMe }: IUser = req.body
+      aboutMe
+    }: IUser = req.body
 
-      // Validate country, city, postalCode, ShortDescription and aboutMe
-      validatorCountry.parse(country);
-      validatorCity.parse(city);
-      validatorPostalCode.parse(postalCode);
-      validatorShortDescription.parse(shortDescription);
-      validatorAboutMe.parse(aboutMe);
+    // Validate country, city, postalCode, ShortDescription and aboutMe
+    validatorCountry.parse(country)
+    validatorCity.parse(city)
+    validatorPostalCode.parse(postalCode)
+    validatorShortDescription.parse(shortDescription)
+    validatorAboutMe.parse(aboutMe)
 
     const user: IUser | null = await UserModel.findOne({ where: { email } })
     if (user != null) {
@@ -96,7 +98,7 @@ export const registerUser = async (
     const blobUrlWithSAS = blobClient.url + "?" + sasToken
 
     const dateNow = new Date()
-    const registerUser: IUser = await UserModel.create({
+    const newUser = await UserModel.create({
       id,
       name,
       lastName,
@@ -110,10 +112,23 @@ export const registerUser = async (
       shortDescription,
       aboutMe
     })
-    res.status(200).send({ registerUser })
+
+    main(newUser.name, newUser.lastName, newUser.email, newUser.country)
+
+    res.status(200).send("User was registered successfully")
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Unknown error registering user"
     res.status(400).send(errorMessage)
   }
 }
+// import main from "./emailNotificacion"
+
+// main(
+//   newDetail.email,
+//   newDetail.firstName,
+//   newDetail.id,
+//   title,
+//   newDetail.transactionAmount,
+//   newDetail.status
+// )

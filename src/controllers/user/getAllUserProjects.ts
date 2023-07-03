@@ -5,9 +5,11 @@ import { validatorString } from "../../schemas/projectSchemas"
 const getAllUserProjects = async (
   req: Request,
   res: Response
-): Promise<Response> => {
+): Promise<void> => {
   try {
     const creatorId = req.query.creatorId as string
+    if (!creatorId || creatorId === null)
+      throw new Error("creatorId is required")
     validatorString.parse(creatorId)
 
     if (!creatorId || creatorId === undefined) {
@@ -21,13 +23,11 @@ const getAllUserProjects = async (
     // Busco por medio de su relacion (projects esta dentro del modelo user)
     const findedUser = await user.$get("projects")
 
-    return res.status(200).json(findedUser)
+    res.status(200).json(findedUser)
   } catch (error) {
-    console.error("Error fetching projects for user:", error)
-    return res.status(400).json({
-      success: false,
-      error: "Internal server error"
-    })
+    const errorMessage =
+      (error as Error).message || "Unknown error registering user"
+    res.status(400).send(errorMessage)
   }
 }
 

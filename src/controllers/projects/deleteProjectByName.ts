@@ -3,10 +3,10 @@ import { deleteIProyect } from "../../types/types"
 
 const deleteProyectByNameController = async (
   validatedProject: deleteIProyect
-): Promise<object> => {
+): Promise<string> => {
   try {
     const projectDB = await ProjectModel.findOne({
-      where: { title: validatedProject.title }
+      where: { id: validatedProject.id }
     })
     if (!projectDB) throw new Error("Project not found")
     //* Si la condicion es FALSE la retorno a TRUE
@@ -19,7 +19,7 @@ const deleteProyectByNameController = async (
         {
           // Aquí se especifica la condición de búsqueda
           where: {
-            title: validatedProject.title
+            id: validatedProject.id
           }
         }
       )
@@ -27,9 +27,7 @@ const deleteProyectByNameController = async (
         throw new Error("Project doesn't exist")
       }
 
-      return {
-        message: `Successful change displayProject: ${validatedProject.displayProject}`
-      }
+      return "Successful change displayProject"
     }
     //* Si la condicion es TRUE la retorno a FALSE
     const existingProject = await ProjectModel.update(
@@ -40,7 +38,7 @@ const deleteProyectByNameController = async (
       {
         // Aquí se especifica la condición de búsqueda
         where: {
-          title: validatedProject.title
+          id: validatedProject.id
         }
       }
     )
@@ -48,13 +46,11 @@ const deleteProyectByNameController = async (
       throw new Error("Project does not exist")
     }
 
-    return {
-      message: `Successful displayProject change: ${validatedProject.displayProject}`
-    }
+    return "Successful change displayProject"
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Unknown error in deleting Project"
-    return { errorMessage }
+    return errorMessage
   }
 }
 

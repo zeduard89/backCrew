@@ -41,10 +41,29 @@ export const projectValidator = z.object({
   creatorId: z.string()
 })
 
-export const deleteProjectValidator = z.object({
+export const projectPostValidator = z.object({
   title: z
     .string()
-    .min(3, { message: "Title must have at least 3 characters" }),
+    .min(3, { message: "The title must have at least 3 characters" })
+    .optional(),
+  description: z
+    .string()
+    .min(10, { message: "The description must have at least 10 characters" })
+    .optional(),
+  shortDescription: z.string().min(5, {
+    message: "The short description must have at least 5 characters"
+  }),
+  fundingGoal: z.string().optional(),
+  fundingDayLeft: z.string().optional(),
+  category: z
+    .string()
+    .min(1, { message: "Please select at least one category" })
+    .optional(),
+  creatorId: z.string().optional()
+})
+
+export const deleteProjectValidator = z.object({
+  id: z.string().min(3, { message: "Title must have at least 3 characters" }),
   displayProject: z.boolean()
 })
 
@@ -79,18 +98,14 @@ export const updateProjectValidator = z.object({
 })
 
 export const updateFundingCurrentValidator = z.object({
-  title: z
-    .string()
-    .min(3, { message: "Title must have at least 3 characters" }),
+  id: z.string().min(3, { message: "Id must have at least 3 characters" }),
   addToFundingCurrent: z.number().positive({
     message: "The value to add to current funding must be a positive number"
   })
 })
 
 export const updateLikesValidator = z.object({
-  title: z
-    .string()
-    .min(3, { message: "Title must have at least 3 characters" }),
+  id: z.string().min(3, { message: "Id must have at least 3 characters" }),
   likes: z
     .number()
     .nonnegative({ message: "Number of likes must be a non-negative value" }),

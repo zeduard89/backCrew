@@ -1,4 +1,4 @@
-import { Router } from "express"
+import { Router, Request, Response } from "express"
 import multer from "multer"
 // import { loginUser } from "../controllers/user/postUserLogin"
 import { registerUser } from "../controllers/user/postUserRegister"
@@ -9,6 +9,7 @@ import getAllUserProjects from "../controllers/user/getAllUserProjects"
 import { postUserFavoriteRelationship } from "../controllers/user/postUserFavorite"
 import getAllUsersFavorites from "../controllers/user/getAllUsersFavorites"
 import { deleteUserFavorite } from "../controllers/user/deleteUserFavorite"
+import { deleteUser } from "../controllers/user/deleteUser"
 
 const upload = multer()
 const router = Router()
@@ -30,5 +31,14 @@ router.post("/create/UserFavoriteRelationship", postUserFavoriteRelationship)
 router.get("/getAllUsersFavorites", getAllUsersFavorites)
 
 router.delete("/deleteUserFavorite", deleteUserFavorite)
+
+router.delete("/logicDelete", deleteUser)
+
+router.delete("/delete", deleteUser)
+
+// Controlador de rutas no especificadas
+router.get("*", (_req: Request, res: Response) => {
+  res.status(404).send("Route not found")
+})
 
 export { router }

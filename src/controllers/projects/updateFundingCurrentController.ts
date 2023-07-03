@@ -3,11 +3,11 @@ import { updateFundingCurrentIProyect } from "../../types/types"
 
 const updatedProjectController = async (
   validatedProject: updateFundingCurrentIProyect
-): Promise<object> => {
+): Promise<string> => {
   try {
     // Busco el projecto y compruebo y edito
     const projectDB = await ProjectModel.findOne({
-      where: { title: validatedProject.title }
+      where: { id: validatedProject.id }
     })
     if (!projectDB) {
       throw new Error("Project does not exist")
@@ -28,19 +28,17 @@ const updatedProjectController = async (
       {
         // Aquí se especifica la condición de búsqueda
         where: {
-          title: validatedProject.title
+          id: validatedProject.id
         }
       }
     )
 
-    return {
-      message: `Successfully modified the value of fundingCurrent and fundingPercentage`
-    }
+    return "Successfully modified the value of fundingCurrent and fundingPercentage"
   } catch (error) {
     const errorMessage =
       (error as Error).message ||
       "Unknown error while updating founding project"
-    return { errorMessage }
+    return errorMessage
   }
 }
 

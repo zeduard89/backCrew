@@ -1,5 +1,5 @@
 import { Response, Request } from "express"
-import { UserModel, ProjectModel, PaymentsModel } from "../config/db"
+import { UserModel, ProjectModel, PaymentsModel } from "../../config/db"
 
 const checkRoute = async (_req: Request, res: Response): Promise<void> => {
   try {

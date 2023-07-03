@@ -1,7 +1,16 @@
-import { Model, Column, Table, DataType } from "sequelize-typescript"
+import {
+  Model,
+  Column,
+  Table,
+  DataType,
+  ForeignKey,
+  BelongsTo,
+  HasMany
+} from "sequelize-typescript"
 import { IComment } from "../types/types"
+import { UserModel, ProjectModel, CommentModel } from "../config/db"
 
-@Table({ tableName: "comments" })
+@Table({ tableName: "comments", timestamps: false })
 export default class Comments extends Model<IComment> {
   @Column({
     type: DataType.INTEGER,
@@ -13,13 +22,12 @@ export default class Comments extends Model<IComment> {
 
   @Column({
     type: DataType.STRING,
-    unique: true,
     allowNull: false
   })
-  title!: string
+  name!: string
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT,
     allowNull: false
   })
   description!: string
@@ -41,13 +49,49 @@ export default class Comments extends Model<IComment> {
   @Column({
     type: DataType.STRING,
     allowNull: true,
-    defaultValue: null
+    defaultValue: Date()
   })
   date!: string
 
   @Column({
     type: DataType.BOOLEAN,
-    allowNull: false
+    allowNull: true,
+    defaultValue: true
   })
   displayComment!: boolean
+
+  // 1: N user-comment----------------
+  @ForeignKey(() => UserModel)
+  @Column({
+    type: DataType.STRING,
+    allowNull: false
+  })
+  userId!: string
+
+  @BelongsTo(() => UserModel, "userId") // Asigna un alias único a la asociación
+  commentUser!: UserModel
+
+  // 1:N project-comment
+  @ForeignKey(() => ProjectModel)
+  @Column({
+    type: DataType.STRING,
+    allowNull: false
+  })
+  projectId!: string
+
+  @BelongsTo(() => ProjectModel, "projectId") // Asigna un alias único a la asociación
+  commentProject!: ProjectModel
+
+  @ForeignKey(() => Comments)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true
+  })
+  parentId!: number
+
+  @BelongsTo(() => Comments, "parentId")
+  parentComment!: CommentModel
+
+  @HasMany(() => Comments, "parentId")
+  nestedComments!: CommentModel[]
 }

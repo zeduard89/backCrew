@@ -2,23 +2,21 @@ import { ProjectModel } from "../../config/db"
 import { limitDate } from "../../types/types"
 
 const getLeftDayByNameController = async (
-  validatedName: string
+  validatedId: string
 ): Promise<object> => {
   try {
-    const allProjects = await ProjectModel.findAll()
-    const existingProject = allProjects.filter(
-      (project) =>
-        project.title.toLowerCase().trim().replace(/\s/g, "") ===
-        validatedName.toLowerCase().trim().replace(/\s/g, "")
-    )
+    const existingProject = await ProjectModel.findOne({
+      where: { id: validatedId }
+    })
+
     if (!existingProject) {
       throw new Error("Project no existe")
     }
     //! Logica para fecha limite
     // Obtengo la cantidad de milisegundos desde 1/1/1970 hasta la creacion
-    const createdAtDate = new Date(existingProject[0].createdAt).getTime()
+    const createdAtDate = new Date(existingProject.createdAt).getTime()
     // Obtengo los milisegundos de la fecha limite impuesta
-    const limitDays = existingProject[0].fundingDayLeft * 24 * 60 * 60 * 1000
+    const limitDays = existingProject.fundingDayLeft * 24 * 60 * 60 * 1000
     // Sumo ambos valores (sin newDate es solo numerico)
     const deadlineDate = new Date(createdAtDate + limitDays)
 

@@ -7,6 +7,7 @@ export const getUserInfo = async (
   res: Response
 ): Promise<void> => {
   try {
+    if (!req.query.id) throw new Error("Id is required")
     const { id }: IUserLD = req.query
     const user: IUserLD | null = await UserModel.findOne({ where: { id } })
     if (user == null) {

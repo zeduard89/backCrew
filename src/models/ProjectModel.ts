@@ -9,7 +9,12 @@ import {
   BelongsToMany
 } from "sequelize-typescript"
 import { IProject } from "../types/types"
-import { UserModel, PaymentsModel, UserFavoritesModel } from "../config/db"
+import {
+  UserModel,
+  PaymentsModel,
+  UserFavoritesModel,
+  CommentModel
+} from "../config/db"
 
 @Table({ tableName: "projects" })
 export default class Project extends Model<IProject> {
@@ -26,19 +31,22 @@ export default class Project extends Model<IProject> {
     type: DataType.STRING,
     primaryKey: true,
     unique: true,
-    allowNull: false
+    allowNull: true,
+    defaultValue: "titulo"
   })
   title!: string
 
   @Column({
     type: DataType.TEXT,
-    allowNull: false
+    allowNull: true,
+    defaultValue: "description"
   })
   description!: string
 
   @Column({
     type: DataType.TEXT,
-    allowNull: true
+    allowNull: true,
+    defaultValue: "shortDescription"
   })
   shortDescription!: string
 
@@ -51,7 +59,8 @@ export default class Project extends Model<IProject> {
 
   @Column({
     type: DataType.FLOAT,
-    allowNull: false
+    allowNull: true,
+    defaultValue: 0
   })
   fundingGoal!: number
 
@@ -71,7 +80,8 @@ export default class Project extends Model<IProject> {
 
   @Column({
     type: DataType.INTEGER,
-    allowNull: false
+    allowNull: true,
+    defaultValue: 0
   })
   fundingDayLeft!: number
 
@@ -91,7 +101,8 @@ export default class Project extends Model<IProject> {
 
   @Column({
     type: DataType.STRING,
-    allowNull: false
+    allowNull: true,
+    defaultValue: "Category"
   })
   category!: string
 
@@ -124,7 +135,8 @@ export default class Project extends Model<IProject> {
 
   @Column({
     type: DataType.BOOLEAN,
-    allowNull: false
+    allowNull: true,
+    defaultValue: true
   })
   displayProject!: boolean
 
@@ -138,6 +150,10 @@ export default class Project extends Model<IProject> {
   // 1:N project-payment
   @HasMany(() => PaymentsModel)
   projectPayments!: PaymentsModel[]
+
+  // 1:N project-comments
+  @HasMany(() => CommentModel)
+  projectComments!: CommentModel[]
 
   // 1:N project-user
   @BelongsTo(() => UserModel, "creatorId") // Asigna un alias único a la asociación

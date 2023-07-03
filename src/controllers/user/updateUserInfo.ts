@@ -26,25 +26,24 @@ export const updateUserInfo = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { 
+    const {
       id,
-      updateName, 
-      updateLastName, 
+      updateName,
+      updateLastName,
       updateEmail,
-      updateCountry, 
-      updateCity, 
+      updateCountry,
+      updateCity,
       updatePostalCode,
       updateShortDescription,
-      updateAboutMe 
-    }: IUpdateUser =
-      req.body
+      updateAboutMe
+    }: IUpdateUser = req.body
 
     // Validar los campos
-    validatorCountry.parse(updateCountry);
-    validatorCity.parse(updateCity);
-    validatorPostalCode.parse(updatePostalCode);
-    validatorShortDescription.parse(updateShortDescription);
-    validatorAboutMe.parse(updateAboutMe);
+    validatorCountry.parse(updateCountry)
+    validatorCity.parse(updateCity)
+    validatorPostalCode.parse(updatePostalCode)
+    validatorShortDescription.parse(updateShortDescription)
+    validatorAboutMe.parse(updateAboutMe)
 
     // Contenedor Defalult de los usuarios
     const containerName = "azureusercontainer"
@@ -97,8 +96,8 @@ export const updateUserInfo = async (
           lastName: updateLastName || user.lastName,
           email: updateEmail || user.email,
           avatar: blobUrl + "." + extension || user.avatar,
-          country: updateCountry || user.country, 
-          city: updateCity || user.city, 
+          country: updateCountry || user.country,
+          city: updateCity || user.city,
           postalCode: updatePostalCode || user.postalCode,
           shortDescription: updateShortDescription || user.shortDescription,
           aboutMe: updateAboutMe || user.aboutMe
@@ -118,8 +117,8 @@ export const updateUserInfo = async (
         name: updateName || user.name,
         lastName: updateLastName || user.lastName,
         email: updateEmail || user.email,
-        country: updateCountry || user.country, 
-        city: updateCity || user.city, 
+        country: updateCountry || user.country,
+        city: updateCity || user.city,
         postalCode: updatePostalCode || user.postalCode,
         shortDescription: updateShortDescription || user.shortDescription,
         aboutMe: updateAboutMe || user.aboutMe

@@ -1,4 +1,5 @@
 import { Request, Response } from "express"
+
 // esta clase me permite conectarme con azureCStore
 import {
   BlobServiceClient,
@@ -60,6 +61,61 @@ export const uploadBlob = async (req: Request, res: Response) => {
     res.status(500).send(errorMessage)
   }
 }
+//! ----
+export const uploadBlobNew = async (
+  file: Express.Multer.File,
+  container: string,
+  names: string
+) => {
+  try {
+    // Verificar si se proporcionó un archivo
+    if (!file) {
+      throw new Error("No file has been provided")
+    }
+    const { originalname, buffer } = file
+
+    // Verificar si se proporcionó el nombre del contenedor y el nombre del archivo
+    if (!container || !names) {
+      throw new Error("Incomplete container/name data")
+    }
+
+    // Buscar si existe el contenedor
+    const containerClient = blobService.getContainerClient(container)
+    const containerExists = await containerClient.exists()
+
+    if (!containerExists) {
+      throw new Error(`The container ${container} does not exist`)
+    }
+
+    // Buscar si existe la imagen
+    const exist = await containerClient.getBlockBlobClient(names).exists()
+
+    if (exist) {
+      throw new Error(`The element: ${names} already exists`)
+    }
+
+    // Obtengo la extension de original name para usarla al final del name
+    const extension = originalname.split(".").pop()
+
+    // Guardamos el archivo con el nombre de la variable name
+    await containerClient
+      .getBlockBlobClient(names + "." + extension)
+      .uploadData(buffer)
+
+    // Subir el archivo al contenedor
+    // await containerClient.getBlockBlobClient(name).uploadData(file.buffer)
+
+    return {
+      message: `The element: ${names} was created successfully`
+    }
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message || "Unknown error while saving ImageAzure"
+    throw new Error(errorMessage)
+  }
+}
+
+//! ----------
 
 // Funcion para ver Listado URL
 export const getBlobList = async (req: Request, res: Response) => {
@@ -201,5 +257,78 @@ export const deleteBlob = async (req: Request, res: Response) => {
     const errorMessage =
       (error as Error).message || "Unknown error while deleting ImageAzure"
     res.status(400).send(errorMessage)
+  }
+}
+
+//! ----NO USE
+
+export const uploadMultiBlob = async (req: Request, res: Response) => {
+  try {
+    // Verifico si req.files contiene los elementos
+    if (!req.files) {
+      throw new Error("No files have been provided in the request")
+    }
+
+    const files: Express.Multer.File[] = Array.isArray(req.files)
+      ? req.files
+      : Object.values(req.files).reduce(
+          (arr, fileArr) => arr.concat(fileArr),
+          []
+        )
+
+    // Recibimos el nombre del contenedor y el nombre base
+    const { container, name } = req.body
+    if (!container || !name) {
+      throw new Error(`Incomplete container/name data`)
+    }
+
+    // Buscamos si existe el contenedor
+    const containerClient = blobService.getContainerClient(container)
+    const containerExists = await containerClient.exists()
+    if (!containerExists) {
+      throw new Error(`The container ${container} does not exist`)
+    }
+
+    const uploadedFiles = []
+
+    // Procesamos cada archivo en el array
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i]
+
+      // Verificamos si el archivo es válido
+      if (!file || !file.originalname || !file.buffer) {
+        throw new Error(`Invalid file at index ${i}`)
+      }
+
+      const { originalname, buffer } = file
+
+      // Buscamos si existe la imagen
+      const exist = await containerClient
+        .getBlockBlobClient(originalname)
+        .exists()
+      if (exist) {
+        throw new Error(`The element: ${originalname} already exists`)
+      }
+
+      // Obtengo la extensión del originalname para usarla al final del name
+      const extension = originalname.split(".").pop()
+
+      // Generamos el nombre único para el archivo
+      const uniqueName = `${name}${i + 1}.${extension}`
+
+      // Guardamos el archivo con el nombre único
+      await containerClient.getBlockBlobClient(uniqueName).uploadData(buffer)
+      uploadedFiles.push(uniqueName)
+    }
+
+    res.json({
+      message: `The elements: ${uploadedFiles.join(
+        ", "
+      )} were created successfully`
+    })
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message || "Unknown error while saving ImageAzure"
+    res.status(500).send(errorMessage)
   }
 }

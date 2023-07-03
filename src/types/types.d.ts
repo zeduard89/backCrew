@@ -6,10 +6,7 @@ export interface IUser {
   avatar: string
   // projects: Array[]
   date: string
-  // password: string
   // verified?: boolean
-  // access: boolean
-
   // Add country, city, postalCode, shortDescription, aboutMe
   country: string
   city: string
@@ -18,7 +15,31 @@ export interface IUser {
   aboutMe: string
 }
 
-export type IUserLD = Omit<IUser, "name", "lastName", "id", "Date", "country", "city", "postalCode", "shortDescription", "aboutMe">
+export type IUserDelete = Omit<
+  IUser,
+  "name",
+  "lastName",
+  "avatar",
+  "Date",
+  "country",
+  "city",
+  "postalCode",
+  "shortDescription",
+  "aboutMe"
+>
+
+export type IUserLD = Omit<
+  IUser,
+  "name",
+  "lastName",
+  "id",
+  "Date",
+  "country",
+  "city",
+  "postalCode",
+  "shortDescription",
+  "aboutMe"
+>
 
 export interface IUpdateUser {
   id: string
@@ -38,14 +59,27 @@ export interface IUserFavorite {
 }
 
 export interface IComment {
-  id: string
-  firstName: string
-  comments: string
-  likes: number
-  dislikes: number
-  date: string
-  displayComment: boolean
+  id?: number
+  name: string
+  description: string
+  likes?: number
+  dislikes?: number
+  date?: string
+  displayComment?: boolean
+  userId: string
+  projectId: string
+  parentId?: number
 }
+
+export type childComment = Omit<
+  // Si uso
+  IComment,
+  "id",
+  "likes",
+  "dislikes",
+  "date",
+  "displayComment"
+>
 
 // export interface ICreator {
 //   id: DataTypeUUID
@@ -57,14 +91,14 @@ export interface IComment {
 // El signo de pregunta permite que sea opcional
 export interface IProject {
   id?: number
-  title: string
-  description: string
+  title?: string
+  description?: string
   shortDescription?: string
   fundingCurrent?: number
-  fundingGoal: number
-  fundingGoalReached: boolean
+  fundingGoal?: number | string
+  fundingGoalReached?: boolean
   fundingPercentage?: number
-  fundingDayLeft: number
+  fundingDayLeft?: number | string
   likes?: number
   disLikes?: number
   category?: string
@@ -93,6 +127,7 @@ export type deleteIProyect = Omit<
 // Uso title y currentFunding
 export type updateFundingCurrentIProyect = Omit<
   IProject,
+  "title",
   "description",
   "shortDescription",
   "fundingGoal",
@@ -108,6 +143,7 @@ export type updateFundingCurrentIProyect = Omit<
 // Uso title y likes/disLikes
 export type updateLikes = Omit<
   IProject,
+  "title",
   "description",
   "fundingCurrent",
   "fundingGoal",
@@ -173,6 +209,13 @@ export interface IPaymentDetail {
   // dateCreated: string
   userId: string
   projectId: string
+}
+
+interface ErrorBody {
+  code: string
+  expected: string
+  received: string
+  path: string
 }
 
 // Por defecto TS utiliza este nombre en el fichero 'types.d.ts'

@@ -3,7 +3,7 @@ import { updateProject } from "../../types/types"
 
 const updatedProjectController = async (
   validatedProject: updateProject
-): Promise<object> => {
+): Promise<string> => {
   try {
     // Compruebo que no exista un nombre igual
     const projectDBname = await ProjectModel.findOne({
@@ -43,13 +43,11 @@ const updatedProjectController = async (
       }
     )
 
-    return {
-      message: `Successful update of the project with ID: ${projectDB.id}`
-    }
+    return `Successful update of the project with ID: ${projectDB.id}`
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Unknown error while updating project"
-    return { errorMessage }
+    return errorMessage
   }
 }
 

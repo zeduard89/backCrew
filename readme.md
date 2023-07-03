@@ -48,6 +48,9 @@ has permissions to access
 - [Update Project](./readme/projectRoute/updateProject.md) : `PUT /projectRoute/update`
 - [UpdateCurrent Founding](./readme/projectRoute/updateCurrentFouding.md) : `PUT /projectRoute/update/addToFundingCurrent`
 - [UpdateLikes](./readme/projectRoute/updateLikes.md) : `PUT /projectRoute/likes`
+- [Get Five Most Funding](./readme/projectRoute/fiveMostFunding.md) : `Get /projectRoute/fiveMostFunding`
+- [Get Twenty Most Trending](./readme/projectRoute/twentyMostTrending.md) : `Get /projectRoute/twentyMostTrending`
+- [Get Filtered Porjects](./readme/projectRoute/searchProjects.md) : `Get /projectRoute/searchProjects/`
 
 ### Azure Containers related
 

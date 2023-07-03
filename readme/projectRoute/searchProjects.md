@@ -32,7 +32,7 @@
             "category": "Creative Works",
             "bank": null,
             "account": "false",
-            "location": "false",
+            "location": "Argentina",
             "projectFase": 0,
             "displayProject": true,
             "createdAt": "2023-06-16T15:18:48.848Z",
@@ -62,7 +62,7 @@ When sending the last projects of the result array, the following object is sent
             "category": "Creative Works",
             "bank": null,
             "account": "false",
-            "location": "false",
+            "location": "Argentina",
             "projectFase": 0,
             "displayProject": true,
             "createdAt": "2023-06-16T15:18:48.848Z",
@@ -91,7 +91,7 @@ When sending the last projects of the result array, the following object is sent
 
 **q:** this+is+a+Query
 
-**country:** all, argentina.
+**country:** all, Argentina, Mexico, Colombia, Peru, Venezuela.
 
 ## Error Response
 
