@@ -1,5 +1,5 @@
 import { Op } from "sequelize"
-import { ProjectModel, ImagesModel } from "../../config/db"
+import { ProjectModel,  ImagesModel  } from "../../config/db"
 
 // sort
 const sortByTrending = (a: ProjectModel, b: ProjectModel) => b.likes - a.likes

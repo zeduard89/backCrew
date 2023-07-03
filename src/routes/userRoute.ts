@@ -10,6 +10,7 @@ import { postUserFavoriteRelationship } from "../controllers/user/postUserFavori
 import getAllUsersFavorites from "../controllers/user/getAllUsersFavorites"
 import { deleteUserFavorite } from "../controllers/user/deleteUserFavorite"
 import { deleteUser } from "../controllers/user/deleteUser"
+import { logicaldeleteUser } from '../controllers/user/userLogicalDelete'
 
 const upload = multer()
 const router = Router()
@@ -31,6 +32,8 @@ router.post("/create/UserFavoriteRelationship", postUserFavoriteRelationship)
 router.get("/getAllUsersFavorites", getAllUsersFavorites)
 
 router.delete("/deleteUserFavorite", deleteUserFavorite)
+
+router.put("/logicalDelete", logicaldeleteUser)
 
 router.delete("/delete", deleteUser)
 
