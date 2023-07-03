@@ -49,7 +49,6 @@ const getFilteredProjects = async (
         location: validatedCountry
       }
     }
-
     // Query search
     if (validatedQ) {
       const decodedQ = decodeURIComponent(validatedQ)
@@ -65,20 +64,26 @@ const getFilteredProjects = async (
         [Op.or]: titleClauses
       }
     }
+    console.log(whereClause)
 
     let existingProjects = await ProjectModel.findAll({
       where: whereClause,
       include: [ImagesModel]
     })
+    console.log(existingProjects)
 
     if (existingProjects.length === 0) {
       throw new Error("There are no projects with this parameters")
     }
-
+    console.log(validatedSort)
     // Trending sort & Most funded sort
     validatedSort === "trending"
       ? (existingProjects = existingProjects.sort(sortByTrending))
       : (existingProjects = existingProjects.sort(orderByMostFunding))
+
+    //       const sortByTrending = (a: ProjectModel, b: ProjectModel) => b.likes - a.likes
+    //   const orderByMostFunding = (a: ProjectModel, b: ProjectModel) =>
+    //      b.fundingCurrent - a.fundingCurrent
 
     // Slice existingProjects for deliver to Front by infiniteScroll
     const size = parseInt(validatedS)
