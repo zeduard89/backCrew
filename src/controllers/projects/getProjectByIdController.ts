@@ -1,11 +1,29 @@
-import { ProjectModel } from "../../config/db"
+import { ProjectModel, ImagesModel, CommentModel } from "../../config/db"
 
 const getProjectByIdController = async (
   validatedName: string
 ): Promise<object> => {
   try {
     // Busco todos los projects, filtro y generalizo la escritura al buscarlos
-    const Project = await ProjectModel.findByPk(validatedName)
+    // const Project = await ProjectModel.findByPk(validatedName, {
+    //   include: [
+    //     {
+    //       model: ImagesModel,
+    //       attributes: ["url"]
+    //     }
+    //   ]
+    // })
+    const Project = await ProjectModel.findByPk(validatedName, {
+      include: [
+        {
+          model: ImagesModel,
+          attributes: ["url"]
+        },
+        {
+          model: CommentModel
+        }
+      ]
+    })
 
     if (!Project) throw new Error("The project does not exist")
 

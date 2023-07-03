@@ -1,13 +1,19 @@
-import { ProjectModel } from "../../config/db"
+import { ProjectModel, ImagesModel } from "../../config/db"
 
 const getAllProjects = async (): Promise<object> => {
   try {
-    const existingProject = await ProjectModel.findAll()
+    // const newExistingProject = await ProjectModel.findAll()
+    const project = await ProjectModel.findAll({
+      include: {
+        model: ImagesModel, // Incluir el modelo de imágenes relacionadas al proyecto
+        attributes: ["url"] // Seleccionar solo la propiedad 'url'
+      }
+    })
 
-    if (Object.keys(existingProject).length === 0) {
+    if (Object.keys(project).length === 0) {
       throw new Error("There are no projects in the DB")
     }
-    return existingProject
+    return project
   } catch (error) {
     const errorMessage =
       (error as Error).message || "Unknown error while retrieving all projects"

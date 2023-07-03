@@ -4,8 +4,8 @@ import { mainUser, mainProject } from "./emailNotificacionPayment"
 import mercadopago from "mercadopago"
 import dotenv from "dotenv"
 dotenv.config()
-const { TOKEN_MP, MP_SUCCESS, MP_FAILURE, MP_PENDING, MP_NOTIFICATION } =
-  process.env
+// const { TOKEN_MP, MP_SUCCESS } = process.env
+const { TOKEN_MP, MP_SUCCESS, MP_NOTIFICATION } = process.env
 
 let user = ""
 let project = ""
@@ -45,8 +45,8 @@ export const createOrder = async (
       // Le indico hacia donde yo retorno la respuesta (2)
       back_urls: {
         success: `${MP_SUCCESS}${projectId}`, // si se realizo el pago me redirige ACA al tocar el boton VOLVER al sitio en la pagina de MP
-        failure: `${MP_FAILURE}`, // fallo
-        pending: `${MP_PENDING}` // pendiente
+        failure: `${MP_SUCCESS}${projectId}`, // fallo
+        pending: `${MP_SUCCESS}${projectId}` // pendiente
       },
       // Cuando el pago este echo, se envia a esta url, pero debe ser una transaccion segura https(en DEV no tenemos)
       // por ende use agrega "ngrok" se descarga un ejecutable que genera un tunnel HTTP, da un dominio SSL

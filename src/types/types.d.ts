@@ -1,3 +1,9 @@
+export interface IImages {
+  projectId: string
+  name: string
+  url: string
+}
+
 export interface IUser {
   id: string
   name: string
@@ -6,13 +12,14 @@ export interface IUser {
   avatar: string
   // projects: Array[]
   date: string
-  // verified?: boolean
+  verified?: boolean
   // Add country, city, postalCode, shortDescription, aboutMe
   country: string
   city: string
   postalCode: string
   shortDescription: string
   aboutMe: string
+  admin?: boolean
 }
 
 export type IUserDelete = Omit<
@@ -63,20 +70,40 @@ export interface IComment {
   name: string
   description: string
   likes?: number
-  dislikes?: number
+  disLikes?: number
   date?: string
   displayComment?: boolean
   userId: string
   projectId: string
   parentId?: number
 }
+export type ILikeComment = Omit<
+  // Si uso
+  IComment,
+  "name",
+  "description",
+  "date",
+  "displayComment",
+  "userId",
+  "projectId",
+  "parentId"
+>
+export type ICommentUpdate = Omit<
+  // Si uso
+  IComment,
+  "date",
+  "displayComment",
+  "likes",
+  "disLikes",
+  "parentId"
+>
 
 export type childComment = Omit<
   // Si uso
   IComment,
   "id",
   "likes",
-  "dislikes",
+  "disLikes",
   "date",
   "displayComment"
 >
@@ -109,6 +136,31 @@ export interface IProject {
   displayProject?: boolean
   creatorId?: string
 }
+
+export interface Project extends Model {
+  // Propiedades existentes de Project
+  id?: number
+  title?: string
+  description?: string
+  shortDescription?: string
+  fundingCurrent?: number
+  fundingGoal?: number | string
+  fundingGoalReached?: boolean
+  fundingPercentage?: number
+  fundingDayLeft?: number | string
+  likes?: number
+  disLikes?: number
+  category?: string
+  bank?: string
+  account?: string
+  location?: string
+  projectFase?: number
+  displayProject?: boolean
+  creatorId?: string
+  // Propiedad adicional mainImage
+  mainImage: string[]
+}
+
 // Uso title displayProject
 export type deleteIProyect = Omit<
   IProject,
@@ -218,37 +270,14 @@ interface ErrorBody {
   path: string
 }
 
-// Por defecto TS utiliza este nombre en el fichero 'types.d.ts'
-// Puedo tener varios esparcidos, pero ahora solo los coloco en este luegar
-// traduce elementos para que TC los entienda como lo de color ROJO, eso lo cree en ENUM
-//! export type Visibility = 'great' | 'good' | 'ok' | 'poor'
-
-// import { Weather, Visibility } from '../enums/enums'
-// import { updateFundingCurrentValidator } from "../schemas/projectSchemas"
-
-// export interface DiaryEntry {
-//   id: number
-//   date: string
-//   weather: Weather
-//   visibility: Visibility
-//   comment: string
-// }
-//  OPCION1)
-//  export type NonSensitiveInfoDiaryEntry = Pick<DiaryEntry, 'id'|'date'|'weather'|'visibility'>
-
-// OPCION2 otro tipo de utilidad
-// export type NonSensitiveInfoDiaryEntry = Omit<DiaryEntry, 'comment'>
-
-// export type NewDiaryEntry = Omit<DiaryEntry, 'id'>
-
-//
-//  TEORIA
-// INTERFACE Permite heredar las propiedades de DiaryEntry, puedo tener atributos que se añaden y no repiten
-// interface SpecialDiaryEntry extends DiaryEntry {
-//    flightNumber: number
-// }
-
-// Con TYPE seria distinto, usar Cuando son FIJAS
-// type SpecialDiaryEntry2 = DiaryEntry & {
-//     flightNumber: number
-// }
+// infoMatches Interface
+export interface IinfoMatches {
+  totalFundsRaised: number
+  chartTotalFundsRaised: object
+  chartFundsRaisedPerMonth: Array
+  allRegisteredUsers: number
+  chartRegisteredUsersPerMonth: Array
+  activeProjects: number
+  chartActiveProjects: object
+  chartActiveProjectsPerMonth: Array
+}

@@ -13,7 +13,8 @@ import {
   UserModel,
   PaymentsModel,
   UserFavoritesModel,
-  CommentModel
+  CommentModel,
+  ImagesModel
 } from "../config/db"
 
 @Table({ tableName: "projects" })
@@ -154,6 +155,10 @@ export default class Project extends Model<IProject> {
   // 1:N project-comments
   @HasMany(() => CommentModel)
   projectComments!: CommentModel[]
+
+  // 1:N project-comments
+  @HasMany(() => ImagesModel)
+  projectImages!: ImagesModel[]
 
   // 1:N project-user
   @BelongsTo(() => UserModel, "creatorId") // Asigna un alias único a la asociación

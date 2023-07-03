@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express"
-import multer from "multer"
 
+import multer from "multer"
 import {
   projectValidator,
   validatorString,
@@ -35,9 +35,14 @@ import updateLikesController from "../controllers/projects/updateLikesController
 import getFilteredProjects from "../controllers/projects/getFilteredProjects"
 import getTwentyMostTrending from "../controllers/projects/getTwentyMostTrending"
 import getFiveMostFunding from "../controllers/projects/getFiveMostFunding"
+import { uploadBlobNew } from "../controllers/azure/blob"
 
 //! ----
-import { uploadBlobNew } from "../controllers/azure/blob"
+import axios from "axios"
+import { ImagesModel } from "../config/db"
+import dotenv from "dotenv"
+dotenv.config()
+const RAILWAY = process.env.RAILWAY
 
 // 50 Projects controller
 // import create50Projects from "../controllers/projects/getCreate50Projects"
@@ -64,7 +69,7 @@ router.post("/", async (req: Request, res: Response) => {
   }
 })
 
-// Ruta crea un project.  NUEVA creo projecto o imagen
+// Ruta crea un project.  NUEVA creo projecto o imagen NO USAR
 router.post(
   "/superPost",
   upload.array("files"),
@@ -95,7 +100,7 @@ router.post(
     }
   }
 )
-// ! --------------- COMPUESTO ,creo projecto / luego subo imagen
+// ! --------------- COMPUESTO ,creo projecto / luego subo imagen ESTA ES LA QUE SIRVE
 
 router.post("/superProject", async (req: Request, res: Response) => {
   try {
@@ -127,6 +132,21 @@ router.post(
         )
       )
 
+      // Agrego las imagenes a la DB
+
+      let objectImage: any[] = []
+      objectImage = (
+        await axios.get(`${RAILWAY}/blobRoute/getAllFiles/${projectId}`)
+      ).data
+
+      objectImage.forEach((object) => {
+        ImagesModel.create({
+          name: object.name,
+          url: object.url,
+          projectId: projectId.toString()
+        })
+      })
+
       res.status(200).send("Project was successfully uploaded")
     } catch (error) {
       const errorMessage =
@@ -139,7 +159,7 @@ router.post(
 
 // ! ---------------------
 
-// Llenar la DB.
+// Llenar la DB. // OBSOLETA
 router.post("/llenarDB", (req: Request, res: Response) => {
   try {
     const { usuarios } = req.query

@@ -6,6 +6,7 @@ import CommentModel from "../models/CommentModel"
 import AdminModel from "../models/AdminModel"
 import UserFavoritesModel from "../models/UserFavoritesModel"
 import PaymentsModel from "../models/PaymentsModel"
+import ImagesModel from "../models/ImagesModel"
 
 dotenv.config()
 
@@ -25,7 +26,8 @@ const sequelize = new Sequelize(
       CommentModel,
       AdminModel,
       UserFavoritesModel,
-      PaymentsModel
+      PaymentsModel,
+      ImagesModel
     ]
   }
 )
@@ -36,13 +38,14 @@ sequelize.addModels([
   CommentModel,
   AdminModel,
   UserFavoritesModel,
-  PaymentsModel
+  PaymentsModel,
+  ImagesModel
 ])
 
 // 1:1 Esto permite que un usuario tenga un perfil asociado.
 
-// UserModel.hasOne(ProfileModel, { foreignKey: 'profileId' });
-// ProfileModel.belongsTo(UserModel, { foreignKey: 'userId'})
+// ProjectModel.hasOne(ImagesModel, { foreignKey: 'PId' });
+// ImagesModel.belongsTo(UserModel, { foreignKey: 'ImagesId'})
 
 //! 1:N Esto permite que un usuario tenga múltiples proyectos asociados.
 // creatorId, es un atributo de ProjectModel y tarjetkey apunta al id del UserModel
@@ -64,7 +67,14 @@ UserModel.hasMany(CommentModel, { foreignKey: "userId" })
 CommentModel.belongsTo(UserModel, { foreignKey: "userId", targetKey: "id" })
 
 ProjectModel.hasMany(CommentModel, { foreignKey: "projectId" })
-ProjectModel.belongsTo(ProjectModel, {
+CommentModel.belongsTo(ProjectModel, {
+  foreignKey: "projectId",
+  targetKey: "id"
+})
+
+// Images Model
+ProjectModel.hasMany(ImagesModel, { foreignKey: "projectId" })
+ImagesModel.belongsTo(ProjectModel, {
   foreignKey: "projectId",
   targetKey: "id"
 })
@@ -76,5 +86,6 @@ export {
   CommentModel,
   AdminModel,
   UserFavoritesModel,
-  PaymentsModel
+  PaymentsModel,
+  ImagesModel
 }

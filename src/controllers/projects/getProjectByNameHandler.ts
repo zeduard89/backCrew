@@ -1,11 +1,16 @@
-import { ProjectModel } from "../../config/db"
+import { ProjectModel, ImagesModel } from "../../config/db"
 
 const getProyectByNameController = async (
   validatedName: string
 ): Promise<object> => {
   try {
     // Busco todos los projects, filtro y generalizo la escritura al buscarlos
-    const allProjects = await ProjectModel.findAll()
+    const allProjects = await ProjectModel.findAll({
+      include: {
+        model: ImagesModel, // Incluir el modelo de imágenes relacionadas al proyecto
+        attributes: ["url"] // Seleccionar solo la propiedad 'url'
+      }
+    })
     const projectByName = allProjects.filter(
       (project) =>
         project.title.toLowerCase().trim().replace(/\s/g, "") ===
@@ -30,27 +35,7 @@ const getProyectByNameController = async (
       return auxArray
     }
 
-    // Limito la info del array
-    const auxProject = {
-      id: projectByName[0].id,
-      title: projectByName[0].title,
-      description: projectByName[0].description,
-      shortDescription: projectByName[0].shortDescription,
-      fundingCurrent: projectByName[0].fundingCurrent,
-      fundingGoal: projectByName[0].fundingGoal,
-      fundingGoalReached: projectByName[0].fundingGoalReached,
-      fundingPercentage: projectByName[0].fundingPercentage,
-      fundingDayLeft: projectByName[0].fundingDayLeft,
-      likes: projectByName[0].likes,
-      disLikes: projectByName[0].disLikes,
-      category: projectByName[0].category,
-      bank: projectByName[0].bank,
-      account: projectByName[0].account,
-      location: projectByName[0].location,
-      projectFase: projectByName[0].projectFase
-    }
-
-    return auxProject
+    return projectByName
   } catch (error) {
     const errorMessage =
       (error as Error).message ||
