@@ -33,6 +33,7 @@ has permissions to access.
 - [Add User Favorite](./readme/userRoute/postUserFavorite.md) : `POST /userRoute/create/UserFavoriteRelationship?userId=${userId}&projectId=${projectId}`
 - [Get all User Favorites ](./readme/userRoute/getAllUserFavorites.md) : `GET /userRoute/getAllUsersFavorites?userId=${userId}`
 - [Delete User Favorites ](./readme/userRoute/deleteUserFavorite.md) : `DELETE /userRoute/deleteUserFavorite?userId=${userId}}&projectId={projectId}}`
+- [Delete User ](./readme/userRoute/logicalDeleteUser.md) : `PUT /userRoute/logicalDelete?userEmail&userId`
 
 ### Projects related
 
@@ -50,7 +51,7 @@ has permissions to access
 - [UpdateLikes](./readme/projectRoute/updateLikes.md) : `PUT /projectRoute/likes`
 - [Get Five Most Funding](./readme/projectRoute/fiveMostFunding.md) : `Get /projectRoute/fiveMostFunding`
 - [Get Twenty Most Trending](./readme/projectRoute/twentyMostTrending.md) : `Get /projectRoute/twentyMostTrending`
-- [Get Filtered Porjects](./readme/projectRoute/searchProjects.md) : `Get /projectRoute/searchProjects/`
+- [Get Filtered Projects](./readme/projectRoute/searchProjects.md) : `Get /projectRoute/searchProjects/`
 
 ### Azure Containers related
 
@@ -77,6 +78,12 @@ has permissions to access
 - [get payment made by User](./readme/paymentRoute/getAllPaymentsFromOneUser.md) : `GET /paymentRoute/info/getAllPaymentsFromOneUser?userId=${userId}`
 - [Get Payment by Id](./readme/paymentRoute/getPaymentById.md) : `GET /paymentRoute/info/getPaymentById?paymentId=${paymentId}`
 - [Mercado Pago Controller](./readme/paymentRoute/paymentController.md)
+
+### DashBoard Admin
+
+- [Get Main Info Data](./readme/adminRoute/getMainInfoData.md) : `GET /adminRoute/dashboardMain`
+- [Get DashBoard Search Users](./readme/adminRoute/getDashboardSearchUsers.md) : `GET /adminRoute/dashboardSearchUsers?name&admin&funding`
+- [Put Admin](./readme/adminRoute/putAdmin.md) : `PUT /adminRoute/userToAdmin?userID={id}`
 
 ### Developer Tools
 

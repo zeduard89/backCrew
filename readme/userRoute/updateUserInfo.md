@@ -78,7 +78,7 @@
 
 ```json
 {
-  "errorMessage": "WHERE parameter "id" has invalid "undefined" value"
+  "errorMessage": "WHERE parameter 'id' has invalid 'undefined' value"
 }
 ```
 

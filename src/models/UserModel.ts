@@ -78,13 +78,6 @@ export default class User extends Model<IUser> {
   //   allowNull: false,
   //   defaultValue: false
   // })
-  // verified!: boolean
-
-  // @Column({
-  //   type: DataType.BOOLEAN,
-  //   allowNull: false,
-  //   defaultValue: false
-  // })
   // access!: boolean
 
   // @Column({
@@ -117,7 +110,7 @@ export default class User extends Model<IUser> {
   @Column({
     type: DataType.BOOLEAN,
     allowNull: true,
-    defaultValue: false
+    defaultValue: true
   })
   verified!: boolean
 
