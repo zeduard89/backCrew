@@ -25,12 +25,8 @@ const createRandomUsers = () => {
     city: faker.location.city(),
     postalCode: faker.location.zipCode(),
     shortDescription: "Lorem ipsum dolor sit amet consect.",
-<<<<<<< HEAD
-    aboutMe: "Lorem ipsum dolor sit amet consectetur adipiscing elit phasellus cras rhoncus consequat tempor, id condimentum lacus taciti porttitor ac scelerisque sem."
-=======
     aboutMe:
       "Lorem ipsum dolor sit amet consectetur adipiscing elit phasellus cras rhoncus consequat tempor, id condimentum lacus taciti porttitor ac scelerisque sem."
->>>>>>> f6ec82db1ed1f2015a8bb41b23fb14905e684af7
   }
 
   return user
