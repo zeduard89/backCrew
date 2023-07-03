@@ -257,8 +257,8 @@ export interface IPaymentDetail {
   transactionAmount: number
   transactionAmountRefunded: number
   transactionReceived: number
-  // dateApproved: string
-  // dateCreated: string
+  dateApproved?: string
+  dateCreated?: string
   userId: string
   projectId: string
 }

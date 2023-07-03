@@ -5,7 +5,7 @@ import mercadopago from "mercadopago"
 import dotenv from "dotenv"
 dotenv.config()
 // const { TOKEN_MP, MP_SUCCESS } = process.env
-const { TOKEN_MP, MP_SUCCESS, MP_NOTIFICATION } = process.env
+const { TOKEN_MP, MP_SUCCESS, MP_NOTIFICATION } = process.env // MP_NOTIFICATION
 
 let user = ""
 let project = ""
@@ -53,6 +53,7 @@ export const createOrder = async (
       // y ese dominio va a redireccionar a su localhost, bajo archivo y agrego al proyecto en carpeta raiz
       // ejecuto en terminal   .\ngrok.exe http 3001    copiar la (http.... io)+/paymentRoute/webhook a notification_url
       notification_url: `${MP_NOTIFICATION}/paymentRoute/webhook`
+
       //! "https://1f02-2800-810-538-16b9-2123-10a6-3eb0-4055.sa.ngrok.io/paymentRoute/webhook"
     })
     // (3) envio la info gral la cual tiene un atributo,tipo url que recibe el usario para terminar el pago

@@ -3,12 +3,15 @@ import {
   UserModel,
   ProjectModel,
   CommentModel,
-  ImagesModel
+  ImagesModel,
+  PaymentsModel
 } from "../../config/db"
 import axios from "axios"
 import userData from "../../utils/FullDB/user.json"
 import projectData from "../../utils/FullDB/projects.json"
 import commentsData from "../../utils/FullDB/comments.json"
+import nameProjectSindescription from "../../utils/FullDB/nameProjectSindescription.json"
+import nameUserId from "../../utils/FullDB/nameUserId.json"
 
 import { faker } from "@faker-js/faker"
 import dotenv from "dotenv"
@@ -98,8 +101,7 @@ const fillDb = async (_req: Request, res: Response) => {
         })
       })
     )
-
-    for (let i = 1; i <= 0; i++) {
+    for (let i = 1; i <= 50; i++) {
       let objectImage: any[] = []
 
       objectImage = (
@@ -112,6 +114,64 @@ const fillDb = async (_req: Request, res: Response) => {
           url: object.url,
           projectId: i.toString()
         })
+      })
+    }
+
+    for (let i = 1; i <= 200; i++) {
+      const random1 = Math.floor(Math.random() * 25)
+      const random2 = Math.floor(Math.random() * 50)
+      const random3 = Math.floor(Math.random() * 50000)
+
+      const transactionAmount2 = random3
+      const transactionReceived2 = Math.floor((5 * random3) / 100)
+
+      const isApproved = Math.random() < 0.5 // Genera un valor aleatorio entre 0 y 1 y verifica si es menor a 0.5
+      const isAccredited = Math.random() < 0.5 // Genera un valor aleatorio entre 0 y 1 y verifica si es menor a 0.5
+
+      const status2 = isApproved ? "approved" : "rejected"
+      const statusDetail2 = isAccredited ? "accredited" : "not_accredited"
+
+      await PaymentsModel.create({
+        id: i,
+        payerId: Math.floor(Math.random() * 9000000000).toString(),
+        currencyId: "ARS",
+        description: nameProjectSindescription[random2].title,
+        operationType: "regular_payment",
+        orderId: Math.floor(Math.random() * 90000000000).toString(),
+        ordertype: "mercadopago",
+        firstName: nameUserId[random1].name || "luis",
+        lastName: faker.person.lastName(),
+        email: faker.internet.email({
+          firstName: nameUserId[random1].name || "luis2"
+        }),
+        identificationNumber: Math.floor(Math.random() * 50).toString(),
+        identificationType: "DNI",
+        phoneAreaCode: Math.floor(Math.random() * 50).toString(),
+        phoneNumber: faker.phone.toString(),
+        phoneExtension: Math.floor(Math.random() * 50).toString(),
+        type: "type",
+        entityType: "entityType",
+        paymentMetodId: "account_money",
+        status: status2,
+        statusDetail: statusDetail2,
+        taxesAmount: 0,
+        transactionAmount: transactionAmount2,
+        transactionAmountRefunded: 0,
+        transactionReceived: transactionReceived2,
+        dateApproved: faker.date
+          .between({
+            from: "2023-06-01T00:00:00.000Z",
+            to: "2023-07-01T00:00:00.000Z"
+          })
+          .toDateString(),
+        dateCreated: faker.date
+          .between({
+            from: "2023-04-01T00:00:00.000Z",
+            to: "2023-05-01T00:00:00.000Z"
+          })
+          .toDateString(),
+        userId: nameUserId[random1].userId.toString(),
+        projectId: nameProjectSindescription[random2].id.toString()
       })
     }
 
