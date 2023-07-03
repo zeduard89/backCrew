@@ -1,46 +1,46 @@
-import { Model, Column, Table, DataType } from "sequelize-typescript";
-import { IUser } from "../types/types";
+import { Model, Column, Table, DataType } from "sequelize-typescript"
+import { IUser } from "../types/types"
 
-@Table({ tableName: "admins", 
-         timestamps: false,
-      })
-export default class AdminModel extends Model<IUser & {id: string, admin: string}> {
+@Table({ tableName: "admins", timestamps: false })
+export default class AdminModel extends Model<
+  IUser & { id: string; admin: string }
+> {
   @Column({
     type: DataType.UUID,
     primaryKey: true,
     allowNull: false,
     defaultValue: DataType.UUIDV4
   })
-  id!: string;
+  id!: string
 
   @Column({
     type: DataType.STRING,
     allowNull: false
   })
-  admin!: string;
+  admin!: string
 
   @Column({
     type: DataType.STRING,
     allowNull: false
   })
-  name!: string;
+  name!: string
 
   @Column({
     type: DataType.STRING,
     allowNull: false
   })
-  lastName!: string;
+  lastName!: string
 
   @Column({
     type: DataType.STRING,
     unique: true,
     allowNull: false
   })
-  email!: string;
+  email!: string
 
   @Column({
     type: DataType.STRING,
     allowNull: false
   })
-  password!: string;
+  password!: string
 }

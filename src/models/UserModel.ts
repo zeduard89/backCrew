@@ -107,6 +107,20 @@ export default class User extends Model<IUser> {
   })
   date!: string
 
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: true,
+    defaultValue: false
+  })
+  admin!: boolean
+
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: true,
+    defaultValue: false
+  })
+  verified!: boolean
+
   // 1:N user-project
   @HasMany(() => ProjectModel)
   projects!: ProjectModel[]

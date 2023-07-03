@@ -12,13 +12,14 @@ export interface IUser {
   avatar: string
   // projects: Array[]
   date: string
-  // verified?: boolean
+  verified?: boolean
   // Add country, city, postalCode, shortDescription, aboutMe
   country: string
   city: string
   postalCode: string
   shortDescription: string
   aboutMe: string
+  admin?: boolean
 }
 
 export type IUserDelete = Omit<
@@ -269,37 +270,14 @@ interface ErrorBody {
   path: string
 }
 
-// Por defecto TS utiliza este nombre en el fichero 'types.d.ts'
-// Puedo tener varios esparcidos, pero ahora solo los coloco en este luegar
-// traduce elementos para que TC los entienda como lo de color ROJO, eso lo cree en ENUM
-//! export type Visibility = 'great' | 'good' | 'ok' | 'poor'
-
-// import { Weather, Visibility } from '../enums/enums'
-// import { updateFundingCurrentValidator } from "../schemas/projectSchemas"
-
-// export interface DiaryEntry {
-//   id: number
-//   date: string
-//   weather: Weather
-//   visibility: Visibility
-//   comment: string
-// }
-//  OPCION1)
-//  export type NonSensitiveInfoDiaryEntry = Pick<DiaryEntry, 'id'|'date'|'weather'|'visibility'>
-
-// OPCION2 otro tipo de utilidad
-// export type NonSensitiveInfoDiaryEntry = Omit<DiaryEntry, 'comment'>
-
-// export type NewDiaryEntry = Omit<DiaryEntry, 'id'>
-
-//
-//  TEORIA
-// INTERFACE Permite heredar las propiedades de DiaryEntry, puedo tener atributos que se añaden y no repiten
-// interface SpecialDiaryEntry extends DiaryEntry {
-//    flightNumber: number
-// }
-
-// Con TYPE seria distinto, usar Cuando son FIJAS
-// type SpecialDiaryEntry2 = DiaryEntry & {
-//     flightNumber: number
-// }
+// infoMatches Interface
+export interface IinfoMatches {
+  totalFundsRaised: number
+  chartTotalFundsRaised: object
+  chartFundsRaisedPerMonth: Array
+  allRegisteredUsers: number
+  chartRegisteredUsersPerMonth: Array
+  activeProjects: number
+  chartActiveProjects: object
+  chartActiveProjectsPerMonth: Array
+}
