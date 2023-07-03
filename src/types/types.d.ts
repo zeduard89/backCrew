@@ -87,13 +87,22 @@ export type ILikeComment = Omit<
   "projectId",
   "parentId"
 >
+export type ICommentUpdate = Omit<
+  // Si uso
+  IComment,
+  "date",
+  "displayComment",
+  "likes",
+  "disLikes",
+  "parentId"
+>
 
 export type childComment = Omit<
   // Si uso
   IComment,
   "id",
   "likes",
-  "dislikes",
+  "disLikes",
   "date",
   "displayComment"
 >

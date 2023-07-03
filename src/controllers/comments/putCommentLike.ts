@@ -5,8 +5,7 @@ const putCommentToLike = async (
   validatedComment: ILikeComment
 ): Promise<string> => {
   try {
-    const { commentId, like, dislike } = validatedComment
-
+    const { commentId, like, disLike } = validatedComment
     const parentComment = await CommentModel.findByPk(commentId)
 
     if (!parentComment) throw new Error("Comment not found")
@@ -14,7 +13,7 @@ const putCommentToLike = async (
     await parentComment.update(
       {
         likes: parentComment.likes + like,
-        disLikes: parentComment.disLikes + dislike
+        disLikes: parentComment.disLikes + disLike
       },
       {
         where: {

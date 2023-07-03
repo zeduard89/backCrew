@@ -13,27 +13,24 @@ import putCommentLike from "../controllers/comments/putCommentLike"
 
 const router = Router()
 
-router.post(
-  "/addCommentProjectToProject",
-  async (req: Request, res: Response) => {
-    try {
-      const commentToProject = req.body
-      if (!commentToProject) throw new Error("Invalid Parameters")
+router.post("/addCommentUserToProject", async (req: Request, res: Response) => {
+  try {
+    console.log(req.body)
+    const commentToProject = req.body
+    if (!commentToProject) throw new Error("Invalid Parameters")
 
-      // Valido la informacion
-      const validatedComment =
-        validatorCommentUserToProject.parse(commentToProject)
-      if (validatedComment === undefined) throw new Error("Need all parametres")
-      const newComment = await userToProjectComment(validatedComment)
-      res.status(200).json(newComment)
-    } catch (error) {
-      const errorMessage =
-        (error as Error).message ||
-        "Error desconocido al buscar proyecto por Id"
-      res.status(400).send(errorMessage)
-    }
+    // Valido la informacion
+    const validatedComment =
+      validatorCommentUserToProject.parse(commentToProject)
+    if (validatedComment === undefined) throw new Error("Need all parametres")
+    const newComment = await userToProjectComment(validatedComment)
+    res.status(200).json(newComment)
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message || "Error desconocido al buscar proyecto por Id"
+    res.status(400).send(errorMessage)
   }
-)
+})
 
 router.post("/addCommentUserToUser", async (req: Request, res: Response) => {
   try {

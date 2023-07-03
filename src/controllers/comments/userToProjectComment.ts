@@ -1,19 +1,25 @@
-import { CommentModel } from "../../config/db"
-import { IComment } from "../../types/types"
+import { CommentModel, UserModel } from "../../config/db"
+import { ICommentUpdate } from "../../types/types"
 
 const userToProjectComment = async (
-  validatedComment: IComment
+  validatedComment: ICommentUpdate
 ): Promise<object> => {
   try {
-    const { userId, projectId, name, description, ...rest } = validatedComment
+    const { userId, projectId, description } = validatedComment
+
+    const userName = await UserModel.findByPk(userId)
+    if (!userName) throw new Error("userId not found")
+
+    const currentDate = new Date()
+    const formattedDate = currentDate.toDateString()
 
     // Creo un comentario padre
     await CommentModel.create({
       userId,
       projectId,
-      name,
+      name: userName.name,
       description,
-      ...rest
+      date: formattedDate
     })
 
     const allProjectComments = await CommentModel.findAll({

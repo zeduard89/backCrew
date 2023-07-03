@@ -3,8 +3,7 @@ import { z } from "zod"
 export const validatorCommentUserToProject = z.object({
   userId: z.string(),
   projectId: z.string(),
-  name: z.string(),
-  description: z.string().min(10)
+  description: z.string().min(5)
 })
 
 export const validatorCommentUserToUser = z.object({

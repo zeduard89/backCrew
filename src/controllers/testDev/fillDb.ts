@@ -88,7 +88,7 @@ const fillDb = async (_req: Request, res: Response) => {
           name: comment.name,
           description: comment.description,
           likes: comment.likes,
-          dislikes: comment.disLikes,
+          disLikes: comment.disLikes,
           date: faker.date
             .between({
               from: "2019-01-01T00:00:00.000Z",
