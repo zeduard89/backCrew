@@ -69,13 +69,24 @@ export interface IComment {
   name: string
   description: string
   likes?: number
-  dislikes?: number
+  disLikes?: number
   date?: string
   displayComment?: boolean
   userId: string
   projectId: string
   parentId?: number
 }
+export type ILikeComment = Omit<
+  // Si uso
+  IComment,
+  "name",
+  "description",
+  "date",
+  "displayComment",
+  "userId",
+  "projectId",
+  "parentId"
+>
 
 export type childComment = Omit<
   // Si uso

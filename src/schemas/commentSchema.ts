@@ -14,3 +14,9 @@ export const validatorCommentUserToUser = z.object({
   projectId: z.string(),
   parentId: z.number().positive()
 })
+
+export const validatorCommentLikes = z.object({
+  commentId: z.number(),
+  like: z.number(),
+  disLike: z.number()
+})
