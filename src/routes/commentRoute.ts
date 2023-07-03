@@ -15,7 +15,6 @@ const router = Router()
 
 router.post("/addCommentUserToProject", async (req: Request, res: Response) => {
   try {
-    console.log(req.body)
     const commentToProject = req.body
     if (!commentToProject) throw new Error("Invalid Parameters")
 
