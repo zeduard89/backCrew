@@ -256,7 +256,6 @@ router.get("/search/byId", async (req: Request, res: Response) => {
     const validatedId = validatorString.parse(id)
     if (id !== undefined) {
       const getProjectById = await getProjectByIdController(validatedId)
-      console.log(getProjectById)
       res.status(200).json(getProjectById)
     }
   } catch (error) {
