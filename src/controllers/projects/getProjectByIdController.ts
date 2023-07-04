@@ -9,18 +9,6 @@ const getProjectByIdController = async (
   validatedName: string
 ): Promise<object> => {
   try {
-    // const Project = await ProjectModel.findByPk(validatedName, {
-    //   include: [
-    //     {
-    //       model: ImagesModel,
-    //       attributes: ["url"]
-    //     },
-    //     {
-    //       model: CommentModel
-    //     }
-    //   ]
-    // })
-
     const Project = await ProjectModel.findByPk(validatedName, {
       include: [
         {
@@ -40,7 +28,8 @@ const getProjectByIdController = async (
     })
 
     if (!Project) throw new Error("The project does not exist")
-
+    if (Project.displayProject === false)
+      throw new Error("The project is banned")
     return Project
   } catch (error) {
     const errorMessage =

@@ -6,6 +6,7 @@ const getAllProyectByNameController = async (
   try {
     // Busco todos los projects, filtro y generalizo la escritura al buscarlos
     const allProjects = await ProjectModel.findAll({
+      where: { displayProject: true },
       include: {
         model: ImagesModel, // Incluir el modelo de imágenes relacionadas al proyecto
         attributes: ["url"] // Seleccionar solo la propiedad 'url'
@@ -20,7 +21,7 @@ const getAllProyectByNameController = async (
     })
     // Si obtengo un array vacio, retorno respusta STRING
     if (newAllProjects.length === 0) {
-      throw new Error("Project does not exist")
+      throw new Error("Project does not exist or is Banned")
     }
 
     return newAllProjects

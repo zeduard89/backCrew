@@ -7,6 +7,7 @@ const sortByTrending = (a: ProjectModel, b: ProjectModel) => b.likes - a.likes
 const getTwentyMostTrending = async (): Promise<object> => {
   try {
     let existingProjects = await ProjectModel.findAll({
+      where: { displayProject: true },
       include: {
         model: ImagesModel, // Incluir el modelo de imágenes relacionadas al proyecto
         attributes: ["url"] // Seleccionar solo la propiedad 'url'

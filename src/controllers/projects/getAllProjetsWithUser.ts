@@ -7,6 +7,7 @@ const getAllProjetsWithUser = async (): Promise<object> => {
         {
           model: ProjectModel,
           as: "favoriteProjects", // Nombre de la relación en el modelo de usuario
+          where: { displayProject: true },
           include: [
             {
               model: ImagesModel, // Incluir el modelo de imágenes relacionadas al proyecto
@@ -16,6 +17,7 @@ const getAllProjetsWithUser = async (): Promise<object> => {
         }
       ]
     })
+    console.log(allUsers)
 
     if (!allUsers) {
       throw new Error("User not found")

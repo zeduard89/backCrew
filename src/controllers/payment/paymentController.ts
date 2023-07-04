@@ -52,6 +52,8 @@ export const createOrder = async (
       // por ende use agrega "ngrok" se descarga un ejecutable que genera un tunnel HTTP, da un dominio SSL
       // y ese dominio va a redireccionar a su localhost, bajo archivo y agrego al proyecto en carpeta raiz
       // ejecuto en terminal   .\ngrok.exe http 3001    copiar la (http.... io)+/paymentRoute/webhook a notification_url
+      // ./ngrok.exe http 3001 tambien probar con la barra invertida
+
       notification_url: `${MP_NOTIFICATION}/paymentRoute/webhook`
 
       //! "https://1f02-2800-810-538-16b9-2123-10a6-3eb0-4055.sa.ngrok.io/paymentRoute/webhook"

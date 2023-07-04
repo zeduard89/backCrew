@@ -63,7 +63,7 @@ export const projectPostValidator = z.object({
 })
 
 export const deleteProjectValidator = z.object({
-  id: z.string().min(3, { message: "Title must have at least 3 characters" }),
+  id: z.string().min(1, { message: "Id must have at least 1 characters" }),
   displayProject: z.boolean()
 })
 

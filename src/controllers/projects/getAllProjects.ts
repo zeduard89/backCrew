@@ -4,6 +4,7 @@ const getAllProjects = async (): Promise<object> => {
   try {
     // const newExistingProject = await ProjectModel.findAll()
     const project = await ProjectModel.findAll({
+      where: { displayProject: true },
       include: {
         model: ImagesModel, // Incluir el modelo de imágenes relacionadas al proyecto
         attributes: ["url"] // Seleccionar solo la propiedad 'url'
