@@ -9,9 +9,11 @@ export const getUserInfo = async (
   try {
     if (!req.query.id) throw new Error("Id is required")
     const { id }: IUserLD = req.query
-    const user: IUserLD | null = await UserModel.findOne({ where: { id } })
+    const user: IUserLD | null = await UserModel.findOne({
+      where: { id, verified: true }
+    })
     if (user == null) {
-      throw new Error("User not found")
+      throw new Error("User not found or was Banned ")
     }
 
     res.status(200).json(user)

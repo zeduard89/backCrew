@@ -16,9 +16,12 @@ const getAllUserProjects = async (
       throw new Error("UserId is required")
     }
 
-    const user = await UserModel.findByPk(creatorId)
+    const user = await UserModel.findOne({
+      where: { id: creatorId, verified: true }
+    })
+
     if (!user) {
-      throw new Error("User not found")
+      throw new Error("User not found or was Banned")
     }
     // Busco por medio de su relacion (projects esta dentro del modelo user)
     const findedUser = await user.$get("projects")

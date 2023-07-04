@@ -14,9 +14,12 @@ const getAllUsersFavorites = async (
       throw new Error("UserId is required")
     }
 
-    const user = await UserModel.findByPk(userId)
+    const user = await UserModel.findOne({
+      where: { id: userId, verified: true }
+    })
+
     if (!user) {
-      throw new Error("User not found")
+      throw new Error("User not found or was Banned")
     }
 
     const favoriteProjects = await user.$get("favoriteProjects") // Obtener la lista de proyectos favoritos
