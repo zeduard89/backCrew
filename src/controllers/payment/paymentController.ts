@@ -85,6 +85,8 @@ export const reciveWebHook = async (req: Request, res: Response) => {
         const paymentDetail = await mercadopago.payment.findById(
           +req.query["data.id"]
         )
+
+        const userFounded = await UserModel.findByPk(user)
         const detail = paymentDetail.response
         // Aquí puedes manejar la información del pago recibido de Mercado Pago
         const newDetail = {
@@ -95,9 +97,11 @@ export const reciveWebHook = async (req: Request, res: Response) => {
           operationType: detail.operation_type,
           orderId: detail.order.id,
           ordertype: detail.order.type,
-          firstName: detail.payer.first_name || "firstName",
-          lastName: detail.payer.last_name || "lastName",
-          email: detail.payer.email,
+          firstName:
+            detail.payer.first_name || userFounded?.name || "firstName",
+          lastName:
+            detail.payer.last_name || userFounded?.lastName || "lastName",
+          email: userFounded?.email || detail.payer.email,
           identificationNumber: detail.payer.identification.number,
           identificationType: detail.payer.identification.type,
           phoneAreaCode: detail.payer.phone.area_code || "phoneAreaCode",
