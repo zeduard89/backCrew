@@ -77,7 +77,7 @@ const getFilteredProjects = async (
     }
     console.log(validatedSort)
     // Trending sort & Most funded sort
-    validatedSort === "trending"
+    validatedSort === "Trending"
       ? (existingProjects = existingProjects.sort(sortByTrending))
       : (existingProjects = existingProjects.sort(orderByMostFunding))
 
