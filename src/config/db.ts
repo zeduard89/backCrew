@@ -9,13 +9,15 @@ import PaymentsModel from "../models/PaymentsModel"
 import ImagesModel from "../models/ImagesModel"
 
 dotenv.config()
-
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME } = process.env
-
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env
+// const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME } = process.env //Original
 const sequelize = new Sequelize(
-  `postgres://${DB_USER ?? ""}:${DB_PASSWORD ?? ""}@${DB_HOST ?? ""}:${
-    DB_PORT ?? ""
-  }/${DB_NAME ?? ""}`,
+  // `postgres://${DB_USER ?? ""}:${DB_PASSWORD ?? ""}@${DB_HOST ?? ""}:${
+  //   DB_PORT ?? ""
+  // }/${DB_NAME ?? ""}`, // Original
+  `postgres://${DB_USER ?? ""}:${DB_PASSWORD ?? ""}@${DB_HOST ?? ""}/${
+    DB_NAME ?? ""
+  }`,
   {
     dialect: "postgres",
     logging: false,
