@@ -83,6 +83,7 @@ has permissions to access
 
 - [Get Main Info Data](./readme/adminRoute/getMainInfoData.md) : `GET /adminRoute/dashboardMain`
 - [Get DashBoard Search Users](./readme/adminRoute/getDashboardSearchUsers.md) : `GET /adminRoute/dashboardSearchUsers?name&admin&funding`
+- [Get Filtered Admin Projects](./readme/adminRoute/searchProjects.md) : `Get /adminRoute/searchProjects/`
 - [Put Admin](./readme/adminRoute/putAdmin.md) : `PUT /adminRoute/userToAdmin?userID={id}`
 
 ### Developer Tools

@@ -1,9 +1,10 @@
 import { Router, Request, Response } from "express"
-import { validatorQuerySearch } from "../schemas/projectSchemas"
+import { validatorQuerySearch, validatorString } from "../schemas/projectSchemas"
 // Filtered Admin Main
 import getFilteredAdminMain from "../controllers/admin/getFilteredAdminMainInfo"
 import getFilteredSortUsers from "../controllers/admin/getFilteredSortUsers"
 import toggleAdminStatus from "../controllers/admin/putAdmin"
+import getFilteredAdminProjects from "../controllers/admin/getFilteredAdminProjects"
 
 const router = Router()
 
@@ -36,6 +37,33 @@ router.get("/dashboardSearchUsers", async (req: Request, res: Response) => {
     const errorMessage =
       (error as Error).message ||
       "Unknown error while searching users in DashBoard Admin"
+    res.status(400).send(errorMessage)
+  }
+})
+
+// Route filter by name, category and sort (most founding and trending)
+router.get("/searchProjects/", async (req: Request, res: Response) => {
+  try {
+    const { category, sort, q, p, s, country } = req.query
+    const validatedCategory = validatorString.parse(category)
+    const validatedSort = validatorString.parse(sort)
+    const validatedQ = validatorQuerySearch.parse(q)
+    const validatedP = validatorString.parse(p)
+    const validatedS = validatorString.parse(s)
+    const validatedCountry = validatorString.parse(country)
+    const getProjectsFiltered = await getFilteredAdminProjects(
+      validatedCategory,
+      validatedSort,
+      validatedQ,
+      validatedP,
+      validatedS,
+      validatedCountry
+    )
+    res.status(200).json(getProjectsFiltered)
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message ||
+      "Unknown error while searching for Project by ID"
     res.status(400).send(errorMessage)
   }
 })
