@@ -10,8 +10,7 @@
 
 ```json
 {
-  "title": "[valid title]",
-  "displayProject": "[valid boolean]"
+  "id": "[valid id]",
 }
 ```
 
@@ -19,8 +18,7 @@
 
 ```json
 {
-  "title": "ProjectoX",
-  "displayProject": false
+  "id": "4fe3caa9-25c7-45c0-b2e8-020fdec35895",
 }
 ```
 
@@ -30,56 +28,21 @@
 
 **Content example**
 
-```json
-{
-  "message": "Successful displayProject change: true"
-}
+```jsonTEXT
+"Project Was Deleted Successfully"
 ```
 
 ## Error Response
 
-**Condition** : If 'title' in DB don't exist.
+**Condition** : If 'id' in DB does not exist.
 
-**Code** : `200 BAD REQUEST` //CORREGIR
+**Code** : `400 BAD REQUEST` 
 
 **Content** :
 
-```json
-{
-  "errorMessage": "Project not found"
-}
-```
+```jsonTEXT
 
-**Condition** : If 'title' parameter don't exist
-
-**Code**: `400 NOT FOUND`
-
-```json
-[
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": ["title"],
-    "message": "Required"
-  }
-]
-```
-
-**Condition** : If 'displayProject' parameter don't exist
-
-**Code**: `400 NOT FOUND`
-
-```json
-[
-  {
-    "code": "invalid_type",
-    "expected": "boolean",
-    "received": "undefined",
-    "path": ["displayProject"],
-    "message": "Required"
-  }
-]
+ "Project not found"
 ```
 
 - [Back](../../readme.md) : `MainPage`

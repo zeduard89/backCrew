@@ -1,11 +1,16 @@
 import { ProjectModel } from "../../config/db"
-import { deleteIProyect } from "../../types/types"
+
 
 const deleteProyectByNameController = async (
-  validatedProject: deleteIProyect
+  validatedID: string,
+  // validatedDisplayProject: string,
 ): Promise<string> => {
   try {
-    const projectDB = await ProjectModel.findOne({ where: { id: validatedProject.id } })
+    // const validatedDisplayProjectToBoolean = !!JSON.parse(validatedDisplayProject);
+    const projectDB = await ProjectModel.findOne({ where: { 
+      id: validatedID,
+      // displayProject: !validatedDisplayProjectToBoolean
+    } });
     if (!projectDB) throw new Error("Project not found")
     //* Si la condicion es FALSE la retorno a TRUE
     projectDB.displayProject = !projectDB.displayProject;
