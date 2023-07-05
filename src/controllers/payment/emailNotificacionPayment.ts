@@ -15,8 +15,7 @@ const transporter = nodemailer.createTransport({
 
 // async..await is not allowed in global scope, must use a wrapper
 export const mainUser = async (
-  mail: string,
-  firstName: string,
+  email: string,
   id: string,
   title: string,
   transactionAmount: string,
@@ -26,9 +25,9 @@ export const mainUser = async (
     // send mail with defined transport object
     const info = await transporter.sendMail({
       from: '"Crew Inspiring Support 👨‍💻 " <ccrewdb@gmail.com>',
-      to: `${mail}`,
+      to: `${email}`,
       subject: `The Biggest crowdfunding`,
-      text: `Hi ${firstName}`,
+      text: `Hi Dear User`,
       html: `
       <html>
       <head>
@@ -60,7 +59,7 @@ export const mainUser = async (
         </style>
       </head>
       <body>
-        <h1>Hello ${firstName},</h1>
+        <h1>Hello</h1>
         <p>Thank you for your support on the project "${title}"!</p>
         <p>We have received your transaction of ${transactionAmount}.</p>
         <p>The current status of your payment is "${status}".</p>
@@ -90,8 +89,7 @@ export const mainUser = async (
 }
 
 export const mainProject = async (
-  mail: string,
-  firstName: string,
+  email: string,
   title: string,
   transactionAmount: string,
   status: string
@@ -100,9 +98,9 @@ export const mainProject = async (
     // send mail with defined transport object
     const info = await transporter.sendMail({
       from: '"Crew Inspiring Support 👨‍💻 " <ccrewdb@gmail.com>',
-      to: `${mail}`,
+      to: `${email}`,
       subject: `The Biggest crowdfunding`,
-      text: `Hi ${firstName}`,
+      text: `Hi`,
       html: `
       <html>
       <head>
@@ -134,7 +132,7 @@ export const mainProject = async (
         </style>
       </head>
       <body>
-        <h1>Hello ${firstName},</h1>
+        <h1>Hello</h1>
         <p>We are glad to inform you that "${title}" has received a new deposit!</p>
         <p>${title} has received an amount of ${transactionAmount}. The current status is "${status}".</p>
         <p>If you have any questions or need further assistance, feel free to reach out to us.</p>

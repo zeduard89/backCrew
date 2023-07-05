@@ -47,6 +47,9 @@ export const registerUser = async (
       aboutMe
     }: IUser = req.body
 
+    const newName = "defaultName"
+    const newLastName = "defaultLastName"
+
     // Validate country, city, postalCode, ShortDescription and aboutMe
     validatorCountry.parse(country)
     validatorCity.parse(city)
@@ -100,8 +103,8 @@ export const registerUser = async (
     const dateNow = new Date()
     const newUser = await UserModel.create({
       id,
-      name,
-      lastName,
+      name: name || newName,
+      lastName: lastName || newLastName,
       email,
       avatar: blobUrlWithSAS,
       date: dateNow.toString(),
@@ -122,13 +125,3 @@ export const registerUser = async (
     res.status(400).send(errorMessage)
   }
 }
-// import main from "./emailNotificacion"
-
-// main(
-//   newDetail.email,
-//   newDetail.firstName,
-//   newDetail.id,
-//   title,
-//   newDetail.transactionAmount,
-//   newDetail.status
-// )

@@ -54,7 +54,8 @@ export const createOrder = async (
       // ejecuto en terminal   .\ngrok.exe http 3001    copiar la (http.... io)+/paymentRoute/webhook a notification_url
       // ./ngrok.exe http 3001 tambien probar con la barra invertida
 
-      notification_url: `https://crewdb.onrender.com/paymentRoute/webhook`
+      // notification_url: `https://crewdb.onrender.com/paymentRoute/webhook`
+      notification_url: `https://8478-2800-810-538-16b9-2d2d-15-3a89-6846.ngrok-free.app/paymentRoute/webhook`
 
       //! "https://1f02-2800-810-538-16b9-2123-10a6-3eb0-4055.sa.ngrok.io/paymentRoute/webhook"
     })
@@ -127,7 +128,6 @@ export const reciveWebHook = async (req: Request, res: Response) => {
         // Envio el email al donante
         mainUser(
           newDetail.email,
-          newDetail.firstName,
           newDetail.id,
           title,
           newDetail.transactionAmount,
@@ -141,7 +141,6 @@ export const reciveWebHook = async (req: Request, res: Response) => {
         if (!userProject) throw new Error("Id Project not found")
         mainProject(
           userProject.email,
-          userProject.name,
           title,
           newDetail.transactionAmount,
           newDetail.status

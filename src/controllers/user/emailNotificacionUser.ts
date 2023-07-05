@@ -24,17 +24,43 @@ const main = async (email: string) => {
       subject: "The Biggest crowdfunding",
       text: `Hi Dear`,
       html: `
-        <html>
-          <body style="background-color: #f5f5f5; text-align: center; padding: 20px;">
-            <h1 style="color: #333;">Hello </h1>
-            <p style="font-size: 18px;">Thank you for joining our crowdfunding platform.</p>
-            
-            <div style="margin-top: 40px;">
-            <img src="cid:crewImage" alt="Welcome Image" style="width: 300px;">
-            </div>
-            <p style="font-size: 14px; color: #777;">Stay tuned for exciting projects and opportunities!</p>
-          </body>
-        </html>
+      <html>
+      <head>
+        <style>
+          body {
+            background-color: #f5f5f5;
+            text-align: center;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+          }
+    
+          h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+          }
+    
+          p {
+            font-size: 18px;
+            margin-bottom: 20px;
+          }
+    
+          .image-container {
+            margin-top: 40px;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>Hello!</h1>
+        <p>Thank you for joining our crowdfunding platform.</p>
+    
+        <div class="image-container">
+          <img src="cid:crewImage" alt="Welcome Image" style="width: 300px;">
+        </div>
+    
+        <p>Stay tuned for exciting projects and opportunities!</p>
+      </body>
+    </html>
       `,
       attachments: [
         {
