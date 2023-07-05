@@ -50,6 +50,10 @@ const main = async (email: string) => {
       border-radius: 4px;
       font-size: 16px;
     }
+
+    .image-container {
+      margin-top: 40px;
+    }
   </style>
 </head>
 <body>
@@ -59,8 +63,11 @@ const main = async (email: string) => {
   <p>Stay tuned for exciting projects and opportunities!</p>
 
   <p>
-    <a href="https://drive.google.com/file/d/1r0o0ZBJKuNsNSiIhQ7U-RBgH7jKmFvGm/view?usp=sharing" class="button">Explore Projects</a>
+    <a href="https://crew-xi.vercel.app" class="button">Explore Projects</a>
   </p>
+  <div class="image-container">
+    <img src="https://drive.google.com/file/d/1r0o0ZBJKuNsNSiIhQ7U-RBgH7jKmFvGm/view?usp=sharing" alt="Image" style="width: 300px;">
+  </div>
 </body>
 </html>
       `
