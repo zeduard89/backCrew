@@ -32,7 +32,6 @@ export const registerUser = async (
   res: Response
 ): Promise<void> => {
   const blobName = "userDefault.png"
-  const blobName2 = "crew.png"
   const containerName = "defaultcontainer"
 
   try {
