@@ -113,7 +113,7 @@ export const registerUser = async (
       aboutMe
     })
 
-    main(newUser.name, newUser.lastName, newUser.email, newUser.country)
+    main(newUser.name, newUser.email)
 
     res.status(200).send("User was registered successfully")
   } catch (error) {

@@ -16,12 +16,12 @@ const transporter = nodemailer.createTransport({
 // async..await is not allowed in global scope, must use a wrapper
 const main = async (
   name: string,
-  lastName: string,
-  email: string,
-  country: string
+
+  email: string
 ) => {
   try {
     // Send mail with defined transport object
+
     await transporter.sendMail({
       from: '"Crew Inspiring Support 👨‍💻 " <ccrewdb@gmail.com>',
       to: email,
@@ -30,9 +30,9 @@ const main = async (
       html: `
         <html>
           <body style="background-color: #f5f5f5; text-align: center; padding: 20px;">
-            <h1 style="color: #333;">Hello ${name} ${lastName}</h1>
+            <h1 style="color: #333;">Hello ${name} </h1>
             <p style="font-size: 18px;">Thank you for joining our crowdfunding platform.</p>
-            <p style="font-size: 16px;">Your country: ${country}</p>
+            
             <div style="margin-top: 40px;">
             <img src="cid:crewImage" alt="Welcome Image" style="width: 300px;">
             </div>
