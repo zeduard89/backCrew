@@ -1,8 +1,4 @@
 import nodemailer from "nodemailer"
-// import path from "path"
-
-// Busco la direccion exacta del archivo
-// const imagePath = path.resolve(__dirname, "crew.png")
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -14,7 +10,7 @@ const transporter = nodemailer.createTransport({
 })
 
 // async..await is not allowed in global scope, must use a wrapper
-const main = async (email: string, blobUrlWithSAS2: string) => {
+const main = async (email: string) => {
   try {
     // Send mail with defined transport object
 
@@ -61,14 +57,7 @@ const main = async (email: string, blobUrlWithSAS2: string) => {
         <p>Stay tuned for exciting projects and opportunities!</p>
       </body>
     </html>
-      `,
-      attachments: [
-        {
-          filename: "crew.png",
-          path: blobUrlWithSAS2,
-          cid: "crewImage" // This ID is referenced in the HTML <img> tag
-        }
-      ]
+      `
     })
   } catch (error) {
     console.log(error)

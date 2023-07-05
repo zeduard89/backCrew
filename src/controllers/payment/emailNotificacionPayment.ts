@@ -1,8 +1,4 @@
 import nodemailer from "nodemailer"
-import path from "path"
-
-// Busco la direccion exacta del archivo
-const imagePath = path.resolve(__dirname, "crew.png")
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -72,14 +68,7 @@ export const mainUser = async (
         <p class="footer">Best regards,<br>Crew Team</p>
       </body>
     </html>
-    `,
-      attachments: [
-        {
-          filename: "crew.png",
-          path: imagePath,
-          cid: "crewImage" // This ID is referenced in the HTML <img> tag
-        }
-      ]
+    `
     })
 
     console.log("Message sent: %s", info.messageId)
@@ -142,14 +131,7 @@ export const mainProject = async (
         <p class="footer">Best regards,<br>Crew Team</p>
       </body>
     </html>
-    `,
-      attachments: [
-        {
-          filename: "crew.png",
-          path: imagePath,
-          cid: "crewImage" // This ID is referenced in the HTML <img> tag
-        }
-      ]
+    `
     })
 
     console.log("Message sent: %s", info.messageId)
