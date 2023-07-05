@@ -66,7 +66,7 @@ const main = async (email: string) => {
     <a href="https://crew-xi.vercel.app" class="button">Explore Projects</a>
   </p>
   <div class="image-container">
-    <img src="https://i.imgur.com/dR4UytW.png" alt="Image" style="width: 300px;">
+    <img src="https://i.imgur.com/dR4UytW.png" alt="Image" style="width: 120px;">
   </div>
 </body>
 </html>
