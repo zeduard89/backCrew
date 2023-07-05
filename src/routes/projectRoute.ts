@@ -4,7 +4,6 @@ import multer from "multer"
 import {
   projectValidator,
   validatorString,
-  deleteProjectValidator,
   updateProjectValidator,
   updateFundingCurrentValidator,
   updateLikesValidator,
@@ -382,9 +381,13 @@ router.get("/twentyMostTrending", async (_req: Request, res: Response) => {
 // Ruta delete por name (actualiza booleano de displayProject)
 router.delete("/deleteProject", async (req: Request, res: Response) => {
   try {
-    const validatedProject = deleteProjectValidator.parse(req.body)
+    const { projectId /* , displayProject */ } = req.query
+    const validatedID = validatorString.parse(projectId)
+    // const validatedDisplayProject = validatorString.parse(displayProject)
+    
     const deleteProjectByName = await deleteProjectByNameController(
-      validatedProject
+      validatedID,
+      // validatedDisplayProject
     )
     res.status(200).json(deleteProjectByName)
   } catch (error) {
