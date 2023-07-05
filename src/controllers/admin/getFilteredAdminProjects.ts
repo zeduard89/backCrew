@@ -1,5 +1,5 @@
 import { Op } from "sequelize"
-import { ProjectModel,  ImagesModel  } from "../../config/db"
+import { ProjectModel } from "../../config/db"
 
 // sort
 const sortByTrending = (a: ProjectModel, b: ProjectModel) => b.likes - a.likes
@@ -64,13 +64,10 @@ const getFilteredAdminProjects = async (
         [Op.or]: titleClauses
       }
     }
-    console.log(whereClause)
 
     let existingProjects = await ProjectModel.findAll({
-      where: whereClause,
-      include: [ImagesModel]
+      where: whereClause
     })
-    console.log(existingProjects)
 
     if (existingProjects.length === 0) {
       throw new Error("There are no projects with this parameters")

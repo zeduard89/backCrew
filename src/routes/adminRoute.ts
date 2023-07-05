@@ -1,12 +1,27 @@
 import { Router, Request, Response } from "express"
-import { validatorQuerySearch, validatorString } from "../schemas/projectSchemas"
+import {
+  validatorQuerySearch,
+  validatorString
+} from "../schemas/projectSchemas"
 // Filtered Admin Main
 import getFilteredAdminMain from "../controllers/admin/getFilteredAdminMainInfo"
 import getFilteredSortUsers from "../controllers/admin/getFilteredSortUsers"
 import toggleAdminStatus from "../controllers/admin/putAdmin"
 import getFilteredAdminProjects from "../controllers/admin/getFilteredAdminProjects"
+import getAllProjects from "../controllers/admin/getAllProjects"
 
 const router = Router()
+
+router.get("/dashboardAllProjects", async (_req: Request, res: Response) => {
+  try {
+    const allProjects = await getAllProjects()
+    res.status(200).json(allProjects)
+  } catch (error) {
+    const errorMessage =
+      (error as Error).message || "Unknown error while searching all Projects"
+    res.status(400).send(errorMessage)
+  }
+})
 
 router.get("/dashboardMain", async (_req: Request, res: Response) => {
   try {
