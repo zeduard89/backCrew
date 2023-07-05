@@ -38,6 +38,8 @@ const fillDb = async (_req: Request, res: Response) => {
           shortDescription: user.shortDescription,
           aboutMe: user.aboutMe,
           avatar: faker.image.avatarLegacy(),
+          verified: true,
+          admin: false,
           date: faker.date
             .between({
               from: "2019-01-01T00:00:00.000Z",
