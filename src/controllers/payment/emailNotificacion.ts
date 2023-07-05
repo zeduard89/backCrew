@@ -5,7 +5,7 @@ const transporter = nodemailer.createTransport({
   auth: {
     // TODO: replace `user` and `pass` values from <https://forwardemail.net>
     user: "ccrewdb@gmail.com", // mailUser
-    pass: "ifbndwwyaohlszcm" // mailPass
+    pass: "cxhjzthsferhkgtx" // mailPass
   }
 })
 
