@@ -99,10 +99,8 @@ export const reciveWebHook = async (req: Request, res: Response) => {
           operationType: detail.operation_type,
           orderId: detail.order.id,
           ordertype: detail.order.type,
-          firstName:
-            detail.payer.first_name || userFounded?.name || "firstName",
-          lastName:
-            detail.payer.last_name || userFounded?.lastName || "lastName",
+          firstName: detail.payer.first_name || "firstName",
+          lastName: detail.payer.last_name || "lastName",
           email: userFounded?.email || detail.payer.email,
           identificationNumber: detail.payer.identification.number,
           identificationType: detail.payer.identification.type,

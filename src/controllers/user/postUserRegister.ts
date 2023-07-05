@@ -113,7 +113,7 @@ export const registerUser = async (
       aboutMe
     })
 
-    await main(newUser.name, newUser.email)
+    await main(newUser.email)
 
     res.status(200).send("User was registered successfully")
   } catch (error) {

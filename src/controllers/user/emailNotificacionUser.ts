@@ -14,11 +14,7 @@ const transporter = nodemailer.createTransport({
 })
 
 // async..await is not allowed in global scope, must use a wrapper
-const main = async (
-  name: string,
-
-  email: string
-) => {
+const main = async (email: string) => {
   try {
     // Send mail with defined transport object
 
@@ -26,11 +22,11 @@ const main = async (
       from: '"Crew Inspiring Support 👨‍💻 " <ccrewdb@gmail.com>',
       to: email,
       subject: "The Biggest crowdfunding",
-      text: `Hi ${name}`,
+      text: `Hi Dear`,
       html: `
         <html>
           <body style="background-color: #f5f5f5; text-align: center; padding: 20px;">
-            <h1 style="color: #333;">Hello ${name} </h1>
+            <h1 style="color: #333;">Hello </h1>
             <p style="font-size: 18px;">Thank you for joining our crowdfunding platform.</p>
             
             <div style="margin-top: 40px;">
