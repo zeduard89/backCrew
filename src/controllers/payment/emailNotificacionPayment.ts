@@ -43,6 +43,20 @@ export const mainUser = async (
             font-size: 18px;
             margin-bottom: 15px;
           }
+
+          .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+          }
+      
+          .image-container {
+            margin-top: 40px;
+          }
           
           .footer {
             font-size: 14px;
@@ -61,6 +75,14 @@ export const mainUser = async (
         <p>If you have any questions or need further assistance, feel free to reach out to us.</p>
         
         <p class="footer">Best regards,<br>Crew Team</p>
+
+        <p>
+          <a href="https://crew-xi.vercel.app" class="button">Explore Projects</a>
+        </p>
+        <div class="image-container">
+          <img src="https://i.imgur.com/dR4UytW.png" alt="Image" style="width: 120px;">
+        </div>
+
       </body>
     </html>
     `
@@ -120,7 +142,7 @@ export const mainProject = async (
           }
           
           .footer {
-            font-size: 14px;
+            font-size: 16px;
             color: #777;
             margin-top: 40px;
           }
