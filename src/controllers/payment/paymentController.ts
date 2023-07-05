@@ -5,7 +5,7 @@ import mercadopago from "mercadopago"
 import dotenv from "dotenv"
 dotenv.config()
 // const { TOKEN_MP, MP_SUCCESS } = process.env
-const { TOKEN_MP, MP_SUCCESS, MP_NOTIFICATION } = process.env // MP_NOTIFICATION
+const { TOKEN_MP, MP_SUCCESS } = process.env // MP_NOTIFICATION
 
 let user = ""
 let project = ""
