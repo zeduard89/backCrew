@@ -47,8 +47,8 @@ export const registerUser = async (
       aboutMe
     }: IUser = req.body
 
-    const newName = "defaultName"
-    const newLastName = "defaultLastName"
+    const newName = "name"
+    const newLastName = "lastName"
 
     // Validate country, city, postalCode, ShortDescription and aboutMe
     validatorCountry.parse(country)
