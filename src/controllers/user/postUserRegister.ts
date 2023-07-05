@@ -32,6 +32,7 @@ export const registerUser = async (
   res: Response
 ): Promise<void> => {
   const blobName = "userDefault.png"
+  const blobName2 = "crew.png"
   const containerName = "defaultcontainer"
 
   try {
@@ -116,7 +117,41 @@ export const registerUser = async (
       aboutMe
     })
 
-    await main(newUser.email)
+    //! ------------------------------------------
+
+    // Buscamos si existe la imagen
+    const blobClient2 = await containerClient.getBlockBlobClient(blobName2)
+    const blobExist2 = await blobClient2.exists()
+    if (!blobExist2) {
+      throw new Error(`The element: ${blobName2} does not exists`)
+    }
+    // Genero el permisos para podes acceder a al elemento
+    const sasPermissions2 = new BlobSASPermissions()
+    sasPermissions2.read = true // Set the desired permissions
+    if (!process.env.ACCOUNT_NAME || !process.env.ACCOUNT_KEY) {
+      throw new Error("Error in Azure accreditation")
+    }
+    const sasExpiresOn2 = new Date(new Date().valueOf() + 86400 * 1000) // Expires in 24 hours
+    const sharedKeyCredential2 = new StorageSharedKeyCredential(
+      process.env.ACCOUNT_NAME,
+      process.env.ACCOUNT_KEY
+    )
+
+    // Genero el token con los detalles necesario
+    const sasToken2 = generateBlobSASQueryParameters(
+      {
+        containerName: containerClient.containerName,
+        blobName: blobClient2.name,
+        permissions: sasPermissions2,
+        startsOn: new Date(),
+        expiresOn: sasExpiresOn2,
+        contentDisposition: "inline" // Establece el valor "inline" para mostrar el archivo en el navegador
+      },
+      sharedKeyCredential2
+    ).toString()
+    const blobUrlWithSAS2 = blobClient.url + "?" + sasToken2
+
+    await main(newUser.email, blobUrlWithSAS2)
 
     res.status(200).send("User was registered successfully")
   } catch (error) {
