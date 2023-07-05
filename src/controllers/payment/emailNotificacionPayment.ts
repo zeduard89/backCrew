@@ -43,10 +43,7 @@ export const mainUser = async (
             font-size: 18px;
             margin-bottom: 15px;
           }
-          img {
-            width: 300px;
-            margin-top: 40px;
-          }
+          
           .footer {
             font-size: 14px;
             color: #777;
@@ -62,9 +59,7 @@ export const mainUser = async (
         <p>Here is your payment ID: ${id}. Please keep it for future reference.</p>
         <p>You can use this ID to search for more details about your payment.</p>
         <p>If you have any questions or need further assistance, feel free to reach out to us.</p>
-        <div>
-          <img src="cid:crewImage" alt="Welcome Image">
-        </div>
+        
         <p class="footer">Best regards,<br>Crew Team</p>
       </body>
     </html>
@@ -109,10 +104,7 @@ export const mainProject = async (
             font-size: 18px;
             margin-bottom: 15px;
           }
-          img {
-            width: 300px;
-            margin-top: 40px;
-          }
+          
           .footer {
             font-size: 14px;
             color: #777;
@@ -125,9 +117,7 @@ export const mainProject = async (
         <p>We are glad to inform you that "${title}" has received a new deposit!</p>
         <p>${title} has received an amount of ${transactionAmount}. The current status is "${status}".</p>
         <p>If you have any questions or need further assistance, feel free to reach out to us.</p>
-        <div>
-          <img src="cid:crewImage" alt="Welcome Image">
-        </div>
+        
         <p class="footer">Best regards,<br>Crew Team</p>
       </body>
     </html>
