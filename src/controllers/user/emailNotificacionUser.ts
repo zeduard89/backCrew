@@ -5,9 +5,7 @@ import path from "path"
 const imagePath = path.resolve(__dirname, "crew.png")
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
+  service: "gmail",
   auth: {
     // TODO: replace `user` and `pass` values from <https://forwardemail.net>
     user: "ccrewdb@gmail.com",
