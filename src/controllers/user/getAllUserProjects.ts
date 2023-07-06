@@ -1,4 +1,4 @@
-import { UserModel } from "../../config/db"
+import { UserModel, ImagesModel } from "../../config/db"
 import { Request, Response } from "express"
 import { validatorString } from "../../schemas/projectSchemas"
 
@@ -24,7 +24,11 @@ const getAllUserProjects = async (
       throw new Error("User not found or was Banned")
     }
     // Busco por medio de su relacion (projects esta dentro del modelo user)
-    const findedUser = await user.$get("projects")
+    const findedUser = await user.$get("projects", {
+      include: [
+        { model: ImagesModel, as: "projectImages" } // Include ImagesModel as "projectImages"
+      ]
+    })
 
     res.status(200).json(findedUser)
   } catch (error) {
