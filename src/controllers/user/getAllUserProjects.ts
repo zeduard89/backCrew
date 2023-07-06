@@ -17,7 +17,7 @@ const getAllUserProjects = async (
     }
 
     const user = await UserModel.findOne({
-      where: { id: creatorId, verified: true }
+      where: { id: creatorId }
     })
 
     if (!user) {
