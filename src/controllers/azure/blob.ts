@@ -141,7 +141,10 @@ export const getBlobList = async (req: Request, res: Response) => {
       sasPermissions.read = true // Set the desired permissions
       if (!process.env.ACCOUNT_NAME || !process.env.ACCOUNT_KEY)
         throw new Error("Error in Azure accreditation")
-      const sasExpiresOn = new Date(new Date().valueOf() + 86400 * 1000) // Expires in 24 hours
+      // const sasExpiresOn = new Date(new Date().valueOf() + 86400 * 1000) // Expires in 24 hours
+      const sasExpiresOn = new Date(
+        new Date().valueOf() + 365 * 24 * 60 * 60 * 1000
+      ) // Expires in 1 year
       const sharedKeyCredential = new StorageSharedKeyCredential(
         process.env.ACCOUNT_NAME,
         process.env.ACCOUNT_KEY
